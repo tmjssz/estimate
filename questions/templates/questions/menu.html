@@ -8,9 +8,9 @@
     <li><a href="{% url 'questions_question_random' %}">Zufällige Fragen</a></li>
     <li><a href="{% url 'questions_challenge_all' %}">Challenge</a></li>
     {% if is_admin %}
-    <li><a href="{% url 'questions_statistics_all' %}">Gesamtstatistik</a></li>
+    <li><a href="{% url 'questions_statistics_all' %}">Crowd-Statistik</a></li>
     {% endif %}
-    <li><a href="{% url 'questions_statistics_user' user.username %}">Deine Statistik</a></li>
+    <li><a href="{% url 'questions_statistics_user' user.username %}">Statistik</a></li>
     <li><a href="{% url 'questions_highscore' %}">Highscore</a></li>
 </ul>
 {% endblock %}
