@@ -19,7 +19,7 @@
 	    <tr>
 	    {% endif %}
 	    	<td>{{ forloop.counter }}</td>
-	    	<td>{{ score.user }}</td>
+	    	<td><a href="{% url 'questions_statistics_user' score.user %}">{{ score.user }}</a></td>
 	    	<td>{{ score.score }}</td>
 	    </tr>
     {% endfor %}

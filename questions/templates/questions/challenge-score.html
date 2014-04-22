@@ -39,6 +39,7 @@
     </tr>
     {% endfor %}
 </table>
+<a href="{% url 'questions_challenge_highscore' challenge.slug %}">Highscore zur Challenge</a>
 </p>
 {% else %}
 <p>Du hast bisher noch keine Schätzungen abgegeben.</p>

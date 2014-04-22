@@ -225,7 +225,6 @@ def statistics_user(request, username):
     return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': show_user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out})
 
 
-
 @login_required
 def question_highscore(request):
     """
@@ -233,3 +232,13 @@ def question_highscore(request):
     """
     scores = Score.objects.get_highscore()
     return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores})
+
+
+@login_required
+def challenge_highscore(request, slug):
+    """
+    Show highscore for a given challenge
+    """
+    challenge = get_object_or_404(Challenge, slug=slug, published=True)
+    scores = Score.objects.get_challenge_highscore(challenge)
+    return render(request, 'questions/challenge-highscore.html', {'user': request.user, 'challenge': challenge, 'score_list': scores})

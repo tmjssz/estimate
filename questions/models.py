@@ -223,6 +223,24 @@ class ScoreManager(models.Manager):
             result_list.append(s)
         return result_list
 
+    def get_challenge_highscore(self, challenge):
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, SUM(e.score) as score
+            FROM questions_estimate e, questions_challenge_questions q
+            WHERE q.challenge_id == """+str(challenge.id)+""" 
+                AND q.question_id == e.question_id
+            GROUP BY e.user_id
+            HAVING COUNT(*) == """+str(len(challenge.questions.all()))+"""
+            ORDER BY score DESC""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1])
+            result_list.append(s)
+        return result_list
+
 class Score(models.Model):
     user = models.ForeignKey(to=User, verbose_name=u'Benutzer')
     score = models.IntegerField(verbose_name=u'Punkte')

@@ -16,4 +16,5 @@ urlpatterns = patterns('questions.views',
 
     url(r'^benutzer/(?P<username>[-\w]+)/$', 'statistics_user', name='questions_statistics_user'),
     url(r'^highscore$', 'question_highscore', name='questions_highscore'),
+    url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
 )
