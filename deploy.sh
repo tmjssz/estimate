@@ -7,6 +7,16 @@ FILE=../estimate.db
 # Prüfen, ob Datenbank schon existiert
 if [ -e $FILE ];
 then
+	if [ ! -d questions/fixtures ];
+	then
+		mkdir questions/fixtures
+	fi
+
+	if [ ! -d userauth/fixtures ];
+	then
+		mkdir userauth/fixtures
+	fi
+
 	echo "Export data from database: $FILE"
 	# Daten exportieren
 	python manage.py dumpdata --indent 4 questions > questions/fixtures/initial_data.json
