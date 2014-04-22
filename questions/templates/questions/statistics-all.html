@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Statistik{% endblock %}
+
+{% block content %}
+<h2>Gesamtstatistik der Crowd</h2>
+
+<h3>&#216; Fehler</h3>
+
+<div class="score">{{ avg_percentage_error|floatformat:"-2" }} %</div>
+
+{% if estimate_list %}
+<h3>Schätzungen</h3>
+
+<p>
+<table>
+    <tr>
+        <th>Frage</th>
+        <th>Antwort</th>
+        <th>Schätzung</th>
+        <th>Fehler</th>
+        <th>Anzahl</th>
+        <th>Beste Schätzung</th>
+    </tr>
+    {% for avg, best, count in estimate_list %}
+    <tr>
+        <td><a href="{% url 'questions_statistics_question' avg.question.slug %}">{{ avg.question }}</a></td>
+        <td>{{ avg.question.answer|floatformat }}</td>
+        <td>{{ avg.estimate|floatformat:"-2" }}</td>
+        <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
+        <td>{{ count }}</td>
+        <td>{{ best.percentage_error|floatformat:"-2" }} % (<a href="{% url 'questions_statistics_user' best.user %}">{{ best.user }}</a>)</td>
+    </tr>
+    {% endfor %}
+</table>
+</p>
+{% else %}
+<p>Bisher wurden noch keine Schätzungen abgegeben.</p>
+{% endif %}
+
+
+{% endblock %}

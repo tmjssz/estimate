@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Ergebnis - {{ question.title }}{% endblock %}
+
+{% block content %}
+<h2>Ergebnis: {{ question.title }}</h2>
+
+<h3>Punkte</h3>
+<div class="score">{{ estimate.score }}</div>
+
+<h3>Auflösung</h3>
+<div class="resolution">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</div>
+
+
+{% if estimate.estimate == None %}
+	<h3>Zeit abgelaufen.</h3>
+	<span id="show_resolution" class="link_like">Zeige Auflösung</span>
+	<p id="resolution" class="hidden"><strong>Auflösung</strong> {{ question.answer|floatformat }}</p>
+{% else %}
+	{% if estimate.estimate == question.answer %}
+		<h3>Punktlandung!</h3>
+	{% elif estimate.score == 100 %}
+		<h3>Wahnsinn!</h3>
+	{% elif estimate.score >= 98 %}
+		<h3>Ganz knapp daneben!</h3>
+	{% elif estimate.score >= 95 %}
+		<h3>Sehr gut!</h3>
+	{% elif estimate.score >= 90 %}
+		<h3>Nicht schlecht!</h3>
+	{% endif %}
+
+	<p>
+		<table>
+			<tr>
+				<th>Deine Schätzung</th>
+				<td>{{ estimate.estimate|floatformat:"-2" }}</td>
+			</tr>
+			<tr>
+				<th>&#216; Schätzung</th> 
+				<td>{{ avg_estimate.estimate|floatformat:"-2" }}</td>
+			</tr>
+			<tr>
+				<th>&#216; Punktzahl</th>
+				<td>{{ avg_estimate.score|floatformat:"0" }}</td>
+			</tr>
+		</table>
+		<a href="{% url 'questions_statistics_question' question.slug %}">Statistik zur Frage</a>
+	</p>
+{% endif %}
+
+<a href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
+
+{% endblock %}

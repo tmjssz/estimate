@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Alle Fragen{% endblock %}
+
+{% block content %}
+<h2>Alle Fragen</h2>
+<ul>
+    {% for question in object_list %}
+    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

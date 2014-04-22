@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+<h2>Willkommen</h2>
+<ul>
+    <li><a href="{% url 'userauth_login' %}">Login</a></li>
+	<li><a href="{% url 'userauth_register' %}">Neuer Account</a></li>
+</ul>
+{% endblock %}

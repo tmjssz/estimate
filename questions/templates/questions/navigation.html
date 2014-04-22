@@ -1,0 +1,6 @@
+{% if user.is_authenticated %}
+	Hi <a href="{% url 'questions_statistics_user' user.username %}">{{ user.username }}</a>.
+    <a href="{% url 'questions_menu' %}">Hauptmenü</a>
+{% endif %}
+
+{% include "userauth/toggle_login.html" %}

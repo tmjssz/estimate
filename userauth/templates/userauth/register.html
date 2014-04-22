@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Neuer Account{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+<h2>Neuer Account</h2>
+
+<form action="{% url 'userauth_register' %}" method="post" accept-charset="utf-8">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Erstellen"/>
+</form>
+{% endblock %}
