@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - {{ challenge.title }} - Highscore{% endblock %}
+
+{% block content %}
+<h2>Highscore - {{ challenge.title }}</h2>
+
+<p>
+<table>
+	<tr>
+		<th>Platz</th>
+		<th>Benutzer</th>
+		<th>Punktestand</th>
+	</tr>
+	{% for score in score_list %}
+		{% if user == score.user %}
+	    <tr class="current_user">
+	    {% else %}
+	    <tr>
+	    {% endif %}
+	    	<td>{{ forloop.counter }}</td>
+	    	<td>{{ score.user }}</td>
+	    	<td>{{ score.score }}</td>
+	    </tr>
+    {% endfor %}
+</table>
+</p>
+
+{% endblock %}
