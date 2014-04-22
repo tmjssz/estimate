@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf8
+
 #from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -23,8 +26,12 @@ def menu_view(request):
             is_admin = True
         else:
             is_admin = False
+
+        challenges = Challenge.objects.filter(published=True)
+        if len(challenges) == 0:
+            challenges = None
         
-        return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin}, context_instance=RequestContext(request))
+        return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges}, context_instance=RequestContext(request))
     else:
         return render_to_response('questions/landing_page.html', context_instance=RequestContext(request))
 
@@ -70,6 +77,10 @@ def question_view_random(request):
     Show a random question, which were not answered before
     """
     questions = Question.objects.filter(published=True)
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
 
     # filter out questions, which were already answered
     estimates = Estimate.objects.filter(user=request.user)
@@ -78,7 +89,9 @@ def question_view_random(request):
     
     if questions.count() == 0:
         # there are no unanswered questions left
-        return render(request, 'questions/question-no-left.html', {'user': request.user})
+        title = u'Alle Fragen beantwortet'
+        message = u'Sorry ' + request.user.username + u', du hast bereits zu jeder Frage eine Schätzung abgegeben. Leider stehen momentan keine weiteren Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
     
     question = random.choice(questions)
 
@@ -90,8 +103,9 @@ def challenges_list_all(request):
     challenges = Challenge.objects.filter(published=True)
 
     if len(challenges) == 0:
-        # give 404, if no published challenges exist
-        raise Http404
+        title = u'Keine Challenge verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
 
     return render(request, 'questions/challenges-list-all.html', {'challenges': challenges})
 

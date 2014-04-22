@@ -4,9 +4,11 @@
 
 {% block content %}
 <h2>Challenges</h2>
+	
 <ul>
     {% for challenge in challenges %}
     <li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a></li>
     {% endfor %}
 </ul>
+
 {% endblock %}
