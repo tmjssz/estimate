@@ -311,18 +311,6 @@
     }
 },
 {
-    "pk": 27, 
-    "model": "questions.estimate", 
-    "fields": {
-        "percentage_error": 0.0, 
-        "question": 6, 
-        "score": 100, 
-        "user": 2, 
-        "date": "2014-04-13T20:38:38.798Z", 
-        "estimate": 8848.0
-    }
-},
-{
     "pk": 29, 
     "model": "questions.estimate", 
     "fields": {
