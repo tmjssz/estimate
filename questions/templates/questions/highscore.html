@@ -3,27 +3,31 @@
 {% block title %}{{ block.super }} - Highscore{% endblock %}
 
 {% block content %}
-<h2>Highscore - Top 25</h2>
+<main id="highscore">
 
-<p>
-<table>
-	<tr>
-		<th>Platz</th>
-		<th>Benutzer</th>
-		<th>Punktestand</th>
-	</tr>
-	{% for score in score_list %}
-		{% if user == score.user %}
-	    <tr class="current_user">
-	    {% else %}
-	    <tr>
-	    {% endif %}
-	    	<td>{{ forloop.counter }}</td>
-	    	<td><a href="{% url 'questions_statistics_user' score.user %}">{{ score.user }}</a></td>
-	    	<td>{{ score.score }}</td>
-	    </tr>
-    {% endfor %}
-</table>
-</p>
+	<h2>Highscore - Top 25</h2>
 
+	<p>
+	<table>
+		<tr>
+			<th>Platz</th>
+			<th>Benutzer</th>
+			<th>Punktestand</th>
+		</tr>
+		{% for score in score_list %}
+			{% if user == score.user %}
+		    <tr class="current_user">
+		    {% else %}
+		    <tr>
+		    {% endif %}
+		    	<td>{{ forloop.counter }}</td>
+		    	<td><a href="{% url 'questions_statistics_user' score.user %}">{{ score.user }}</a></td>
+		    	<td>{{ score.score }}</td>
+		    </tr>
+	    {% endfor %}
+	</table>
+	</p>
+
+<!-- / #highscore -->
+</main>
 {% endblock %}

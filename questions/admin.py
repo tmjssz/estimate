@@ -53,9 +53,17 @@ class EstimateAdmin(admin.ModelAdmin):
         html = '<a href="/admin/auth/user/'+str(self.user.id)+'/">'+str(self.user)+'</a>'
         return html
     benutzer.allow_tags = True
-    list_display = ('estimate', 'percentage_error', 'score', frage, benutzer)
+    def challenge(self):
+        if self.challenge:
+            html = '<a href="/admin/questions/challenge/'+str(self.challenge.id)+'/">'+str(self.challenge)+'</a>'
+        else:
+            html = '(leer)'
+        return html
+    challenge.allow_tags = True
+    
+    list_display = ('estimate', 'percentage_error', 'score', frage, benutzer, challenge)
     search_fields = ('question__title' ,'user__username')
-    list_filter = ('user', 'question')
+    list_filter = ('user', 'question', 'challenge')
     actions = [update_estimate_score]
     readonly_fields = ['score', 'percentage_error']
 

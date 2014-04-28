@@ -107,7 +107,21 @@ def challenges_list_all(request):
         message = u'Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.'
         return render(request, 'questions/message.html', {'title': title, 'message': message})
 
-    return render(request, 'questions/challenges-list-all.html', {'challenges': challenges})
+    completed_challenges = Challenge.objects.completed_challenges(request.user)
+    if completed_challenges:
+        score_list = []
+        for c in completed_challenges:
+            score_list.append(Score.objects.challenge_score(request.user, c))
+        completed_challenges = zip(completed_challenges, score_list)
+
+    incompleted_challenges = Challenge.objects.incompleted_challenges(request.user)
+    if incompleted_challenges:
+        status_list = []
+        for c in incompleted_challenges:
+            status_list.append(Estimate.objects.get_challenge_status(request.user, c))
+        incompleted_challenges = zip(incompleted_challenges, status_list)
+
+    return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges})
 
 
 @login_required
@@ -120,16 +134,21 @@ def challenge_view(request, slug):
         raise Http404
 
     # check for each question, if there is already an estimate
-    score = 0
     estimates = []
+    score = 0
     for q in questions:
         estimate = Estimate.objects.filter(question=q, user=request.user)
         if not estimate:
             # unanswered question found
             return HttpResponseRedirect("/challenge/"+slug+"/"+q.slug)
-        
-        estimates.append(estimate[0])
-        score += estimate[0].score
+
+        challenge_estimate = estimate.filter(challenge=challenge)
+        if challenge_estimate:
+            estimates.append(challenge_estimate[0])
+            score += challenge_estimate[0].score
+        else:
+            estimates.append(estimate[0])
+            score += estimate[0].score
 
     # all questions already answered -> show result
     return render(request, 'questions/challenge-score.html',
@@ -152,7 +171,7 @@ def challenge_question_view(request, challenge, question):
         raise Http404
 
     if request.method == 'POST':
-        form = EstimateForm(user=request.user, question=question, data=request.POST)
+        form = EstimateForm(user=request.user, question=question, data=request.POST, challenge=challenge)
         if form.is_valid():
             form.save()
             for q in questions:
@@ -254,5 +273,5 @@ def challenge_highscore(request, slug):
     Show highscore for a given challenge
     """
     challenge = get_object_or_404(Challenge, slug=slug, published=True)
-    scores = Score.objects.get_challenge_highscore(challenge)
+    scores = Score.objects.challenge_highscore(challenge)
     return render(request, 'questions/challenge-highscore.html', {'user': request.user, 'challenge': challenge, 'score_list': scores})

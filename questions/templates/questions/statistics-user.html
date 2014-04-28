@@ -3,60 +3,64 @@
 {% block title %}{{ block.super }} - Statistik{% endblock %}
 
 {% block content %}
-<h2>{{ show_user }}</h2>
+<main id="statistics-user">
 
-<h3>Punktestand</h3>
+    <h2>{{ show_user }}</h2>
 
-<div class="score">{{ score }}</div>
+    <h3>Punktestand</h3>
 
-
-{% if show_user == user %}
-
-    <h3>Dein Konto</h3>
-    <a href="{% url 'password_change' %}">Passwort ändern</a>
-
-{% endif %}
+    <div class="score">{{ score }}</div>
 
 
-{% if estimate_list %}
-<h3>Schätzungen</h3>
+    {% if show_user == user %}
 
-<p>
-<table>
-    <tr>
-        <th>Frage</th>
-        <th>Auflösung</th>
-        <th>Schätzwert</th>
-        <th>Punkte</th>
-        <th>Fehler</th>
-    </tr>
-    {% for estimate in estimate_list %}
-    <tr>
-        <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
-        <td>{{ estimate.question.answer|floatformat }}</td>
-        <td>{{ estimate.estimate|floatformat:"-2" }}</td>
-        <td>{{ estimate.score }}</td>
-        <td>{{ estimate.percentage_error|floatformat:"-2" }} %</td>
-    </tr>
-    {% endfor %}
-    {% if estimates_time_out %}
-        {% for estimate in estimates_time_out %}
+        <h3>Dein Konto</h3>
+        <a href="{% url 'password_change' %}">Passwort ändern</a>
+
+    {% endif %}
+
+
+    {% if estimate_list %}
+    <h3>Schätzungen</h3>
+
+    <p>
+    <table>
+        <tr>
+            <th>Frage</th>
+            <th>Auflösung</th>
+            <th>Schätzwert</th>
+            <th>Punkte</th>
+            <th>Fehler</th>
+        </tr>
+        {% for estimate in estimate_list %}
         <tr>
             <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
             <td>{{ estimate.question.answer|floatformat }}</td>
-            <td>-</td>
+            <td>{{ estimate.estimate|floatformat:"-2" }}</td>
             <td>{{ estimate.score }}</td>
-            <td>-</td>
+            <td>{{ estimate.percentage_error|floatformat:"-2" }} %</td>
         </tr>
         {% endfor %}
+        {% if estimates_time_out %}
+            {% for estimate in estimates_time_out %}
+            <tr>
+                <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
+                <td>{{ estimate.question.answer|floatformat }}</td>
+                <td>-</td>
+                <td>{{ estimate.score }}</td>
+                <td>-</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    </p>
+    {% else %}
+    <p>Du hast bisher noch keine Schätzungen abgegeben.</p>
     {% endif %}
-</table>
-</p>
-{% else %}
-<p>Du hast bisher noch keine Schätzungen abgegeben.</p>
-{% endif %}
 
-<h3>Angemeldet seit</h3>
-{{ show_user.date_joined }}
+    <h3>Angemeldet seit</h3>
+    {{ show_user.date_joined }}
 
+<!-- / #statistics-user -->
+</main>
 {% endblock %}

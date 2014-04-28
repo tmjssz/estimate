@@ -3,8 +3,12 @@
 {% block title %}{{ block.super }} - {{ title }}{% endblock %}
 
 {% block content %}
-<h2>{{ title }}</h2>
+<main id="message">
 
-<p>{{ message }}</p>
+	<h2>{{ title }}</h2>
 
+	<p>{{ message }}</p>
+
+<!-- / #message -->
+</main>
 {% endblock %}

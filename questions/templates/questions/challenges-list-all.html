@@ -3,12 +3,30 @@
 {% block title %}{{ block.super }} - Challenge{% endblock %}
 
 {% block content %}
-<h2>Challenges</h2>
-	
-<ul>
-    {% for challenge in challenges %}
-    <li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a></li>
-    {% endfor %}
-</ul>
+<main id="challenge-list-all">
 
+	<h2>Challenges</h2>
+		
+	{% if incompleted_challenges %}
+	<ul>
+	    {% for challenge, status in incompleted_challenges %}
+	    <li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> <span>{{ status|floatformat:"-2" }} %</span></li>
+	    {% endfor %}
+	</ul>
+	{% else %}
+	Momentan gibt es leider keine offenen Challenges.
+	{% endif %}
+
+
+	{% if completed_challenges %}
+	<h3>Abgeschlossen</h3>
+	<ul>
+		{% for challenge, score in completed_challenges %}
+		<li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> <span>{{ score }}</span></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+<!-- / #challenges-list-all -->
+</main>
 {% endblock %}

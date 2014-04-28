@@ -6,7 +6,7 @@ import math
 
 
 # =============================================================================
-# QUESTION MODEL
+# +++ QUESTION +++
 # =============================================================================
 class Question(models.Model):
     """Question model."""
@@ -46,11 +46,86 @@ class Question(models.Model):
         return ('questions_question_show', (), {'slug': self.slug})
 
 
+
 # =============================================================================
-# ESTIMATE MODEL
+# +++ CHALLENGE +++
+# =============================================================================
+class ChallengeManager(models.Manager):
+
+    def completed_challenges(self, user):
+        """
+        Returns a list of completed challenges for given user
+        """
+        completed = []
+        challenges = Challenge.objects.filter(published=True)
+        for c in challenges:
+            status = Estimate.objects.get_challenge_status(user, c)
+            if status == 100:
+                completed.append(c)
+
+        if len(completed) == 0:
+            return None
+        
+        return completed
+
+    def incompleted_challenges(self, user):
+        """
+        Returns a list of not completed challenges for given user
+        """
+        completed = self.completed_challenges(user)
+        challenges = Challenge.objects.filter(published=True)
+
+        if completed:
+            for c in completed:
+                challenges = challenges.exclude(pk=c.pk)
+
+        if len(challenges) == 0:
+            return None
+        
+        return challenges
+
+# -----------------------------------------------------------------------------
+# CHALLENGE MODEL
+# -----------------------------------------------------------------------------
+class Challenge(models.Model):
+    """Challenge model."""
+    title = models.CharField(u'Titel', max_length=100, help_text="Bitte einen Titel für die Challenge eingeben (mit max. 100 Zeichen).")
+    questions = models.ManyToManyField(Question, verbose_name=u'Fragen', help_text="Bitte hier die Schätz-Fragen auswählen.")
+    published = models.BooleanField(verbose_name=u'Veröffentlicht', default=True,  help_text='Challenge zur Verfügung stellen?')
+    author = models.ForeignKey(User, verbose_name=u'Autor')
+    slug = models.SlugField(unique=True)
+    date_created = models.DateTimeField(editable=False, verbose_name=u'Erstellt')
+    date_updated = models.DateTimeField(editable=False, verbose_name=u'Zuletzt Geändert')
+    objects = ChallengeManager()
+    
+    class Meta:
+        verbose_name = u'Challenge'
+        verbose_name_plural = u'Challenges'
+        ordering = ['-date_created']
+
+    def __unicode__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.date_created = now()
+        self.date_updated = now()
+        super(Challenge, self).save(*args, **kwargs)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('questions_challenge_show', (), {'slug': self.slug})
+
+
+
+# =============================================================================
+# +++ ESTIMATE +++
 # =============================================================================
 class EstimateManager(models.Manager):
     
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Statistics functions
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     def get_avg_estimates(self):
         from django.db import connection
         cursor = connection.cursor()
@@ -113,6 +188,27 @@ class EstimateManager(models.Manager):
             result = self.model(user=user, question=question, estimate=row[1], score=row[2], percentage_error=row[3])
         return result
 
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Challenge's estimates
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    def get_challenge_status(self, user, challenge):
+        """
+        Returns the percent value for how many questions are already answered for the given challenge
+        """
+        questions = challenge.questions.filter(published=True)
+
+        counter = 0
+        for q in questions:
+            estimate = Estimate.objects.filter(question=q, user=user)
+            if estimate:
+                counter += 1
+
+        return counter*100/questions.count()
+
+# -----------------------------------------------------------------------------
+# ESTIMATE MODEL
+# -----------------------------------------------------------------------------
 class Estimate(models.Model):
     """Estimate model."""
     user = models.ForeignKey(to=User, verbose_name=u'Benutzer', help_text='Bitte den Benutzer auswählen, der die diese Schätzung abgibt.')
@@ -121,6 +217,7 @@ class Estimate(models.Model):
     percentage_error = models.FloatField(verbose_name=u'Prozentualer Fehler', null=True, blank=True)
     date = models.DateTimeField(verbose_name=u'Datum', null=True, blank=True)
     score = models.IntegerField(verbose_name=u'Punkte', null=True, blank=True)
+    challenge = models.ForeignKey(Challenge, verbose_name=u'Challenge', help_text="Hier bitte auswählen, zu welcher Challenge die Schätzung abgegeben wird.", blank=True, null=True)
     objects = EstimateManager()
     
     class Meta:
@@ -170,44 +267,16 @@ class Estimate(models.Model):
         self.save()
 
 
-# =============================================================================
-# CHALLENGE MODEL
-# =============================================================================
-class Challenge(models.Model):
-    """Challenge model."""
-    title = models.CharField(u'Titel', max_length=100, help_text="Bitte einen Titel für die Challenge eingeben (mit max. 100 Zeichen).")
-    questions = models.ManyToManyField(Question, verbose_name=u'Fragen', help_text="Bitte hier die Schätz-Fragen auswählen.")
-    published = models.BooleanField(verbose_name=u'Veröffentlicht', default=True,  help_text='Challenge zur Verfügung stellen?')
-    author = models.ForeignKey(User, verbose_name=u'Autor')
-    slug = models.SlugField(unique=True)
-    date_created = models.DateTimeField(editable=False, verbose_name=u'Erstellt')
-    date_updated = models.DateTimeField(editable=False, verbose_name=u'Zuletzt Geändert')
-    
-    class Meta:
-        verbose_name = u'Challenge'
-        verbose_name_plural = u'Challenges'
-        ordering = ['-date_created']
-
-    def __unicode__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.date_created = now()
-        self.date_updated = now()
-        super(Challenge, self).save(*args, **kwargs)
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('questions_challenge_show', (), {'slug': self.slug})
-
-
 
 # =============================================================================
-# SCORE MODEL
+# +++ SCORE +++
 # =============================================================================
 class ScoreManager(models.Manager):
+
     def get_highscore(self):
+        """
+        Returns the score for every user (limited to best 25 users).
+        """
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
@@ -223,7 +292,13 @@ class ScoreManager(models.Manager):
             result_list.append(s)
         return result_list
 
-    def get_challenge_highscore(self, challenge):
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Challenge's Scores
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    def challenge_highscore(self, challenge):
+        """
+        Returns the challenge score for every user, who played a given challenge.
+        """
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
@@ -241,8 +316,34 @@ class ScoreManager(models.Manager):
             result_list.append(s)
         return result_list
 
+    def challenge_score(self, user, challenge):
+        """
+        Returns a user's score for a given challenge.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT SUM(e.score) as score
+            FROM questions_estimate e, questions_challenge_questions q
+            WHERE q.challenge_id == """+str(challenge.id)+""" 
+                AND q.question_id == e.question_id
+                AND e.user_id == """+str(user.id))
+        result = None
+        row = cursor.fetchone()
+        if row:
+            result = self.model(user=user, score=row[0])
+        return result
+
+# -----------------------------------------------------------------------------
+# SCORE MODEL
+# -----------------------------------------------------------------------------
 class Score(models.Model):
     user = models.ForeignKey(to=User, verbose_name=u'Benutzer')
     score = models.IntegerField(verbose_name=u'Punkte')
     objects = ScoreManager()
+
+    def __unicode__(self):
+        if self.score == 1:
+            return str(self.score) + u' Punkt'
+        return str(self.score) + u' Punkte'
 
