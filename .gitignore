@@ -3,3 +3,4 @@
 static/img/questions/*
 questions/fixtures/*
 userauth/fixtures/*
+.sass-chache/*
