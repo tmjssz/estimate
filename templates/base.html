@@ -12,8 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
 	<body>
@@ -22,11 +21,9 @@
 	    <![endif]-->
 
 	    <header>
-		    <h1>Schätze</h1>
-
-		    {% block navigation %}
-		    	{% include "questions/navigation.html" %}
-		    {% endblock %}
+		{% block navigation %}
+			{% include "questions/navigation.html" %}
+		{% endblock %}
 		</header>
 		
 	    {% block content %}{% endblock %}

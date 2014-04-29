@@ -1,6 +1,15 @@
-{% if user.is_authenticated %}
-	Hi <a href="{% url 'questions_statistics_user' user.username %}">{{ user.username }}</a>.
-    <a href="{% url 'questions_menu' %}">Hauptmenü</a>
-{% endif %}
+<div class="navigation-wrapper">
+	<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-entwurf-weiss.png" alt="">
+	<span id="nav-title">SCHÄTZE</span>
+	<nav>
+		<ul>
+		{% if user.is_authenticated %}
+			<li><a href="{% url 'questions_menu' %}">Hauptmenü</a></li>
+			<li><a href="{% url 'questions_statistics_user' user.username %}">Konto</a></li>
+		{% endif %}
 
-{% include "userauth/toggle_login.html" %}
+		{% include "userauth/toggle_login.html" %}
+		</ul>
+	</nav>
+<!-- / .navigation-wrapper -->
+</div>

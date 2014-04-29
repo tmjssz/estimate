@@ -1,6 +1,6 @@
 {% if user.is_authenticated %}
-    <a href="{% url 'userauth_logout' %}">Logout</a>
+    <li><a class="logout-btn" href="{% url 'userauth_logout' %}">Logout</a></li>
 {% else %}
-    <a href="{% url 'userauth_login' %}">Login</a>
-    <a href="{% url 'userauth_register' %}">Neuer Account</a>
+    <li><a href="{% url 'userauth_register' %}">Neuer Account</a></li>
+    <li><a class="login-btn" href="{% url 'userauth_login' %}">Login</a></li>
 {% endif %}
