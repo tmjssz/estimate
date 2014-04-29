@@ -33,7 +33,7 @@ def menu_view(request):
         
         return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges}, context_instance=RequestContext(request))
     else:
-        return render_to_response('questions/landing_page.html', context_instance=RequestContext(request))
+        return render_to_response('questions/landing-page.html', context_instance=RequestContext(request))
 
 def questions_list_all(request):
     """
