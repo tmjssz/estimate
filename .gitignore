@@ -1,5 +1,5 @@
 .DS_Store
 *.pyc
-static/img/*
+static/img/questions/*
 questions/fixtures/*
 userauth/fixtures/*
