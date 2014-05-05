@@ -17,10 +17,10 @@ then
 		mkdir userauth/fixtures
 	fi
 
-	echo "Export data from database: $FILE"
+#	echo "Export data from database: $FILE"
 	# Daten exportieren
-	python manage.py dumpdata --indent 4 questions > questions/fixtures/initial_data.json
-	python manage.py dumpdata --indent 4 auth.User > userauth/fixtures/initial_data.json
+#	python manage.py dumpdata --indent 4 questions > questions/fixtures/initial_data.json
+#	python manage.py dumpdata --indent 4 auth.User > userauth/fixtures/initial_data.json
 fi
 
 # SQL Queries von den Models ausführen

@@ -259,7 +259,7 @@ header {
   header #logo {
     float: left;
     max-height: 60px;
-    padding: .5em .1em .5em .6em; }
+    padding: .1em .1em .1em .6em; }
   header #nav-title {
     float: left;
     color: white;
