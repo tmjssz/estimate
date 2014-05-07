@@ -239,97 +239,90 @@ dl {
   dl dd {
     margin: 0; }
 
-header {
-  background-color: #333333;
-  border-bottom: 1px solid #1a1a1a;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  height: 60px;
-  width: 100%;
-  z-index: 999; }
-  header div.navigation-wrapper {
-    max-width: 68em;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    z-index: 9999; }
-    header div.navigation-wrapper:after {
-      content: "";
-      display: table;
-      clear: both; }
-  header #logo {
-    float: left;
-    max-height: 60px;
-    padding: .1em .1em .1em .6em; }
-  header #nav-title {
-    float: left;
-    color: white;
-    font-size: 1.4em;
-    line-height: 60px;
-    padding-right: 1em; }
-  header nav ul {
-    float: right;
-    line-height: 60px;
-    padding-right: .1em; }
-  header nav ul li {
-    float: left;
-    padding-right: .7em; }
-    header nav ul li a {
-      color: rgba(255, 255, 255, 0.7); }
-      header nav ul li a:hover {
-        color: white; }
-    header nav ul li .login-btn {
-      border: 1px solid #076fe4;
-      border-radius: 3px;
-      box-shadow: inset 0 1px 0 0 #8ebcf1;
+body {
+  margin: 0; }
+  body header {
+    background-color: #333333;
+    border-bottom: 1px solid #1a1a1a;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    height: 60px;
+    width: 100%;
+    z-index: 999; }
+    body header div.navigation-wrapper {
+      max-width: 68em;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 9999; }
+      body header div.navigation-wrapper:after {
+        content: "";
+        display: table;
+        clear: both; }
+    body header #corporate #logo {
+      float: left;
+      max-height: 60px;
+      padding: 7.5px 5.64px 7.5px 7.5px; }
+    body header #corporate #font {
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      line-height: 30.9975px;
+      font-size: 41.61102px;
+      float: left;
+      padding: 14.0025px 7.5px 15px 0px; }
+      body header #corporate #font #esti {
+        font-weight: 200;
+        color: #CAB69A;
+        letter-spacing: -0.07em;
+        margin-right: 3px;
+        float: left; }
+      body header #corporate #font #mate {
+        font-weight: 400;
+        color: #F0E3CF;
+        letter-spacing: -0.02em;
+        float: left; }
+    body header #nav-title {
+      float: left;
       color: white;
-      display: inline-block;
-      font-size: inherit;
-      font-weight: bold;
-      background-color: #4294f0;
-      background-image: -webkit-linear-gradient(#4294f0, #0776f3);
-      background-image: linear-gradient(#4294f0, #0776f3);
-      padding: 7px 18px;
-      text-decoration: none;
-      text-shadow: 0 1px 0 #0065d6;
-      background-clip: padding-box;
-      line-height: 1em !important; }
-      header nav ul li .login-btn:hover:not(:disabled) {
-        box-shadow: inset 0 1px 0 0 #60a2ec;
-        cursor: pointer;
-        background-color: #2f87ea;
-        background-image: -webkit-linear-gradient(#2f87ea, #086fe3);
-        background-image: linear-gradient(#2f87ea, #086fe3); }
-      header nav ul li .login-btn:active:not(:disabled), header nav ul li .login-btn:focus:not(:disabled) {
+      font-size: 1.4em;
+      line-height: 60px;
+      padding-right: 1em; }
+    body header nav ul {
+      float: right;
+      line-height: 60px;
+      padding-right: .1em; }
+    body header nav ul li {
+      float: left;
+      padding-right: .7em; }
+      body header nav ul li a {
+        color: rgba(255, 255, 255, 0.7); }
+        body header nav ul li a:hover {
+          color: white; }
+      body header nav ul li .login-btn {
         border: 1px solid #076fe4;
-        box-shadow: inset 0 0 8px 4px #0868d3, inset 0 0 8px 4px #0868d3; }
-      header nav ul li .login-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed; }
-    header nav ul li .logout-btn {
-      border: 1px solid #b80000;
-      border-radius: 3px;
-      box-shadow: inset 0 1px 0 0 #f85454;
-      color: white;
-      display: inline-block;
-      font-size: inherit;
-      font-weight: bold;
-      background-color: red;
-      background-image: -webkit-linear-gradient(red, #c70000);
-      background-image: linear-gradient(red, #c70000);
-      padding: 7px 18px;
-      text-decoration: none;
-      text-shadow: 0 1px 0 #a30000;
-      background-clip: padding-box;
-      line-height: 1em !important; }
-      header nav ul li .logout-btn:hover:not(:disabled) {
-        box-shadow: inset 0 1px 0 0 #f72222;
-        cursor: pointer;
-        background-color: #e10505;
-        background-image: -webkit-linear-gradient(#e10505, #b80000);
-        background-image: linear-gradient(#e10505, #b80000); }
-      header nav ul li .logout-btn:active:not(:disabled), header nav ul li .logout-btn:focus:not(:disabled) {
-        border: 1px solid #b80000;
-        box-shadow: inset 0 0 8px 4px #a80000, inset 0 0 8px 4px #a80000; }
-      header nav ul li .logout-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed; }
+        border-radius: 3px;
+        box-shadow: inset 0 1px 0 0 #8ebcf1;
+        color: white;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: bold;
+        background-color: #4294f0;
+        background-image: -webkit-linear-gradient(#4294f0, #0776f3);
+        background-image: linear-gradient(#4294f0, #0776f3);
+        padding: 7px 18px;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #0065d6;
+        background-clip: padding-box;
+        line-height: 1em !important; }
+        body header nav ul li .login-btn:hover:not(:disabled) {
+          box-shadow: inset 0 1px 0 0 #60a2ec;
+          cursor: pointer;
+          background-color: #2f87ea;
+          background-image: -webkit-linear-gradient(#2f87ea, #086fe3);
+          background-image: linear-gradient(#2f87ea, #086fe3); }
+        body header nav ul li .login-btn:active:not(:disabled), body header nav ul li .login-btn:focus:not(:disabled) {
+          border: 1px solid #076fe4;
+          box-shadow: inset 0 0 8px 4px #0868d3, inset 0 0 8px 4px #0868d3; }
+        body header nav ul li .login-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed; }
+  body main {
+    margin: 8px; }
