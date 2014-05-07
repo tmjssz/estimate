@@ -59,8 +59,8 @@ WSGI_APPLICATION = 'estimate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '..', 'estimate.db'),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -104,58 +104,9 @@ LOGOUT_URL = '/abmelden/'
 LOGIN_REDIRECT_URL = '/'
 
 
-# Logging
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(pathname)s %(message)s'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'debuglog': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, '..', 'debug.log'),
-            'maxBytes': 50000,
-            'backupCount': 1,
-            'formatter': 'simple'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-
-
 # Local Settings
 
 try:
     from local_settings import *
 except ImportError:
     pass
-
-
-if DEBUG:
-    LOGGING['loggers'].update(
-        {'cookbook': {
-            'handlers': ['debuglog'],
-            'level': 'DEBUG'
-        }}
-    )
