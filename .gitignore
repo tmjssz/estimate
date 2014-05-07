@@ -1,4 +1,5 @@
 local_settings.py
+secret.txt
 .DS_Store
 *.pyc
 static/img/questions/*
