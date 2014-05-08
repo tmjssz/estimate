@@ -245,7 +245,7 @@ body {
     background-color: #333333;
     border-bottom: 1px solid #1a1a1a;
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    height: 50px;
+    height: 45px;
     width: 100%;
     z-index: 999; }
     body header div.navigation-wrapper {
@@ -260,19 +260,19 @@ body {
         clear: both; }
     body header #corporate #logo {
       float: left;
-      max-height: 50px;
-      padding: 6.25px 4.7px 6.25px 6.25px; }
+      max-height: 45px;
+      padding: 5.625px 4.23px 5.625px 5.625px; }
     body header #corporate #font {
       font-family: 'Yanone Kaffeesatz', sans-serif;
-      line-height: 25.83125px;
-      font-size: 34.67585px;
+      line-height: 23.24813px;
+      font-size: 31.20827px;
       float: left;
-      padding: 11.66875px 6.25px 12.5px 0px; }
+      padding: 10.50188px 5.625px 11.25px 0px; }
       body header #corporate #font #esti {
         font-weight: 200;
         color: #CAB69A;
         letter-spacing: -0.07em;
-        margin-right: 2.5px;
+        margin-right: 2.25px;
         float: left; }
       body header #corporate #font #mate {
         font-weight: 400;
@@ -283,11 +283,11 @@ body {
       float: left;
       color: white;
       font-size: 1.4em;
-      line-height: 50px;
+      line-height: 45px;
       padding-right: 1em; }
     body header nav ul {
       float: right;
-      line-height: 50px;
+      line-height: 45px;
       padding-right: .1em; }
     body header nav ul li {
       float: left;
