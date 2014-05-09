@@ -1,8 +1,15 @@
 @import "bourbon/bourbon";
+@import "grid-settings";
 @import "neat/neat";
 @import "bitters/bitters";
 
-$mm-to-in: 0.0393700787;
+// VARIABLES ========================================================
+
+// Corporate Colors 
+$light-coffee: #F0E3CF;
+$strong-coffee: #CAB69A;
+
+
 
 body {
 
@@ -16,9 +23,9 @@ body {
 		$navigation-nav-button-background: $base-accent-color;
 		$navigation-nav-button-background-hover: lighten($navigation-background, 10);
 		$navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20);
-		$navigation-search-background: lighten($navigation-background, 5);
-		$navigation-search-border: 1px solid darken($navigation-background, 5);
+		$navigation-elem-padding: 15px;
 
+		$mm-to-in: 0.0393700787;
 		$size-factor: ($navigation-height / 72) / (80 * $mm-to-in);
 		$mm-to-px: $size-factor * 72 * $mm-to-in;
 
@@ -34,73 +41,87 @@ body {
 			@include outer-container;
 		    position: relative;
 		    z-index: 9999;
-		}
 
-		#corporate {
+		    #corporate {
+				display: inline-block;
+				height: $navigation-height;
+				padding-left: $navigation-elem-padding;
+				padding-right: $navigation-elem-padding;
 
-			#logo {
-				float: left;
-				max-height: $navigation-height;
-				padding: $mm-to-px * 10 $mm-to-px * 7.52 $mm-to-px * 10 $mm-to-px * 10;
-			}
-
-			#font {
-				font-family: 'Yanone Kaffeesatz', sans-serif;
-				line-height: $navigation-height - $mm-to-px * 38.67;
-				font-size: $size-factor * 157.27;
-				float: left;
-				padding: $mm-to-px * 18.67 $mm-to-px * 10 $mm-to-px * 20 0px;
-
-				#esti {
-					font-weight: 200;
-					color: #CAB69A;
-					letter-spacing: -0.07em;
-					margin-right: $mm-to-px * 4;
-					float: left;
+				a {
+					display: inline-block;
 				}
 
-				#mate {
-					font-weight: 400;
-					color: #F0E3CF;
-					letter-spacing: -0.02em;
+				#logo {
 					float: left;
+					max-height: $navigation-height;
+					padding: $mm-to-px * 10 $mm-to-px * 7.52 $mm-to-px * 10 0;
 				}
-			}
-			
-		}
 
-		#nav-title {
-			float: left;
-			color: $navigation-color-hover;
-			font-size: 1.4em;
-			line-height: $navigation-height;
-			padding-right: 1em;
-		}
+				#font {
+					font-family: 'Yanone Kaffeesatz', sans-serif;
+					line-height: $navigation-height - $mm-to-px * 38.67;
+					font-size: $size-factor * 157.27;
+					float: left;
+					padding: $mm-to-px * 18.67 $mm-to-px * 10 $mm-to-px * 20 0px;
 
-		nav {
-	    	ul {
-	    		float: right;
-		      	line-height: $navigation-height;
-		      	padding-right:.1em;
-	    	}
-
-	    	ul li {
-	    		float: left;
-	    		padding-right: .7em;
-
-	    		a {
-		    		color: $navigation-color;
-
-		    		&:hover {
-						color: $navigation-color-hover;
+					#esti {
+						font-weight: 200;
+						color: $strong-coffee;
+						letter-spacing: -0.07em;
+						margin-right: $mm-to-px * 4;
+						float: left;
 					}
+
+					#mate {
+						font-weight: 400;
+						color: $light-coffee;
+						letter-spacing: -0.02em;
+						float: left;
+					}
+				}
+			}
+
+			nav {
+				display: inline-block;
+				float: right;
+
+		    	ul {
+		    		display: inline-block;
+			      	line-height: $navigation-height;
+			      	padding-right: 1/3 * $navigation-elem-padding;
 		    	}
 
-		    	.login-btn {
-		    		@include button;
-		    		line-height: 1em !important;
+		    	ul li {
+		    		float: left;
+		    		padding-right: 2/3 * $navigation-elem-padding;
+
+		    		a {
+			    		color: $navigation-color;
+
+			    		&:hover {
+							color: $navigation-color-hover;
+						}
+			    	}
+
+			    	.login-btn {
+			    		//@include button;
+			    		line-height: 1em !important;
+			    		@include transition (all 0.2s ease-in-out);
+			    		background: $navigation-nav-button-background;
+			    		border-radius: $base-border-radius; 
+			    		color: white;
+			    		padding: .4em .6em;
+					    //font-size: .8em;  
+					    //font-weight: 800;
+					    //text-transform: uppercase;
+
+					    &:hover {
+					    	background: lighten($navigation-nav-button-background, 10);
+					    }
+			    	}
 		    	}
-	    	}
+			}
 		}
 	}
 
