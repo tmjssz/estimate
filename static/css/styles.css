@@ -263,6 +263,10 @@ body {
         height: 45px;
         padding-left: 15px;
         padding-right: 15px; }
+        @media screen and (max-width: 480px) {
+          body header div.navigation-wrapper #corporate {
+            padding-left: 8px;
+            padding-right: 8px; } }
         body header div.navigation-wrapper #corporate a {
           display: inline-block; }
         body header div.navigation-wrapper #corporate #logo {
@@ -297,6 +301,9 @@ body {
           display: inline-block;
           line-height: 45px;
           padding-right: 5px; }
+          @media screen and (max-width: 480px) {
+            body header div.navigation-wrapper nav ul {
+              padding-right: 0; } }
         body header div.navigation-wrapper nav ul li {
           float: left;
           padding-right: 10px; }
