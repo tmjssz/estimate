@@ -10,13 +10,15 @@
 			</div>
 		</a>
 	</div>
-	<nav>
+	{% if user.is_authenticated %}
+	<nav class="logged_in">
 		<ul>
-		{% if user.is_authenticated %}
 			<li><a href="{% url 'questions_menu' %}">Hauptmenü</a></li>
 			<li><a href="{% url 'questions_statistics_user' user.username %}">Konto</a></li>
-		{% endif %}
-
+	{% else %}
+	<nav class="logged_out">
+		<ul>
+	{% endif %}
 		{% include "userauth/toggle_login.html" %}
 		</ul>
 	</nav>

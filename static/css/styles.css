@@ -288,7 +288,11 @@ body {
             float: left; }
       body header div.navigation-wrapper nav {
         display: inline-block;
-        float: right; }
+        float: right;
+        font-size: 16px; }
+        @media screen and (max-width: 480px) {
+          body header div.navigation-wrapper nav.logged_out {
+            font-size: 14px; } }
         body header div.navigation-wrapper nav ul {
           display: inline-block;
           line-height: 45px;

@@ -85,6 +85,13 @@ body {
 			nav {
 				display: inline-block;
 				float: right;
+				font-size: 16px;
+
+				&.logged_out {
+					@include media ($mobile) {
+						font-size: 14px;
+					}
+				}
 
 		    	ul {
 		    		display: inline-block;
