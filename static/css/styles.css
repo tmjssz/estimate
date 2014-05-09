@@ -272,7 +272,8 @@ body {
         body header div.navigation-wrapper #corporate #logo {
           float: left;
           max-height: 45px;
-          padding: 5.625px 4.23px 5.625px 0; }
+          padding: 5.625px 4.23px 5.625px 0;
+          border: 0; }
         body header div.navigation-wrapper #corporate #font {
           font-family: 'Yanone Kaffeesatz', sans-serif;
           line-height: 23.24813px;
