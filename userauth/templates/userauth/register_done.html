@@ -3,8 +3,13 @@
 {% block title %}{{ block.super }} - Account erstellt{% endblock %}
 
 {% block content %}
-<h2>Account wurde erstellt</h2>
+<main id="register_done">
 
-<p>Du hast jetzt deinen eigenen Account. Viel Spass beim Schätzen!</p>
-<a href="{% url 'questions_menu' %}">Zum Hauptmenü</a>
+	<h2>Account wurde erstellt</h2>
+
+	<p>Du hast jetzt deinen eigenen Account. Viel Spass beim Schätzen!</p>
+	<a href="{% url 'questions_menu' %}">Zum Hauptmenü</a>
+
+<!-- / #register_done -->
+</main>
 {% endblock %}

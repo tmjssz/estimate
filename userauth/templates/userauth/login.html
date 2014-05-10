@@ -5,11 +5,11 @@
 {% block toggle_login %}{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-    <form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="Login"/>
-    </form>
+<main id="login">
+
+	<h2>Login</h2>
+    {% include "userauth/login_form.html" %}
+    
+<!-- / #login -->
+</main>
 {% endblock %}
