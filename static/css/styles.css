@@ -247,13 +247,16 @@ body {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     height: 45px;
     width: 100%;
-    z-index: 999; }
+    z-index: 999;
+    line-height: 1em;
+    margin: 0; }
     body header div.navigation-wrapper {
       max-width: 68em;
       margin-left: auto;
       margin-right: auto;
       position: relative;
-      z-index: 9999; }
+      z-index: 9999;
+      height: 45px; }
       body header div.navigation-wrapper:after {
         content: "";
         display: table;
@@ -268,7 +271,7 @@ body {
             padding-left: 8px;
             padding-right: 8px; } }
         body header div.navigation-wrapper #corporate a {
-          display: inline-block; }
+          display: inline; }
         body header div.navigation-wrapper #corporate #logo {
           float: left;
           max-height: 45px;
@@ -276,7 +279,6 @@ body {
           border: 0; }
         body header div.navigation-wrapper #corporate #font {
           font-family: 'Yanone Kaffeesatz', sans-serif;
-          line-height: 23.24813px;
           font-size: 31.20827px;
           float: left;
           padding: 10.50188px 5.625px 11.25px 0px; }
@@ -285,43 +287,106 @@ body {
             color: #cab69a;
             letter-spacing: -0.07em;
             margin-right: 2.25px;
-            float: left; }
+            float: left;
+            line-height: 23.24813px; }
           body header div.navigation-wrapper #corporate #font #mate {
             font-weight: 400;
             color: #f0e3cf;
             letter-spacing: -0.02em;
-            float: left; }
+            float: left;
+            line-height: 23.24813px; }
+      body header div.navigation-wrapper #username {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.7);
+        float: right;
+        line-height: 13px;
+        height: 45px;
+        padding: 9.5px 15px 9.5px 10px;
+        font-size: 11px;
+        border-left: 1px solid #646464; }
+        @media screen and (max-width: 480px) {
+          body header div.navigation-wrapper #username {
+            padding-left: 8px;
+            padding-right: 8px;
+            border-left: 0; } }
+        body header div.navigation-wrapper #username span {
+          font-size: 16px;
+          font-weight: 600;
+          color: white; }
+      body header div.navigation-wrapper #naviToggle {
+        display: none;
+        color: rgba(255, 255, 255, 0.7);
+        float: right;
+        cursor: pointer;
+        padding: 0px 8px; }
+        body header div.navigation-wrapper #naviToggle:hover {
+          color: white; }
+        body header div.navigation-wrapper #naviToggle i {
+          font-size: 1.5em;
+          line-height: 45px; }
+        @media screen and (max-width: 480px) {
+          body header div.navigation-wrapper #naviToggle {
+            display: inline-block; } }
       body header div.navigation-wrapper nav {
         display: inline-block;
         float: right;
-        font-size: 16px; }
+        font-size: 16px;
+        height: 45px; }
         @media screen and (max-width: 480px) {
-          body header div.navigation-wrapper nav.logged_out {
-            font-size: 14px; } }
+          body header div.navigation-wrapper nav.logged_in {
+            width: 100%;
+            top: -2px;
+            position: relative; } }
         body header div.navigation-wrapper nav ul {
           display: inline-block;
           line-height: 45px;
           padding-right: 5px; }
           @media screen and (max-width: 480px) {
             body header div.navigation-wrapper nav ul {
-              padding-right: 0; } }
-        body header div.navigation-wrapper nav ul li {
-          float: left;
-          padding-right: 10px; }
-          body header div.navigation-wrapper nav ul li a {
-            color: rgba(255, 255, 255, 0.7); }
-            body header div.navigation-wrapper nav ul li a:hover {
-              color: white; }
-          body header div.navigation-wrapper nav ul li .login-btn {
-            line-height: 1em !important;
-            -webkit-transition: all 0.2s ease-in-out;
-            -moz-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-            background: #477dca;
-            border-radius: 0.1875em;
-            color: white;
-            padding: .4em .6em; }
-            body header div.navigation-wrapper nav ul li .login-btn:hover {
-              background: #6f99d5; }
+              padding-right: 0;
+              clear: both;
+              -webkit-transform-style: preserve-3d;
+              margin: 0 auto;
+              overflow: hidden;
+              padding: 0;
+              width: 100%;
+              z-index: 9999; }
+              body header div.navigation-wrapper nav ul.logged_in {
+                display: none; }
+              body header div.navigation-wrapper nav ul.logged_out {
+                font-size: 14px; } }
+          body header div.navigation-wrapper nav ul li {
+            float: left;
+            padding-right: 10px; }
+            body header div.navigation-wrapper nav ul li a {
+              color: rgba(255, 255, 255, 0.7); }
+              body header div.navigation-wrapper nav ul li a:hover {
+                color: white; }
+            body header div.navigation-wrapper nav ul li .login-btn {
+              line-height: 1em !important;
+              -webkit-transition: all 0.2s ease-in-out;
+              -moz-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              background: #477dca;
+              border-radius: 0.1875em;
+              color: white;
+              padding: .4em .6em; }
+              body header div.navigation-wrapper nav ul li .login-btn:hover {
+                background: #6f99d5; }
+          @media screen and (max-width: 480px) {
+            body header div.navigation-wrapper nav ul.logged_in li {
+              background: #333333;
+              display: block;
+              line-height: 35px;
+              overflow: hidden;
+              text-align: right;
+              width: 100%;
+              z-index: 9999;
+              -webkit-transition: all 0.2s ease-in-out;
+              -moz-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out; }
+              body header div.navigation-wrapper nav ul.logged_in li:hover {
+                background: #595959; } }
   body main {
-    margin: 8px; }
+    margin: 8px;
+    position: absolute; }

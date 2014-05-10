@@ -13,4 +13,18 @@ $( document ).ready(function() {
 		$(this).hide();
 		$('#resolution').removeClass('hidden');
 	});
+
+
+	// Click handler for mobile navigation
+    var navigation = $('.navigation-wrapper nav ul');
+    var naviToggle = $('#naviToggle');
+    $(naviToggle).click(function(e) {
+    	e.preventDefault();
+    	navigation.slideToggle(function(){
+    		if(navigation.is(':hidden')) {
+    			navigation.removeAttr('style');
+    		}
+    	});
+    });
+
 });

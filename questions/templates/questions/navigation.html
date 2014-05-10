@@ -10,17 +10,25 @@
 			</div>
 		</a>
 	</div>
+
 	{% if user.is_authenticated %}
+
+	<div id="naviToggle"><i class="fa fa-bars"></i></div>
+	<div id="username">Eingeloggt als <br><span>{{ user.username }}</span></div>
+
 	<nav class="logged_in">
-		<ul>
+		<ul class="logged_in">
 			<li><a href="{% url 'questions_menu' %}">Hauptmenü</a></li>
 			<li><a href="{% url 'questions_statistics_user' user.username %}">Konto</a></li>
 	{% else %}
 	<nav class="logged_out">
-		<ul>
+		<ul class="logged_out">
 	{% endif %}
 		{% include "userauth/toggle_login.html" %}
 		</ul>
 	</nav>
+
+	
+
 <!-- / .navigation-wrapper -->
 </div>

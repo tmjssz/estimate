@@ -35,11 +35,14 @@ body {
 		height: $navigation-height;
 		width: 100%;
 		z-index: 999;
+		line-height: 1em;
+		margin: 0;
 
 		div.navigation-wrapper {
 			@include outer-container;
 		    position: relative;
 		    z-index: 9999;
+		    height: $navigation-height;
 
 		    #corporate {
 				display: inline-block;
@@ -53,7 +56,7 @@ body {
 				}
 
 				a {
-					display: inline-block;
+					display: inline;
 				}
 
 				#logo {
@@ -65,7 +68,6 @@ body {
 
 				#font {
 					font-family: 'Yanone Kaffeesatz', sans-serif;
-					line-height: $navigation-height - $mm-to-px * 38.67;
 					font-size: $size-factor * 157.27;
 					float: left;
 					padding: $mm-to-px * 18.67 $mm-to-px * 10 $mm-to-px * 20 0px;
@@ -76,6 +78,7 @@ body {
 						letter-spacing: -0.07em;
 						margin-right: $mm-to-px * 4;
 						float: left;
+						line-height: $navigation-height - $mm-to-px * 38.67;
 					}
 
 					#mate {
@@ -83,7 +86,55 @@ body {
 						color: $light-coffee;
 						letter-spacing: -0.02em;
 						float: left;
+						line-height: $navigation-height - $mm-to-px * 38.67;
 					}
+				}
+			}
+
+			#username {
+				$username-line-height: 13px;
+				$username-border-color: #646464;
+
+				display: inline-block;
+				color: $navigation-color;
+				float: right;
+				line-height: $username-line-height;
+				height: $navigation-height;
+				padding: ($navigation-height - $username-line-height*2)/2 15px ($navigation-height - $username-line-height*2)/2 10px;
+				font-size: 11px;
+				border-left: 1px solid $username-border-color;
+
+				@include media ($mobile) {
+					padding-left: 8px;
+					padding-right: 8px;
+					border-left: 0;
+				}
+
+				span {
+					font-size: 16px;
+					font-weight: 600;
+					color: white;
+				}
+			}
+
+			#naviToggle {
+				display: none;
+				color: $navigation-color;
+				float: right;
+				cursor: pointer;
+				padding: 0px 8px;
+
+				&:hover {
+					color: $navigation-color-hover;
+				}
+
+				i {
+					font-size: 1.5em;
+					line-height: $navigation-height;
+				}
+
+				@include media ($mobile) {
+					display: inline-block;
 				}
 			}
 
@@ -91,10 +142,13 @@ body {
 				display: inline-block;
 				float: right;
 				font-size: 16px;
+				height: $navigation-height;
 
-				&.logged_out {
-					@include media ($mobile) {
-						font-size: 14px;
+				@include media ($mobile) {
+					&.logged_in {
+						width: 100%;
+						top: -2px;
+						position: relative;
 					}
 				}
 
@@ -102,38 +156,75 @@ body {
 		    		display: inline-block;
 			      	line-height: $navigation-height;
 			      	padding-right: 5px;
+
 			      	@include media ($mobile) {
 						padding-right: 0;
-					}
-		    	}
+						clear: both;
+					    -webkit-transform-style: preserve-3d; 
+					// stop webkit flicker
+					    margin: 0 auto;
+					    overflow: hidden;
+					    padding: 0;
+					    width: 100%;
+					    z-index: 9999;
 
-		    	ul li {
-		    		float: left;
-		    		padding-right: 10px;
-
-		    		a {
-			    		color: $navigation-color;
-
-			    		&:hover {
-							color: $navigation-color-hover;
+					    &.logged_in {
+							display: none;
 						}
-			    	}
 
-			    	.login-btn {
-			    		//@include button;
-			    		line-height: 1em !important;
-			    		@include transition (all 0.2s ease-in-out);
-			    		background: $navigation-nav-button-background;
-			    		border-radius: $base-border-radius; 
-			    		color: white;
-			    		padding: .4em .6em;
-					    //font-size: .8em;  
-					    //font-weight: 800;
-					    //text-transform: uppercase;
+					    &.logged_out {
+							font-size: 14px;
+						}
+					}
 
-					    &:hover {
-					    	background: lighten($navigation-nav-button-background, 10);
-					    }
+					li {
+						float: left;
+			    		padding-right: 10px;
+
+						a {
+				    		color: $navigation-color;
+
+				    		&:hover {
+								color: $navigation-color-hover;
+							}
+				    	}
+
+				    	.login-btn {
+				    		//@include button;
+				    		line-height: 1em !important;
+				    		@include transition (all 0.2s ease-in-out);
+				    		background: $navigation-nav-button-background;
+				    		border-radius: $base-border-radius; 
+				    		color: white;
+				    		padding: .4em .6em;
+
+						    &:hover {
+						    	background: lighten($navigation-nav-button-background, 10);
+						    }
+				    	}
+					}
+
+					&.logged_out li {
+
+					}
+
+					&.logged_in li {
+
+			    		@include media ($mobile) {
+							background: $navigation-background;
+							display: block;
+							line-height: $navigation-height - 10;
+							overflow: hidden;
+							text-align: right;
+							width: 100%;
+							z-index: 9999;
+							@include transition (all 0.2s ease-in-out);
+
+							&:hover {
+								background: lighten($navigation-background, 15);
+							}
+			    		}
+
 			    	}
 		    	}
 			}
@@ -142,6 +233,7 @@ body {
 
 	main {
 		margin: 8px;
+		position: absolute;
 	}
 }
 
