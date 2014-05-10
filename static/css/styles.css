@@ -336,7 +336,8 @@ body {
           body header div.navigation-wrapper nav.logged_in {
             width: 100%;
             top: -2px;
-            position: relative; } }
+            position: relative;
+            height: 0; } }
         body header div.navigation-wrapper nav ul {
           display: inline-block;
           line-height: 45px;
@@ -388,5 +389,15 @@ body {
               body header div.navigation-wrapper nav ul.logged_in li:hover {
                 background: #595959; } }
   body main {
-    margin: 8px;
-    position: absolute; }
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding: 15px; }
+    body main:after {
+      content: "";
+      display: table;
+      clear: both; }
+    @media screen and (max-width: 480px) {
+      body main {
+        padding: 8px; } }

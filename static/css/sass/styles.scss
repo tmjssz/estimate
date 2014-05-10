@@ -149,6 +149,7 @@ body {
 						width: 100%;
 						top: -2px;
 						position: relative;
+						height: 0;
 					}
 				}
 
@@ -232,8 +233,13 @@ body {
 	}
 
 	main {
-		margin: 8px;
-		position: absolute;
+		@include outer-container;
+		position: relative;
+		padding: 15px;
+
+		@include media ($mobile) {
+			padding: 8px;
+		}
 	}
 }
 
