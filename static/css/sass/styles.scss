@@ -213,7 +213,7 @@ body {
 			    		@include media ($mobile) {
 							background: $navigation-background;
 							display: block;
-							line-height: $navigation-height - 10;
+							line-height: $navigation-height;
 							overflow: hidden;
 							text-align: right;
 							width: 100%;
