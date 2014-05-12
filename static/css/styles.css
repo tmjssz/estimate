@@ -249,7 +249,10 @@ body {
     width: 100%;
     z-index: 999;
     line-height: 1em;
-    margin: 0; }
+    margin: 0px 0px 15px 0px; }
+    @media screen and (max-width: 480px) {
+      body header {
+        margin: 0; } }
     body header div.navigation-wrapper {
       max-width: 50em;
       margin-left: auto;
@@ -401,3 +404,90 @@ body {
     @media screen and (max-width: 480px) {
       body main {
         padding: 8px; } }
+    body main form input[type="submit"], body main form input[type="button"] {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em; }
+    body main form label {
+      font-size: 12px; }
+    body main form span.helptext {
+      display: none; }
+    body main form ul.errorlist {
+      color: #a60000;
+      background: #ffd5d5;
+      border-radius: 0.1875em;
+      padding: 5px 10px; }
+    body main #landing {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 48.71795%; }
+      body main #landing:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body main #landing {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          body main #landing:last-child {
+            margin-right: 0; } }
+    body main #register-login {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 48.71795%; }
+      body main #register-login:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body main #register-login {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          body main #register-login:last-child {
+            margin-right: 0; } }
+      body main #register-login ul.accordion {
+        margin-bottom: 1.5em;
+        display: flex; }
+        body main #register-login ul.accordion li {
+          float: left;
+          padding: 5px 0;
+          float: left;
+          display: block;
+          margin-right: 5.26316%;
+          width: 47.36842%; }
+          body main #register-login ul.accordion li:last-child {
+            margin-right: 0; }
+          body main #register-login ul.accordion li.not-selected {
+            color: #477dca;
+            text-decoration: none;
+            -webkit-transition: color 0.1s linear;
+            -moz-transition: color 0.1s linear;
+            transition: color 0.1s linear;
+            cursor: pointer;
+            border-bottom: 1px solid #dddddd; }
+            body main #register-login ul.accordion li.not-selected:hover {
+              color: #2c5999; }
+            body main #register-login ul.accordion li.not-selected:active, body main #register-login ul.accordion li.not-selected:focus {
+              color: #2c5999;
+              outline: none; }
+          body main #register-login ul.accordion li.selected {
+            font-weight: bold;
+            border-bottom: 1px solid #333333; }
+          @media screen and (max-width: 480px) {
+            body main #register-login ul.accordion li {
+              float: left;
+              display: block;
+              margin-right: 6.66667%;
+              width: 46.66667%; }
+              body main #register-login ul.accordion li:last-child {
+                margin-right: 0; } }
+      body main #register-login #login-form {
+        display: none; }
+        body main #register-login #login-form a.new-account {
+          display: none; }

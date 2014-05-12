@@ -11,6 +11,7 @@ from django.shortcuts import render
 from questions.forms import EstimateForm
 from questions.models import Question, Estimate, Score, Challenge
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import logging
 import random
 
@@ -33,7 +34,9 @@ def menu_view(request):
         
         return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges}, context_instance=RequestContext(request))
     else:
-        return render_to_response('questions/landing-page.html', context_instance=RequestContext(request))
+        register_form = UserCreationForm()
+        login_form = AuthenticationForm()
+        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form}, context_instance=RequestContext(request))
 
 def questions_list_all(request):
     """

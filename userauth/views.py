@@ -27,5 +27,5 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
             return HttpResponseRedirect(next_page)
     else:
         form = UserCreationForm()
-    return render_to_response(template_name, {'form': form},
+    return render_to_response(template_name, {'register_form': form},
         context_instance=RequestContext(request))

@@ -5,16 +5,11 @@
 {% block toggle_login %}{% endblock %}
 
 {% block content %}
-<main id="register">
+<div id="register">
 
 	<h2>Neuer Account</h2>
-
-	<form action="{% url 'userauth_register' %}" method="post" accept-charset="utf-8">
-	    {{ form.as_p }}
-	    {% csrf_token %}
-	    <input type="submit" value="Erstellen"/>
-	</form>
+	{% include "userauth/register_form.html" %}
 
 <!-- / #register -->
-</main>
+</div>
 {% endblock %}

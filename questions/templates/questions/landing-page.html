@@ -4,14 +4,29 @@
 
 
 {% block content %}
-<main id="landing-page">
 
+<div id="landing">
 	<h2>Willkommen</h2>
-	
-	{% include "userauth/login_form.html" %}
-	
-	<a href="{% url 'userauth_register' %}">Neuer Account</a>
+	<p>Dies ist eine Plattform zum Sammeln von Schätzwerten. Du bist herzlich eingeladen, zu interessanten Themen deine eigenen Schätzungen abzugeben. Finde heraus, wie gut du im Vergleich zu anderen Teilnehmern schätzen kannst. </p>
+<!-- / #landing -->
+</div>
 
-<!-- / #landing-page -->
-</main>
+
+<div id="register-login">
+	<ul class="accordion">
+  		<li class="selected" rel="register-form">Neuer Account</li>
+  		<li class="not-selected" rel="login-form">Login</li>
+  	</ul>
+
+	<div class="form" id="register-form">
+		{% include "userauth/register_form.html" %}
+	<!-- / #register-form -->
+	</div>
+	<div class="form" id="login-form">
+		{% include "userauth/login_form.html" %}
+	<!-- / #login-form -->
+	</div>
+<!-- / #register-login -->
+</div>
+
 {% endblock %}

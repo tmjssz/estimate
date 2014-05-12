@@ -3,4 +3,5 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}" />
     <input type="submit" value="Login"/>
+    <a class="new-account" href="{% url 'userauth_register' %}">Neuer Account</a>
 </form>

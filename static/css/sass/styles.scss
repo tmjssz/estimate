@@ -9,6 +9,45 @@
 $light-coffee: #F0E3CF;
 $strong-coffee: #CAB69A;
 
+// Navigation Colors
+$navigation-background: $dark-gray;
+$navigation-color: transparentize(white, 0.3);
+$navigation-color-hover: white;
+$navigation-nav-button-background: $base-accent-color;
+$navigation-nav-button-background-hover: lighten($navigation-background, 10);
+
+// General Colors
+$error-red: #a60000;
+$error-background: #ffd5d5;
+
+
+// MIXINS ========================================================
+
+// Button
+@mixin btn {
+	@include transition (all 0.2s ease-in-out);
+	background: $navigation-nav-button-background;
+	border-radius: $base-border-radius; 
+	color: white;
+	padding: .4em .6em;
+}
+
+@mixin link-like {
+	color: #477dca;
+	text-decoration: none;
+	-webkit-transition: color 0.1s linear;
+	-moz-transition: color 0.1s linear;
+	transition: color 0.1s linear;
+	cursor: pointer;
+
+	&:hover {
+		color: #2c5999; 
+	}
+	&:active, &:focus {
+		color: #2c5999;
+		outline: none; 
+	}
+}
 
 
 body {
@@ -16,12 +55,7 @@ body {
 	margin: 0;
 
 	header {
-		$navigation-background: $dark-gray;
-		$navigation-color: transparentize(white, 0.3);
-		$navigation-color-hover: white;
 		$navigation-height: 45px;
-		$navigation-nav-button-background: $base-accent-color;
-		$navigation-nav-button-background-hover: lighten($navigation-background, 10);
 		$navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20);
 
 		$mm-to-in: 0.0393700787;
@@ -36,7 +70,11 @@ body {
 		width: 100%;
 		z-index: 999;
 		line-height: 1em;
-		margin: 0;
+		margin: 0px 0px 15px 0px;
+
+		@include media ($mobile) {
+			margin: 0;
+		}
 
 		div.navigation-wrapper {
 			@include outer-container;
@@ -191,13 +229,8 @@ body {
 				    	}
 
 				    	.login-btn {
-				    		//@include button;
 				    		line-height: 1em !important;
-				    		@include transition (all 0.2s ease-in-out);
-				    		background: $navigation-nav-button-background;
-				    		border-radius: $base-border-radius; 
-				    		color: white;
-				    		padding: .4em .6em;
+				    		@include btn;
 
 						    &:hover {
 						    	background: lighten($navigation-nav-button-background, 10);
@@ -239,6 +272,78 @@ body {
 
 		@include media ($mobile) {
 			padding: 8px;
+		}
+
+		form {
+			input {
+				&[type="submit"], &[type="button"] {
+					@include btn;
+				}
+			}
+
+			label {
+				font-size: 12px;
+			}
+
+			span.helptext {
+				display: none;
+			}
+
+			ul.errorlist {
+				color: $error-red;
+				background: $error-background;
+				border-radius: $base-border-radius; 
+				padding: 5px 10px;
+			}
+
+
+		}
+
+		#landing {
+			@include span-columns(5);
+			@include media($mobile) {
+				@include span-columns(4);
+			}
+		}
+
+		#register-login {
+			@include span-columns(5);
+			@include media($mobile) {
+				@include span-columns(4);
+			}
+
+			ul.accordion {
+				margin-bottom: $base-line-height;
+				display: flex;
+
+				li {
+					float:left;
+					padding: 5px 0;
+					@include span-columns(2.5 of 5);
+
+					&.not-selected {
+						@include link-like;
+						border-bottom: 1px solid $base-border-color;
+					}
+
+					&.selected {
+						font-weight: bold;
+						border-bottom: 1px solid $dark-gray;
+					}
+
+					@include media($mobile) {
+						@include span-columns(2 of 4);
+					}
+				}
+			}
+
+			#login-form {
+				display:none;
+
+				a.new-account {
+					display:none;
+				}
+			}
 		}
 	}
 }

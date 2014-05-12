@@ -3,7 +3,7 @@
 {% block title %}{{ block.super }} - {{ question.title }}{% endblock %}
 
 {% block content %}
-<main id="question-show">
+<div id="question-show">
 
 	<h2>{{ question.title }}</h2>
 	<p>{{ question.question }}</p>
@@ -27,5 +27,5 @@
 	</form>
 
 <!-- / #question-show -->
-</main>
+</div>
 {% endblock %}

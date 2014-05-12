@@ -3,7 +3,7 @@
 {% block title %}{{ block.super }} - Ergebnis - {{ question.title }}{% endblock %}
 
 {% block content %}
-<main id="question-score">
+<div id="question-score">
 
 	<h2>Ergebnis: {{ question.title }}</h2>
 
@@ -53,5 +53,5 @@
 	<a href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
 
 <!-- / #question-score -->
-</main>
+</div>
 {% endblock %}
