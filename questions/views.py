@@ -31,8 +31,16 @@ def menu_view(request):
         challenges = Challenge.objects.filter(published=True)
         if len(challenges) == 0:
             challenges = None
+
+        estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
         
-        return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges}, context_instance=RequestContext(request))
+        score = 0
+        for e in estimates:
+            score += e.score
+
+        number_estimates = len(estimates)
+        
+        return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
     else:
         register_form = UserCreationForm()
         login_form = AuthenticationForm()

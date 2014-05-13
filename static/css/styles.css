@@ -376,7 +376,7 @@ body {
               color: white;
               padding: .4em .6em; }
               body header div.navigation-wrapper nav ul li .login-btn:hover {
-                background: #6f99d5; }
+                background: #82a7db; }
           @media screen and (max-width: 480px) {
             body header div.navigation-wrapper nav ul.logged_in li {
               background: #333333;
@@ -404,6 +404,13 @@ body {
     @media screen and (max-width: 480px) {
       body main {
         padding: 8px; } }
+    body main h2 {
+      margin-bottom: 15px; }
+    body main h3 {
+      margin-bottom: 10px; }
+    @media screen and (max-width: 480px) {
+      body main p {
+        line-height: 1em; } }
     body main form input[type="submit"], body main form input[type="button"] {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
@@ -412,6 +419,8 @@ body {
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em; }
+      body main form input[type="submit"]:hover, body main form input[type="button"]:hover {
+        background: #82a7db; }
     body main form label {
       font-size: 12px; }
     body main form span.helptext {
@@ -421,6 +430,32 @@ body {
       background: #ffd5d5;
       border-radius: 0.1875em;
       padding: 5px 10px; }
+    body main #login, body main #register, body main #menu {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 58.97436%;
+      margin-left: 20.51282%; }
+      body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main #login, body main #register, body main #menu {
+          margin-left: 10.25641%;
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 74.19355%; }
+          body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main #login, body main #register, body main #menu {
+          margin-left: 0%;
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+            margin-right: 0; } }
     body main #landing {
       float: left;
       display: block;
@@ -433,7 +468,8 @@ body {
           float: left;
           display: block;
           margin-right: 6.66667%;
-          width: 100%; }
+          width: 100%;
+          margin-bottom: 10px; }
           body main #landing:last-child {
             margin-right: 0; } }
     body main #register-login {
@@ -491,3 +527,207 @@ body {
         display: none; }
         body main #register-login #login-form a.new-account {
           display: none; }
+    body main section.menu {
+      padding: 20px 0;
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 58.97436%; }
+      body main section.menu:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main section.menu {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 74.19355%; }
+          body main section.menu:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main section.menu {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 73.33333%;
+          margin-left: 13.33333%;
+          text-align: center; }
+          body main section.menu:last-child {
+            margin-right: 0; } }
+      body main section.menu .row .menu-btn {
+        float: left;
+        display: block;
+        margin-right: 4.34783%;
+        width: 47.82609%; }
+        body main section.menu .row .menu-btn:last-child {
+          margin-right: 0; }
+        @media screen and (max-width: 480px) {
+          body main section.menu .row .menu-btn {
+            float: left;
+            display: block;
+            margin-right: 9.09091%;
+            width: 100%; }
+            body main section.menu .row .menu-btn:last-child {
+              margin-right: 0; } }
+      body main section.menu .row .challenge_btn {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #477dca;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em;
+        text-align: center;
+        margin-bottom: 15px;
+        padding: 0 .6em;
+        font-weight: bold; }
+        body main section.menu .row .challenge_btn:hover {
+          background: #82a7db; }
+        body main section.menu .row .challenge_btn div {
+          display: table;
+          height: 100px;
+          width: 100%; }
+          body main section.menu .row .challenge_btn div span {
+            display: table-cell;
+            vertical-align: middle; }
+        @media screen and (max-width: 480px) {
+          body main section.menu .row .challenge_btn div {
+            height: auto;
+            padding: .6em .6em; } }
+      body main section.menu .row .choose_btn {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #aabb2f;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em;
+        text-align: center;
+        margin-bottom: 15px;
+        padding: 0 .6em;
+        font-weight: bold; }
+        body main section.menu .row .choose_btn:hover {
+          background: #c8d760; }
+        body main section.menu .row .choose_btn div {
+          display: table;
+          height: 100px;
+          width: 100%; }
+          body main section.menu .row .choose_btn div span {
+            display: table-cell;
+            vertical-align: middle; }
+        @media screen and (max-width: 480px) {
+          body main section.menu .row .choose_btn div {
+            height: auto;
+            padding: .6em .6em; } }
+      body main section.menu .row .random_btn {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #dd480d;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em;
+        text-align: center;
+        margin-bottom: 15px;
+        padding: 0 .6em;
+        font-weight: bold; }
+        body main section.menu .row .random_btn:hover {
+          background: #f47543; }
+        body main section.menu .row .random_btn div {
+          display: table;
+          height: 100px;
+          width: 100%; }
+          body main section.menu .row .random_btn div span {
+            display: table-cell;
+            vertical-align: middle; }
+        @media screen and (max-width: 480px) {
+          body main section.menu .row .random_btn div {
+            height: auto;
+            padding: .6em .6em; } }
+      body main section.menu .row .create_btn {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #efb600;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em;
+        text-align: center;
+        margin-bottom: 15px;
+        padding: 0 .6em;
+        font-weight: bold; }
+        body main section.menu .row .create_btn:hover {
+          background: #ffd13d; }
+        body main section.menu .row .create_btn div {
+          display: table;
+          height: 100px;
+          width: 100%; }
+          body main section.menu .row .create_btn div span {
+            display: table-cell;
+            vertical-align: middle; }
+        @media screen and (max-width: 480px) {
+          body main section.menu .row .create_btn div {
+            height: auto;
+            padding: .6em .6em; } }
+    body main aside.menu {
+      padding: 20px 0;
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 33.33333%;
+      margin-left: 5.12821%; }
+      body main aside.menu:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main aside.menu {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 22.58065%;
+          margin-left: 0%; }
+          body main aside.menu:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main aside.menu {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-left: 0%;
+          padding-top: 0; }
+          body main aside.menu:last-child {
+            margin-right: 0; } }
+      body main aside.menu .short-stats {
+        float: left;
+        display: block;
+        margin-right: 7.69231%;
+        width: 38.46154%;
+        margin-bottom: 20px; }
+        body main aside.menu .short-stats:last-child {
+          margin-right: 0; }
+        @media screen and (max-width: 768px) {
+          body main aside.menu .short-stats {
+            float: left;
+            display: block;
+            margin-right: 14.28571%;
+            width: 100%; }
+            body main aside.menu .short-stats:last-child {
+              margin-right: 0; } }
+        @media screen and (max-width: 480px) {
+          body main aside.menu .short-stats {
+            float: left;
+            display: block;
+            margin-right: 6.66667%;
+            width: 46.66667%;
+            margin-left: 0%;
+            text-align: center; }
+            body main aside.menu .short-stats:last-child {
+              margin-right: 0; } }
+        body main aside.menu .short-stats .title {
+          font-weight: bold;
+          font-size: 12px;
+          color: #646464; }
+        body main aside.menu .short-stats .value {
+          font-size: 40px;
+          font-weight: bold; }
+    body main #login a.new-account {
+      margin-left: 15px; }
