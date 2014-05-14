@@ -87,6 +87,25 @@ $error-background: #ffd5d5;
 	}
 }
 
+@mixin number($color) {
+	text-align: center;
+
+	.title {
+		font-weight: bold;
+		font-size: 12px;
+		color: $grey-text;
+		display: block;
+		width: 100%;
+	}
+	.value {
+		font-size: 40px;
+		font-weight: bold;
+		display: block;
+		width: 100%;
+		color: $color;
+	}
+}
+
 
 body {
 
@@ -386,25 +405,6 @@ body {
 			}
 		}
 
-		.number {
-			text-align: center;
-
-			.title {
-				font-weight: bold;
-				font-size: 12px;
-				color: $grey-text;
-				display: block;
-				width: 100%;
-			}
-			.value {
-				font-size: 40px;
-				font-weight: bold;
-				display: block;
-				width: 100%;
-				color: $base-accent-color;
-			}
-		}
-
 		// - - - - - - - - - - - - - - - - - - - - - - - - 
 		// CONTAINER SIZING 
 		// -----------------------------------------------
@@ -520,7 +520,7 @@ body {
 				padding-top: 0;
 			}
 
-			.number {
+			.short-stats {
 				@include span-columns(1.5 of 3.5);
 				margin-bottom: 20px;
 
@@ -532,6 +532,13 @@ body {
 					@include span-columns(2 of 4);
 					@include shift(0);
 					text-align: center;
+				}
+
+				&.score {
+					@include number(#851625);
+				}
+				&.number {
+					@include number(#0f3569);
 				}
 			}
 		}
@@ -549,11 +556,113 @@ body {
 		// QUESTION PAGE 
 		// - - - - - - - - - - - - - - - - - - - - - - - - 
 		#question-show {
-			form {
-				p {
-					span.helptext {
-						display: none;
+			section {
+				@include span-columns(5 of 10);
+
+				@include media($mobile) {
+					@include span-columns(4);
+					@include shift(0);
+				}
+
+				&.without-aside {
+					@include shift(1 of 10);
+					@include span-columns(8 of 10);
+
+					@include media($tablet) {
+						@include span-columns(8 of 8);
+						@include shift(0);
 					}
+				}
+
+				h2 {
+					@include span-columns(8 of 10);
+				}
+
+				#countdown {
+					@include span-columns(2 of 10);
+					float: right;
+					@include omega;
+					margin: 15px 0 15px 0;
+					text-align: center;
+				}
+
+				p {
+					@include span-columns(1 of 1);
+					margin-bottom: 15px;
+				}
+
+				small#unit {
+					@include span-columns(1 of 1);
+				}
+
+				form {
+					@include span-columns(1 of 1);
+
+					input#id_estimate {
+						@include span-columns(6 of 9);
+
+						@include media($mobile) {
+							@include span-columns(4 of 4);
+						}
+					}
+
+					input[type=submit] {
+						@include span-columns(3 of 9);
+						padding: 0.5em 0.5em;
+
+						@include media($mobile) {
+							@include span-columns(4 of 4);
+							margin-bottom: 15px;
+						}
+					}
+				}
+			}
+
+			aside {
+				@include span-columns(5 of 10);
+				@include shift(0);
+
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					@include shift(0);
+				}
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+
+
+		// QUESTION SCORE PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#question-score {
+
+			.score, .resolution {
+				@include span-columns(2.5 of 5);
+				@include number($base-font-color);
+				margin-bottom: 20px;
+			}
+
+			.score {
+				@include omega;
+			}
+
+			.half {
+				@include span-columns(5);
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					margin-bottom: 15px;
+					text-align: center;
+				}
+
+				&.result {
+					h3 {
+						display: inline-block;
+						text-align: center;
+						width: 100%;
+					}
+					
 				}
 			}
 		}

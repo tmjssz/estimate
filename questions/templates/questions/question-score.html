@@ -5,33 +5,37 @@
 {% block content %}
 <div id="question-score">
 
-	<h2>Ergebnis: {{ question.title }}</h2>
+	<h2>{{ question.title }}</h2>
 
-	<h3>Punkte</h3>
-	<div class="score">{{ estimate.score }}</div>
+	<div class="half result">
 
-	<h3>Auflösung</h3>
-	<div class="resolution">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</div>
+		<div class="resolution">	
+			<span class="title">Auflösung</span>
+			<span class="value">{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
+		</div>
 
+		<div class="score">	
+			<span class="title">Punkte</span>
+			<span class="value">{{ estimate.score }}</span>
+		</div>
 
-	{% if estimate.estimate == None %}
-		<h3>Zeit abgelaufen.</h3>
-		<span id="show_resolution" class="link_like">Zeige Auflösung</span>
-		<p id="resolution" class="hidden"><strong>Auflösung</strong> {{ question.answer|floatformat }}</p>
-	{% else %}
-		{% if estimate.estimate == question.answer %}
-			<h3>Punktlandung!</h3>
-		{% elif estimate.score == 100 %}
-			<h3>Wahnsinn!</h3>
-		{% elif estimate.score >= 98 %}
-			<h3>Ganz knapp daneben!</h3>
-		{% elif estimate.score >= 95 %}
-			<h3>Sehr gut!</h3>
-		{% elif estimate.score >= 90 %}
-			<h3>Nicht schlecht!</h3>
-		{% endif %}
+		{% if estimate.estimate == None %}
+			<h3>Zeit abgelaufen.</h3>
+			<span id="show_resolution" class="link_like">Zeige Auflösung</span>
+			<p id="resolution" class="hidden"><strong>Auflösung</strong> {{ question.answer|floatformat }}</p>
+		{% else %}
+			{% if estimate.estimate == question.answer %}
+				<h3>Punktlandung!</h3>
+			{% elif estimate.score == 100 %}
+				<h3>Wahnsinn!</h3>
+			{% elif estimate.score >= 98 %}
+				<h3>Ganz knapp daneben!</h3>
+			{% elif estimate.score >= 95 %}
+				<h3>Sehr gut!</h3>
+			{% elif estimate.score >= 90 %}
+				<h3>Nicht schlecht!</h3>
+			{% endif %}
 
-		<p>
 			<table>
 				<tr>
 					<th>Deine Schätzung</th>
@@ -47,10 +51,27 @@
 				</tr>
 			</table>
 			<a href="{% url 'questions_statistics_question' question.slug %}">Statistik zur Frage</a>
-		</p>
-	{% endif %}
+		{% endif %}
 
-	<a href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
+		<a href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
+
+	<!-- /.half -->
+	</div>
+
+	<div class="half">
+
+		<p>{{ question.question }}</p>
+
+		{% if question.unit %}
+			<small id="unit">Einheit: {{ question.unit }}</small>
+		{% endif %}
+
+		{% if question.image %}
+			<p><img src="/{{ question.image }}" /></p>
+		{% endif %}
+
+	<!-- /.half -->
+	</div>
 
 <!-- / #question-score -->
 </div>

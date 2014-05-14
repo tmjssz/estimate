@@ -5,35 +5,54 @@
 {% block content %}
 <div id="question-show">
 
-	<h2>{{ question.title }}</h2>
-
-	{% if user != question.author %}
-
-		<p>{{ question.question }}</p>
-
-		{% if question.unit %}
-		<small>Einheit: {{ question.unit }}</small>
-		{% endif %}
-
-		{% if question.image %}
-		<p><img src="/{{ question.image }}" /></p>
-		{% endif %}
-
-		<!-- Countdown Timer -->
-		<div id="countdown"></div>
-
-		<!-- Estimate Add Form -->
-		<form action="{{ action_url }}" method="post" accept-charset="utf-8">
-		    {{ form.as_p }}
-		    {% csrf_token %}
-		    <p><input type="submit" value="Speichern"/></p>
-		</form>
-
+	{% if question.image %} 
+	<section>
 	{% else %}
-
-		<p>Nicht schummeln! Diese Frage hast du selbst erstellt. Aber schau dir doch die <a href="{% url 'questions_statistics_question' question.slug %}">Statistik</a> zu deiner Frage an.</p>
-
+	<section class="without-aside">
 	{% endif %}
+
+		<h2>{{ question.title }}</h2>
+
+		{% if user != question.author %}
+
+			<!-- Countdown Timer -->
+			<div id="countdown"></div>
+
+			<p id="question">{{ question.question }}</p>
+
+			{% if question.unit %}
+			<small id="unit">Einheit: {{ question.unit }}</small>
+			{% endif %}
+
+			<!-- Estimate Add Form -->
+			<form action="{{ action_url }}" method="post" accept-charset="utf-8">
+			    {% csrf_token %}
+			    {% for hidden in form.hidden_fields %}
+	                {{ hidden }}
+	            {% endfor %}
+
+	            {% for field in form.visible_fields %}
+	                {{ field.errors }}
+	                {{ field }}
+	            {% endfor %}
+			    <input type="submit" value="Speichern"/>
+			</form>
+
+		{% else %}
+
+			<p>Nicht schummeln! Diese Frage hast du selbst erstellt. Aber schau dir doch die <a href="{% url 'questions_statistics_question' question.slug %}">Statistik</a> zu deiner Frage an.</p>
+
+		{% endif %}
+
+	</section>
+
+	{% if question.image %}
+	<aside>
+		<p><img src="/{{ question.image }}" /></p>
+	</aside>
+	{% endif %}
+
+	
 
 <!-- / #question-show -->
 </div>
