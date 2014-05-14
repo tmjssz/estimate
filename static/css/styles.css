@@ -497,6 +497,20 @@ body {
       background: #ffd5d5;
       border-radius: 0.1875em;
       padding: 5px 10px; }
+    body main .number {
+      text-align: center; }
+      body main .number .title {
+        font-weight: bold;
+        font-size: 12px;
+        color: #646464;
+        display: block;
+        width: 100%; }
+      body main .number .value {
+        font-size: 40px;
+        font-weight: bold;
+        display: block;
+        width: 100%;
+        color: #477dca; }
     body main #login, body main #register, body main #menu {
       float: left;
       display: block;
@@ -749,39 +763,32 @@ body {
       @media screen and (max-width: 480px) {
         body main aside.menu {
           padding-top: 0; } }
-      body main aside.menu .short-stats {
+      body main aside.menu .number {
         float: left;
         display: block;
         margin-right: 7.69231%;
         width: 38.46154%;
         margin-bottom: 20px; }
-        body main aside.menu .short-stats:last-child {
+        body main aside.menu .number:last-child {
           margin-right: 0; }
         @media screen and (max-width: 768px) {
-          body main aside.menu .short-stats {
+          body main aside.menu .number {
             float: left;
             display: block;
             margin-right: 14.28571%;
-            width: 100%; }
-            body main aside.menu .short-stats:last-child {
+            width: 42.85714%; }
+            body main aside.menu .number:last-child {
               margin-right: 0; } }
         @media screen and (max-width: 480px) {
-          body main aside.menu .short-stats {
+          body main aside.menu .number {
             float: left;
             display: block;
             margin-right: 6.66667%;
             width: 46.66667%;
             margin-left: 0%;
             text-align: center; }
-            body main aside.menu .short-stats:last-child {
+            body main aside.menu .number:last-child {
               margin-right: 0; } }
-        body main aside.menu .short-stats .title {
-          font-weight: bold;
-          font-size: 12px;
-          color: #646464; }
-        body main aside.menu .short-stats .value {
-          font-size: 40px;
-          font-weight: bold; }
     body main #login a.new-account {
       margin-left: 15px; }
     body main #question-show form p span.helptext {
@@ -794,6 +801,15 @@ body {
       margin-bottom: 20px; }
       body main #questions-list-all .full:last-child {
         margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body main #questions-list-all .full {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          text-align: center; }
+          body main #questions-list-all .full:last-child {
+            margin-right: 0; } }
     body main #questions-list-all .half {
       float: left;
       display: block;
@@ -807,7 +823,8 @@ body {
           display: block;
           margin-right: 6.66667%;
           width: 100%;
-          margin-bottom: 15px; }
+          margin-bottom: 15px;
+          text-align: center; }
           body main #questions-list-all .half:last-child {
             margin-right: 0; } }
     body main #challenge-list-all .grid-item {
@@ -828,6 +845,7 @@ body {
       body main #challenge-list-all .grid-item:hover {
         background: rgba(51, 51, 51, 0.05); }
         body main #challenge-list-all .grid-item:hover .title {
+          padding: 2em 0 1em 0;
           letter-spacing: -0.5px; }
       body main #challenge-list-all .grid-item.last-col {
         border-right: 0; }
@@ -878,19 +896,24 @@ body {
           margin-bottom: 15px; }
           body main #challenge-list-all #open-challenges:last-child {
             margin-right: 0; } }
-    body main #challenge-list-all aside#played-challenges ul li {
-      margin-bottom: 5px; }
-      body main #challenge-list-all aside#played-challenges ul li a {
-        padding: 5px;
-        display: block; }
-        body main #challenge-list-all aside#played-challenges ul li a span {
-          display: block;
-          line-height: 1em; }
-        body main #challenge-list-all aside#played-challenges ul li a span.detail {
-          font-size: 14px;
-          color: #646464; }
-          body main #challenge-list-all aside#played-challenges ul li a span.detail:hover {
-            color: #333333; }
+    body main #challenge-list-all aside#played-challenges {
+      margin-top: 15px; }
+      body main #challenge-list-all aside#played-challenges ul li {
+        margin-bottom: 5px; }
+        body main #challenge-list-all aside#played-challenges ul li a {
+          padding: 5px;
+          display: block; }
+          body main #challenge-list-all aside#played-challenges ul li a span {
+            display: block;
+            line-height: 1em; }
+          body main #challenge-list-all aside#played-challenges ul li a span.detail {
+            font-size: 14px;
+            color: #646464; }
+            body main #challenge-list-all aside#played-challenges ul li a span.detail:hover {
+              color: #333333; }
+      @media screen and (max-width: 480px) {
+        body main #challenge-list-all aside#played-challenges {
+          text-align: center; } }
     body main #question-create form {
       float: left;
       display: block;

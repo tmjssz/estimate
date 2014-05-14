@@ -384,8 +384,25 @@ body {
 				border-radius: $base-border-radius; 
 				padding: 5px 10px;
 			}
+		}
 
+		.number {
+			text-align: center;
 
+			.title {
+				font-weight: bold;
+				font-size: 12px;
+				color: $grey-text;
+				display: block;
+				width: 100%;
+			}
+			.value {
+				font-size: 40px;
+				font-weight: bold;
+				display: block;
+				width: 100%;
+				color: $base-accent-color;
+			}
 		}
 
 		// - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -503,28 +520,18 @@ body {
 				padding-top: 0;
 			}
 
-			.short-stats {
+			.number {
 				@include span-columns(1.5 of 3.5);
 				margin-bottom: 20px;
 
 				@include media($tablet) {
-					@include span-columns(2 of 2);
+					@include span-columns(1 of 2);
 				}
 
 				@include media($mobile) {
 					@include span-columns(2 of 4);
 					@include shift(0);
 					text-align: center;
-				}
-
-				.title {
-					font-weight: bold;
-					font-size: 12px;
-					color: $grey-text;
-				}
-				.value {
-					font-size: 40px;
-					font-weight: bold;
 				}
 			}
 		}
@@ -559,6 +566,10 @@ body {
 			.full {
 				@include span-columns(10);
 				margin-bottom: 20px;
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					text-align: center;
+				}
 			}
 
 			.half {
@@ -566,6 +577,7 @@ body {
 				@include media($mobile) {
 					@include span-columns(4 of 4);
 					margin-bottom: 15px;
+					text-align: center;
 				}
 			}
 		}
@@ -595,6 +607,7 @@ body {
 					background: transparentize($base-font-color, .95);
 
 					.title {
+						padding: 2em 0 1em 0;
 						letter-spacing: -0.5px;
 					}
 				}
@@ -660,6 +673,7 @@ body {
 			}
 
 			aside#played-challenges {
+				margin-top: 15px;
 				ul {
 					li {
 						margin-bottom: 5px;
@@ -681,6 +695,10 @@ body {
 							}
 						}
 					}
+				}
+
+				@include media($mobile) {
+					text-align: center;
 				}
 			}
 		}
