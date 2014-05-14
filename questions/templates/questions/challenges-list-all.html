@@ -43,7 +43,8 @@
 			    </a>
 		    {% endfor %}
 		{% else %}
-		Momentan gibt es leider keine offenen Challenges.
+		<h2>Keine offenen Challenges</h2>
+		<p>Momentan gibt es leider keine offenen Challenges mehr.</p>
 		{% endif %}
 
 	</section>
@@ -53,12 +54,19 @@
 	<aside id="played-challenges">
 
 		<h4>Abgeschlossen</h4>
-		{% for challenge, score in completed_challenges %}
-		<span class="challenge-item">
-			<a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> 
-		</span>
-		<div class="challenge-status">{{ challenge.questions.count }} Fragen {{ score }}</div>
-		{% endfor %}
+
+		<ul>
+			{% for challenge, score in completed_challenges %}
+			<li>
+				<a href="{{ challenge.get_absolute_url }}">
+					<span class="title">{{ challenge.title }}</span>
+					<span class="detail">{{ challenge.questions.count }} Frage{% if challenge.questions.count >= 2 %}n {% endif %} | {{ score }}</span>
+				</a> 
+			<li>
+			<div class="challenge-status"></div>
+			{% endfor %}
+		</ul>
+
 		{% endif %}
 
 	</aside>

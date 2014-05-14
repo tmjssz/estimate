@@ -90,7 +90,7 @@ class ChallengeManager(models.Manager):
 class Challenge(models.Model):
     """Challenge model."""
     title = models.CharField(u'Titel', max_length=100, help_text="Bitte einen Titel für die Challenge eingeben (mit max. 100 Zeichen).")
-    questions = models.ManyToManyField(Question, verbose_name=u'Fragen', help_text="Bitte hier die Schätz-Fragen auswählen.")
+    questions = models.ManyToManyField(Question, verbose_name=u'Fragen', limit_choices_to={'published': True}, help_text="Bitte hier die Schätz-Fragen auswählen.")
     published = models.BooleanField(verbose_name=u'Veröffentlicht', default=True,  help_text='Challenge zur Verfügung stellen?')
     author = models.ForeignKey(User, verbose_name=u'Autor')
     slug = models.SlugField(unique=True)

@@ -404,10 +404,26 @@ body {
     @media screen and (max-width: 480px) {
       body main {
         padding: 8px; } }
+    body main h1 {
+      margin: 5px 0 15px 0;
+      letter-spacing: -1.5px;
+      display: block; }
     body main h2 {
-      margin-bottom: 15px; }
+      margin: 5px 0 15px 0;
+      letter-spacing: -1.3px;
+      display: block; }
     body main h3 {
-      margin-bottom: 10px; }
+      margin: 5px 0 10px 0;
+      text-transform: uppercase;
+      font-size: 23px;
+      letter-spacing: -1px;
+      display: block; }
+    body main h4 {
+      margin: 3px 0 10px 0;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: -.7px;
+      display: block; }
     @media screen and (max-width: 480px) {
       body main p {
         line-height: 1.3em; } }
@@ -574,6 +590,8 @@ body {
               width: 46.66667%; }
               body main #register-login ul.accordion li:last-child {
                 margin-right: 0; } }
+      body main #register-login span.helptext {
+        display: none; }
       body main #register-login #login-form {
         display: none; }
         body main #register-login #login-form a.new-account {
@@ -809,6 +827,8 @@ body {
       text-align: center; }
       body main #challenge-list-all .grid-item:hover {
         background: rgba(51, 51, 51, 0.05); }
+        body main #challenge-list-all .grid-item:hover .title {
+          letter-spacing: -0.5px; }
       body main #challenge-list-all .grid-item.last-col {
         border-right: 0; }
       body main #challenge-list-all .grid-item.last-row {
@@ -816,7 +836,10 @@ body {
       body main #challenge-list-all .grid-item .title {
         font-size: 24px;
         color: #333333;
-        letter-spacing: -1.5px; }
+        letter-spacing: -1.5px;
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out; }
         @media screen and (max-width: 768px) {
           body main #challenge-list-all .grid-item .title {
             font-size: 20px; } }
@@ -855,6 +878,19 @@ body {
           margin-bottom: 15px; }
           body main #challenge-list-all #open-challenges:last-child {
             margin-right: 0; } }
+    body main #challenge-list-all aside#played-challenges ul li {
+      margin-bottom: 5px; }
+      body main #challenge-list-all aside#played-challenges ul li a {
+        padding: 5px;
+        display: block; }
+        body main #challenge-list-all aside#played-challenges ul li a span {
+          display: block;
+          line-height: 1em; }
+        body main #challenge-list-all aside#played-challenges ul li a span.detail {
+          font-size: 14px;
+          color: #646464; }
+          body main #challenge-list-all aside#played-challenges ul li a span.detail:hover {
+            color: #333333; }
     body main #question-create form {
       float: left;
       display: block;
