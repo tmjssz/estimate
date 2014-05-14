@@ -41,11 +41,15 @@ $error-background: #ffd5d5;
 	text-align: center;
 	margin-bottom: 15px;
 	padding: 0 .6em;
+	font-size: 18px;
 	font-weight: bold;
+	letter-spacing: -1px;
 
 	&:hover {
-		background: lighten($bg_color, 15);
-		color: darken($bg_color, 15);
+		background: lighten($bg_color, 18);
+		color: darken($bg_color, 16);
+		font-weight: normal;
+		letter-spacing: 1px;
 	}
 
 	div {
@@ -234,7 +238,6 @@ body {
 						padding-right: 0;
 						clear: both;
 					    -webkit-transform-style: preserve-3d; 
-					// stop webkit flicker
 					    margin: 0 auto;
 					    overflow: hidden;
 					    padding: 0;
@@ -266,10 +269,6 @@ body {
 				    		line-height: 1em !important;
 				    		@include btn($navigation-nav-button-background);
 				    	}
-					}
-
-					&.logged_out li {
-
 					}
 
 					&.logged_in li {
@@ -315,6 +314,34 @@ body {
 		p {
 			@include media ($mobile) {
 				line-height: 1.3em;
+			}
+		}
+
+		section {
+			@include span-columns(6);
+
+			@include media($tablet) {
+				@include span-columns(5 of 8);
+			}
+
+			@include media($mobile) {
+				@include span-columns(3);
+				@include shift(0.5);
+			}
+		}
+
+		aside {
+			@include span-columns(3.5);
+			@include shift(0.5);
+			
+			@include media($tablet) {
+				@include span-columns(2.5 of 8);
+				@include shift(0.5);
+			}
+
+			@include media($mobile) {
+				@include span-columns(4 of 4);
+				@include shift(0);
 			}
 		}
 
@@ -418,15 +445,8 @@ body {
 		// - - - - - - - - - - - - - - - - - - - - - - - - 
 		section.menu {
 			padding: 20px 0;
-			@include span-columns(6);
-
-			@include media($tablet) {
-				@include span-columns(6 of 8);
-			}
 
 			@include media($mobile) {
-				@include span-columns(3);
-				@include shift(0.5);
 				text-align:center;
 			}
 
@@ -435,7 +455,7 @@ body {
 				.menu-btn {
 					@include span-columns(3 of 6);
 					@include media($mobile) {
-						@include span-columns(3 of 3);
+						@include span-columns(1 of 1);
 					}
 				}
 				
@@ -457,17 +477,8 @@ body {
 
 		aside.menu {
 			padding: 20px 0;
-			@include span-columns(3.5);
-			@include shift(0.5);
-			
-			@include media($tablet) {
-				@include span-columns(2 of 8);
-				@include shift(0);
-			}
 
 			@include media($mobile) {
-				@include span-columns(4 of 4);
-				@include shift(0);
 				padding-top: 0;
 			}
 
@@ -495,10 +506,6 @@ body {
 					font-weight: bold;
 				}
 			}
-
-			#statistics-menu {
-
-			}
 		}
 
 
@@ -520,6 +527,114 @@ body {
 						display: none;
 					}
 				}
+			}
+		}
+		
+
+		// LIST ALL QUESTIONS PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#questions-list-all {
+
+			.full {
+				@include span-columns(10);
+				margin-bottom: 20px;
+			}
+
+			.half {
+				@include span-columns(5);
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					margin-bottom: 15px;
+				}
+			}
+		}
+
+
+		// LIST ALL CHALLENGES PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#challenge-list-all {
+
+			.grid-item {
+				$grid-item-border: 1px solid transparentize($base-font-color, .8);
+
+				@include span-columns(2 of 4, table);
+				@include transition (all 0.2s ease-in-out);
+				height: 140px;
+				background: $base-body-color;
+				//width: 100%;
+				overflow: hidden;
+				float: left;
+				padding: 2em 1em 1em 1em;
+				border-right: $grid-item-border;
+				border-bottom: $grid-item-border;
+				cursor: pointer;
+				text-align: center;
+
+				&:hover {
+					background: transparentize($base-font-color, .95);
+				}
+
+				&.last-col {
+					border-right: 0;
+				}
+				&.last-row {
+					border-bottom: 0;
+				}
+
+				.title {
+					font-size:24px;
+					color: $base-font-color;
+					letter-spacing: -1.5px;
+
+					@include media($tablet) {
+						font-size:20px;
+					}
+				}
+
+				.detail {
+					font-size:16px;
+					color: $grey-text;
+
+					.progress-bar-indication {
+						$progress-border: 1px solid $base-border-color;
+						$progress-meter-border: 1px solid darken($base-accent-color, 15%);
+						$progress-meter-color: $base-accent-color;
+						$progress-background: darken($base-body-color, 5);
+
+						background-color: $progress-background;
+						//border: $progress-border;
+						box-shadow: inset 0 0 3px 0 rgba(darken($progress-background, 50%), 0.15);
+						border-radius: $base-border-radius;
+						margin: 5px 0;
+						height: 6px;
+
+						> .meter {
+							background-color: $progress-meter-color;
+							border: $progress-meter-border;
+							border-radius: $base-border-radius /1.5;
+							border-top-right-radius: 0;
+							border-bottom-right-radius: 0;
+							display: block;
+							height: 100%;
+							width: 60%;
+						}
+
+					}
+				}
+			}
+
+			#open-challenges {
+				@include span-columns(6);
+
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					@include shift(0);
+					margin-bottom: 15px;
+				}
+			}
+
+			aside#played-challenges {
+
 			}
 		}
 

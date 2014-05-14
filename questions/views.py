@@ -161,10 +161,15 @@ def challenges_list_all(request):
 
     incompleted_challenges = Challenge.objects.incompleted_challenges(request.user)
     if incompleted_challenges:
+        left_questions_list = []
         status_list = []
         for c in incompleted_challenges:
-            status_list.append(Estimate.objects.get_challenge_status(request.user, c))
-        incompleted_challenges = zip(incompleted_challenges, status_list)
+            answered_questions = Estimate.objects.number_answered_questions(request.user, c)
+            left_questions = c.questions.count() - answered_questions
+            left_questions_list.append(left_questions)
+            status = 100*answered_questions / c.questions.count()
+            status_list.append(status)
+        incompleted_challenges = zip(incompleted_challenges, left_questions_list, status_list)
 
     return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges})
 

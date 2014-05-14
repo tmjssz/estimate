@@ -5,27 +5,63 @@
 {% block content %}
 <div id="challenge-list-all">
 
-	<h2>Challenges</h2>
+	<section id="open-challenges">
 		
-	{% if incompleted_challenges %}
-	<ul>
-	    {% for challenge, status in incompleted_challenges %}
-	    <li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> <span>{{ status|floatformat:"-2" }} %</span></li>
-	    {% endfor %}
-	</ul>
-	{% else %}
-	Momentan gibt es leider keine offenen Challenges.
-	{% endif %}
+		{% if incompleted_challenges %}
+		    {% for challenge, left, status in incompleted_challenges %}
+
+			    {% if forloop.counter|divisibleby:2 %}
+			    	{% if forloop.last %}
+			    	<a href="{{ challenge.get_absolute_url }}" class="grid-item last-col last-row">
+			    	{% else %}
+			    	<a href="{{ challenge.get_absolute_url }}" class="grid-item last-col">
+			    	{% endif %}
+			    {% elif forloop.counter > forloop.revcounter %}
+			    <a href="{{ challenge.get_absolute_url }}" class="grid-item last-row">
+			    {% else %}
+			    <a href="{{ challenge.get_absolute_url }}" class="grid-item">
+			    {% endif %}
+			    	<span class="title">{{ challenge.title }}</span><br>
+			    	<div class="detail">
+			    		
+
+			    		{% if status > 0 %}
+
+			    		Noch {{ left }} Frage{% if left >= 2 %}n {% endif %} 
+
+			    		<div class="progress-bar-indication">
+							<div class="meter" style="width: {{ status|floatformat:"-2" }}%"></div>
+						</div>
+
+						{% else %}
+
+						{{ challenge.questions.count }}
+			    		Frage{% if challenge.questions.count >= 2 %}n {% endif %} 
+
+						{% endif %}
+			    	</div>
+			    </a>
+		    {% endfor %}
+		{% else %}
+		Momentan gibt es leider keine offenen Challenges.
+		{% endif %}
+
+	</section>
 
 
 	{% if completed_challenges %}
-	<h3>Abgeschlossen</h3>
-	<ul>
+	<aside id="played-challenges">
+
+		<h4>Abgeschlossen</h4>
 		{% for challenge, score in completed_challenges %}
-		<li><a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> <span>{{ score }}</span></li>
+		<span class="challenge-item">
+			<a href="{{ challenge.get_absolute_url }}">{{ challenge.title }}</a> 
+		</span>
+		<div class="challenge-status">{{ challenge.questions.count }} Fragen {{ score }}</div>
 		{% endfor %}
-	</ul>
-	{% endif %}
+		{% endif %}
+
+	</aside>
 
 <!-- / #challenges-list-all -->
 </div>

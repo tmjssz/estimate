@@ -59,8 +59,8 @@ class ChallengeManager(models.Manager):
         completed = []
         challenges = Challenge.objects.filter(published=True)
         for c in challenges:
-            status = Estimate.objects.get_challenge_status(user, c)
-            if status == 100:
+            answered = Estimate.objects.number_answered_questions(user, c)
+            if answered == c.questions.count():
                 completed.append(c)
 
         if len(completed) == 0:
@@ -192,19 +192,17 @@ class EstimateManager(models.Manager):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Challenge's estimates
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    def get_challenge_status(self, user, challenge):
+    def number_answered_questions(self, user, challenge):
         """
-        Returns the percent value for how many questions are already answered for the given challenge
+        Returns the number of how many questions are already answered for the given challenge
         """
         questions = challenge.questions.filter(published=True)
-
         counter = 0
         for q in questions:
             estimate = Estimate.objects.filter(question=q, user=user)
             if estimate:
                 counter += 1
-
-        return counter*100/questions.count()
+        return counter
 
 # -----------------------------------------------------------------------------
 # ESTIMATE MODEL

@@ -4,46 +4,51 @@
 
 {% block content %}
 <div id="questions-list-all">
+	<div class="full">
 
-	{% if question_list.count > 0 %}
+		{% if question_list.count > 0 %}
 
-	<h2>Offene Fragen</h2>
-	<ul>
-	    {% for question in question_list %}
-	    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
-	    {% endfor %}
-	</ul>
+			<h2>Offene Fragen</h2>
+			<ul>
+			    {% for question in question_list %}
+			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+			    {% endfor %}
+			</ul>
 
-	{% else %}
+		{% else %}
 
-	<h2>Alle Fragen beantwortet</h2>
-	<p>Sorry {{ user.username }}, du hast bereits zu jeder Frage eine Schätzung abgegeben. Leider stehen momentan keine weiteren Fragen zur Verfügung.</p>
-	<p>Schaue dir deine <a href="{% url 'questions_statistics_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
+		<h2>Alle Fragen beantwortet</h2>
+		<p>Sorry {{ user.username }}, du hast bereits zu jeder Frage eine Schätzung abgegeben. Leider stehen momentan keine weiteren Fragen zur Verfügung.</p>
+		<p>Schaue dir deine <a href="{% url 'questions_statistics_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
 
-	{% endif %}
+		{% endif %}
+
+	</div>
 
 	{% if ready_list.count > 0 %}
+	<div class="half">
 
-	<h2>Bereits beantwortet</h2>
-	
-	<ul>
-		{% for question in ready_list %}
-	    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
-	    {% endfor %}
-	</ul>
+		<h3>Beantwortet</h3>
+		<ul>
+			{% for question in ready_list %}
+		    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+		    {% endfor %}
+		</ul>
 
+	</div>
 	{% endif %}
 
 	{% if own_questions.count > 0 %}
+	<div class="half">
 
-	<h2>Eigene Fragen</h2>
-	
-	<ul>
-		{% for question in own_questions %}
-	    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
-	    {% endfor %}
-	</ul>
+		<h3>Eigene Fragen</h3>
+		<ul>
+			{% for question in own_questions %}
+		    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
+		    {% endfor %}
+		</ul>
 
+	</div>
 	{% endif %}
 	
 

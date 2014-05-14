@@ -411,6 +411,56 @@ body {
     @media screen and (max-width: 480px) {
       body main p {
         line-height: 1.3em; } }
+    body main section {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 58.97436%; }
+      body main section:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main section {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 61.29032%; }
+          body main section:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main section {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 73.33333%;
+          margin-left: 13.33333%; }
+          body main section:last-child {
+            margin-right: 0; } }
+    body main aside {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 33.33333%;
+      margin-left: 5.12821%; }
+      body main aside:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main aside {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 29.03226%;
+          margin-left: 6.45161%; }
+          body main aside:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main aside {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-left: 0%; }
+          body main aside:last-child {
+            margin-right: 0; } }
     body main form input[type="submit"], body main form input[type="button"] {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
@@ -529,31 +579,10 @@ body {
         body main #register-login #login-form a.new-account {
           display: none; }
     body main section.menu {
-      padding: 20px 0;
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 58.97436%; }
-      body main section.menu:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 768px) {
-        body main section.menu {
-          float: left;
-          display: block;
-          margin-right: 3.22581%;
-          width: 74.19355%; }
-          body main section.menu:last-child {
-            margin-right: 0; } }
+      padding: 20px 0; }
       @media screen and (max-width: 480px) {
         body main section.menu {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 73.33333%;
-          margin-left: 13.33333%;
-          text-align: center; }
-          body main section.menu:last-child {
-            margin-right: 0; } }
+          text-align: center; } }
       body main section.menu .row .menu-btn {
         float: left;
         display: block;
@@ -565,7 +594,7 @@ body {
           body main section.menu .row .menu-btn {
             float: left;
             display: block;
-            margin-right: 9.09091%;
+            margin-right: 33.33333%;
             width: 100%; }
             body main section.menu .row .menu-btn:last-child {
               margin-right: 0; } }
@@ -580,12 +609,16 @@ body {
         text-align: center;
         margin-bottom: 15px;
         padding: 0 .6em;
-        font-weight: bold; }
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: -1px; }
         body main section.menu .row .challenge_btn:hover {
           background: #6f99d5; }
         body main section.menu .row .challenge_btn:hover {
-          background: #82a7db;
-          color: #2c5999; }
+          background: #8eafdf;
+          color: #2b5695;
+          font-weight: normal;
+          letter-spacing: 1px; }
         body main section.menu .row .challenge_btn div {
           display: table;
           height: 100px;
@@ -608,12 +641,16 @@ body {
         text-align: center;
         margin-bottom: 15px;
         padding: 0 .6em;
-        font-weight: bold; }
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: -1px; }
         body main section.menu .row .choose_btn:hover {
           background: #c1d24b; }
         body main section.menu .row .choose_btn:hover {
-          background: #c8d760;
-          color: #727e20; }
+          background: #cdda6c;
+          color: #6f7a1f;
+          font-weight: normal;
+          letter-spacing: 1px; }
         body main section.menu .row .choose_btn div {
           display: table;
           height: 100px;
@@ -636,12 +673,16 @@ body {
         text-align: center;
         margin-bottom: 15px;
         padding: 0 .6em;
-        font-weight: bold; }
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: -1px; }
         body main section.menu .row .random_btn:hover {
           background: #f3632b; }
         body main section.menu .row .random_btn:hover {
-          background: #f47543;
-          color: #953009; }
+          background: #f57f51;
+          color: #902f08;
+          font-weight: normal;
+          letter-spacing: 1px; }
         body main section.menu .row .random_btn div {
           display: table;
           height: 100px;
@@ -664,12 +705,16 @@ body {
         text-align: center;
         margin-bottom: 15px;
         padding: 0 .6em;
-        font-weight: bold; }
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: -1px; }
         body main section.menu .row .create_btn:hover {
           background: #ffcb23; }
         body main section.menu .row .create_btn:hover {
-          background: #ffd13d;
-          color: #a37c00; }
+          background: #ffd44c;
+          color: #9d7800;
+          font-weight: normal;
+          letter-spacing: 1px; }
         body main section.menu .row .create_btn div {
           display: table;
           height: 100px;
@@ -682,33 +727,10 @@ body {
             height: auto;
             padding: .6em .6em; } }
     body main aside.menu {
-      padding: 20px 0;
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 33.33333%;
-      margin-left: 5.12821%; }
-      body main aside.menu:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 768px) {
-        body main aside.menu {
-          float: left;
-          display: block;
-          margin-right: 3.22581%;
-          width: 22.58065%;
-          margin-left: 0%; }
-          body main aside.menu:last-child {
-            margin-right: 0; } }
+      padding: 20px 0; }
       @media screen and (max-width: 480px) {
         body main aside.menu {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          margin-left: 0%;
-          padding-top: 0; }
-          body main aside.menu:last-child {
-            margin-right: 0; } }
+          padding-top: 0; } }
       body main aside.menu .short-stats {
         float: left;
         display: block;
@@ -746,6 +768,93 @@ body {
       margin-left: 15px; }
     body main #question-show form p span.helptext {
       display: none; }
+    body main #questions-list-all .full {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 100%;
+      margin-bottom: 20px; }
+      body main #questions-list-all .full:last-child {
+        margin-right: 0; }
+    body main #questions-list-all .half {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 48.71795%; }
+      body main #questions-list-all .half:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body main #questions-list-all .half {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-bottom: 15px; }
+          body main #questions-list-all .half:last-child {
+            margin-right: 0; } }
+    body main #challenge-list-all .grid-item {
+      display: table-cell;
+      width: 50%;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      height: 140px;
+      background: white;
+      overflow: hidden;
+      float: left;
+      padding: 2em 1em 1em 1em;
+      border-right: 1px solid rgba(51, 51, 51, 0.2);
+      border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+      cursor: pointer;
+      text-align: center; }
+      body main #challenge-list-all .grid-item:hover {
+        background: rgba(51, 51, 51, 0.05); }
+      body main #challenge-list-all .grid-item.last-col {
+        border-right: 0; }
+      body main #challenge-list-all .grid-item.last-row {
+        border-bottom: 0; }
+      body main #challenge-list-all .grid-item .title {
+        font-size: 24px;
+        color: #333333;
+        letter-spacing: -1.5px; }
+        @media screen and (max-width: 768px) {
+          body main #challenge-list-all .grid-item .title {
+            font-size: 20px; } }
+      body main #challenge-list-all .grid-item .detail {
+        font-size: 16px;
+        color: #646464; }
+        body main #challenge-list-all .grid-item .detail .progress-bar-indication {
+          background-color: #f2f2f2;
+          box-shadow: inset 0 0 3px 0 rgba(115, 115, 115, 0.15);
+          border-radius: 0.1875em;
+          margin: 5px 0;
+          height: 6px; }
+          body main #challenge-list-all .grid-item .detail .progress-bar-indication > .meter {
+            background-color: #477dca;
+            border: 1px solid #2c5999;
+            border-radius: 0.125em;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            display: block;
+            height: 100%;
+            width: 60%; }
+    body main #challenge-list-all #open-challenges {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 58.97436%; }
+      body main #challenge-list-all #open-challenges:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body main #challenge-list-all #open-challenges {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-left: 0%;
+          margin-bottom: 15px; }
+          body main #challenge-list-all #open-challenges:last-child {
+            margin-right: 0; } }
     body main #question-create form {
       float: left;
       display: block;

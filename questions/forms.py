@@ -16,6 +16,11 @@ class EstimateForm(ModelForm):
         self.__challenge = kwargs.pop('challenge', None)
         super(EstimateForm, self).__init__(**kwargs)
 
+    def clean(self):
+        if self.__user == self.__question.author:
+            raise ValidationError(u'Abgabe von Schätzungen zu eigenen Fragen nicht möglich.')
+        return self.cleaned_data
+
     def save(self, commit=True):
         if self.instance.pk is None:
             if self.__user is None:
