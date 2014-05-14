@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Frage einreichen{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+<div id="question-create">
+
+	{% if form %}
+
+		<h2>Frage einreichen</h2>
+
+		<form action="{% url 'questions_question_create' %}" method="post" accept-charset="utf-8">
+		    {{ form.as_p }}
+		    {% csrf_token %}
+		    <input type="submit" value="Absenden"/>
+		</form>
+
+	{% else %}
+
+		<h2>Frage eingereicht</h2>
+		<p>Danke, du hast deine Frage wurde erfolgreich eingereicht. Bitte habe noch ein wenig Geduld! Die Frage wird jetzt nochmal überprüft und bis sie verfügbar ist dauert es daher noch etwas. </p>
+
+
+	{% endif %}
+
+<!-- / #question-create -->
+</div>
+{% endblock %}

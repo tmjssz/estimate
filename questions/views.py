@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render
 
-from questions.forms import EstimateForm
+from questions.forms import EstimateForm, QuestionForm
 from questions.models import Question, Estimate, Score, Challenge
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -46,12 +46,30 @@ def menu_view(request):
         login_form = AuthenticationForm()
         return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form}, context_instance=RequestContext(request))
 
+@login_required
 def questions_list_all(request):
     """
     List all Questions
     """
     questions = Question.objects.filter(published=True)
-    return render_to_response('questions/questions-list-all.html', {'object_list': questions}, context_instance=RequestContext(request))
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+
+    # filter out own questions
+    questions = questions.exclude(author=request.user)
+    
+    # filter out questions, which were already answered
+    estimates = Estimate.objects.filter(user=request.user)
+    ready_questions = []
+    for e in estimates:
+        questions = questions.exclude(pk=e.question.pk)
+        ready_questions.append(e.question)
+
+    own_questions = Question.objects.filter(published=True, author=request.user)
+
+    return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -79,7 +97,7 @@ def question_view(request, slug):
     else:
         form = EstimateForm()
     return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question})
+        {'form': form, 'question': question, 'user': request.user})
 
 
 @login_required
@@ -108,6 +126,22 @@ def question_view_random(request):
 
     return HttpResponseRedirect("/frage/"+question.slug)
 
+
+@login_required
+def question_create_view(request):
+    """
+    Show from for sending in a question
+    """
+    if request.method == 'POST':
+        form = QuestionForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'questions/question-create.html',
+                {'form': None})
+    else:
+        form = QuestionForm()
+    return render(request, 'questions/question-create.html',
+        {'form': form})
 
 @login_required
 def challenges_list_all(request):

@@ -5,12 +5,47 @@
 {% block content %}
 <div id="questions-list-all">
 
-	<h2>Alle Fragen</h2>
+	{% if question_list.count > 0 %}
+
+	<h2>Offene Fragen</h2>
 	<ul>
-	    {% for question in object_list %}
+	    {% for question in question_list %}
 	    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
 	    {% endfor %}
 	</ul>
+
+	{% else %}
+
+	<h2>Alle Fragen beantwortet</h2>
+	<p>Sorry {{ user.username }}, du hast bereits zu jeder Frage eine Schätzung abgegeben. Leider stehen momentan keine weiteren Fragen zur Verfügung.</p>
+	<p>Schaue dir deine <a href="{% url 'questions_statistics_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
+
+	{% endif %}
+
+	{% if ready_list.count > 0 %}
+
+	<h2>Bereits beantwortet</h2>
+	
+	<ul>
+		{% for question in ready_list %}
+	    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+	    {% endfor %}
+	</ul>
+
+	{% endif %}
+
+	{% if own_questions.count > 0 %}
+
+	<h2>Eigene Fragen</h2>
+	
+	<ul>
+		{% for question in own_questions %}
+	    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
+	    {% endfor %}
+	</ul>
+
+	{% endif %}
+	
 
 <!-- / #questions-list-all -->
 </div>

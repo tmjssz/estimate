@@ -376,7 +376,7 @@ body {
               color: white;
               padding: .4em .6em; }
               body header div.navigation-wrapper nav ul li .login-btn:hover {
-                background: #82a7db; }
+                background: #6f99d5; }
           @media screen and (max-width: 480px) {
             body header div.navigation-wrapper nav ul.logged_in li {
               background: #333333;
@@ -410,7 +410,7 @@ body {
       margin-bottom: 10px; }
     @media screen and (max-width: 480px) {
       body main p {
-        line-height: 1em; } }
+        line-height: 1.3em; } }
     body main form input[type="submit"], body main form input[type="button"] {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
@@ -420,11 +420,12 @@ body {
       color: white;
       padding: .4em .6em; }
       body main form input[type="submit"]:hover, body main form input[type="button"]:hover {
-        background: #82a7db; }
+        background: #6f99d5; }
     body main form label {
       font-size: 12px; }
     body main form span.helptext {
-      display: none; }
+      font-size: 14px;
+      line-height: 1.3em; }
     body main form ul.errorlist {
       color: #a60000;
       background: #ffd5d5;
@@ -581,7 +582,10 @@ body {
         padding: 0 .6em;
         font-weight: bold; }
         body main section.menu .row .challenge_btn:hover {
-          background: #82a7db; }
+          background: #6f99d5; }
+        body main section.menu .row .challenge_btn:hover {
+          background: #82a7db;
+          color: #2c5999; }
         body main section.menu .row .challenge_btn div {
           display: table;
           height: 100px;
@@ -606,7 +610,10 @@ body {
         padding: 0 .6em;
         font-weight: bold; }
         body main section.menu .row .choose_btn:hover {
-          background: #c8d760; }
+          background: #c1d24b; }
+        body main section.menu .row .choose_btn:hover {
+          background: #c8d760;
+          color: #727e20; }
         body main section.menu .row .choose_btn div {
           display: table;
           height: 100px;
@@ -631,7 +638,10 @@ body {
         padding: 0 .6em;
         font-weight: bold; }
         body main section.menu .row .random_btn:hover {
-          background: #f47543; }
+          background: #f3632b; }
+        body main section.menu .row .random_btn:hover {
+          background: #f47543;
+          color: #953009; }
         body main section.menu .row .random_btn div {
           display: table;
           height: 100px;
@@ -656,7 +666,10 @@ body {
         padding: 0 .6em;
         font-weight: bold; }
         body main section.menu .row .create_btn:hover {
-          background: #ffd13d; }
+          background: #ffcb23; }
+        body main section.menu .row .create_btn:hover {
+          background: #ffd13d;
+          color: #a37c00; }
         body main section.menu .row .create_btn div {
           display: table;
           height: 100px;
@@ -731,3 +744,89 @@ body {
           font-weight: bold; }
     body main #login a.new-account {
       margin-left: 15px; }
+    body main #question-show form p span.helptext {
+      display: none; }
+    body main #question-create form {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 100%; }
+      body main #question-create form:last-child {
+        margin-right: 0; }
+      body main #question-create form p {
+        display: inline-block;
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 100%; }
+        body main #question-create form p:last-child {
+          margin-right: 0; }
+        @media screen and (max-width: 768px) {
+          body main #question-create form p {
+            float: left;
+            display: block;
+            margin-right: 3.22581%;
+            width: 100%; }
+            body main #question-create form p:last-child {
+              margin-right: 0; } }
+        @media screen and (max-width: 480px) {
+          body main #question-create form p {
+            float: left;
+            display: block;
+            margin-right: 6.66667%;
+            width: 100%; }
+            body main #question-create form p:last-child {
+              margin-right: 0; } }
+        body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 69.23077%;
+          float: left; }
+          body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
+            margin-right: 0; }
+          @media screen and (max-width: 768px) {
+            body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
+              float: left;
+              display: block;
+              margin-right: 3.22581%;
+              width: 61.29032%; }
+              body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
+                margin-right: 0; } }
+          @media screen and (max-width: 480px) {
+            body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
+              float: left;
+              display: block;
+              margin-right: 6.66667%;
+              width: 100%; }
+              body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
+                margin-right: 0; } }
+        body main #question-create form p input, body main #question-create form p textarea {
+          margin-bottom: 10px; }
+        body main #question-create form p span.helptext {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 28.20513%;
+          display: inline-block;
+          float: left; }
+          body main #question-create form p span.helptext:last-child {
+            margin-right: 0; }
+          @media screen and (max-width: 768px) {
+            body main #question-create form p span.helptext {
+              float: left;
+              display: block;
+              margin-right: 3.22581%;
+              width: 35.48387%;
+              font-size: 14px; }
+              body main #question-create form p span.helptext:last-child {
+                margin-right: 0; } }
+          @media screen and (max-width: 480px) {
+            body main #question-create form p span.helptext {
+              float: left;
+              display: block;
+              margin-right: 6.66667%;
+              width: 100%;
+              font-size: 12px; }
+              body main #question-create form p span.helptext:last-child {
+                margin-right: 0; } }

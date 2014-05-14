@@ -4,6 +4,7 @@ urlpatterns = patterns('questions.views',
     url(r'^$', 'menu_view', name='questions_menu'),
     url(r'^frage/$', 'questions_list_all', name='questions_question_all'),
     url(r'^frage/(?P<slug>[-\w]+)/$', 'question_view', name='questions_question_show'),
+    url(r'^frage-einreichen$', 'question_create_view', name='questions_question_create'),
 
     url(r'^zufall$', 'question_view_random', name='questions_question_random'),
 

@@ -17,7 +17,7 @@
         <p><img src="/{{ question.image }}" /></p>
     {% endif %}
 
-    {% if own_estimate or admin %}
+    {% if own_estimate or admin or user == question.author %}
 
         <h3>Auflösung</h3>
         <div class="resolution">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</div>

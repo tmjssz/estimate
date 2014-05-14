@@ -32,7 +32,7 @@ $error-background: #ffd5d5;
 	color: white;
 	padding: .4em .6em;
 	&:hover {
-		background: lighten($bg_color, 15);
+		background: lighten($bg_color, 10);
 	}
 }
 
@@ -42,6 +42,12 @@ $error-background: #ffd5d5;
 	margin-bottom: 15px;
 	padding: 0 .6em;
 	font-weight: bold;
+
+	&:hover {
+		background: lighten($bg_color, 15);
+		color: darken($bg_color, 15);
+	}
+
 	div {
 		display:table;
 		height: $height;
@@ -308,7 +314,7 @@ body {
 
 		p {
 			@include media ($mobile) {
-				line-height: 1em;
+				line-height: 1.3em;
 			}
 		}
 
@@ -324,7 +330,8 @@ body {
 			}
 
 			span.helptext {
-				display: none;
+				font-size: 14px;
+				line-height: 1.3em;
 			}
 
 			ul.errorlist {
@@ -500,6 +507,72 @@ body {
 		#login {
 			a.new-account {
 				margin-left: 15px;
+			}
+		}
+
+
+		// QUESTION PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#question-show {
+			form {
+				p {
+					span.helptext {
+						display: none;
+					}
+				}
+			}
+		}
+
+
+		// CREATE QUESTION PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#question-create {
+			form {
+				@include span-columns(10);
+
+				p {
+					display: inline-block;
+					@include span-columns(10);
+
+					@include media($tablet) {
+						@include span-columns(8);
+					}
+					@include media($mobile) {
+						@include span-columns(4);
+					}
+
+					label, input, textarea {
+						@include span-columns(7 of 10);
+						float: left;
+
+						@include media($tablet) {
+							@include span-columns(5 of 8);
+						}
+						@include media($mobile) {
+							@include span-columns(4 of 4);
+						}
+					}
+
+					input, textarea {
+						margin-bottom: 10px;
+					}
+
+					span.helptext {
+						@include span-columns(3 of 10);
+						display: inline-block;
+						float: left;
+
+						@include media($tablet) {
+							@include span-columns(3 of 8);
+							font-size: 14px;
+						}
+
+						@include media($mobile) {
+							@include span-columns(4 of 4);
+							font-size: 12px;
+						}
+					}
+				}
 			}
 		}
 	}
