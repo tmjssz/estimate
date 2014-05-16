@@ -11,7 +11,7 @@
 
 		<h2>Frage einreichen</h2>
 
-		<form action="{% url 'questions_question_create' %}" method="post" accept-charset="utf-8">
+		<form enctype="multipart/form-data" action="{% url 'questions_question_create' %}" method="post" accept-charset="utf-8">
 		    {{ form.as_p }}
 		    {% csrf_token %}
 		    <input type="submit" value="Absenden"/>

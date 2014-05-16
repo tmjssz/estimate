@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.timezone import now
 import math
+import logging
+
+logger = logging.getLogger('estimate.questions.views')
 
 
 # =============================================================================
@@ -60,7 +63,8 @@ class ChallengeManager(models.Manager):
         challenges = Challenge.objects.filter(published=True)
         for c in challenges:
             answered = Estimate.objects.number_answered_questions(user, c)
-            if answered == c.questions.count():
+            number_total = c.questions.exclude(author=user).count()
+            if answered == number_total and number_total > 0:
                 completed.append(c)
 
         if len(completed) == 0:
@@ -72,17 +76,32 @@ class ChallengeManager(models.Manager):
         """
         Returns a list of not completed challenges for given user
         """
-        completed = self.completed_challenges(user)
+        incompleted = []
         challenges = Challenge.objects.filter(published=True)
+        for c in challenges:
+            answered = Estimate.objects.number_answered_questions(user, c)
+            if answered < c.questions.exclude(author=user).count():
+                incompleted.append(c)
 
-        if completed:
-            for c in completed:
-                challenges = challenges.exclude(pk=c.pk)
-
-        if len(challenges) == 0:
+        if len(incompleted) == 0:
             return None
         
-        return challenges
+        return incompleted
+
+    def own_challenges(self, user):
+        """
+        Returns a list of challenges containing only questions created by given user
+        """
+        own = []
+        challenges = Challenge.objects.filter(published=True)
+        for c in challenges:
+            if c.questions.exclude(author=user).count() == 0:
+                own.append(c)
+
+        if len(own) == 0:
+            return None
+        
+        return own
 
 # -----------------------------------------------------------------------------
 # CHALLENGE MODEL
@@ -196,7 +215,7 @@ class EstimateManager(models.Manager):
         """
         Returns the number of how many questions are already answered for the given challenge
         """
-        questions = challenge.questions.filter(published=True)
+        questions = challenge.questions.filter(published=True).exclude(author=user)
         counter = 0
         for q in questions:
             estimate = Estimate.objects.filter(question=q, user=user)
@@ -293,7 +312,7 @@ class ScoreManager(models.Manager):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Challenge's Scores
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    def challenge_highscore(self, challenge):
+    def challenge_highscore_all(self, challenge):
         """
         Returns the challenge score for every user, who played a given challenge.
         """
@@ -303,9 +322,33 @@ class ScoreManager(models.Manager):
             SELECT e.user_id as user, SUM(e.score) as score
             FROM questions_estimate e, questions_challenge_questions q
             WHERE q.challenge_id == """+str(challenge.id)+""" 
-                AND q.question_id == e.question_id
+                AND q.question_id == e.question_id 
             GROUP BY e.user_id
             HAVING COUNT(*) == """+str(len(challenge.questions.all()))+"""
+            ORDER BY score DESC""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1])
+            result_list.append(s)
+        return result_list
+
+    def challenge_highscore(self, challenge, user):
+        """
+        Returns the challenge score for every user, who played a given challenge.
+        Does not take scores from estimates for questions, that were created by te given user.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, SUM(e.score) as score
+            FROM questions_estimate e, questions_challenge_questions q, questions_question q1
+            WHERE q.challenge_id == """+str(challenge.id)+""" 
+                AND q.question_id == e.question_id 
+                AND q1.id == q.question_id 
+                AND q1.author_id <> """ + str(user.id) + """
+            GROUP BY e.user_id
+            HAVING COUNT(*) == """+str(len(challenge.questions.all().exclude(author=user)))+"""
             ORDER BY score DESC""")
         result_list = []
         for row in cursor.fetchall():

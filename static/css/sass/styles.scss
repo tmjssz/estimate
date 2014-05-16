@@ -405,6 +405,34 @@ body {
 			}
 		}
 
+		table {
+			tr {
+				td, th {
+					text-align: center;
+
+					&.left {
+						text-align: left;
+					}
+
+					&.right {
+						text-align: right;
+					}
+				}
+			}
+		}
+
+		.no-tablet {
+			@include media($tablet) {
+				display: none;
+			}
+		}
+
+		.no-mobile {
+			@include media($mobile) {
+				display: none;
+			}
+		}
+
 		// - - - - - - - - - - - - - - - - - - - - - - - - 
 		// CONTAINER SIZING 
 		// -----------------------------------------------
@@ -534,11 +562,8 @@ body {
 					text-align: center;
 				}
 
-				&.score {
-					@include number(#851625);
-				}
-				&.number {
-					@include number(#0f3569);
+				&.score, &.number {
+					@include number($base-accent-color);
 				}
 			}
 		}
@@ -642,18 +667,76 @@ body {
 				@include span-columns(2.5 of 5);
 				@include number($base-font-color);
 				margin-bottom: 20px;
+
+				@include media($tablet) {
+					@include span-columns(4 of 8);
+				}
 			}
 
 			.score {
 				@include omega;
 			}
 
-			.half {
-				@include span-columns(5);
+			.resolution {
+				.value {
+					&.small {
+						letter-spacing: -1.5px;
+						font-size: 35px;
+					}
+
+					&.smaller {
+						letter-spacing: -2px;
+						font-size: 30px;
+					}
+					&.tiny {
+						letter-spacing: -2px;
+						font-size: 25px;
+					}
+					&.really-tiny {
+						letter-spacing: -2px;
+						font-size: 20px;
+					}
+				}
+			}
+
+			.next-random-btn {
+				text-align:center;
+				display: block;
+			}
+
+			h2 {
+				@include span-columns(8 of 10);
 				@include media($mobile) {
-					@include span-columns(4 of 4);
+					@include span-columns(7 of 10);
+				}
+			}
+
+			.question-stats-btn {
+				@include span-columns(2 of 10);
+				@include omega;
+				@include btn($base-accent-color);
+				font-weight: bold;
+				float: right;
+				text-align: center;
+				margin: 5px 0 15px 0;
+
+				@include media($mobile) {
+					@include span-columns(3 of 10);
+					@include omega;
+				}
+			}
+
+			section {
+
+
+				@include media($tablet) {
 					margin-bottom: 15px;
 					text-align: center;
+				}
+
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					@include shift(0);
 				}
 
 				&.result {
@@ -662,7 +745,20 @@ body {
 						text-align: center;
 						width: 100%;
 					}
-					
+				}
+			}
+
+			aside.question {
+				@include span-columns(4 of 10);
+				@include shift(0);
+
+				@include media($tablet) {
+					@include span-columns(3 of 8);
+					@include shift(0);
+				}
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					@include shift(0);
 				}
 			}
 		}
@@ -781,33 +877,88 @@ body {
 				}
 			}
 
-			aside#played-challenges {
-				margin-top: 15px;
-				ul {
-					li {
-						margin-bottom: 5px;
+			aside {
 
-						a {
-							padding: 5px;
-							display: block;
+				@include media($mobile) {
+					text-align: center;
+				}
 
-							span {
+				#played-challenges, #own-challenges {
+					margin-top: 15px;
+					ul {
+						li {
+							margin-bottom: 5px;
+
+							a {
+								padding: 5px;
 								display: block;
-								line-height: 1em;
-							}
-							span.detail {
-								font-size: 14px;
-								color: $grey-text;
-								&:hover {
-									color: $base-font-color;
+
+								span {
+									display: block;
+									line-height: 1em;
+								}
+								span.detail {
+									font-size: 14px;
+									color: $grey-text;
+									&:hover {
+										color: $base-font-color;
+									}
 								}
 							}
 						}
 					}
 				}
 
+			}
+		}
+
+
+		// CHALLENGE SCORE PAGE 
+		// - - - - - - - - - - - - - - - - - - - - - - - - 
+		#challenge-score {
+			h2 {
+				@include span-columns(8 of 10);
+
 				@include media($mobile) {
-					text-align: center;
+					@include span-columns(7 of 10);
+				}
+			}
+
+			.challenge-highscore {
+				@include span-columns(2 of 10);
+				@include omega;
+				@include btn($base-accent-color);
+				font-weight: bold;
+				float: right;
+				text-align: center;
+				margin: 5px 0 15px 0;
+
+				@include media($mobile) {
+					@include span-columns(3 of 10);
+					@include omega;
+				}
+			}
+
+			p {
+				display: inline-block;
+			}
+
+			.score, .score-per-questions {
+				@include span-columns(5 of 10);
+				@include number($base-font-color);
+				margin-bottom: 20px;
+			}
+
+			.score-per-questions {
+				@include omega;
+			}
+
+			table {
+				td.own-question {
+					color: $grey-text;
+					font-style:italic;
+					font-size: 13px;
+					letter-spacing: 1px;
 				}
 			}
 		}

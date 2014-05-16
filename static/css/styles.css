@@ -497,6 +497,18 @@ body {
       background: #ffd5d5;
       border-radius: 0.1875em;
       padding: 5px 10px; }
+    body main table tr td, body main table tr th {
+      text-align: center; }
+      body main table tr td.left, body main table tr th.left {
+        text-align: left; }
+      body main table tr td.right, body main table tr th.right {
+        text-align: right; }
+    @media screen and (max-width: 768px) {
+      body main .no-tablet {
+        display: none; } }
+    @media screen and (max-width: 480px) {
+      body main .no-mobile {
+        display: none; } }
     body main #login, body main #register, body main #menu {
       float: left;
       display: block;
@@ -775,34 +787,20 @@ body {
             text-align: center; }
             body main aside.menu .short-stats:last-child {
               margin-right: 0; } }
-        body main aside.menu .short-stats.score {
+        body main aside.menu .short-stats.score, body main aside.menu .short-stats.number {
           text-align: center; }
-          body main aside.menu .short-stats.score .title {
+          body main aside.menu .short-stats.score .title, body main aside.menu .short-stats.number .title {
             font-weight: bold;
             font-size: 12px;
             color: #646464;
             display: block;
             width: 100%; }
-          body main aside.menu .short-stats.score .value {
+          body main aside.menu .short-stats.score .value, body main aside.menu .short-stats.number .value {
             font-size: 40px;
             font-weight: bold;
             display: block;
             width: 100%;
-            color: #851625; }
-        body main aside.menu .short-stats.number {
-          text-align: center; }
-          body main aside.menu .short-stats.number .title {
-            font-weight: bold;
-            font-size: 12px;
-            color: #646464;
-            display: block;
-            width: 100%; }
-          body main aside.menu .short-stats.number .value {
-            font-size: 40px;
-            font-weight: bold;
-            display: block;
-            width: 100%;
-            color: #0f3569; }
+            color: #477dca; }
     body main #login a.new-account {
       margin-left: 15px; }
     body main #question-show section {
@@ -950,29 +948,119 @@ body {
         display: block;
         width: 100%;
         color: #333333; }
+      @media screen and (max-width: 768px) {
+        body main #question-score .score, body main #question-score .resolution {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 48.3871%; }
+          body main #question-score .score:last-child, body main #question-score .resolution:last-child {
+            margin-right: 0; } }
     body main #question-score .score {
       margin-right: 0; }
-    body main #question-score .half {
+    body main #question-score .resolution .value.small {
+      letter-spacing: -1.5px;
+      font-size: 35px; }
+    body main #question-score .resolution .value.smaller {
+      letter-spacing: -2px;
+      font-size: 30px; }
+    body main #question-score .resolution .value.tiny {
+      letter-spacing: -2px;
+      font-size: 25px; }
+    body main #question-score .resolution .value.really-tiny {
+      letter-spacing: -2px;
+      font-size: 20px; }
+    body main #question-score .next-random-btn {
+      text-align: center;
+      display: block; }
+    body main #question-score h2 {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 48.71795%; }
-      body main #question-score .half:last-child {
+      width: 79.48718%; }
+      body main #question-score h2:last-child {
         margin-right: 0; }
       @media screen and (max-width: 480px) {
-        body main #question-score .half {
+        body main #question-score h2 {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 69.23077%; }
+          body main #question-score h2:last-child {
+            margin-right: 0; } }
+    body main #question-score .question-stats-btn {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 17.94872%;
+      margin-right: 0;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      font-weight: bold;
+      float: right;
+      text-align: center;
+      margin: 5px 0 15px 0; }
+      body main #question-score .question-stats-btn:last-child {
+        margin-right: 0; }
+      body main #question-score .question-stats-btn:hover {
+        background: #6f99d5; }
+      @media screen and (max-width: 480px) {
+        body main #question-score .question-stats-btn {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 28.20513%;
+          margin-right: 0; }
+          body main #question-score .question-stats-btn:last-child {
+            margin-right: 0; } }
+    @media screen and (max-width: 768px) {
+      body main #question-score section {
+        margin-bottom: 15px;
+        text-align: center; } }
+    @media screen and (max-width: 480px) {
+      body main #question-score section {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%;
+        margin-left: 0%; }
+        body main #question-score section:last-child {
+          margin-right: 0; } }
+    body main #question-score section.result h3 {
+      display: inline-block;
+      text-align: center;
+      width: 100%; }
+    body main #question-score aside.question {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 38.46154%;
+      margin-left: 0%; }
+      body main #question-score aside.question:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        body main #question-score aside.question {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 35.48387%;
+          margin-left: 0%; }
+          body main #question-score aside.question:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        body main #question-score aside.question {
           float: left;
           display: block;
           margin-right: 6.66667%;
           width: 100%;
-          margin-bottom: 15px;
-          text-align: center; }
-          body main #question-score .half:last-child {
+          margin-left: 0%; }
+          body main #question-score aside.question:last-child {
             margin-right: 0; } }
-      body main #question-score .half.result h3 {
-        display: inline-block;
-        text-align: center;
-        width: 100%; }
     body main #questions-list-all .full {
       float: left;
       display: block;
@@ -1076,24 +1164,99 @@ body {
           margin-bottom: 15px; }
           body main #challenge-list-all #open-challenges:last-child {
             margin-right: 0; } }
-    body main #challenge-list-all aside#played-challenges {
+    @media screen and (max-width: 480px) {
+      body main #challenge-list-all aside {
+        text-align: center; } }
+    body main #challenge-list-all aside #played-challenges, body main #challenge-list-all aside #own-challenges {
       margin-top: 15px; }
-      body main #challenge-list-all aside#played-challenges ul li {
+      body main #challenge-list-all aside #played-challenges ul li, body main #challenge-list-all aside #own-challenges ul li {
         margin-bottom: 5px; }
-        body main #challenge-list-all aside#played-challenges ul li a {
+        body main #challenge-list-all aside #played-challenges ul li a, body main #challenge-list-all aside #own-challenges ul li a {
           padding: 5px;
           display: block; }
-          body main #challenge-list-all aside#played-challenges ul li a span {
+          body main #challenge-list-all aside #played-challenges ul li a span, body main #challenge-list-all aside #own-challenges ul li a span {
             display: block;
             line-height: 1em; }
-          body main #challenge-list-all aside#played-challenges ul li a span.detail {
+          body main #challenge-list-all aside #played-challenges ul li a span.detail, body main #challenge-list-all aside #own-challenges ul li a span.detail {
             font-size: 14px;
             color: #646464; }
-            body main #challenge-list-all aside#played-challenges ul li a span.detail:hover {
+            body main #challenge-list-all aside #played-challenges ul li a span.detail:hover, body main #challenge-list-all aside #own-challenges ul li a span.detail:hover {
               color: #333333; }
+    body main #challenge-score h2 {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 79.48718%; }
+      body main #challenge-score h2:last-child {
+        margin-right: 0; }
       @media screen and (max-width: 480px) {
-        body main #challenge-list-all aside#played-challenges {
-          text-align: center; } }
+        body main #challenge-score h2 {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 69.23077%; }
+          body main #challenge-score h2:last-child {
+            margin-right: 0; } }
+    body main #challenge-score .challenge-highscore {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 17.94872%;
+      margin-right: 0;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      font-weight: bold;
+      float: right;
+      text-align: center;
+      margin: 5px 0 15px 0; }
+      body main #challenge-score .challenge-highscore:last-child {
+        margin-right: 0; }
+      body main #challenge-score .challenge-highscore:hover {
+        background: #6f99d5; }
+      @media screen and (max-width: 480px) {
+        body main #challenge-score .challenge-highscore {
+          float: left;
+          display: block;
+          margin-right: 2.5641%;
+          width: 28.20513%;
+          margin-right: 0; }
+          body main #challenge-score .challenge-highscore:last-child {
+            margin-right: 0; } }
+    body main #challenge-score p {
+      display: inline-block; }
+    body main #challenge-score .score, body main #challenge-score .score-per-questions {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 48.71795%;
+      text-align: center;
+      margin-bottom: 20px; }
+      body main #challenge-score .score:last-child, body main #challenge-score .score-per-questions:last-child {
+        margin-right: 0; }
+      body main #challenge-score .score .title, body main #challenge-score .score-per-questions .title {
+        font-weight: bold;
+        font-size: 12px;
+        color: #646464;
+        display: block;
+        width: 100%; }
+      body main #challenge-score .score .value, body main #challenge-score .score-per-questions .value {
+        font-size: 40px;
+        font-weight: bold;
+        display: block;
+        width: 100%;
+        color: #333333; }
+    body main #challenge-score .score-per-questions {
+      margin-right: 0; }
+    body main #challenge-score table td.own-question {
+      color: #646464;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 1px; }
     body main #question-create form {
       float: left;
       display: block;

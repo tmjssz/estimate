@@ -7,11 +7,26 @@
 
 	<h2>{{ question.title }}</h2>
 
-	<div class="half result">
+	<a class="question-stats-btn" href="{% url 'questions_statistics_question' question.slug %}">Statistik</a>
+
+	<section class="result">
 
 		<div class="resolution">	
 			<span class="title">Auflösung</span>
-			<span class="value">{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
+
+			{% if question.answer < 99999 %}
+				<span class="value">
+			{% elif question.answer < 999999999 %}
+				<span class="value small">
+			{% elif question.answer < 999999999999 %}
+				<span class="value smaller">
+			{% elif question.answer < 999999999999999 %}
+				<span class="value tiny">
+			{% else %}
+				<span class="value really-tiny">
+			{% endif %}
+
+			{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
 		</div>
 
 		<div class="score">	
@@ -38,27 +53,30 @@
 
 			<table>
 				<tr>
-					<th>Deine Schätzung</th>
-					<td>{{ estimate.estimate|floatformat:"-2" }}</td>
+					<td class="left"><strong>Schätzung</strong></td>
+					<td class="right">{{ estimate.estimate|floatformat:"-2" }}</td>
 				</tr>
 				<tr>
-					<th>&#216; Schätzung</th> 
-					<td>{{ avg_estimate.estimate|floatformat:"-2" }}</td>
+					<td class="left"><strong>Fehler</strong></td>
+					<td class="right">{{ estimate.percentage_error|floatformat:"-2" }} %</td>
 				</tr>
 				<tr>
-					<th>&#216; Punktzahl</th>
-					<td>{{ avg_estimate.score|floatformat:"0" }}</td>
+					<td class="left"><strong>&#216; Schätzung</strong></td> 
+					<td class="right">{{ avg_estimate.estimate|floatformat:"-2" }}</td>
+				</tr>
+				<tr>
+					<td class="left"><strong>&#216; Punktzahl</strong></td>
+					<td class="right">{{ avg_estimate.score|floatformat:"0" }}</td>
 				</tr>
 			</table>
-			<a href="{% url 'questions_statistics_question' question.slug %}">Statistik zur Frage</a>
 		{% endif %}
 
-		<a href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
+		<a class="next-random-btn" href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
 
 	<!-- /.half -->
-	</div>
+	</section>
 
-	<div class="half">
+	<aside class=" question">
 
 		<p>{{ question.question }}</p>
 
@@ -71,7 +89,7 @@
 		{% endif %}
 
 	<!-- /.half -->
-	</div>
+	</aside>
 
 <!-- / #question-score -->
 </div>

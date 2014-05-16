@@ -37,9 +37,10 @@ class QuestionForm(ModelForm):
         model = Question
         exclude = ('published', 'stats', 'author', 'slug', 'date_created', 'date_updated')
     
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.__author = kwargs.pop('user', None)
-        super(QuestionForm, self).__init__(**kwargs)
+        #self.__image = kwargs.pop('image', None)
+        super(QuestionForm, self).__init__(*args, **kwargs)
     
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -56,6 +57,7 @@ class QuestionForm(ModelForm):
                 raise TypeError("You didn't give an user argument to the constructor.")
             self.instance.slug = slugify(self.instance.title)
             self.instance.author = self.__author
+            #self.instance.image = self.__image
             self.instance.published = False
             self.instance.stats = False
         return super(QuestionForm, self).save(commit)
