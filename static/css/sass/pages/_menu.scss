@@ -1,0 +1,61 @@
+// MAIN MENU 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+section.menu {
+	padding: 20px 0;
+
+	@include media($mobile) {
+		padding: 20px 40px;
+		text-align:center;
+	}
+
+	.row {
+
+		.menu-btn {
+			@include span-columns(3 of 6);
+			@include media($mobile) {
+				@include span-columns(1 of 1);
+			}
+		}
+		
+		.challenge_btn {
+			@include menu-btn($base-accent-color, 100px);
+		}
+		.choose_btn {
+			@include menu-btn(#aabb2f, 100px);
+		}
+		.random_btn {
+			@include menu-btn(#dd480d, 100px);
+		}
+		.create_btn {
+			@include menu-btn(#efb600, 100px);
+		}
+	} 
+
+}
+
+aside.menu {
+	padding: 20px 0 0 20px;
+
+	@include media($mobile) {
+		padding: 0;
+	}
+
+	.short-stats {
+		@include span-columns(1.5 of 3.5);
+		margin-bottom: 20px;
+
+		@include media($tablet) {
+			@include span-columns(1 of 2);
+		}
+
+		@include media($mobile) {
+			@include span-columns(2 of 4);
+			@include shift(0);
+			text-align: center;
+		}
+
+		&.score, &.number {
+			@include number($base-accent-color);
+		}
+	}
+}

@@ -1,0 +1,209 @@
+$navigation-height: 45px;
+$navigation-background: $dark-gray;
+$navigation-nav-button-border: 1px solid lighten($base-accent-color, 20);
+$navigation-color: transparentize(white, 0.3);
+$navigation-color-hover: white;
+
+$mm-to-in: 0.0393700787;
+$size-factor: ($navigation-height / 72) / (80 * $mm-to-in);
+$mm-to-px: $size-factor * 72 * $mm-to-in;
+
+$username-line-height: 13px;
+$username-border-color: #646464;
+
+// Corporate Colors 
+$light-coffee: #F0E3CF;
+$strong-coffee: #CAB69A;
+
+
+header {
+	background-color: $navigation-background;
+	border-bottom: 1px solid darken($navigation-background, 10);
+	font-family: $sans-serif;
+	height: $navigation-height;
+	width: 100%;
+	z-index: 999;
+	line-height: 1em;
+	margin: 0px 0px 15px 0px;
+
+	@include media ($mobile) {
+		margin: 0;
+	}
+
+	div.navigation-wrapper {
+		@include outer-container;
+	    position: relative;
+	    z-index: 9999;
+	    height: $navigation-height;
+
+	    #corporate {
+			display: inline-block;
+			height: $navigation-height;
+			padding-left: 15px;
+			padding-right: 15px;
+
+			@include media ($mobile) {
+				padding-left: 8px;
+				padding-right: 8px;
+			}
+
+			a {
+				display: inline;
+			}
+
+			#logo {
+				float: left;
+				max-height: $navigation-height;
+				padding: $mm-to-px * 10 $mm-to-px * 7.52 $mm-to-px * 10 0;
+				border:0;
+			}
+
+			#font {
+				font-family: 'Yanone Kaffeesatz', sans-serif;
+				font-size: $size-factor * 157.27;
+				float: left;
+				padding: $mm-to-px * 18.67 $mm-to-px * 10 $mm-to-px * 20 0px;
+
+				#esti {
+					font-weight: 200;
+					color: $strong-coffee;
+					letter-spacing: -0.07em;
+					margin-right: $mm-to-px * 4;
+					float: left;
+					line-height: $navigation-height - $mm-to-px * 38.67;
+				}
+
+				#mate {
+					font-weight: 400;
+					color: $light-coffee;
+					letter-spacing: -0.02em;
+					float: left;
+					line-height: $navigation-height - $mm-to-px * 38.67;
+				}
+			}
+		}
+
+		#username {
+			display: inline-block;
+			color: $navigation-color;
+			float: right;
+			line-height: $username-line-height;
+			height: $navigation-height;
+			padding: ($navigation-height - $username-line-height*2)/2 15px ($navigation-height - $username-line-height*2)/2 10px;
+			font-size: 11px;
+			border-left: 1px solid $username-border-color;
+
+			@include media ($mobile) {
+				padding-left: 8px;
+				padding-right: 8px;
+				border-left: 0;
+			}
+
+			span {
+				font-size: 16px;
+				font-weight: 600;
+				color: white;
+			}
+		}
+
+		#naviToggle {
+			display: none;
+			color: $navigation-color;
+			float: right;
+			cursor: pointer;
+			padding: 0px 8px;
+
+			&:hover {
+				color: $navigation-color-hover;
+			}
+
+			i {
+				font-size: 1.5em;
+				line-height: $navigation-height;
+			}
+
+			@include media ($mobile) {
+				display: inline-block;
+			}
+		}
+
+		nav {
+			display: inline-block;
+			float: right;
+			font-size: 16px;
+			height: $navigation-height;
+
+			@include media ($mobile) {
+				&.logged_in {
+					width: 100%;
+					top: -2px;
+					position: relative;
+					height: 0;
+				}
+			}
+
+	    	ul {
+	    		display: inline-block;
+		      	line-height: $navigation-height;
+		      	padding-right: 5px;
+
+		      	@include media ($mobile) {
+					padding-right: 0;
+					clear: both;
+				    -webkit-transform-style: preserve-3d; 
+				    margin: 0 auto;
+				    overflow: hidden;
+				    padding: 0;
+				    width: 100%;
+				    z-index: 9999;
+
+				    &.logged_in {
+						display: none;
+					}
+
+				    &.logged_out {
+						font-size: 14px;
+					}
+				}
+
+				li {
+					float: left;
+		    		padding-right: 10px;
+
+					a {
+			    		color: $navigation-color;
+
+			    		&:hover {
+							color: $navigation-color-hover;
+						}
+			    	}
+
+			    	.login-btn {
+			    		line-height: 1em !important;
+			    		@include btn($base-accent-color);
+			    	}
+				}
+
+				&.logged_in li {
+
+		    		@include media ($mobile) {
+						background: $navigation-background;
+						display: block;
+						line-height: $navigation-height;
+						overflow: hidden;
+						text-align: right;
+						width: 100%;
+						z-index: 9999;
+						@include transition (all 0.2s ease-in-out);
+
+						&:hover {
+							background: lighten($navigation-background, 15);
+						}
+		    		}
+
+		    	}
+	    	}
+		}
+	}
+}
+

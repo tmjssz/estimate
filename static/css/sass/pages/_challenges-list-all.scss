@@ -1,0 +1,113 @@
+// LIST ALL CHALLENGES PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#challenge-list-all {
+
+	.grid-item {
+		$grid-item-border: 1px solid transparentize($base-font-color, .8);
+
+		@include span-columns(2 of 4, table);
+		@include transition (all 0.2s ease-in-out);
+		height: 140px;
+		background: $base-body-color;
+		//width: 100%;
+		overflow: hidden;
+		float: left;
+		padding: 2em 1em 1em 1em;
+		border-right: $grid-item-border;
+		border-bottom: $grid-item-border;
+		cursor: pointer;
+		text-align: center;
+
+		&:hover {
+			background: transparentize($base-font-color, .95);
+
+			.title {
+				padding: 2em 0 1em 0;
+				letter-spacing: -0.5px;
+			}
+		}
+
+		&.last-col {
+			border-right: 0;
+		}
+		&.last-row {
+			border-bottom: 0;
+		}
+
+		.title {
+			font-size:24px;
+			color: $base-font-color;
+			letter-spacing: -1.5px;
+			@include transition (all 0.1s ease-in-out);
+
+			@include media($tablet) {
+				font-size:20px;
+			}
+		}
+
+		.detail {
+			font-size:16px;
+			color: $grey-text;
+
+			.progress-bar-indication {
+				$progress-border: 1px solid $base-border-color;
+				$progress-meter-border: 1px solid darken($base-accent-color, 15%);
+				$progress-meter-color: $base-accent-color;
+				$progress-background: darken($base-body-color, 5);
+
+				background-color: $progress-background;
+				//border: $progress-border;
+				box-shadow: inset 0 0 3px 0 rgba(darken($progress-background, 50%), 0.15);
+				border-radius: $base-border-radius;
+				margin: 5px 0;
+				height: 6px;
+
+				> .meter {
+					background-color: $progress-meter-color;
+					border: $progress-meter-border;
+					border-radius: $base-border-radius /1.5;
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+					display: block;
+					height: 100%;
+					width: 60%;
+				}
+
+			}
+		}
+	}
+
+	aside {
+
+		@include media($mobile) {
+			text-align: center;
+		}
+
+		#played-challenges, #own-challenges {
+			margin-top: 15px;
+			ul {
+				li {
+					margin-bottom: 5px;
+
+					a {
+						padding: 5px;
+						display: block;
+
+						span {
+							display: block;
+							line-height: 1em;
+						}
+						span.detail {
+							font-size: 14px;
+							color: $grey-text;
+							&:hover {
+								color: $base-font-color;
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+}

@@ -1,0 +1,138 @@
+$error-red: #a60000;
+$error-background: #ffd5d5;
+
+body {
+
+	margin: 0;
+
+	#main {
+
+		@include outer-container;
+		position: relative;
+		padding: 15px;
+
+		@include media ($mobile) {
+			padding: 10px;
+		}
+
+		h1 {
+			margin: 5px 0 15px 0;
+			letter-spacing: -1.5px;
+			display: block;
+		}
+		h2 {
+			margin: 5px 0 15px 0;
+			letter-spacing: -1.3px;
+			display: block;
+		}
+		h3 {
+			margin: 5px 0 10px 0;
+			text-transform: uppercase;
+			font-size: 23px;
+			letter-spacing: -1px;
+			display: block;
+		}
+		h4 {
+			margin: 3px 0 10px 0;
+			font-size: 18px;
+			text-transform: uppercase;
+			letter-spacing: -.7px;
+			display: block;
+		}
+
+		p {
+			@include media ($mobile) {
+				line-height: 1.3em;
+			}
+		}
+
+		section {
+			@include span-columns(6 of 10);
+
+			@include media($tablet) {
+				@include span-columns(5 of 8);
+			}
+
+			@include media($mobile) {
+				@include span-columns(4 of 4);
+			}
+		}
+
+		aside {
+			@include span-columns(4 of 10);
+			@include omega;
+			
+			@include media($tablet) {
+				@include span-columns(3 of 8);
+			}
+
+			@include media($mobile) {
+				@include span-columns(4 of 4);
+			}
+		}
+
+		form {
+
+
+			label {
+				font-size: 12px;
+			}
+
+			span.helptext {
+				font-size: 14px;
+				line-height: 1.3em;
+			}
+
+			ul.errorlist {
+				color: $error-red;
+				background: $error-background;
+				border-radius: $base-border-radius; 
+				padding: 5px 10px;
+			}
+		}
+
+		table {
+			tr {
+				td, th {
+					text-align: center;
+
+					&.left {
+						text-align: left;
+					}
+
+					&.right {
+						text-align: right;
+					}
+				}
+			}
+		}
+
+		.no-tablet {
+			@include media($tablet) {
+				display: none;
+			}
+		}
+
+		.no-mobile {
+			@include media($mobile) {
+				display: none;
+			}
+		}
+
+		.center {
+			@include span-columns(6);
+			@include shift(2);
+
+			@include media($tablet) {
+				@include shift(1);
+				@include span-columns(6);
+			}
+
+			@include media($mobile) {
+				@include shift(0);
+				@include span-columns(4);
+			}
+		}
+	}
+}
+

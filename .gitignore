@@ -2,10 +2,9 @@ local_settings.py
 secret.txt
 .DS_Store
 *.pyc
+stylesheets
 static/img/questions/*
 questions/fixtures/*
 userauth/fixtures/*
 .sass-cache/*
 static/css/sass/.sass-cache/*
-static/css/sass/stylesheets
-static/js/stylesheets

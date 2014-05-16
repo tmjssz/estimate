@@ -1,0 +1,54 @@
+// LANDING PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#landing {
+	@include span-columns(5);
+	@include media($mobile) {
+		@include span-columns(4);
+		margin-bottom: 10px;
+	}
+}
+
+// REGISTER / LOGIN PART ON LANDING PAGE
+#register-login {
+	@include span-columns(5);
+	@include media($mobile) {
+		@include span-columns(4);
+	}
+
+	ul.accordion {
+		margin-bottom: $base-line-height;
+		display: flex;
+
+		li {
+			float:left;
+			padding: 5px 0;
+			@include span-columns(2.5 of 5);
+
+			&.not-selected {
+				@include link-like;
+				border-bottom: 1px solid $base-border-color;
+			}
+
+			&.selected {
+				font-weight: bold;
+				border-bottom: 1px solid $dark-gray;
+			}
+
+			@include media($mobile) {
+				@include span-columns(2 of 4);
+			}
+		}
+	}
+
+	span.helptext {
+		display: none;
+	}
+
+	#login-form {
+		display:none;
+
+		a.new-account {
+			display:none;
+		}
+	}
+}

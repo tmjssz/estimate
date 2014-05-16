@@ -1,0 +1,51 @@
+// CREATE QUESTION PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#question-create {
+	form {
+		@include span-columns(10);
+
+		p {
+			display: inline-block;
+			@include span-columns(10);
+
+			@include media($tablet) {
+				@include span-columns(8);
+			}
+			@include media($mobile) {
+				@include span-columns(4);
+			}
+
+			label, input, textarea {
+				@include span-columns(7 of 10);
+				float: left;
+
+				@include media($tablet) {
+					@include span-columns(5 of 8);
+				}
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+				}
+			}
+
+			input, textarea {
+				margin-bottom: 10px;
+			}
+
+			span.helptext {
+				@include span-columns(3 of 10);
+				display: inline-block;
+				float: left;
+
+				@include media($tablet) {
+					@include span-columns(3 of 8);
+					font-size: 14px;
+				}
+
+				@include media($mobile) {
+					@include span-columns(4 of 4);
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}

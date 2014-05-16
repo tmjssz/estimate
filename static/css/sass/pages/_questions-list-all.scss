@@ -1,0 +1,22 @@
+// LIST ALL QUESTIONS PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#questions-list-all {
+
+	.full {
+		@include span-columns(10);
+		margin-bottom: 20px;
+		@include media($mobile) {
+			@include span-columns(4 of 4);
+			text-align: center;
+		}
+	}
+
+	.half {
+		@include span-columns(5);
+		@include media($mobile) {
+			@include span-columns(4 of 4);
+			margin-bottom: 15px;
+			text-align: center;
+		}
+	}
+}

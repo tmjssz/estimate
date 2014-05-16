@@ -1,0 +1,49 @@
+// CHALLENGE SCORE PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#challenge-score {
+	h2 {
+		@include span-columns(8 of 10);
+
+		@include media($mobile) {
+			@include span-columns(7 of 10);
+		}
+	}
+
+	.challenge-highscore {
+		@include span-columns(2 of 10);
+		@include omega;
+		@include btn($base-accent-color);
+		font-weight: bold;
+		float: right;
+		text-align: center;
+		margin: 5px 0 15px 0;
+
+		@include media($mobile) {
+			@include span-columns(3 of 10);
+			@include omega;
+		}
+	}
+
+	p {
+		display: inline-block;
+	}
+
+	.score, .score-per-questions {
+		@include span-columns(5 of 10);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+	}
+
+	.score-per-questions {
+		@include omega;
+	}
+
+	table {
+		td.own-question {
+			color: $grey-text;
+			font-style:italic;
+			font-size: 13px;
+			letter-spacing: 1px;
+		}
+	}
+}

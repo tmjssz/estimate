@@ -1,0 +1,90 @@
+// QUESTION SCORE PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#question-score {
+
+	.score, .resolution {
+		@include span-columns(2.5 of 5);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+
+		@include media($tablet) {
+			@include span-columns(4 of 8);
+		}
+	}
+
+	.score {
+		@include omega;
+	}
+
+	.resolution {
+		.value {
+			&.small {
+				letter-spacing: -1.5px;
+				font-size: 35px;
+			}
+
+			&.smaller {
+				letter-spacing: -2px;
+				font-size: 30px;
+			}
+			&.tiny {
+				letter-spacing: -2px;
+				font-size: 25px;
+			}
+			&.really-tiny {
+				letter-spacing: -2px;
+				font-size: 20px;
+			}
+		}
+	}
+
+	.next-random-btn {
+		text-align:center;
+		display: block;
+	}
+
+	h2 {
+		@include span-columns(8 of 10);
+		@include media($mobile) {
+			@include span-columns(7 of 10);
+		}
+	}
+
+	.question-stats-btn {
+		@include span-columns(2 of 10);
+		@include omega;
+		@include btn($base-accent-color);
+		font-weight: bold;
+		float: right;
+		text-align: center;
+		margin: 5px 0 15px 0;
+
+		@include media($mobile) {
+			@include span-columns(3 of 10);
+			@include omega;
+		}
+	}
+
+	section.result {
+
+		@include media($tablet) {
+			margin-bottom: 15px;
+			text-align: center;
+			@include span-columns(8 of 8);
+		}
+
+		&.result {
+			h3 {
+				display: inline-block;
+				text-align: center;
+				width: 100%;
+			}
+		}
+	}
+
+	aside.question {
+		@include media($tablet) {
+			@include span-columns(8 of 8);
+		}
+	}
+}

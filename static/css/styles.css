@@ -241,1103 +241,1065 @@ dl {
 
 body {
   margin: 0; }
-  body header {
-    background-color: #333333;
-    border-bottom: 1px solid #1a1a1a;
-    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    height: 45px;
-    width: 100%;
-    z-index: 999;
-    line-height: 1em;
-    margin: 0px 0px 15px 0px; }
-    @media screen and (max-width: 480px) {
-      body header {
-        margin: 0; } }
-    body header div.navigation-wrapper {
-      max-width: 50em;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      z-index: 9999;
-      height: 45px; }
-      body header div.navigation-wrapper:after {
-        content: "";
-        display: table;
-        clear: both; }
-      body header div.navigation-wrapper #corporate {
-        display: inline-block;
-        height: 45px;
-        padding-left: 15px;
-        padding-right: 15px; }
-        @media screen and (max-width: 480px) {
-          body header div.navigation-wrapper #corporate {
-            padding-left: 8px;
-            padding-right: 8px; } }
-        body header div.navigation-wrapper #corporate a {
-          display: inline; }
-        body header div.navigation-wrapper #corporate #logo {
-          float: left;
-          max-height: 45px;
-          padding: 5.625px 4.23px 5.625px 0;
-          border: 0; }
-        body header div.navigation-wrapper #corporate #font {
-          font-family: 'Yanone Kaffeesatz', sans-serif;
-          font-size: 31.20827px;
-          float: left;
-          padding: 10.50188px 5.625px 11.25px 0px; }
-          body header div.navigation-wrapper #corporate #font #esti {
-            font-weight: 200;
-            color: #cab69a;
-            letter-spacing: -0.07em;
-            margin-right: 2.25px;
-            float: left;
-            line-height: 23.24813px; }
-          body header div.navigation-wrapper #corporate #font #mate {
-            font-weight: 400;
-            color: #f0e3cf;
-            letter-spacing: -0.02em;
-            float: left;
-            line-height: 23.24813px; }
-      body header div.navigation-wrapper #username {
-        display: inline-block;
-        color: rgba(255, 255, 255, 0.7);
-        float: right;
-        line-height: 13px;
-        height: 45px;
-        padding: 9.5px 15px 9.5px 10px;
-        font-size: 11px;
-        border-left: 1px solid #646464; }
-        @media screen and (max-width: 480px) {
-          body header div.navigation-wrapper #username {
-            padding-left: 8px;
-            padding-right: 8px;
-            border-left: 0; } }
-        body header div.navigation-wrapper #username span {
-          font-size: 16px;
-          font-weight: 600;
-          color: white; }
-      body header div.navigation-wrapper #naviToggle {
-        display: none;
-        color: rgba(255, 255, 255, 0.7);
-        float: right;
-        cursor: pointer;
-        padding: 0px 8px; }
-        body header div.navigation-wrapper #naviToggle:hover {
-          color: white; }
-        body header div.navigation-wrapper #naviToggle i {
-          font-size: 1.5em;
-          line-height: 45px; }
-        @media screen and (max-width: 480px) {
-          body header div.navigation-wrapper #naviToggle {
-            display: inline-block; } }
-      body header div.navigation-wrapper nav {
-        display: inline-block;
-        float: right;
-        font-size: 16px;
-        height: 45px; }
-        @media screen and (max-width: 480px) {
-          body header div.navigation-wrapper nav.logged_in {
-            width: 100%;
-            top: -2px;
-            position: relative;
-            height: 0; } }
-        body header div.navigation-wrapper nav ul {
-          display: inline-block;
-          line-height: 45px;
-          padding-right: 5px; }
-          @media screen and (max-width: 480px) {
-            body header div.navigation-wrapper nav ul {
-              padding-right: 0;
-              clear: both;
-              -webkit-transform-style: preserve-3d;
-              margin: 0 auto;
-              overflow: hidden;
-              padding: 0;
-              width: 100%;
-              z-index: 9999; }
-              body header div.navigation-wrapper nav ul.logged_in {
-                display: none; }
-              body header div.navigation-wrapper nav ul.logged_out {
-                font-size: 14px; } }
-          body header div.navigation-wrapper nav ul li {
-            float: left;
-            padding-right: 10px; }
-            body header div.navigation-wrapper nav ul li a {
-              color: rgba(255, 255, 255, 0.7); }
-              body header div.navigation-wrapper nav ul li a:hover {
-                color: white; }
-            body header div.navigation-wrapper nav ul li .login-btn {
-              line-height: 1em !important;
-              -webkit-transition: all 0.2s ease-in-out;
-              -moz-transition: all 0.2s ease-in-out;
-              transition: all 0.2s ease-in-out;
-              background: #477dca;
-              border-radius: 0.1875em;
-              color: white;
-              padding: .4em .6em; }
-              body header div.navigation-wrapper nav ul li .login-btn:hover {
-                background: #6f99d5; }
-          @media screen and (max-width: 480px) {
-            body header div.navigation-wrapper nav ul.logged_in li {
-              background: #333333;
-              display: block;
-              line-height: 45px;
-              overflow: hidden;
-              text-align: right;
-              width: 100%;
-              z-index: 9999;
-              -webkit-transition: all 0.2s ease-in-out;
-              -moz-transition: all 0.2s ease-in-out;
-              transition: all 0.2s ease-in-out; }
-              body header div.navigation-wrapper nav ul.logged_in li:hover {
-                background: #595959; } }
-  body main {
+  body #main {
     max-width: 50em;
     margin-left: auto;
     margin-right: auto;
     position: relative;
     padding: 15px; }
-    body main:after {
+    body #main:after {
       content: "";
       display: table;
       clear: both; }
     @media screen and (max-width: 480px) {
-      body main {
-        padding: 8px; } }
-    body main h1 {
+      body #main {
+        padding: 10px; } }
+    body #main h1 {
       margin: 5px 0 15px 0;
       letter-spacing: -1.5px;
       display: block; }
-    body main h2 {
+    body #main h2 {
       margin: 5px 0 15px 0;
       letter-spacing: -1.3px;
       display: block; }
-    body main h3 {
+    body #main h3 {
       margin: 5px 0 10px 0;
       text-transform: uppercase;
       font-size: 23px;
       letter-spacing: -1px;
       display: block; }
-    body main h4 {
+    body #main h4 {
       margin: 3px 0 10px 0;
       font-size: 18px;
       text-transform: uppercase;
       letter-spacing: -.7px;
       display: block; }
     @media screen and (max-width: 480px) {
-      body main p {
+      body #main p {
         line-height: 1.3em; } }
-    body main section {
+    body #main section {
       float: left;
       display: block;
       margin-right: 2.5641%;
       width: 58.97436%; }
-      body main section:last-child {
+      body #main section:last-child {
         margin-right: 0; }
       @media screen and (max-width: 768px) {
-        body main section {
+        body #main section {
           float: left;
           display: block;
           margin-right: 3.22581%;
           width: 61.29032%; }
-          body main section:last-child {
+          body #main section:last-child {
             margin-right: 0; } }
       @media screen and (max-width: 480px) {
-        body main section {
+        body #main section {
           float: left;
           display: block;
           margin-right: 6.66667%;
-          width: 73.33333%;
-          margin-left: 13.33333%; }
-          body main section:last-child {
+          width: 100%; }
+          body #main section:last-child {
             margin-right: 0; } }
-    body main aside {
+    body #main aside {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 33.33333%;
-      margin-left: 5.12821%; }
-      body main aside:last-child {
+      width: 38.46154%;
+      margin-right: 0; }
+      body #main aside:last-child {
         margin-right: 0; }
       @media screen and (max-width: 768px) {
-        body main aside {
+        body #main aside {
           float: left;
           display: block;
           margin-right: 3.22581%;
-          width: 29.03226%;
-          margin-left: 6.45161%; }
-          body main aside:last-child {
+          width: 35.48387%; }
+          body #main aside:last-child {
             margin-right: 0; } }
       @media screen and (max-width: 480px) {
-        body main aside {
+        body #main aside {
           float: left;
           display: block;
           margin-right: 6.66667%;
-          width: 100%;
-          margin-left: 0%; }
-          body main aside:last-child {
+          width: 100%; }
+          body #main aside:last-child {
             margin-right: 0; } }
-    body main form input[type="submit"], body main form input[type="button"] {
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      background: #477dca;
-      border-radius: 0.1875em;
-      color: white;
-      padding: .4em .6em; }
-      body main form input[type="submit"]:hover, body main form input[type="button"]:hover {
-        background: #6f99d5; }
-    body main form label {
+    body #main form label {
       font-size: 12px; }
-    body main form span.helptext {
+    body #main form span.helptext {
       font-size: 14px;
       line-height: 1.3em; }
-    body main form ul.errorlist {
+    body #main form ul.errorlist {
       color: #a60000;
       background: #ffd5d5;
       border-radius: 0.1875em;
       padding: 5px 10px; }
-    body main table tr td, body main table tr th {
+    body #main table tr td, body #main table tr th {
       text-align: center; }
-      body main table tr td.left, body main table tr th.left {
+      body #main table tr td.left, body #main table tr th.left {
         text-align: left; }
-      body main table tr td.right, body main table tr th.right {
+      body #main table tr td.right, body #main table tr th.right {
         text-align: right; }
     @media screen and (max-width: 768px) {
-      body main .no-tablet {
+      body #main .no-tablet {
         display: none; } }
     @media screen and (max-width: 480px) {
-      body main .no-mobile {
+      body #main .no-mobile {
         display: none; } }
-    body main #login, body main #register, body main #menu {
+    body #main .center {
       float: left;
       display: block;
       margin-right: 2.5641%;
       width: 58.97436%;
       margin-left: 20.51282%; }
-      body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+      body #main .center:last-child {
         margin-right: 0; }
       @media screen and (max-width: 768px) {
-        body main #login, body main #register, body main #menu {
+        body #main .center {
           margin-left: 10.25641%;
           float: left;
           display: block;
           margin-right: 3.22581%;
           width: 74.19355%; }
-          body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+          body #main .center:last-child {
             margin-right: 0; } }
       @media screen and (max-width: 480px) {
-        body main #login, body main #register, body main #menu {
+        body #main .center {
           margin-left: 0%;
           float: left;
           display: block;
           margin-right: 6.66667%;
           width: 100%; }
-          body main #login:last-child, body main #register:last-child, body main #menu:last-child {
+          body #main .center:last-child {
             margin-right: 0; } }
-    body main #landing {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 48.71795%; }
-      body main #landing:last-child {
-        margin-right: 0; }
+
+header {
+  background-color: #333333;
+  border-bottom: 1px solid #1a1a1a;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  height: 45px;
+  width: 100%;
+  z-index: 999;
+  line-height: 1em;
+  margin: 0px 0px 15px 0px; }
+  @media screen and (max-width: 480px) {
+    header {
+      margin: 0; } }
+  header div.navigation-wrapper {
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 9999;
+    height: 45px; }
+    header div.navigation-wrapper:after {
+      content: "";
+      display: table;
+      clear: both; }
+    header div.navigation-wrapper #corporate {
+      display: inline-block;
+      height: 45px;
+      padding-left: 15px;
+      padding-right: 15px; }
       @media screen and (max-width: 480px) {
-        body main #landing {
+        header div.navigation-wrapper #corporate {
+          padding-left: 8px;
+          padding-right: 8px; } }
+      header div.navigation-wrapper #corporate a {
+        display: inline; }
+      header div.navigation-wrapper #corporate #logo {
+        float: left;
+        max-height: 45px;
+        padding: 5.625px 4.23px 5.625px 0;
+        border: 0; }
+      header div.navigation-wrapper #corporate #font {
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+        font-size: 31.20827px;
+        float: left;
+        padding: 10.50188px 5.625px 11.25px 0px; }
+        header div.navigation-wrapper #corporate #font #esti {
+          font-weight: 200;
+          color: #cab69a;
+          letter-spacing: -0.07em;
+          margin-right: 2.25px;
           float: left;
-          display: block;
-          margin-right: 6.66667%;
+          line-height: 23.24813px; }
+        header div.navigation-wrapper #corporate #font #mate {
+          font-weight: 400;
+          color: #f0e3cf;
+          letter-spacing: -0.02em;
+          float: left;
+          line-height: 23.24813px; }
+    header div.navigation-wrapper #username {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.7);
+      float: right;
+      line-height: 13px;
+      height: 45px;
+      padding: 9.5px 15px 9.5px 10px;
+      font-size: 11px;
+      border-left: 1px solid #646464; }
+      @media screen and (max-width: 480px) {
+        header div.navigation-wrapper #username {
+          padding-left: 8px;
+          padding-right: 8px;
+          border-left: 0; } }
+      header div.navigation-wrapper #username span {
+        font-size: 16px;
+        font-weight: 600;
+        color: white; }
+    header div.navigation-wrapper #naviToggle {
+      display: none;
+      color: rgba(255, 255, 255, 0.7);
+      float: right;
+      cursor: pointer;
+      padding: 0px 8px; }
+      header div.navigation-wrapper #naviToggle:hover {
+        color: white; }
+      header div.navigation-wrapper #naviToggle i {
+        font-size: 1.5em;
+        line-height: 45px; }
+      @media screen and (max-width: 480px) {
+        header div.navigation-wrapper #naviToggle {
+          display: inline-block; } }
+    header div.navigation-wrapper nav {
+      display: inline-block;
+      float: right;
+      font-size: 16px;
+      height: 45px; }
+      @media screen and (max-width: 480px) {
+        header div.navigation-wrapper nav.logged_in {
           width: 100%;
-          margin-bottom: 10px; }
-          body main #landing:last-child {
-            margin-right: 0; } }
-    body main #register-login {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 48.71795%; }
-      body main #register-login:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #register-login {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%; }
-          body main #register-login:last-child {
-            margin-right: 0; } }
-      body main #register-login ul.accordion {
-        margin-bottom: 1.5em;
-        display: flex; }
-        body main #register-login ul.accordion li {
-          float: left;
-          padding: 5px 0;
-          float: left;
-          display: block;
-          margin-right: 5.26316%;
-          width: 47.36842%; }
-          body main #register-login ul.accordion li:last-child {
-            margin-right: 0; }
-          body main #register-login ul.accordion li.not-selected {
-            color: #477dca;
-            text-decoration: none;
-            -webkit-transition: color 0.1s linear;
-            -moz-transition: color 0.1s linear;
-            transition: color 0.1s linear;
-            cursor: pointer;
-            border-bottom: 1px solid #dddddd; }
-            body main #register-login ul.accordion li.not-selected:hover {
-              color: #2c5999; }
-            body main #register-login ul.accordion li.not-selected:active, body main #register-login ul.accordion li.not-selected:focus {
-              color: #2c5999;
-              outline: none; }
-          body main #register-login ul.accordion li.selected {
-            font-weight: bold;
-            border-bottom: 1px solid #333333; }
-          @media screen and (max-width: 480px) {
-            body main #register-login ul.accordion li {
-              float: left;
-              display: block;
-              margin-right: 6.66667%;
-              width: 46.66667%; }
-              body main #register-login ul.accordion li:last-child {
-                margin-right: 0; } }
-      body main #register-login span.helptext {
-        display: none; }
-      body main #register-login #login-form {
-        display: none; }
-        body main #register-login #login-form a.new-account {
-          display: none; }
-    body main section.menu {
-      padding: 20px 0; }
-      @media screen and (max-width: 480px) {
-        body main section.menu {
-          text-align: center; } }
-      body main section.menu .row .menu-btn {
-        float: left;
-        display: block;
-        margin-right: 4.34783%;
-        width: 47.82609%; }
-        body main section.menu .row .menu-btn:last-child {
-          margin-right: 0; }
+          top: -2px;
+          position: relative;
+          height: 0; } }
+      header div.navigation-wrapper nav ul {
+        display: inline-block;
+        line-height: 45px;
+        padding-right: 5px; }
         @media screen and (max-width: 480px) {
-          body main section.menu .row .menu-btn {
-            float: left;
-            display: block;
-            margin-right: 33.33333%;
-            width: 100%; }
-            body main section.menu .row .menu-btn:last-child {
-              margin-right: 0; } }
-      body main section.menu .row .challenge_btn {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        background: #477dca;
-        border-radius: 0.1875em;
-        color: white;
-        padding: .4em .6em;
-        text-align: center;
-        margin-bottom: 15px;
-        padding: 0 .6em;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: -1px; }
-        body main section.menu .row .challenge_btn:hover {
-          background: #6f99d5; }
-        body main section.menu .row .challenge_btn:hover {
-          background: #8eafdf;
-          color: #2b5695;
-          font-weight: normal;
-          letter-spacing: 1px; }
-        body main section.menu .row .challenge_btn div {
-          display: table;
-          height: 100px;
-          width: 100%; }
-          body main section.menu .row .challenge_btn div span {
-            display: table-cell;
-            vertical-align: middle; }
-        @media screen and (max-width: 480px) {
-          body main section.menu .row .challenge_btn div {
-            height: auto;
-            padding: .6em .6em; } }
-      body main section.menu .row .choose_btn {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        background: #aabb2f;
-        border-radius: 0.1875em;
-        color: white;
-        padding: .4em .6em;
-        text-align: center;
-        margin-bottom: 15px;
-        padding: 0 .6em;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: -1px; }
-        body main section.menu .row .choose_btn:hover {
-          background: #c1d24b; }
-        body main section.menu .row .choose_btn:hover {
-          background: #cdda6c;
-          color: #6f7a1f;
-          font-weight: normal;
-          letter-spacing: 1px; }
-        body main section.menu .row .choose_btn div {
-          display: table;
-          height: 100px;
-          width: 100%; }
-          body main section.menu .row .choose_btn div span {
-            display: table-cell;
-            vertical-align: middle; }
-        @media screen and (max-width: 480px) {
-          body main section.menu .row .choose_btn div {
-            height: auto;
-            padding: .6em .6em; } }
-      body main section.menu .row .random_btn {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        background: #dd480d;
-        border-radius: 0.1875em;
-        color: white;
-        padding: .4em .6em;
-        text-align: center;
-        margin-bottom: 15px;
-        padding: 0 .6em;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: -1px; }
-        body main section.menu .row .random_btn:hover {
-          background: #f3632b; }
-        body main section.menu .row .random_btn:hover {
-          background: #f57f51;
-          color: #902f08;
-          font-weight: normal;
-          letter-spacing: 1px; }
-        body main section.menu .row .random_btn div {
-          display: table;
-          height: 100px;
-          width: 100%; }
-          body main section.menu .row .random_btn div span {
-            display: table-cell;
-            vertical-align: middle; }
-        @media screen and (max-width: 480px) {
-          body main section.menu .row .random_btn div {
-            height: auto;
-            padding: .6em .6em; } }
-      body main section.menu .row .create_btn {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        background: #efb600;
-        border-radius: 0.1875em;
-        color: white;
-        padding: .4em .6em;
-        text-align: center;
-        margin-bottom: 15px;
-        padding: 0 .6em;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: -1px; }
-        body main section.menu .row .create_btn:hover {
-          background: #ffcb23; }
-        body main section.menu .row .create_btn:hover {
-          background: #ffd44c;
-          color: #9d7800;
-          font-weight: normal;
-          letter-spacing: 1px; }
-        body main section.menu .row .create_btn div {
-          display: table;
-          height: 100px;
-          width: 100%; }
-          body main section.menu .row .create_btn div span {
-            display: table-cell;
-            vertical-align: middle; }
-        @media screen and (max-width: 480px) {
-          body main section.menu .row .create_btn div {
-            height: auto;
-            padding: .6em .6em; } }
-    body main aside.menu {
-      padding: 20px 0; }
-      @media screen and (max-width: 480px) {
-        body main aside.menu {
-          padding-top: 0; } }
-      body main aside.menu .short-stats {
-        float: left;
-        display: block;
-        margin-right: 7.69231%;
-        width: 38.46154%;
-        margin-bottom: 20px; }
-        body main aside.menu .short-stats:last-child {
-          margin-right: 0; }
-        @media screen and (max-width: 768px) {
-          body main aside.menu .short-stats {
-            float: left;
-            display: block;
-            margin-right: 14.28571%;
-            width: 42.85714%; }
-            body main aside.menu .short-stats:last-child {
-              margin-right: 0; } }
-        @media screen and (max-width: 480px) {
-          body main aside.menu .short-stats {
-            float: left;
-            display: block;
-            margin-right: 6.66667%;
-            width: 46.66667%;
-            margin-left: 0%;
-            text-align: center; }
-            body main aside.menu .short-stats:last-child {
-              margin-right: 0; } }
-        body main aside.menu .short-stats.score, body main aside.menu .short-stats.number {
-          text-align: center; }
-          body main aside.menu .short-stats.score .title, body main aside.menu .short-stats.number .title {
-            font-weight: bold;
-            font-size: 12px;
-            color: #646464;
-            display: block;
-            width: 100%; }
-          body main aside.menu .short-stats.score .value, body main aside.menu .short-stats.number .value {
-            font-size: 40px;
-            font-weight: bold;
-            display: block;
+          header div.navigation-wrapper nav ul {
+            padding-right: 0;
+            clear: both;
+            -webkit-transform-style: preserve-3d;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0;
             width: 100%;
-            color: #477dca; }
-    body main #login a.new-account {
-      margin-left: 15px; }
-    body main #question-show section {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 48.71795%; }
-      body main #question-show section:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #question-show section {
+            z-index: 9999; }
+            header div.navigation-wrapper nav ul.logged_in {
+              display: none; }
+            header div.navigation-wrapper nav ul.logged_out {
+              font-size: 14px; } }
+        header div.navigation-wrapper nav ul li {
           float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          margin-left: 0%; }
-          body main #question-show section:last-child {
-            margin-right: 0; } }
-      body main #question-show section.without-aside {
-        margin-left: 10.25641%;
-        float: left;
-        display: block;
-        margin-right: 2.5641%;
-        width: 79.48718%; }
-        body main #question-show section.without-aside:last-child {
-          margin-right: 0; }
-        @media screen and (max-width: 768px) {
-          body main #question-show section.without-aside {
-            float: left;
+          padding-right: 10px; }
+          header div.navigation-wrapper nav ul li a {
+            color: rgba(255, 255, 255, 0.7); }
+            header div.navigation-wrapper nav ul li a:hover {
+              color: white; }
+          header div.navigation-wrapper nav ul li .login-btn {
+            line-height: 1em !important;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            background: #477dca;
+            border-radius: 0.1875em;
+            color: white;
+            padding: .4em .6em; }
+            header div.navigation-wrapper nav ul li .login-btn:hover {
+              background: #6f99d5; }
+        @media screen and (max-width: 480px) {
+          header div.navigation-wrapper nav ul.logged_in li {
+            background: #333333;
             display: block;
-            margin-right: 3.22581%;
+            line-height: 45px;
+            overflow: hidden;
+            text-align: right;
             width: 100%;
-            margin-left: 0%; }
-            body main #question-show section.without-aside:last-child {
-              margin-right: 0; } }
-      body main #question-show section h2 {
-        float: left;
-        display: block;
-        margin-right: 2.5641%;
-        width: 79.48718%; }
-        body main #question-show section h2:last-child {
-          margin-right: 0; }
-      body main #question-show section #countdown {
-        float: left;
-        display: block;
-        margin-right: 2.5641%;
-        width: 17.94872%;
-        float: right;
-        margin-right: 0;
-        margin: 15px 0 15px 0;
-        text-align: center; }
-        body main #question-show section #countdown:last-child {
-          margin-right: 0; }
-      body main #question-show section p {
-        float: left;
-        display: block;
-        margin-right: 33.33333%;
-        width: 100%;
-        margin-bottom: 15px; }
-        body main #question-show section p:last-child {
-          margin-right: 0; }
-      body main #question-show section small#unit {
-        float: left;
-        display: block;
-        margin-right: 33.33333%;
-        width: 100%; }
-        body main #question-show section small#unit:last-child {
-          margin-right: 0; }
-      body main #question-show section form {
-        float: left;
-        display: block;
-        margin-right: 33.33333%;
-        width: 100%; }
-        body main #question-show section form:last-child {
-          margin-right: 0; }
-        body main #question-show section form input#id_estimate {
-          float: left;
-          display: block;
-          margin-right: 2.85714%;
-          width: 65.71429%; }
-          body main #question-show section form input#id_estimate:last-child {
-            margin-right: 0; }
-          @media screen and (max-width: 480px) {
-            body main #question-show section form input#id_estimate {
-              float: left;
-              display: block;
-              margin-right: 6.66667%;
-              width: 100%; }
-              body main #question-show section form input#id_estimate:last-child {
-                margin-right: 0; } }
-        body main #question-show section form input[type=submit] {
-          float: left;
-          display: block;
-          margin-right: 2.85714%;
-          width: 31.42857%;
-          padding: 0.5em 0.5em; }
-          body main #question-show section form input[type=submit]:last-child {
-            margin-right: 0; }
-          @media screen and (max-width: 480px) {
-            body main #question-show section form input[type=submit] {
-              float: left;
-              display: block;
-              margin-right: 6.66667%;
-              width: 100%;
-              margin-bottom: 15px; }
-              body main #question-show section form input[type=submit]:last-child {
-                margin-right: 0; } }
-    body main #question-show aside {
+            z-index: 9999;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out; }
+            header div.navigation-wrapper nav ul.logged_in li:hover {
+              background: #595959; } }
+
+#challenge-score h2 {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 79.48718%; }
+  #challenge-score h2:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #challenge-score h2 {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 48.71795%;
-      margin-left: 0%; }
-      body main #question-show aside:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #question-show aside {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          margin-left: 0%; }
-          body main #question-show aside:last-child {
-            margin-right: 0; } }
-      body main #question-show aside img {
-        width: 100%; }
-    body main #question-score .score, body main #question-score .resolution {
+      width: 69.23077%; }
+      #challenge-score h2:last-child {
+        margin-right: 0; } }
+#challenge-score .challenge-highscore {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 17.94872%;
+  margin-right: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: #477dca;
+  border-radius: 0.1875em;
+  color: white;
+  padding: .4em .6em;
+  font-weight: bold;
+  float: right;
+  text-align: center;
+  margin: 5px 0 15px 0; }
+  #challenge-score .challenge-highscore:last-child {
+    margin-right: 0; }
+  #challenge-score .challenge-highscore:hover {
+    background: #6f99d5; }
+  @media screen and (max-width: 480px) {
+    #challenge-score .challenge-highscore {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 28.20513%;
+      margin-right: 0; }
+      #challenge-score .challenge-highscore:last-child {
+        margin-right: 0; } }
+#challenge-score p {
+  display: inline-block; }
+#challenge-score .score, #challenge-score .score-per-questions {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%;
+  text-align: center;
+  margin-bottom: 20px; }
+  #challenge-score .score:last-child, #challenge-score .score-per-questions:last-child {
+    margin-right: 0; }
+  #challenge-score .score .title, #challenge-score .score-per-questions .title {
+    font-weight: bold;
+    font-size: 12px;
+    color: #646464;
+    display: block;
+    width: 100%; }
+  #challenge-score .score .value, #challenge-score .score-per-questions .value {
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    color: #333333; }
+#challenge-score .score-per-questions {
+  margin-right: 0; }
+#challenge-score table td.own-question {
+  color: #646464;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 1px; }
+
+#challenge-list-all .grid-item {
+  display: table-cell;
+  width: 50%;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  height: 140px;
+  background: white;
+  overflow: hidden;
+  float: left;
+  padding: 2em 1em 1em 1em;
+  border-right: 1px solid rgba(51, 51, 51, 0.2);
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  cursor: pointer;
+  text-align: center; }
+  #challenge-list-all .grid-item:hover {
+    background: rgba(51, 51, 51, 0.05); }
+    #challenge-list-all .grid-item:hover .title {
+      padding: 2em 0 1em 0;
+      letter-spacing: -0.5px; }
+  #challenge-list-all .grid-item.last-col {
+    border-right: 0; }
+  #challenge-list-all .grid-item.last-row {
+    border-bottom: 0; }
+  #challenge-list-all .grid-item .title {
+    font-size: 24px;
+    color: #333333;
+    letter-spacing: -1.5px;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out; }
+    @media screen and (max-width: 768px) {
+      #challenge-list-all .grid-item .title {
+        font-size: 20px; } }
+  #challenge-list-all .grid-item .detail {
+    font-size: 16px;
+    color: #646464; }
+    #challenge-list-all .grid-item .detail .progress-bar-indication {
+      background-color: #f2f2f2;
+      box-shadow: inset 0 0 3px 0 rgba(115, 115, 115, 0.15);
+      border-radius: 0.1875em;
+      margin: 5px 0;
+      height: 6px; }
+      #challenge-list-all .grid-item .detail .progress-bar-indication > .meter {
+        background-color: #477dca;
+        border: 1px solid #2c5999;
+        border-radius: 0.125em;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        display: block;
+        height: 100%;
+        width: 60%; }
+@media screen and (max-width: 480px) {
+  #challenge-list-all aside {
+    text-align: center; } }
+#challenge-list-all aside #played-challenges, #challenge-list-all aside #own-challenges {
+  margin-top: 15px; }
+  #challenge-list-all aside #played-challenges ul li, #challenge-list-all aside #own-challenges ul li {
+    margin-bottom: 5px; }
+    #challenge-list-all aside #played-challenges ul li a, #challenge-list-all aside #own-challenges ul li a {
+      padding: 5px;
+      display: block; }
+      #challenge-list-all aside #played-challenges ul li a span, #challenge-list-all aside #own-challenges ul li a span {
+        display: block;
+        line-height: 1em; }
+      #challenge-list-all aside #played-challenges ul li a span.detail, #challenge-list-all aside #own-challenges ul li a span.detail {
+        font-size: 14px;
+        color: #646464; }
+        #challenge-list-all aside #played-challenges ul li a span.detail:hover, #challenge-list-all aside #own-challenges ul li a span.detail:hover {
+          color: #333333; }
+
+#landing {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%; }
+  #landing:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #landing {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-bottom: 10px; }
+      #landing:last-child {
+        margin-right: 0; } }
+
+#register-login {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%; }
+  #register-login:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #register-login {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%; }
+      #register-login:last-child {
+        margin-right: 0; } }
+  #register-login ul.accordion {
+    margin-bottom: 1.5em;
+    display: flex; }
+    #register-login ul.accordion li {
+      float: left;
+      padding: 5px 0;
       float: left;
       display: block;
       margin-right: 5.26316%;
-      width: 47.36842%;
-      text-align: center;
-      margin-bottom: 20px; }
-      body main #question-score .score:last-child, body main #question-score .resolution:last-child {
+      width: 47.36842%; }
+      #register-login ul.accordion li:last-child {
         margin-right: 0; }
-      body main #question-score .score .title, body main #question-score .resolution .title {
+      #register-login ul.accordion li.not-selected {
+        color: #477dca;
+        text-decoration: none;
+        -webkit-transition: color 0.1s linear;
+        -moz-transition: color 0.1s linear;
+        transition: color 0.1s linear;
+        cursor: pointer;
+        border-bottom: 1px solid #dddddd; }
+        #register-login ul.accordion li.not-selected:hover {
+          color: #2c5999; }
+        #register-login ul.accordion li.not-selected:active, #register-login ul.accordion li.not-selected:focus {
+          color: #2c5999;
+          outline: none; }
+      #register-login ul.accordion li.selected {
+        font-weight: bold;
+        border-bottom: 1px solid #333333; }
+      @media screen and (max-width: 480px) {
+        #register-login ul.accordion li {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 46.66667%; }
+          #register-login ul.accordion li:last-child {
+            margin-right: 0; } }
+  #register-login span.helptext {
+    display: none; }
+  #register-login #login-form {
+    display: none; }
+    #register-login #login-form a.new-account {
+      display: none; }
+
+section.menu {
+  padding: 20px 0; }
+  @media screen and (max-width: 480px) {
+    section.menu {
+      padding: 20px 40px;
+      text-align: center; } }
+  section.menu .row .menu-btn {
+    float: left;
+    display: block;
+    margin-right: 4.34783%;
+    width: 47.82609%; }
+    section.menu .row .menu-btn:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 480px) {
+      section.menu .row .menu-btn {
+        float: left;
+        display: block;
+        margin-right: 33.33333%;
+        width: 100%; }
+        section.menu .row .menu-btn:last-child {
+          margin-right: 0; } }
+  section.menu .row .challenge_btn {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #477dca;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 .6em;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px; }
+    section.menu .row .challenge_btn:hover {
+      background: #6f99d5; }
+    section.menu .row .challenge_btn:hover {
+      background: #8eafdf;
+      color: #2b5695;
+      font-weight: normal;
+      letter-spacing: 1px; }
+    section.menu .row .challenge_btn div {
+      display: table;
+      height: 100px;
+      width: 100%; }
+      section.menu .row .challenge_btn div span {
+        display: table-cell;
+        vertical-align: middle; }
+    @media screen and (max-width: 480px) {
+      section.menu .row .challenge_btn div {
+        height: auto;
+        padding: .6em .6em; } }
+  section.menu .row .choose_btn {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #aabb2f;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 .6em;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px; }
+    section.menu .row .choose_btn:hover {
+      background: #c1d24b; }
+    section.menu .row .choose_btn:hover {
+      background: #cdda6c;
+      color: #6f7a1f;
+      font-weight: normal;
+      letter-spacing: 1px; }
+    section.menu .row .choose_btn div {
+      display: table;
+      height: 100px;
+      width: 100%; }
+      section.menu .row .choose_btn div span {
+        display: table-cell;
+        vertical-align: middle; }
+    @media screen and (max-width: 480px) {
+      section.menu .row .choose_btn div {
+        height: auto;
+        padding: .6em .6em; } }
+  section.menu .row .random_btn {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #dd480d;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 .6em;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px; }
+    section.menu .row .random_btn:hover {
+      background: #f3632b; }
+    section.menu .row .random_btn:hover {
+      background: #f57f51;
+      color: #902f08;
+      font-weight: normal;
+      letter-spacing: 1px; }
+    section.menu .row .random_btn div {
+      display: table;
+      height: 100px;
+      width: 100%; }
+      section.menu .row .random_btn div span {
+        display: table-cell;
+        vertical-align: middle; }
+    @media screen and (max-width: 480px) {
+      section.menu .row .random_btn div {
+        height: auto;
+        padding: .6em .6em; } }
+  section.menu .row .create_btn {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #efb600;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 .6em;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px; }
+    section.menu .row .create_btn:hover {
+      background: #ffcb23; }
+    section.menu .row .create_btn:hover {
+      background: #ffd44c;
+      color: #9d7800;
+      font-weight: normal;
+      letter-spacing: 1px; }
+    section.menu .row .create_btn div {
+      display: table;
+      height: 100px;
+      width: 100%; }
+      section.menu .row .create_btn div span {
+        display: table-cell;
+        vertical-align: middle; }
+    @media screen and (max-width: 480px) {
+      section.menu .row .create_btn div {
+        height: auto;
+        padding: .6em .6em; } }
+
+aside.menu {
+  padding: 20px 0 0 20px; }
+  @media screen and (max-width: 480px) {
+    aside.menu {
+      padding: 0; } }
+  aside.menu .short-stats {
+    float: left;
+    display: block;
+    margin-right: 7.69231%;
+    width: 38.46154%;
+    margin-bottom: 20px; }
+    aside.menu .short-stats:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 768px) {
+      aside.menu .short-stats {
+        float: left;
+        display: block;
+        margin-right: 14.28571%;
+        width: 42.85714%; }
+        aside.menu .short-stats:last-child {
+          margin-right: 0; } }
+    @media screen and (max-width: 480px) {
+      aside.menu .short-stats {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 46.66667%;
+        margin-left: 0%;
+        text-align: center; }
+        aside.menu .short-stats:last-child {
+          margin-right: 0; } }
+    aside.menu .short-stats.score, aside.menu .short-stats.number {
+      text-align: center; }
+      aside.menu .short-stats.score .title, aside.menu .short-stats.number .title {
         font-weight: bold;
         font-size: 12px;
         color: #646464;
         display: block;
         width: 100%; }
-      body main #question-score .score .value, body main #question-score .resolution .value {
+      aside.menu .short-stats.score .value, aside.menu .short-stats.number .value {
         font-size: 40px;
         font-weight: bold;
         display: block;
         width: 100%;
-        color: #333333; }
-      @media screen and (max-width: 768px) {
-        body main #question-score .score, body main #question-score .resolution {
-          float: left;
-          display: block;
-          margin-right: 3.22581%;
-          width: 48.3871%; }
-          body main #question-score .score:last-child, body main #question-score .resolution:last-child {
-            margin-right: 0; } }
-    body main #question-score .score {
+        color: #477dca; }
+
+#question-create form {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 100%; }
+  #question-create form:last-child {
+    margin-right: 0; }
+  #question-create form p {
+    display: inline-block;
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 100%; }
+    #question-create form p:last-child {
       margin-right: 0; }
-    body main #question-score .resolution .value.small {
-      letter-spacing: -1.5px;
-      font-size: 35px; }
-    body main #question-score .resolution .value.smaller {
-      letter-spacing: -2px;
-      font-size: 30px; }
-    body main #question-score .resolution .value.tiny {
-      letter-spacing: -2px;
-      font-size: 25px; }
-    body main #question-score .resolution .value.really-tiny {
-      letter-spacing: -2px;
-      font-size: 20px; }
-    body main #question-score .next-random-btn {
-      text-align: center;
-      display: block; }
-    body main #question-score h2 {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 79.48718%; }
-      body main #question-score h2:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #question-score h2 {
-          float: left;
-          display: block;
-          margin-right: 2.5641%;
-          width: 69.23077%; }
-          body main #question-score h2:last-child {
-            margin-right: 0; } }
-    body main #question-score .question-stats-btn {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 17.94872%;
-      margin-right: 0;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      background: #477dca;
-      border-radius: 0.1875em;
-      color: white;
-      padding: .4em .6em;
-      font-weight: bold;
-      float: right;
-      text-align: center;
-      margin: 5px 0 15px 0; }
-      body main #question-score .question-stats-btn:last-child {
-        margin-right: 0; }
-      body main #question-score .question-stats-btn:hover {
-        background: #6f99d5; }
-      @media screen and (max-width: 480px) {
-        body main #question-score .question-stats-btn {
-          float: left;
-          display: block;
-          margin-right: 2.5641%;
-          width: 28.20513%;
-          margin-right: 0; }
-          body main #question-score .question-stats-btn:last-child {
-            margin-right: 0; } }
     @media screen and (max-width: 768px) {
-      body main #question-score section {
-        margin-bottom: 15px;
-        text-align: center; } }
+      #question-create form p {
+        float: left;
+        display: block;
+        margin-right: 3.22581%;
+        width: 100%; }
+        #question-create form p:last-child {
+          margin-right: 0; } }
     @media screen and (max-width: 480px) {
-      body main #question-score section {
+      #question-create form p {
         float: left;
         display: block;
         margin-right: 6.66667%;
-        width: 100%;
-        margin-left: 0%; }
-        body main #question-score section:last-child {
+        width: 100%; }
+        #question-create form p:last-child {
           margin-right: 0; } }
-    body main #question-score section.result h3 {
-      display: inline-block;
-      text-align: center;
-      width: 100%; }
-    body main #question-score aside.question {
+    #question-create form p label, #question-create form p input, #question-create form p textarea {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 38.46154%;
-      margin-left: 0%; }
-      body main #question-score aside.question:last-child {
+      width: 69.23077%;
+      float: left; }
+      #question-create form p label:last-child, #question-create form p input:last-child, #question-create form p textarea:last-child {
         margin-right: 0; }
       @media screen and (max-width: 768px) {
-        body main #question-score aside.question {
+        #question-create form p label, #question-create form p input, #question-create form p textarea {
+          float: left;
+          display: block;
+          margin-right: 3.22581%;
+          width: 61.29032%; }
+          #question-create form p label:last-child, #question-create form p input:last-child, #question-create form p textarea:last-child {
+            margin-right: 0; } }
+      @media screen and (max-width: 480px) {
+        #question-create form p label, #question-create form p input, #question-create form p textarea {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          #question-create form p label:last-child, #question-create form p input:last-child, #question-create form p textarea:last-child {
+            margin-right: 0; } }
+    #question-create form p input, #question-create form p textarea {
+      margin-bottom: 10px; }
+    #question-create form p span.helptext {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 28.20513%;
+      display: inline-block;
+      float: left; }
+      #question-create form p span.helptext:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 768px) {
+        #question-create form p span.helptext {
           float: left;
           display: block;
           margin-right: 3.22581%;
           width: 35.48387%;
-          margin-left: 0%; }
-          body main #question-score aside.question:last-child {
+          font-size: 14px; }
+          #question-create form p span.helptext:last-child {
             margin-right: 0; } }
       @media screen and (max-width: 480px) {
-        body main #question-score aside.question {
+        #question-create form p span.helptext {
           float: left;
           display: block;
           margin-right: 6.66667%;
           width: 100%;
-          margin-left: 0%; }
-          body main #question-score aside.question:last-child {
+          font-size: 12px; }
+          #question-create form p span.helptext:last-child {
             margin-right: 0; } }
-    body main #questions-list-all .full {
+
+#question-score .score, #question-score .resolution {
+  float: left;
+  display: block;
+  margin-right: 5.26316%;
+  width: 47.36842%;
+  text-align: center;
+  margin-bottom: 20px; }
+  #question-score .score:last-child, #question-score .resolution:last-child {
+    margin-right: 0; }
+  #question-score .score .title, #question-score .resolution .title {
+    font-weight: bold;
+    font-size: 12px;
+    color: #646464;
+    display: block;
+    width: 100%; }
+  #question-score .score .value, #question-score .resolution .value {
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    color: #333333; }
+  @media screen and (max-width: 768px) {
+    #question-score .score, #question-score .resolution {
+      float: left;
+      display: block;
+      margin-right: 3.22581%;
+      width: 48.3871%; }
+      #question-score .score:last-child, #question-score .resolution:last-child {
+        margin-right: 0; } }
+#question-score .score {
+  margin-right: 0; }
+#question-score .resolution .value.small {
+  letter-spacing: -1.5px;
+  font-size: 35px; }
+#question-score .resolution .value.smaller {
+  letter-spacing: -2px;
+  font-size: 30px; }
+#question-score .resolution .value.tiny {
+  letter-spacing: -2px;
+  font-size: 25px; }
+#question-score .resolution .value.really-tiny {
+  letter-spacing: -2px;
+  font-size: 20px; }
+#question-score .next-random-btn {
+  text-align: center;
+  display: block; }
+#question-score h2 {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 79.48718%; }
+  #question-score h2:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #question-score h2 {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 100%;
-      margin-bottom: 20px; }
-      body main #questions-list-all .full:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #questions-list-all .full {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          text-align: center; }
-          body main #questions-list-all .full:last-child {
-            margin-right: 0; } }
-    body main #questions-list-all .half {
+      width: 69.23077%; }
+      #question-score h2:last-child {
+        margin-right: 0; } }
+#question-score .question-stats-btn {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 17.94872%;
+  margin-right: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: #477dca;
+  border-radius: 0.1875em;
+  color: white;
+  padding: .4em .6em;
+  font-weight: bold;
+  float: right;
+  text-align: center;
+  margin: 5px 0 15px 0; }
+  #question-score .question-stats-btn:last-child {
+    margin-right: 0; }
+  #question-score .question-stats-btn:hover {
+    background: #6f99d5; }
+  @media screen and (max-width: 480px) {
+    #question-score .question-stats-btn {
       float: left;
       display: block;
       margin-right: 2.5641%;
-      width: 48.71795%; }
-      body main #questions-list-all .half:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #questions-list-all .half {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          margin-bottom: 15px;
-          text-align: center; }
-          body main #questions-list-all .half:last-child {
-            margin-right: 0; } }
-    body main #challenge-list-all .grid-item {
-      display: table-cell;
-      width: 50%;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      height: 140px;
-      background: white;
-      overflow: hidden;
-      float: left;
-      padding: 2em 1em 1em 1em;
-      border-right: 1px solid rgba(51, 51, 51, 0.2);
-      border-bottom: 1px solid rgba(51, 51, 51, 0.2);
-      cursor: pointer;
-      text-align: center; }
-      body main #challenge-list-all .grid-item:hover {
-        background: rgba(51, 51, 51, 0.05); }
-        body main #challenge-list-all .grid-item:hover .title {
-          padding: 2em 0 1em 0;
-          letter-spacing: -0.5px; }
-      body main #challenge-list-all .grid-item.last-col {
-        border-right: 0; }
-      body main #challenge-list-all .grid-item.last-row {
-        border-bottom: 0; }
-      body main #challenge-list-all .grid-item .title {
-        font-size: 24px;
-        color: #333333;
-        letter-spacing: -1.5px;
-        -webkit-transition: all 0.1s ease-in-out;
-        -moz-transition: all 0.1s ease-in-out;
-        transition: all 0.1s ease-in-out; }
-        @media screen and (max-width: 768px) {
-          body main #challenge-list-all .grid-item .title {
-            font-size: 20px; } }
-      body main #challenge-list-all .grid-item .detail {
-        font-size: 16px;
-        color: #646464; }
-        body main #challenge-list-all .grid-item .detail .progress-bar-indication {
-          background-color: #f2f2f2;
-          box-shadow: inset 0 0 3px 0 rgba(115, 115, 115, 0.15);
-          border-radius: 0.1875em;
-          margin: 5px 0;
-          height: 6px; }
-          body main #challenge-list-all .grid-item .detail .progress-bar-indication > .meter {
-            background-color: #477dca;
-            border: 1px solid #2c5999;
-            border-radius: 0.125em;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            display: block;
-            height: 100%;
-            width: 60%; }
-    body main #challenge-list-all #open-challenges {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 58.97436%; }
-      body main #challenge-list-all #open-challenges:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #challenge-list-all #open-challenges {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%;
-          margin-left: 0%;
-          margin-bottom: 15px; }
-          body main #challenge-list-all #open-challenges:last-child {
-            margin-right: 0; } }
-    @media screen and (max-width: 480px) {
-      body main #challenge-list-all aside {
-        text-align: center; } }
-    body main #challenge-list-all aside #played-challenges, body main #challenge-list-all aside #own-challenges {
-      margin-top: 15px; }
-      body main #challenge-list-all aside #played-challenges ul li, body main #challenge-list-all aside #own-challenges ul li {
-        margin-bottom: 5px; }
-        body main #challenge-list-all aside #played-challenges ul li a, body main #challenge-list-all aside #own-challenges ul li a {
-          padding: 5px;
-          display: block; }
-          body main #challenge-list-all aside #played-challenges ul li a span, body main #challenge-list-all aside #own-challenges ul li a span {
-            display: block;
-            line-height: 1em; }
-          body main #challenge-list-all aside #played-challenges ul li a span.detail, body main #challenge-list-all aside #own-challenges ul li a span.detail {
-            font-size: 14px;
-            color: #646464; }
-            body main #challenge-list-all aside #played-challenges ul li a span.detail:hover, body main #challenge-list-all aside #own-challenges ul li a span.detail:hover {
-              color: #333333; }
-    body main #challenge-score h2 {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 79.48718%; }
-      body main #challenge-score h2:last-child {
-        margin-right: 0; }
-      @media screen and (max-width: 480px) {
-        body main #challenge-score h2 {
-          float: left;
-          display: block;
-          margin-right: 2.5641%;
-          width: 69.23077%; }
-          body main #challenge-score h2:last-child {
-            margin-right: 0; } }
-    body main #challenge-score .challenge-highscore {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 17.94872%;
-      margin-right: 0;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      background: #477dca;
-      border-radius: 0.1875em;
-      color: white;
-      padding: .4em .6em;
-      font-weight: bold;
-      float: right;
-      text-align: center;
-      margin: 5px 0 15px 0; }
-      body main #challenge-score .challenge-highscore:last-child {
-        margin-right: 0; }
-      body main #challenge-score .challenge-highscore:hover {
-        background: #6f99d5; }
-      @media screen and (max-width: 480px) {
-        body main #challenge-score .challenge-highscore {
-          float: left;
-          display: block;
-          margin-right: 2.5641%;
-          width: 28.20513%;
-          margin-right: 0; }
-          body main #challenge-score .challenge-highscore:last-child {
-            margin-right: 0; } }
-    body main #challenge-score p {
-      display: inline-block; }
-    body main #challenge-score .score, body main #challenge-score .score-per-questions {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 48.71795%;
-      text-align: center;
-      margin-bottom: 20px; }
-      body main #challenge-score .score:last-child, body main #challenge-score .score-per-questions:last-child {
-        margin-right: 0; }
-      body main #challenge-score .score .title, body main #challenge-score .score-per-questions .title {
-        font-weight: bold;
-        font-size: 12px;
-        color: #646464;
-        display: block;
-        width: 100%; }
-      body main #challenge-score .score .value, body main #challenge-score .score-per-questions .value {
-        font-size: 40px;
-        font-weight: bold;
-        display: block;
-        width: 100%;
-        color: #333333; }
-    body main #challenge-score .score-per-questions {
+      width: 28.20513%;
       margin-right: 0; }
-    body main #challenge-score table td.own-question {
-      color: #646464;
-      font-style: italic;
-      font-size: 13px;
-      letter-spacing: 1px; }
-    body main #question-create form {
+      #question-score .question-stats-btn:last-child {
+        margin-right: 0; } }
+@media screen and (max-width: 768px) {
+  #question-score section.result {
+    margin-bottom: 15px;
+    text-align: center;
+    float: left;
+    display: block;
+    margin-right: 3.22581%;
+    width: 100%; }
+    #question-score section.result:last-child {
+      margin-right: 0; } }
+#question-score section.result.result h3 {
+  display: inline-block;
+  text-align: center;
+  width: 100%; }
+@media screen and (max-width: 768px) {
+  #question-score aside.question {
+    float: left;
+    display: block;
+    margin-right: 3.22581%;
+    width: 100%; }
+    #question-score aside.question:last-child {
+      margin-right: 0; } }
+
+#question-show section {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%; }
+  #question-show section:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #question-show section {
       float: left;
       display: block;
-      margin-right: 2.5641%;
-      width: 100%; }
-      body main #question-create form:last-child {
-        margin-right: 0; }
-      body main #question-create form p {
-        display: inline-block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-left: 0%; }
+      #question-show section:last-child {
+        margin-right: 0; } }
+  #question-show section.without-aside {
+    margin-left: 10.25641%;
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 79.48718%; }
+    #question-show section.without-aside:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 768px) {
+      #question-show section.without-aside {
         float: left;
         display: block;
-        margin-right: 2.5641%;
-        width: 100%; }
-        body main #question-create form p:last-child {
-          margin-right: 0; }
-        @media screen and (max-width: 768px) {
-          body main #question-create form p {
-            float: left;
-            display: block;
-            margin-right: 3.22581%;
-            width: 100%; }
-            body main #question-create form p:last-child {
-              margin-right: 0; } }
-        @media screen and (max-width: 480px) {
-          body main #question-create form p {
-            float: left;
-            display: block;
-            margin-right: 6.66667%;
-            width: 100%; }
-            body main #question-create form p:last-child {
-              margin-right: 0; } }
-        body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
+        margin-right: 3.22581%;
+        width: 100%;
+        margin-left: 0%; }
+        #question-show section.without-aside:last-child {
+          margin-right: 0; } }
+  #question-show section h2 {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 79.48718%; }
+    #question-show section h2:last-child {
+      margin-right: 0; }
+  #question-show section #countdown {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 17.94872%;
+    float: right;
+    margin-right: 0;
+    margin: 15px 0 15px 0;
+    text-align: center; }
+    #question-show section #countdown:last-child {
+      margin-right: 0; }
+  #question-show section p {
+    float: left;
+    display: block;
+    margin-right: 33.33333%;
+    width: 100%;
+    margin-bottom: 15px; }
+    #question-show section p:last-child {
+      margin-right: 0; }
+  #question-show section small#unit {
+    float: left;
+    display: block;
+    margin-right: 33.33333%;
+    width: 100%; }
+    #question-show section small#unit:last-child {
+      margin-right: 0; }
+  #question-show section form {
+    float: left;
+    display: block;
+    margin-right: 33.33333%;
+    width: 100%; }
+    #question-show section form:last-child {
+      margin-right: 0; }
+    #question-show section form input#id_estimate {
+      float: left;
+      display: block;
+      margin-right: 2.85714%;
+      width: 65.71429%; }
+      #question-show section form input#id_estimate:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        #question-show section form input#id_estimate {
           float: left;
           display: block;
-          margin-right: 2.5641%;
-          width: 69.23077%;
-          float: left; }
-          body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
-            margin-right: 0; }
-          @media screen and (max-width: 768px) {
-            body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
-              float: left;
-              display: block;
-              margin-right: 3.22581%;
-              width: 61.29032%; }
-              body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
-                margin-right: 0; } }
-          @media screen and (max-width: 480px) {
-            body main #question-create form p label, body main #question-create form p input, body main #question-create form p textarea {
-              float: left;
-              display: block;
-              margin-right: 6.66667%;
-              width: 100%; }
-              body main #question-create form p label:last-child, body main #question-create form p input:last-child, body main #question-create form p textarea:last-child {
-                margin-right: 0; } }
-        body main #question-create form p input, body main #question-create form p textarea {
-          margin-bottom: 10px; }
-        body main #question-create form p span.helptext {
+          margin-right: 6.66667%;
+          width: 100%; }
+          #question-show section form input#id_estimate:last-child {
+            margin-right: 0; } }
+    #question-show section form input[type=submit] {
+      float: left;
+      display: block;
+      margin-right: 2.85714%;
+      width: 31.42857%;
+      padding: 0.5em 0.5em; }
+      #question-show section form input[type=submit]:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        #question-show section form input[type=submit] {
           float: left;
           display: block;
-          margin-right: 2.5641%;
-          width: 28.20513%;
-          display: inline-block;
-          float: left; }
-          body main #question-create form p span.helptext:last-child {
-            margin-right: 0; }
-          @media screen and (max-width: 768px) {
-            body main #question-create form p span.helptext {
-              float: left;
-              display: block;
-              margin-right: 3.22581%;
-              width: 35.48387%;
-              font-size: 14px; }
-              body main #question-create form p span.helptext:last-child {
-                margin-right: 0; } }
-          @media screen and (max-width: 480px) {
-            body main #question-create form p span.helptext {
-              float: left;
-              display: block;
-              margin-right: 6.66667%;
-              width: 100%;
-              font-size: 12px; }
-              body main #question-create form p span.helptext:last-child {
-                margin-right: 0; } }
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-bottom: 15px; }
+          #question-show section form input[type=submit]:last-child {
+            margin-right: 0; } }
+#question-show aside {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%;
+  margin-left: 0%; }
+  #question-show aside:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #question-show aside {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-left: 0%; }
+      #question-show aside:last-child {
+        margin-right: 0; } }
+  #question-show aside img {
+    width: 100%; }
+
+#questions-list-all .full {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 100%;
+  margin-bottom: 20px; }
+  #questions-list-all .full:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #questions-list-all .full {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      text-align: center; }
+      #questions-list-all .full:last-child {
+        margin-right: 0; } }
+#questions-list-all .half {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%; }
+  #questions-list-all .half:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #questions-list-all .half {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-bottom: 15px;
+      text-align: center; }
+      #questions-list-all .half:last-child {
+        margin-right: 0; } }
+
+#login a.new-account {
+  margin-left: 15px; }
