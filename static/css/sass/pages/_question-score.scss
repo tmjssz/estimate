@@ -65,7 +65,7 @@
 		}
 	}
 
-	section.result {
+	section {
 
 		@include media($tablet) {
 			margin-bottom: 15px;
@@ -82,7 +82,7 @@
 		}
 	}
 
-	aside.question {
+	aside {
 		@include media($tablet) {
 			@include span-columns(8 of 8);
 		}

@@ -48,6 +48,10 @@ class Question(models.Model):
     def get_absolute_url(self):
         return ('questions_question_show', (), {'slug': self.slug})
 
+    @models.permalink
+    def get_absolute_url_random(self):
+        return ('questions_question_random', (), {'slug': self.slug})
+
 
 
 # =============================================================================

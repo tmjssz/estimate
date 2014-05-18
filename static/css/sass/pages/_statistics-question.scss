@@ -1,0 +1,44 @@
+#statistics-question {
+
+	.multi-title {
+		display: block;
+		letter-spacing: -1.3px;
+		line-height: 1.25em;
+		text-rendering: optimizeLegibility;
+		color: $dark-gray;
+		font-size: 2em;
+		margin: 5px 0 15px 0;
+
+		span {
+			font-weight: bold;
+		}
+	}
+
+	.resolution {
+		@include span-columns(1 of 1);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+
+
+		.value {
+			&.small {
+				letter-spacing: -1.5px;
+				font-size: 35px;
+			}
+
+			&.smaller {
+				letter-spacing: -2px;
+				font-size: 30px;
+			}
+			&.tiny {
+				letter-spacing: -2px;
+				font-size: 25px;
+			}
+			&.really-tiny {
+				letter-spacing: -2px;
+				font-size: 20px;
+			}
+		}
+	}
+
+}

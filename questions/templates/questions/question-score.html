@@ -9,7 +9,7 @@
 
 	<a class="question-stats-btn" href="{% url 'questions_statistics_question' question.slug %}">Statistik</a>
 
-	<section class="result">
+	<section>
 
 		<div class="resolution">	
 			<span class="title">Auflösung</span>
@@ -71,12 +71,13 @@
 			</table>
 		{% endif %}
 
-		<a class="next-random-btn" href="{% url 'questions_question_random' %}">Nächste Zufallsfrage</a>
+		{% if next_random %}
+			<a class="next-random-btn" href="{% url 'questions_random' %}">Nächste Zufallsfrage</a>
+		{% endif %}
 
-	<!-- /.half -->
 	</section>
 
-	<aside class="question">
+	<aside>
 
 		<p>{{ question.question }}</p>
 
@@ -88,7 +89,6 @@
 			<p><img src="/{{ question.image }}" /></p>
 		{% endif %}
 
-	<!-- /.half -->
 	</aside>
 
 <!-- / #question-score -->

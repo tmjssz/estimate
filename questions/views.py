@@ -85,8 +85,9 @@ def question_view(request, slug):
     if estimates:
         estimate = estimates[0]
         avg_estimate = Estimate.objects.get_avg_estimate(question=question)
+        next_random = False
         return render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'avg_estimate': avg_estimate})
+            {'question': question, 'estimate': estimate, 'avg_estimate': avg_estimate, 'next_random': next_random})
     
     # current user hasn't already made an estimate for this question
     if request.method == 'POST':
@@ -101,7 +102,35 @@ def question_view(request, slug):
 
 
 @login_required
-def question_view_random(request):
+def question_view_random(request, slug):
+    """
+    Show a randomly chosen question with estimate form or reached score
+    """
+    question = get_object_or_404(Question, slug=slug, published=True)
+    
+    estimates = Estimate.objects.filter(question=question, user=request.user)
+    
+    # for this questions does already exist an estimate from the current user
+    if estimates:
+        estimate = estimates[0]
+        avg_estimate = Estimate.objects.get_avg_estimate(question=question)
+        next_random = True
+        return render(request, 'questions/question-score.html',
+            {'question': question, 'estimate': estimate, 'avg_estimate': avg_estimate, 'next_random': next_random})
+    
+    # current user hasn't already made an estimate for this question
+    if request.method == 'POST':
+        form = EstimateForm(user=request.user, question=question, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(question.get_absolute_url_random())
+    else:
+        form = EstimateForm()
+    return render(request, 'questions/question-show.html',
+        {'form': form, 'question': question, 'user': request.user})
+
+@login_required
+def question_random(request):
     """
     Show a random question, which were not answered before
     """
@@ -124,7 +153,7 @@ def question_view_random(request):
     
     question = random.choice(questions)
 
-    return HttpResponseRedirect("/frage/"+question.slug)
+    return HttpResponseRedirect("/zufall/"+question.slug)
 
 
 @login_required

@@ -6,7 +6,8 @@ urlpatterns = patterns('questions.views',
     url(r'^frage/(?P<slug>[-\w]+)/$', 'question_view', name='questions_question_show'),
     url(r'^frage-einreichen$', 'question_create_view', name='questions_question_create'),
 
-    url(r'^zufall$', 'question_view_random', name='questions_question_random'),
+    url(r'^zufall$', 'question_random', name='questions_random'),
+    url(r'^zufall/(?P<slug>[-\w]+)/$', 'question_view_random', name='questions_question_random'),
 
     url(r'^challenge/$', 'challenges_list_all', name='questions_challenge_all'),
     url(r'^challenge/(?P<slug>[-\w]+)/$', 'challenge_view', name='questions_challenge_show'),

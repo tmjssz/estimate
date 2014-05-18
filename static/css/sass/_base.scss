@@ -69,6 +69,10 @@ body {
 			@include media($mobile) {
 				@include span-columns(4 of 4);
 			}
+
+			img {
+				width: 100%;
+			}
 		}
 
 		form {
