@@ -28,7 +28,7 @@
 	{% if ready_list.count > 0 %}
 	<div class="half">
 
-		<h3>Beantwortet</h3>
+		<h3><i class="fa fa-check-circle"></i> Beantwortet</h3>
 		<ul>
 			{% for question in ready_list %}
 		    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
@@ -41,7 +41,7 @@
 	{% if own_questions.count > 0 %}
 	<div class="half">
 
-		<h3>Eigene Fragen</h3>
+		<h3><i class="fa fa-pencil"></i> Eigene Fragen</h3>
 		<ul>
 			{% for question in own_questions %}
 		    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>

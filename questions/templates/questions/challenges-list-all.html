@@ -55,7 +55,7 @@
 		{% if completed_challenges %}
 		<div id="played-challenges">
 
-			<h4>Abgeschlossen</h4>
+			<h4><i class="fa fa-check-circle"></i> Abgeschlossen</h4>
 
 			<ul>
 				{% for challenge, score in completed_challenges %}
@@ -74,7 +74,7 @@
 		{% if own_challenges %}
 		<div id="own-challenges">
 
-			<h4>Eigene</h4>
+			<h4><i class="fa fa-pencil"></i> Eigene</h4>
 
 			<ul>
 				{% for challenge in own_challenges %}

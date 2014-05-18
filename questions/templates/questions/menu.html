@@ -7,16 +7,46 @@
 <section class="menu">
 
 	<div class="row">
-		<a class="menu-btn challenge_btn" href="{% url 'questions_challenge_all' %}"><div><span>Challenge</span></div></a>
+		<a class="menu-btn challenge_btn" href="{% url 'questions_challenge_all' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-flag"></i>
+					<span>Challenge</span>
+				</div>
+			</div>
+		</a>
 
-		<a class="menu-btn choose_btn" href="{% url 'questions_question_all' %}"><div><span>Frage wählen</span></div></a>
+		<a class="menu-btn random_btn" href="{% url 'questions_random' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-random"></i>
+					<span>Zufällige Fragen</span>
+				</div>
+			</div>
+		</a>
+
 	<!-- /.row --> 
 	</div>
 
 	<div class="row">
-		<a class="menu-btn random_btn" href="{% url 'questions_random' %}"><div><span>Zufällige Fragen</span></div></a>
+		<a class="menu-btn choose_btn" href="{% url 'questions_question_all' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-list"></i>
+					<span>Frage wählen</span>
+				</div>
+			</div>
+		</a>
 
-		<a class="menu-btn create_btn" href="{% url 'questions_question_create' %}"><div><span>Frage einreichen</span></div></a>
+		<a class="menu-btn create_btn" href="{% url 'questions_question_create' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-plus-circle"></i>
+					<span>Frage einreichen</span>
+				</div>
+			</div>
+		</a>
+
 	<!-- /.row --> 
 	</div>
 
@@ -26,29 +56,30 @@
 
 <aside class="menu">
 
-	<div class="short-stats score">	
-		<span class="title">Punktestand</span>
-		<span class="value">{{ score }}</span>
+	<div class="short-stats">
+		<div class="score">	
+			<span class="title">Punktestand</span>
+			<span class="value">{{ score }}</span>
+		</div>
+
+		<div class="number">	
+			<span class="title">Beantwortet</span>
+			<span class="value">{{ number_estimates }}</span>
+		</div>
+	<!-- /.short-stats -->
 	</div>
 
-	<div class="short-stats number">	
-		<span class="title">Beantwortet</span>
-		<span class="value">{{ number_estimates }}</span>
+	<div id="statistics-menu">
+		<ul>
+		    <li><a href="{% url 'questions_statistics_user' user.username %}"><i class="fa fa-bar-chart-o"></i> Statistik</a></li>
+		    <li><a href="{% url 'questions_highscore' %}"><i class="fa fa-trophy"></i> Highscore</a></li>
+
+		    {% if is_admin %}
+		    <li><a href="{% url 'questions_statistics_all' %}"><i class="fa fa-users"></i> Crowd</a></li>
+		    {% endif %} 
+		</ul>
+	<!-- /#statistics-menu -->
 	</div>
-
-	<h3>Statistik</h3>
-
-	<ul id="statistics-menu">	
-
-	    <li><a href="{% url 'questions_statistics_user' user.username %}">Statistik</a></li>
-	    <li><a href="{% url 'questions_highscore' %}">Highscore</a></li>
-
-	    {% if is_admin %}
-	    <li><a href="{% url 'questions_statistics_all' %}">Crowd-Statistik</a></li>
-	    {% endif %}
-
-	<!-- /#statistics-menu --> 
-	</ul>
 
 </aside>
 

@@ -4,7 +4,7 @@ section.menu {
 	padding: 20px 0;
 
 	@include media($mobile) {
-		padding: 20px 40px;
+		padding: 10px 10px;
 		text-align:center;
 	}
 
@@ -13,7 +13,7 @@ section.menu {
 		.menu-btn {
 			@include span-columns(3 of 6);
 			@include media($mobile) {
-				@include span-columns(1 of 1);
+				@include span-columns(2 of 4);
 			}
 		}
 		
@@ -36,26 +36,53 @@ section.menu {
 aside.menu {
 	padding: 20px 0 0 20px;
 
+	@include media($tablet) {
+		padding-left: 0;
+	}
+
 	@include media($mobile) {
 		padding: 0;
 	}
 
 	.short-stats {
-		@include span-columns(1.5 of 3.5);
+		@include span-columns(1 of 1);
 		margin-bottom: 20px;
 
-		@include media($tablet) {
-			@include span-columns(1 of 2);
-		}
 
 		@include media($mobile) {
-			@include span-columns(2 of 4);
-			@include shift(0);
+			@include span-columns(1.5 of 4);
+			@include shift(0.5 of 4);
 			text-align: center;
 		}
 
-		&.score, &.number {
-			@include number($base-accent-color);
+		.score, .number {
+			@include span-columns(3 of 6);
+			@include number($dark-gray);
+
+			@include media($mobile) {
+				@include span-columns(1 of 1);
+				@include omega;
+				margin-bottom: 15px;
+			}
 		}
 	}
+
+	#statistics-menu {
+		text-align: center;
+		padding: 15px 0;
+		@include span-columns(1 of 1);
+		@include omega;
+
+		@include media($mobile) {
+			@include span-columns(2 of 4);
+			text-align: left;
+		}
+
+		ul {
+			display: inline-block;
+			text-align: left;
+			font-size: 18px;
+		}
+	}
+
 }

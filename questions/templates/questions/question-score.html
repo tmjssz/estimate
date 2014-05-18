@@ -7,7 +7,16 @@
 
 	<h2>{{ question.title }}</h2>
 
-	<a class="question-stats-btn" href="{% url 'questions_statistics_question' question.slug %}">Statistik</a>
+	{% if next_random %}
+		<div class="top-right">
+			<a class="next-random-btn" href="{% url 'questions_random' %}">
+				<div class="label">
+					<span>Nächste</span><span>Frage</span>
+				</div>
+				<i class="fa fa-arrow-circle-right"></i> 
+			</a>
+		</div>
+	{% endif %}
 
 	<section>
 
@@ -115,9 +124,10 @@
 
 		{% endif %}
 
-		{% if next_random %}
-			<a class="next-random-btn" href="{% url 'questions_random' %}">Nächste Zufallsfrage</a>
-		{% endif %}
+		<a class="question-stats-btn" href="{% url 'questions_statistics_question' question.slug %}">
+			<i class="fa fa-bar-chart-o"></i>
+			Statistik zur Frage
+		</a>
 
 	</section>
 

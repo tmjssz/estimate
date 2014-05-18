@@ -478,9 +478,13 @@ header {
       header div.navigation-wrapper nav ul {
         display: inline-block;
         line-height: 45px;
-        padding-right: 5px; }
+        font-size: 16px; }
+        @media screen and (max-width: 768px) {
+          header div.navigation-wrapper nav ul {
+            font-size: 15px; } }
         @media screen and (max-width: 480px) {
           header div.navigation-wrapper nav ul {
+            font-size: 16px;
             padding-right: 0;
             clear: both;
             -webkit-transform-style: preserve-3d;
@@ -495,9 +499,13 @@ header {
               font-size: 14px; } }
         header div.navigation-wrapper nav ul li {
           float: left;
-          padding-right: 10px; }
+          padding-right: 20px;
+          letter-spacing: -0.8px; }
+          header div.navigation-wrapper nav ul li:last-child {
+            padding-right: 10px; }
           header div.navigation-wrapper nav ul li a {
-            color: rgba(255, 255, 255, 0.7); }
+            color: rgba(255, 255, 255, 0.7);
+            display: block; }
             header div.navigation-wrapper nav ul li a:hover {
               color: white; }
           header div.navigation-wrapper nav ul li .login-btn {
@@ -511,6 +519,12 @@ header {
             padding: .4em .6em; }
             header div.navigation-wrapper nav ul li .login-btn:hover {
               background: #6f99d5; }
+          @media screen and (max-width: 768px) {
+            header div.navigation-wrapper nav ul li {
+              letter-spacing: -1px;
+              padding-right: 15px; }
+              header div.navigation-wrapper nav ul li:last-child {
+                padding-right: 10px; } }
         @media screen and (max-width: 480px) {
           header div.navigation-wrapper nav ul.logged_in li {
             background: #333333;
@@ -752,7 +766,7 @@ section.menu {
   padding: 20px 0; }
   @media screen and (max-width: 480px) {
     section.menu {
-      padding: 20px 40px;
+      padding: 10px 10px;
       text-align: center; } }
   section.menu .row .menu-btn {
     float: left;
@@ -765,8 +779,8 @@ section.menu {
       section.menu .row .menu-btn {
         float: left;
         display: block;
-        margin-right: 33.33333%;
-        width: 100%; }
+        margin-right: 6.66667%;
+        width: 46.66667%; }
         section.menu .row .menu-btn:last-child {
           margin-right: 0; } }
   section.menu .row .challenge_btn {
@@ -779,10 +793,9 @@ section.menu {
     padding: .4em .6em;
     text-align: center;
     margin-bottom: 15px;
-    padding: 0 .6em;
-    font-size: 18px;
     font-weight: bold;
-    letter-spacing: -1px; }
+    letter-spacing: -1px;
+    padding: 0 20px; }
     section.menu .row .challenge_btn:hover {
       background: #6f99d5; }
     section.menu .row .challenge_btn:hover {
@@ -790,17 +803,23 @@ section.menu {
       color: #2b5695;
       font-weight: normal;
       letter-spacing: 1px; }
-    section.menu .row .challenge_btn div {
+      @media screen and (max-width: 480px) {
+        section.menu .row .challenge_btn:hover {
+          letter-spacing: 0; } }
+    section.menu .row .challenge_btn div.wrapper {
       display: table;
       height: 100px;
       width: 100%; }
-      section.menu .row .challenge_btn div span {
+      section.menu .row .challenge_btn div.wrapper .cell {
         display: table-cell;
         vertical-align: middle; }
-    @media screen and (max-width: 480px) {
-      section.menu .row .challenge_btn div {
-        height: auto;
-        padding: .6em .6em; } }
+        section.menu .row .challenge_btn div.wrapper .cell i {
+          display: block;
+          font-size: 1.8em; }
+        section.menu .row .challenge_btn div.wrapper .cell span {
+          display: block;
+          font-size: 15px;
+          line-height: 15px; }
   section.menu .row .choose_btn {
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -811,10 +830,9 @@ section.menu {
     padding: .4em .6em;
     text-align: center;
     margin-bottom: 15px;
-    padding: 0 .6em;
-    font-size: 18px;
     font-weight: bold;
-    letter-spacing: -1px; }
+    letter-spacing: -1px;
+    padding: 0 20px; }
     section.menu .row .choose_btn:hover {
       background: #c1d24b; }
     section.menu .row .choose_btn:hover {
@@ -822,17 +840,23 @@ section.menu {
       color: #6f7a1f;
       font-weight: normal;
       letter-spacing: 1px; }
-    section.menu .row .choose_btn div {
+      @media screen and (max-width: 480px) {
+        section.menu .row .choose_btn:hover {
+          letter-spacing: 0; } }
+    section.menu .row .choose_btn div.wrapper {
       display: table;
       height: 100px;
       width: 100%; }
-      section.menu .row .choose_btn div span {
+      section.menu .row .choose_btn div.wrapper .cell {
         display: table-cell;
         vertical-align: middle; }
-    @media screen and (max-width: 480px) {
-      section.menu .row .choose_btn div {
-        height: auto;
-        padding: .6em .6em; } }
+        section.menu .row .choose_btn div.wrapper .cell i {
+          display: block;
+          font-size: 1.8em; }
+        section.menu .row .choose_btn div.wrapper .cell span {
+          display: block;
+          font-size: 15px;
+          line-height: 15px; }
   section.menu .row .random_btn {
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -843,10 +867,9 @@ section.menu {
     padding: .4em .6em;
     text-align: center;
     margin-bottom: 15px;
-    padding: 0 .6em;
-    font-size: 18px;
     font-weight: bold;
-    letter-spacing: -1px; }
+    letter-spacing: -1px;
+    padding: 0 20px; }
     section.menu .row .random_btn:hover {
       background: #f3632b; }
     section.menu .row .random_btn:hover {
@@ -854,17 +877,23 @@ section.menu {
       color: #902f08;
       font-weight: normal;
       letter-spacing: 1px; }
-    section.menu .row .random_btn div {
+      @media screen and (max-width: 480px) {
+        section.menu .row .random_btn:hover {
+          letter-spacing: 0; } }
+    section.menu .row .random_btn div.wrapper {
       display: table;
       height: 100px;
       width: 100%; }
-      section.menu .row .random_btn div span {
+      section.menu .row .random_btn div.wrapper .cell {
         display: table-cell;
         vertical-align: middle; }
-    @media screen and (max-width: 480px) {
-      section.menu .row .random_btn div {
-        height: auto;
-        padding: .6em .6em; } }
+        section.menu .row .random_btn div.wrapper .cell i {
+          display: block;
+          font-size: 1.8em; }
+        section.menu .row .random_btn div.wrapper .cell span {
+          display: block;
+          font-size: 15px;
+          line-height: 15px; }
   section.menu .row .create_btn {
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -875,10 +904,9 @@ section.menu {
     padding: .4em .6em;
     text-align: center;
     margin-bottom: 15px;
-    padding: 0 .6em;
-    font-size: 18px;
     font-weight: bold;
-    letter-spacing: -1px; }
+    letter-spacing: -1px;
+    padding: 0 20px; }
     section.menu .row .create_btn:hover {
       background: #ffcb23; }
     section.menu .row .create_btn:hover {
@@ -886,63 +914,103 @@ section.menu {
       color: #9d7800;
       font-weight: normal;
       letter-spacing: 1px; }
-    section.menu .row .create_btn div {
+      @media screen and (max-width: 480px) {
+        section.menu .row .create_btn:hover {
+          letter-spacing: 0; } }
+    section.menu .row .create_btn div.wrapper {
       display: table;
       height: 100px;
       width: 100%; }
-      section.menu .row .create_btn div span {
+      section.menu .row .create_btn div.wrapper .cell {
         display: table-cell;
         vertical-align: middle; }
-    @media screen and (max-width: 480px) {
-      section.menu .row .create_btn div {
-        height: auto;
-        padding: .6em .6em; } }
+        section.menu .row .create_btn div.wrapper .cell i {
+          display: block;
+          font-size: 1.8em; }
+        section.menu .row .create_btn div.wrapper .cell span {
+          display: block;
+          font-size: 15px;
+          line-height: 15px; }
 
 aside.menu {
   padding: 20px 0 0 20px; }
+  @media screen and (max-width: 768px) {
+    aside.menu {
+      padding-left: 0; } }
   @media screen and (max-width: 480px) {
     aside.menu {
       padding: 0; } }
   aside.menu .short-stats {
     float: left;
     display: block;
-    margin-right: 7.69231%;
-    width: 38.46154%;
+    margin-right: 33.33333%;
+    width: 100%;
     margin-bottom: 20px; }
     aside.menu .short-stats:last-child {
       margin-right: 0; }
-    @media screen and (max-width: 768px) {
-      aside.menu .short-stats {
-        float: left;
-        display: block;
-        margin-right: 14.28571%;
-        width: 42.85714%; }
-        aside.menu .short-stats:last-child {
-          margin-right: 0; } }
     @media screen and (max-width: 480px) {
       aside.menu .short-stats {
         float: left;
         display: block;
         margin-right: 6.66667%;
-        width: 46.66667%;
-        margin-left: 0%;
+        width: 33.33333%;
+        margin-left: 13.33333%;
         text-align: center; }
         aside.menu .short-stats:last-child {
           margin-right: 0; } }
-    aside.menu .short-stats.score, aside.menu .short-stats.number {
+    aside.menu .short-stats .score, aside.menu .short-stats .number {
+      float: left;
+      display: block;
+      margin-right: 4.34783%;
+      width: 47.82609%;
       text-align: center; }
-      aside.menu .short-stats.score .title, aside.menu .short-stats.number .title {
+      aside.menu .short-stats .score:last-child, aside.menu .short-stats .number:last-child {
+        margin-right: 0; }
+      aside.menu .short-stats .score .title, aside.menu .short-stats .number .title {
         font-weight: bold;
         font-size: 12px;
         color: #646464;
         display: block;
         width: 100%; }
-      aside.menu .short-stats.score .value, aside.menu .short-stats.number .value {
+      aside.menu .short-stats .score .value, aside.menu .short-stats .number .value {
         font-size: 40px;
         font-weight: bold;
         display: block;
         width: 100%;
-        color: #477dca; }
+        color: #333333; }
+      @media screen and (max-width: 480px) {
+        aside.menu .short-stats .score, aside.menu .short-stats .number {
+          float: left;
+          display: block;
+          margin-right: 33.33333%;
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 15px; }
+          aside.menu .short-stats .score:last-child, aside.menu .short-stats .number:last-child {
+            margin-right: 0; } }
+  aside.menu #statistics-menu {
+    text-align: center;
+    padding: 15px 0;
+    float: left;
+    display: block;
+    margin-right: 33.33333%;
+    width: 100%;
+    margin-right: 0; }
+    aside.menu #statistics-menu:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 480px) {
+      aside.menu #statistics-menu {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 46.66667%;
+        text-align: left; }
+        aside.menu #statistics-menu:last-child {
+          margin-right: 0; } }
+    aside.menu #statistics-menu ul {
+      display: inline-block;
+      text-align: left;
+      font-size: 18px; }
 
 #question-create form {
   float: left;
@@ -1120,9 +1188,44 @@ aside.menu {
     color: rgba(51, 51, 51, 0.5); }
 #question-score table.timed_out {
   display: none; }
-#question-score .next-random-btn {
-  text-align: center;
-  display: block; }
+#question-score .top-right {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 17.94872%;
+  margin-right: 0; }
+  #question-score .top-right:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 768px) {
+    #question-score .top-right {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 28.20513%; }
+      #question-score .top-right:last-child {
+        margin-right: 0; } }
+  #question-score .top-right .next-random-btn {
+    text-align: center;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #477dca;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    float: right; }
+    #question-score .top-right .next-random-btn:hover {
+      background: #6f99d5; }
+    #question-score .top-right .next-random-btn i {
+      display: inline-block;
+      font-size: 1.7em; }
+    #question-score .top-right .next-random-btn .label {
+      display: inline-block;
+      font-weight: bold; }
+      #question-score .top-right .next-random-btn .label span {
+        font-size: 14px;
+        display: block;
+        line-height: 12px; }
 #question-score h2 {
   float: left;
   display: block;
@@ -1130,7 +1233,7 @@ aside.menu {
   width: 79.48718%; }
   #question-score h2:last-child {
     margin-right: 0; }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     #question-score h2 {
       float: left;
       display: block;
@@ -1139,35 +1242,9 @@ aside.menu {
       #question-score h2:last-child {
         margin-right: 0; } }
 #question-score .question-stats-btn {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 17.94872%;
-  margin-right: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  background: #477dca;
-  border-radius: 0.1875em;
-  color: white;
-  padding: .4em .6em;
-  font-weight: bold;
-  float: right;
   text-align: center;
+  display: block;
   margin: 5px 0 15px 0; }
-  #question-score .question-stats-btn:last-child {
-    margin-right: 0; }
-  #question-score .question-stats-btn:hover {
-    background: #6f99d5; }
-  @media screen and (max-width: 480px) {
-    #question-score .question-stats-btn {
-      float: left;
-      display: block;
-      margin-right: 2.5641%;
-      width: 28.20513%;
-      margin-right: 0; }
-      #question-score .question-stats-btn:last-child {
-        margin-right: 0; } }
 @media screen and (max-width: 768px) {
   #question-score section {
     margin-bottom: 15px;

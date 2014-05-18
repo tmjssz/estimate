@@ -14,34 +14,42 @@
 	@include btn($bg_color);
 	text-align: center;
 	margin-bottom: 15px;
-	padding: 0 .6em;
-	font-size: 18px;
 	font-weight: bold;
 	letter-spacing: -1px;
+	padding: 0 20px;
 
 	&:hover {
 		background: lighten($bg_color, 18);
 		color: darken($bg_color, 16);
 		font-weight: normal;
 		letter-spacing: 1px;
+
+		@include media ($mobile) {
+			letter-spacing: 0;
+		}
 	}
 
-	div {
+	div.wrapper {
 		display:table;
 		height: $height;
 		width: 100%;
-		span {
+		.cell {
 			display:table-cell;
 			vertical-align:middle;
+
+			i {
+				display: block;
+				font-size: 1.8em;
+			}
+			span {
+				display: block;
+				font-size: 15px;
+				line-height: 15px;
+			}
 		}
 	}
 
-	@include media($mobile) {
-		div {
-			height: auto;
-			padding: .6em .6em;
-		}
-	}
+	
 }
 
 @mixin link-like {

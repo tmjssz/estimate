@@ -18,8 +18,8 @@
 
 	<nav class="logged_in">
 		<ul class="logged_in">
-			<li><a href="{% url 'questions_menu' %}">Hauptmenü</a></li>
-			<li><a href="{% url 'questions_statistics_user' user.username %}">Konto</a></li>
+			<li><a href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
+			<li><a href="{% url 'questions_statistics_user' user.username %}"><i class="fa fa-user"></i> Konto</a></li>
 	{% else %}
 	<nav class="logged_out">
 		<ul class="logged_out">

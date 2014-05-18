@@ -7,7 +7,7 @@
 
     <h2>{{ challenge.title }}</h2>
 
-    <a class="challenge-highscore" href="{% url 'questions_challenge_highscore' challenge.slug %}">Highscore</a>
+    <a class="challenge-highscore" href="{% url 'questions_challenge_highscore' challenge.slug %}"><i class="fa fa-trophy"></i> Highscore</a>
 
     {% if estimate_list %}
         

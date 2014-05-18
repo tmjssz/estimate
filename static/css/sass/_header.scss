@@ -145,9 +145,14 @@ header {
 	    	ul {
 	    		display: inline-block;
 		      	line-height: $navigation-height;
-		      	padding-right: 5px;
+		      	font-size: 16px;
+
+		      	@include media ($tablet) {
+		      		font-size: 15px;
+		      	}
 
 		      	@include media ($mobile) {
+		      		font-size: 16px;
 					padding-right: 0;
 					clear: both;
 				    -webkit-transform-style: preserve-3d; 
@@ -168,10 +173,16 @@ header {
 
 				li {
 					float: left;
-		    		padding-right: 10px;
+		    		padding-right: 20px;
+					letter-spacing: -0.8px;
+
+					&:last-child {
+						padding-right: 10px;
+					}
 
 					a {
 			    		color: $navigation-color;
+			    		display: block;
 
 			    		&:hover {
 							color: $navigation-color-hover;
@@ -182,6 +193,14 @@ header {
 			    		line-height: 1em !important;
 			    		@include btn($base-accent-color);
 			    	}
+
+			    	@include media ($tablet) {
+			      		letter-spacing: -1px;
+			      		padding-right: 15px;
+			      		&:last-child {
+							padding-right: 10px;
+						}
+			      	}
 				}
 
 				&.logged_in li {
