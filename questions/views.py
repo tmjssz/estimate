@@ -332,7 +332,10 @@ def question_statistics(request, slug):
     else:
         own_estimate = None
 
-    return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates})
+    # get the average estimate for this question
+    avg_estimate = Estimate.objects.get_avg_estimate(question=question)
+
+    return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates, 'avg_estimate': avg_estimate})
 
 
 @login_required

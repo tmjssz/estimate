@@ -9,9 +9,10 @@ $( document ).ready(function() {
 	});
 
     // Click handler for 'Show resolution' Button
-	$('#show_resolution').click(function() {
+	$('#show_btn').click(function() {
 		$(this).hide();
-		$('#resolution').removeClass('hidden');
+		$('#show_resolution').fadeIn();
+        $('table.timed_out').fadeIn();
 	});
 
 

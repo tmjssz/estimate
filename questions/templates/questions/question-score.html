@@ -11,34 +11,31 @@
 
 	<section>
 
-		<div class="resolution">	
-			<span class="title">Auflösung</span>
+		{% if estimate.estimate %}
 
-			{% if question.answer < 99999 %}
-				<span class="value">
-			{% elif question.answer < 999999999 %}
-				<span class="value small">
-			{% elif question.answer < 999999999999 %}
-				<span class="value smaller">
-			{% elif question.answer < 999999999999999 %}
-				<span class="value tiny">
-			{% else %}
-				<span class="value really-tiny">
-			{% endif %}
+			<div class="resolution">	
+				<span class="title">Auflösung</span>
 
-			{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
-		</div>
+				{% if question.answer < 99999 %}
+					<span class="value">
+				{% elif question.answer < 999999999 %}
+					<span class="value small">
+				{% elif question.answer < 999999999999 %}
+					<span class="value smaller">
+				{% elif question.answer < 999999999999999 %}
+					<span class="value tiny">
+				{% else %}
+					<span class="value really-tiny">
+				{% endif %}
 
-		<div class="score">	
-			<span class="title">Punkte</span>
-			<span class="value">{{ estimate.score }}</span>
-		</div>
+				{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
+			</div>
 
-		{% if estimate.estimate == None %}
-			<h3>Zeit abgelaufen.</h3>
-			<span id="show_resolution" class="link_like">Zeige Auflösung</span>
-			<p id="resolution" class="hidden"><strong>Auflösung</strong> {{ question.answer|floatformat }}</p>
-		{% else %}
+			<div class="score">	
+				<span class="title">Punkte</span>
+				<span class="value">{{ estimate.score }}</span>
+			</div>
+			
 			{% if estimate.estimate == question.answer %}
 				<h3>Punktlandung!</h3>
 			{% elif estimate.score == 100 %}
@@ -69,6 +66,53 @@
 					<td class="right">{{ avg_estimate.score|floatformat:"0" }}</td>
 				</tr>
 			</table>
+
+		{% else %}
+
+			<div class="timed_out">
+				<p class="icon"><i class="fa fa-exclamation-triangle fa-3x"></i></p>
+				<p>Leider ist die Zeit abgelaufen.</p>
+			</div>
+
+			<div id="show_btn">Zeige Auflösung</div>
+
+			<div id="show_resolution">
+				<span class="title">Auflösung</span>
+
+				{% if question.answer < 99999 %}
+					<span class="value">
+				{% elif question.answer < 999999999 %}
+					<span class="value small">
+				{% elif question.answer < 999999999999 %}
+					<span class="value smaller">
+				{% elif question.answer < 999999999999999 %}
+					<span class="value tiny">
+				{% else %}
+					<span class="value really-tiny">
+				{% endif %}
+
+				{{ question.answer|floatformat }}</span> 
+				{% if question.unit %}
+					<span class="unit">{{ question.unit }}</span>
+				{% endif %}
+			</div>
+
+			<div class="score">	
+				<span class="title">Punkte</span>
+				<span class="value">{{ estimate.score }}</span>
+			</div>
+
+			<table class="timed_out">
+				<tr>
+					<td class="left"><strong>&#216; Schätzung</strong></td> 
+					<td class="right">{{ avg_estimate.estimate|floatformat:"-2" }}</td>
+				</tr>
+				<tr>
+					<td class="left"><strong>&#216; Punktzahl</strong></td>
+					<td class="right">{{ avg_estimate.score|floatformat:"0" }}</td>
+				</tr>
+			</table>
+
 		{% endif %}
 
 		{% if next_random %}

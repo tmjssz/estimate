@@ -7,8 +7,8 @@
 		@include number($base-font-color);
 		margin-bottom: 20px;
 
-		@include media($tablet) {
-			@include span-columns(4 of 8);
+		@include media($mobile) {
+			@include span-columns(2 of 4);
 		}
 	}
 
@@ -16,7 +16,21 @@
 		@include omega;
 	}
 
-	.resolution {
+	#show_btn {
+		@include link-like;
+		@include span-columns(2.5 of 5);
+		text-align:center;
+		line-height: 60px;
+	}
+
+	#show_resolution {
+		@include span-columns(2.5 of 5);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+		display:none;
+	}
+
+	.resolution, .show_resolution, #show_resolution {
 		.value {
 			&.small {
 				letter-spacing: -1.5px;
@@ -36,6 +50,17 @@
 				font-size: 20px;
 			}
 		}
+	}
+
+	.timed_out {
+		text-align: center;
+		.icon {
+			color: transparentize($base-font-color, 0.5);
+		}
+	}
+
+	table.timed_out {
+		display: none;
 	}
 
 	.next-random-btn {

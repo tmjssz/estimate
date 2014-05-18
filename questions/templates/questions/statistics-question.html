@@ -14,6 +14,33 @@
 
         <section>
 
+            {% if avg_estimate %}
+
+                <div class="avg_estimate">    
+                    <span class="title">&#216; Schätzung</span>
+
+                    {% if avg_estimate.estimate < 99999 %}
+                        <span class="value">
+                    {% elif avg_estimate.estimate < 999999999 %}
+                        <span class="value small">
+                    {% elif avg_estimate.estimate < 999999999999 %}
+                        <span class="value smaller">
+                    {% elif avg_estimate.estimate < 999999999999999 %}
+                        <span class="value tiny">
+                    {% else %}
+                        <span class="value really-tiny">
+                    {% endif %}
+
+                    {{ avg_estimate.estimate|floatformat }}</span>
+                </div>
+
+                <div class="avg_error">    
+                    <span class="title">&#216; Fehler</span>
+                    <span class="value">{{ avg_estimate.percentage_error|floatformat:"-2" }}%</span>
+                </div>
+
+            {% endif %}
+
             {% if estimate_list %}
 
                 <table>
