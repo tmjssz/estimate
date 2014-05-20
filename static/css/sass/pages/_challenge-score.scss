@@ -2,7 +2,11 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #challenge-score {
 	h2 {
-		@include span-columns(8 of 10);
+		@include span-columns(7 of 10);
+
+		@include media($tablet) {
+			@include span-columns(6 of 10);
+		}
 
 		@include media($mobile) {
 			@include span-columns(7 of 10);
@@ -10,17 +14,26 @@
 	}
 
 	.challenge-highscore {
-		@include span-columns(2 of 10);
+		@include span-columns(3 of 10);
 		@include omega;
-		@include btn($base-accent-color);
+		text-align: right;
 		font-weight: bold;
-		float: right;
-		text-align: center;
-		margin: 5px 0 15px 0;
+		padding: 12px 0 15px 0;	
+
+		@include media($tablet) {
+			@include span-columns(4 of 10);
+			font-weight: 500;
+			letter-spacing: -1px;
+		}
 
 		@include media($mobile) {
 			@include span-columns(3 of 10);
 			@include omega;
+			font-weight: 400;
+		}
+
+		a {
+			@include btn($base-accent-color);		
 		}
 	}
 
@@ -39,11 +52,12 @@
 	}
 
 	table {
-		td.own-question {
+		td.own-question, td.timed-out {
 			color: $grey-text;
 			font-style:italic;
 			font-size: 13px;
 			letter-spacing: 1px;
+			text-align: center;
 		}
 	}
 }

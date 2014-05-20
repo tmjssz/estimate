@@ -347,13 +347,22 @@ def statistics_user(request, username):
     estimates_time_out = Estimate.objects.filter(user=user, estimate=None)
     
     score = 0
-    for e in estimates:
-        score += e.score
+    score_per_question = 0
+    sum_percentage_error = 0
+    error_per_question = 0
 
     if estimates.count() == 0:
         estimates = None
+        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
+    else:
+        for e in estimates:
+            score += e.score
+            sum_percentage_error += e.percentage_error
+        
+        score_per_question = score / estimates.count()
+        error_per_question = sum_percentage_error / estimates.count()
 
-    return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out})
+        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
 
 
 @login_required

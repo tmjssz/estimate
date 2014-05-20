@@ -341,12 +341,16 @@ body {
       background: #ffd5d5;
       border-radius: 0.1875em;
       padding: 5px 10px; }
+    body #main table tr.current_user {
+      background: #ebebeb; }
     body #main table tr td, body #main table tr th {
       text-align: center; }
-      body #main table tr td.left, body #main table tr th.left {
-        text-align: left; }
-      body #main table tr td.right, body #main table tr th.right {
-        text-align: right; }
+      body #main table tr td:first-child, body #main table tr td.left, body #main table tr th:first-child, body #main table tr th.left {
+        text-align: left;
+        padding-left: 10px; }
+      body #main table tr td:last-child, body #main table tr td.right, body #main table tr th:last-child, body #main table tr th.right {
+        text-align: right;
+        padding-right: 10px; }
     @media screen and (max-width: 768px) {
       body #main .no-tablet {
         display: none; } }
@@ -555,13 +559,38 @@ header {
             header div.navigation-wrapper nav ul.logged_in li:hover {
               background: #595959; } }
 
+#account-settings div.join-date, #account-settings div.last-login, #account-settings div.pw-change {
+  padding-bottom: 15px; }
+#account-settings div.pw-change {
+  display: none; }
+#account-settings span.pw-change {
+  color: #477dca;
+  text-decoration: none;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  cursor: pointer; }
+  #account-settings span.pw-change:hover {
+    color: #2c5999; }
+  #account-settings span.pw-change:active, #account-settings span.pw-change:focus {
+    color: #2c5999;
+    outline: none; }
+
 #challenge-score h2 {
   float: left;
   display: block;
   margin-right: 2.5641%;
-  width: 79.48718%; }
+  width: 69.23077%; }
   #challenge-score h2:last-child {
     margin-right: 0; }
+  @media screen and (max-width: 768px) {
+    #challenge-score h2 {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 58.97436%; }
+      #challenge-score h2:last-child {
+        margin-right: 0; } }
   @media screen and (max-width: 480px) {
     #challenge-score h2 {
       float: left;
@@ -574,32 +603,43 @@ header {
   float: left;
   display: block;
   margin-right: 2.5641%;
-  width: 17.94872%;
+  width: 28.20513%;
   margin-right: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  background: #477dca;
-  border-radius: 0.1875em;
-  color: white;
-  padding: .4em .6em;
+  text-align: right;
   font-weight: bold;
-  float: right;
-  text-align: center;
-  margin: 5px 0 15px 0; }
+  padding: 12px 0 15px 0; }
   #challenge-score .challenge-highscore:last-child {
     margin-right: 0; }
-  #challenge-score .challenge-highscore:hover {
-    background: #6f99d5; }
+  @media screen and (max-width: 768px) {
+    #challenge-score .challenge-highscore {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 38.46154%;
+      font-weight: 500;
+      letter-spacing: -1px; }
+      #challenge-score .challenge-highscore:last-child {
+        margin-right: 0; } }
   @media screen and (max-width: 480px) {
     #challenge-score .challenge-highscore {
       float: left;
       display: block;
       margin-right: 2.5641%;
       width: 28.20513%;
-      margin-right: 0; }
+      margin-right: 0;
+      font-weight: 400; }
       #challenge-score .challenge-highscore:last-child {
         margin-right: 0; } }
+  #challenge-score .challenge-highscore a {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #477dca;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em; }
+    #challenge-score .challenge-highscore a:hover {
+      background: #6f99d5; }
 #challenge-score p {
   display: inline-block; }
 #challenge-score .score, #challenge-score .score-per-questions {
@@ -625,11 +665,12 @@ header {
     color: #333333; }
 #challenge-score .score-per-questions {
   margin-right: 0; }
-#challenge-score table td.own-question {
+#challenge-score table td.own-question, #challenge-score table td.timed-out {
   color: #646464;
   font-style: italic;
   font-size: 13px;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  text-align: center; }
 
 #challenge-list-all .grid-item {
   display: table-cell;
@@ -701,6 +742,27 @@ header {
         color: #646464; }
         #challenge-list-all aside #played-challenges ul li a span.detail:hover, #challenge-list-all aside #own-challenges ul li a span.detail:hover {
           color: #333333; }
+
+#highscore div.score-list {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 69.23077%;
+  margin-left: 15.38462%;
+  margin-bottom: 30px; }
+  #highscore div.score-list:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #highscore div.score-list {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-left: 0%; }
+      #highscore div.score-list:last-child {
+        margin-right: 0; } }
+  #highscore div.score-list table tr th:first-child, #highscore div.score-list table tr td:first-child {
+    width: 60px; }
 
 #landing {
   float: left;
@@ -1500,22 +1562,40 @@ aside.menu {
   letter-spacing: -2px;
   font-size: 20px; }
 
-#account-settings div.join-date, #account-settings div.last-login, #account-settings div.pw-change {
-  padding-bottom: 15px; }
-#account-settings div.pw-change {
-  display: none; }
-#account-settings span.pw-change {
-  color: #477dca;
-  text-decoration: none;
-  -webkit-transition: color 0.1s linear;
-  -moz-transition: color 0.1s linear;
-  transition: color 0.1s linear;
-  cursor: pointer; }
-  #account-settings span.pw-change:hover {
-    color: #2c5999; }
-  #account-settings span.pw-change:active, #account-settings span.pw-change:focus {
-    color: #2c5999;
-    outline: none; }
+#statistics-user div.stats {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 69.23077%;
+  margin-left: 15.38462%;
+  margin-bottom: 30px; }
+  #statistics-user div.stats:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #statistics-user div.stats {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-left: 0%; }
+      #statistics-user div.stats:last-child {
+        margin-right: 0; } }
+  #statistics-user div.stats table td.title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: -1px; }
+  #statistics-user div.stats table td.value {
+    font-size: 18px;
+    line-height: 18px; }
+#statistics-user table.estimates {
+  margin-bottom: 30px; }
+  #statistics-user table.estimates td.timed-out {
+    color: #646464;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center; }
 
 #login a.new-account {
   margin-left: 15px; }

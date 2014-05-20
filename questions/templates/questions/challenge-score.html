@@ -7,7 +7,9 @@
 
     <h2>{{ challenge.title }}</h2>
 
-    <a class="challenge-highscore" href="{% url 'questions_challenge_highscore' challenge.slug %}"><i class="fa fa-trophy"></i> Highscore</a>
+    <div class="challenge-highscore">
+        <a href="{% url 'questions_challenge_highscore' challenge.slug %}"><i class="fa fa-trophy"></i> Highscore</a>
+    </div>
 
     {% if estimate_list %}
         
@@ -24,35 +26,37 @@
         <p>
         <table>
             <tr>
-                <th class="left">Frage</th>
+                <th>Frage</th>
                 <th>Auflösung</th>
                 <th class="no-mobile">Schätzwert</th>
                 <th class="no-tablet">Fehler</th>
-                <th class="right">Punkte</th>
+                <th>Punkte</th>
             </tr>
             {% for estimate in estimate_list %}
             <tr>
-                <td class="left"><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
+                <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
                 <td>{{ estimate.question.answer|floatformat }}</td>
-                <td class="no-mobile">{% if estimate.estimate %}
+                <td class="no-mobile">
+                    {% if estimate.estimate %}
                 		{{ estimate.estimate|floatformat:"-2" }}
-                	{% else %}
-                		-
                 	{% endif %}
                 </td>
                 <td class="no-tablet">{% if estimate.percentage_error %}
-                		{{ estimate.percentage_error|floatformat:"-2" }} %
-                	{% else %}
-                		-
+                		{{ estimate.percentage_error|floatformat:"-2" }} %                	
                 	{% endif %}
                 </td>
-                <td class="right">{{ estimate.score }}</td>
+                {% if estimate.estimate %}
+                        <td>{{ estimate.score }}
+                    {% else %}
+                        <td class="timed-out">Zeit abgelaufen.
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
 
             {% for question in own_questions %}
             <tr>
-                <td class="left"><a href="{% url 'questions_statistics_question' question.slug %}">{{ question }}</a></td>
+                <td><a href="{% url 'questions_statistics_question' question.slug %}">{{ question }}</a></td>
                 <td>{{ question.answer|floatformat }}</td>
                 <td class="no-mobile"></td>
                 <td class="no-tablet"></td>

@@ -102,15 +102,22 @@ body {
 
 		table {
 			tr {
+
+				&.current_user {
+					background: darken(white, 8);
+				}
+
 				td, th {
 					text-align: center;
 
-					&.left {
+					&:first-child, &.left {
 						text-align: left;
+						padding-left: 10px;
 					}
 
-					&.right {
+					&:last-child, &.right {
 						text-align: right;
+						padding-right: 10px;
 					}
 				}
 			}

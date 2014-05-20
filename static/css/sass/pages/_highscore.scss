@@ -1,0 +1,21 @@
+#highscore {
+
+	div.score-list {
+		@include span-columns(7 of 10);
+		@include shift(1.5 of 10);
+		margin-bottom: 30px;
+
+		@include media ($mobile) {
+			@include span-columns(4 of 4);
+			@include shift(0);
+		}
+		
+		table {
+			tr {
+				th:first-child, td:first-child {
+					width: 60px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,39 @@
+#statistics-user {
+
+	div.stats {
+		@include span-columns(7 of 10);
+		@include shift(1.5 of 10);
+		margin-bottom: 30px;
+
+		@include media ($mobile) {
+			@include span-columns(4 of 4);
+			@include shift(0);
+		}
+
+		table {
+			td.title {
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 18px;
+				letter-spacing: -1px;
+			}
+
+			td.value {
+				font-size: 18px;
+				line-height: 18px;
+			}
+		}
+	}
+
+	table.estimates {
+		margin-bottom: 30px;
+		td.timed-out {
+			color: $grey-text;
+			font-style:italic;
+			font-size: 13px;
+			letter-spacing: 1px;
+			text-align: center;
+		}
+	}
+
+}

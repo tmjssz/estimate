@@ -3,17 +3,24 @@
 @import "neat/neat";
 @import "bitters/bitters";
 
-@import "mixins";
-@import "base";
-@import "header";
 
 // General Colors
 $grey-text: #646464;
 $error-red: #a60000;
 $error-background: #ffd5d5;
+// Corporate Colors 
+$light-coffee: #F0E3CF;
+$strong-coffee: #CAB69A;
 
+
+@import "mixins";
+@import "base";
+@import "header";
+
+@import "pages/account-settings";
 @import "pages/challenge-score";
 @import "pages/challenges-list-all";
+@import "pages/highscore";
 @import "pages/landing-page";
 @import "pages/menu";
 @import "pages/question-create";
@@ -21,6 +28,6 @@ $error-background: #ffd5d5;
 @import "pages/question-show";
 @import "pages/questions-list-all";
 @import "pages/statistics-question";
-@import "pages/account-settings";
+@import "pages/statistics-user";
 
 @import "pages/login";

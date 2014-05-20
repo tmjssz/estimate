@@ -10,30 +10,52 @@
         {{ show_user }}
     </div>
 
-    <h3>Punktestand</h3>
 
-    <div class="score">{{ score }}</div>
+    <div class="stats">
+        <table>
+
+            <tr class="score"> 
+                <td class="title">Punktestand</td>
+                <td class="value">{{ score }}</td>
+            </tr>
+
+            <tr class="number"> 
+                <td class="title">Beantwortete Fragen</td>
+                <td class="value">{{ estimate_list.count }}</td>
+            </tr>
+
+            <tr class="per-question"> 
+                <td class="title">Punkte pro Frage</td>
+                <td class="value">{{ score_per_question }}</td>
+            </tr>
+
+            <tr class="per-question"> 
+                <td class="title">Fehler pro Frage</td>
+                <td class="value">{{ error_per_question|floatformat:"-2" }}%</td>
+            </tr>
+
+        </table>
+    </div>
 
 
     {% if estimate_list %}
     <h3>Schätzungen</h3>
 
-    <p>
-    <table>
+    <table class="estimates">
         <tr>
             <th>Frage</th>
             <th>Auflösung</th>
-            <th>Schätzwert</th>
+            <th class="no-mobile">Schätzwert</th>
+            <th class="no-tablet">Fehler</th>
             <th>Punkte</th>
-            <th>Fehler</th>
         </tr>
         {% for estimate in estimate_list %}
         <tr>
             <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
             <td>{{ estimate.question.answer|floatformat }}</td>
-            <td>{{ estimate.estimate|floatformat:"-2" }}</td>
+            <td class="no-mobile">{{ estimate.estimate|floatformat:"-2" }}</td>
+            <td class="no-tablet">{{ estimate.percentage_error|floatformat:"-2" }} %</td>
             <td>{{ estimate.score }}</td>
-            <td>{{ estimate.percentage_error|floatformat:"-2" }} %</td>
         </tr>
         {% endfor %}
         {% if estimates_time_out %}
@@ -41,19 +63,19 @@
             <tr>
                 <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
                 <td>{{ estimate.question.answer|floatformat }}</td>
-                <td>-</td>
-                <td>{{ estimate.score }}</td>
-                <td>-</td>
+                <td class="no-mobile"></td>
+                <td class="no-tablet"></td>
+                <td class="timed-out">Zeit abgelaufen.</td>
             </tr>
             {% endfor %}
         {% endif %}
     </table>
-    </p>
+
     {% else %}
-    <p>Du hast bisher noch keine Schätzungen abgegeben.</p>
+        <p>Du hast bisher noch keine Schätzungen abgegeben.</p>
     {% endif %}
 
-    <h3>Angemeldet seit</h3>
+    <h3>Mitglied seit</h3>
     {{ show_user.date_joined }}
 
 <!-- / #statistics-user -->
