@@ -71,11 +71,11 @@
 
 	<div id="statistics-menu">
 		<ul>
-		    <li><a href="{% url 'questions_statistics_user' user.username %}"><i class="fa fa-bar-chart-o"></i> Statistik</a></li>
+		    <li><a href="{% url 'questions_user' user %}"><i class="fa fa-bar-chart-o"></i> Statistik</a></li>
 		    <li><a href="{% url 'questions_highscore' %}"><i class="fa fa-trophy"></i> Highscore</a></li>
 
 		    {% if is_admin %}
-		    <li><a href="{% url 'questions_statistics_all' %}"><i class="fa fa-users"></i> Crowd</a></li>
+		    <li><a href="{% url 'questions_statistics_crowd' %}"><i class="fa fa-users"></i> Crowd</a></li>
 		    {% endif %} 
 		</ul>
 	<!-- /#statistics-menu -->

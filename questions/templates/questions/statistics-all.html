@@ -31,7 +31,7 @@
             <td>{{ avg.estimate|floatformat:"-2" }}</td>
             <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
             <td>{{ count }}</td>
-            <td>{{ best.percentage_error|floatformat:"-2" }} % (<a href="{% url 'questions_statistics_user' best.user %}">{{ best.user }}</a>)</td>
+            <td>{{ best.percentage_error|floatformat:"-2" }} % (<a href="{% url 'questions_user' best.user %}">{{ best.user }}</a>)</td>
         </tr>
         {% endfor %}
     </table>

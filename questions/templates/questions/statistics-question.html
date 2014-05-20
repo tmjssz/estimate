@@ -56,7 +56,7 @@
                         {% else %}
                             <tr>
                         {% endif %}
-                        <td class="left"><a href="{% url 'questions_statistics_user' e.user %}">{{ e.user }}</a></td>
+                        <td class="left"><a href="{% url 'questions_user' e.user %}">{{ e.user }}</a></td>
                         <td>{{ e.score }}</td>
                         <td>{{ e.estimate|floatformat:"-2" }}</td>
                         <td class="right">{{ e.percentage_error|floatformat:"-2" }} %</td>

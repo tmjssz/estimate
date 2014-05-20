@@ -2,6 +2,9 @@
 # -*- coding: utf8 -*-
 from django.forms import ModelForm, ValidationError
 from django.utils.text import slugify
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
+
 
 from questions.models import Estimate, Question
 
@@ -61,3 +64,8 @@ class QuestionForm(ModelForm):
             self.instance.published = False
             self.instance.stats = False
         return super(QuestionForm, self).save(commit)
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', )

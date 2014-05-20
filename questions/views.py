@@ -8,10 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render
 
-from questions.forms import EstimateForm, QuestionForm
+from questions.forms import EstimateForm, QuestionForm, UserProfileForm
 from questions.models import Question, Estimate, Score, Challenge
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 import logging
 import random
 
@@ -284,9 +284,9 @@ def challenge_question_view(request, challenge, question):
 
 
 @login_required
-def statistics_all(request):
+def statistics_crowd(request):
     """
-    Show overall statistics  
+    Show overall crowd statistics  
     """
     if request.user.is_active and request.user.is_superuser:
         avg_percentage_error = 0
@@ -337,15 +337,14 @@ def question_statistics(request, slug):
 
     return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates, 'avg_estimate': avg_estimate})
 
-
 @login_required
 def statistics_user(request, username):
     """
-    Show statistics for a given user 
+    Show statistics for current user 
     """
-    show_user = get_object_or_404(User, username=username)
-    estimates = Estimate.objects.filter(user=show_user).exclude(estimate=None).order_by('percentage_error')
-    estimates_time_out = Estimate.objects.filter(user=show_user, estimate=None)
+    user = get_object_or_404(User, username=username)
+    estimates = Estimate.objects.filter(user=user).exclude(estimate=None).order_by('percentage_error')
+    estimates_time_out = Estimate.objects.filter(user=user, estimate=None)
     
     score = 0
     for e in estimates:
@@ -354,7 +353,19 @@ def statistics_user(request, username):
     if estimates.count() == 0:
         estimates = None
 
-    return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': show_user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out})
+    return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out})
+
+
+@login_required
+def account_settings(request):
+    if request.method == "POST":
+        user_form = UserProfileForm(data=request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+    pw_form = PasswordChangeForm(user=request.user)
+    user_form = UserProfileForm(instance=request.user)
+    return render(request, 'questions/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
+
 
 
 @login_required

@@ -256,28 +256,33 @@ body {
         padding: 10px; } }
     body #main h1 {
       margin: 5px 0 15px 0;
-      letter-spacing: -1.5px;
-      display: block; }
+      letter-spacing: -2px;
+      display: block;
+      font-weight: 400; }
     body #main h2 {
       margin: 5px 0 15px 0;
-      letter-spacing: -1.3px;
-      display: block; }
+      letter-spacing: -1.6px;
+      display: block;
+      font-weight: 400; }
     body #main h3 {
       margin: 5px 0 10px 0;
       text-transform: uppercase;
       font-size: 23px;
-      letter-spacing: -1px;
-      display: block; }
+      letter-spacing: -1.3px;
+      display: block;
+      font-weight: 400; }
     body #main h4 {
       margin: 3px 0 10px 0;
       font-size: 18px;
       text-transform: uppercase;
-      letter-spacing: -.7px;
-      display: block; }
+      letter-spacing: -1px;
+      display: block;
+      font-weight: 400; }
     @media screen and (max-width: 480px) {
       body #main p {
         line-height: 1.3em; } }
     body #main section {
+      padding-bottom: 15px;
       float: left;
       display: block;
       margin-right: 2.5641%;
@@ -374,6 +379,16 @@ body {
           width: 100%; }
           body #main .center:last-child {
             margin-right: 0; } }
+    body #main .multi-title {
+      display: block;
+      letter-spacing: -1.3px;
+      line-height: 1.25em;
+      text-rendering: optimizeLegibility;
+      color: #333333;
+      font-size: 2em;
+      margin: 5px 0 15px 0; }
+      body #main .multi-title span {
+        font-weight: bold; }
 
 header {
   background-color: #333333;
@@ -1428,16 +1443,6 @@ aside.menu {
       #questions-list-all .half:last-child {
         margin-right: 0; } }
 
-#statistics-question .multi-title {
-  display: block;
-  letter-spacing: -1.3px;
-  line-height: 1.25em;
-  text-rendering: optimizeLegibility;
-  color: #333333;
-  font-size: 2em;
-  margin: 5px 0 15px 0; }
-  #statistics-question .multi-title span {
-    font-weight: bold; }
 #statistics-question .resolution {
   float: left;
   display: block;
@@ -1494,6 +1499,23 @@ aside.menu {
 #statistics-question .resolution .value.really-tiny, #statistics-question .avg_estimate .value.really-tiny, #statistics-question .avg_error .value.really-tiny {
   letter-spacing: -2px;
   font-size: 20px; }
+
+#account-settings div.join-date, #account-settings div.last-login, #account-settings div.pw-change {
+  padding-bottom: 15px; }
+#account-settings div.pw-change {
+  display: none; }
+#account-settings span.pw-change {
+  color: #477dca;
+  text-decoration: none;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  cursor: pointer; }
+  #account-settings span.pw-change:hover {
+    color: #2c5999; }
+  #account-settings span.pw-change:active, #account-settings span.pw-change:focus {
+    color: #2c5999;
+    outline: none; }
 
 #login a.new-account {
   margin-left: 15px; }

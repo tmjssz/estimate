@@ -1,0 +1,15 @@
+#account-settings {
+
+	div.join-date, div.last-login, div.pw-change {
+		padding-bottom: 15px;
+	}
+
+	div.pw-change {
+		display: none;
+	}
+
+	span.pw-change {
+		@include link-like;
+	}
+
+}

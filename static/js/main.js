@@ -42,4 +42,10 @@ $( document ).ready(function() {
         }
     });
 
+    // Click handler for 'Password change' Button
+    $('span.pw-change').click(function() {
+        $(this).hide();
+        $('div.pw-change').fadeIn();
+    });
+
 });

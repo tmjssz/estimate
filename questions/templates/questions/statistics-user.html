@@ -5,19 +5,14 @@
 {% block content %}
 <div id="statistics-user">
 
-    <h2>{{ show_user }}</h2>
+    <div class="multi-title">
+        <span>Statistik</span>
+        {{ show_user }}
+    </div>
 
     <h3>Punktestand</h3>
 
     <div class="score">{{ score }}</div>
-
-
-    {% if show_user == user %}
-
-        <h3>Dein Konto</h3>
-        <a href="{% url 'password_change' %}">Passwort ändern</a>
-
-    {% endif %}
 
 
     {% if estimate_list %}
