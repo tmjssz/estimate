@@ -101,6 +101,7 @@ body {
 		}
 
 		table {
+
 			tr {
 
 				&.current_user {
@@ -109,6 +110,7 @@ body {
 
 				td, th {
 					text-align: center;
+					line-height: 1.1em;
 
 					&:first-child, &.left {
 						text-align: left;

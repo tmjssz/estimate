@@ -344,7 +344,8 @@ body {
     body #main table tr.current_user {
       background: #ebebeb; }
     body #main table tr td, body #main table tr th {
-      text-align: center; }
+      text-align: center;
+      line-height: 1.1em; }
       body #main table tr td:first-child, body #main table tr td.left, body #main table tr th:first-child, body #main table tr th.left {
         text-align: left;
         padding-left: 10px; }
@@ -1504,6 +1505,38 @@ aside.menu {
       text-align: center; }
       #questions-list-all .half:last-child {
         margin-right: 0; } }
+
+#statistics-all .error {
+  float: left;
+  display: block;
+  margin-right: 5.26316%;
+  width: 47.36842%;
+  text-align: center;
+  margin-bottom: 20px; }
+  #statistics-all .error:last-child {
+    margin-right: 0; }
+  #statistics-all .error .title {
+    font-weight: bold;
+    font-size: 12px;
+    color: #646464;
+    display: block;
+    width: 100%; }
+  #statistics-all .error .value {
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    color: #333333; }
+  @media screen and (max-width: 480px) {
+    #statistics-all .error {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 46.66667%; }
+      #statistics-all .error:last-child {
+        margin-right: 0; } }
+#statistics-all table td a.best {
+  display: block; }
 
 #statistics-question .resolution {
   float: left;

@@ -294,20 +294,25 @@ def statistics_crowd(request):
         avg_estimates = Estimate.objects.get_avg_estimates()
         best_estimates = []
         count_estimates = []
+        show_estimate = []
 
         for e in avg_estimates:
             avg_percentage_error += e.percentage_error
             best_estimate = Estimate.objects.get_best_estimate(e.question)
             best_estimates.append(best_estimate)
+
             count = Estimate.objects.filter(question=e.question).count()
             count_estimates.append(count)
+
+            show = Estimate.objects.filter(question=e.question, user=request.user).exists() or e.question.author == request.user
+            show_estimate.append(show)
 
         if len(avg_estimates) > 0:
             avg_percentage_error = avg_percentage_error / len(avg_estimates)
 
         #best_estimates = Estimate.objects.get_best_estimates()
-        estimate_list = zip(avg_estimates, best_estimates, count_estimates)
-        return render(request, 'questions/statistics-all.html', {'avg_percentage_error': avg_percentage_error, 'estimate_list': estimate_list})
+        estimate_list = zip(avg_estimates, best_estimates, count_estimates, show_estimate)
+        return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'estimate_list': estimate_list})
 
     else:
         raise Http404
@@ -355,13 +360,19 @@ def statistics_user(request, username):
         estimates = None
         return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
     else:
+        show_estimate = []
         for e in estimates:
             score += e.score
             sum_percentage_error += e.percentage_error
+
+            show = Estimate.objects.filter(question=e.question, user=request.user).exists() or e.question.author == request.user
+            show_estimate.append(show)
         
         score_per_question = score / estimates.count()
         error_per_question = sum_percentage_error / estimates.count()
 
+        estimates = zip(estimates, show_estimate)
+        
         return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
 
 

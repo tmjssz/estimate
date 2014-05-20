@@ -1,0 +1,20 @@
+#statistics-all {
+
+	.error {
+		@include span-columns(2.5 of 5);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+
+		@include media($mobile) {
+			@include span-columns(2 of 4);
+		}
+	}
+
+	table {
+		td {
+			a.best {
+				display:block;
+			}
+		}
+	}
+}
