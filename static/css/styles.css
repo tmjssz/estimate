@@ -258,26 +258,28 @@ body {
       margin: 5px 0 15px 0;
       letter-spacing: -2px;
       display: block;
-      font-weight: 400; }
+      font-size: 2.5em;
+      font-weight: 200; }
     body #main h2 {
       margin: 5px 0 15px 0;
-      letter-spacing: -1.6px;
+      letter-spacing: -1.8px;
+      font-size: 2.3em;
       display: block;
-      font-weight: 400; }
+      font-weight: 300; }
     body #main h3 {
       margin: 5px 0 10px 0;
       text-transform: uppercase;
       font-size: 23px;
       letter-spacing: -1.3px;
       display: block;
-      font-weight: 400; }
+      font-weight: 300; }
     body #main h4 {
       margin: 3px 0 10px 0;
       font-size: 18px;
       text-transform: uppercase;
       letter-spacing: -1px;
       display: block;
-      font-weight: 400; }
+      font-weight: 300; }
     @media screen and (max-width: 480px) {
       body #main p {
         line-height: 1.3em; } }
@@ -386,14 +388,15 @@ body {
             margin-right: 0; } }
     body #main .multi-title {
       display: block;
-      letter-spacing: -1.3px;
       line-height: 1.25em;
       text-rendering: optimizeLegibility;
       color: #333333;
-      font-size: 2em;
+      letter-spacing: -1.8px;
+      font-size: 2.3em;
+      font-weight: 300;
       margin: 5px 0 15px 0; }
       body #main .multi-title span {
-        font-weight: bold; }
+        font-weight: 500; }
 
 header {
   background-color: #333333;
@@ -1509,8 +1512,8 @@ aside.menu {
 #statistics-all .error {
   float: left;
   display: block;
-  margin-right: 5.26316%;
-  width: 47.36842%;
+  margin-right: 11.11111%;
+  width: 100%;
   text-align: center;
   margin-bottom: 20px; }
   #statistics-all .error:last-child {
