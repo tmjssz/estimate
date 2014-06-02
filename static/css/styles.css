@@ -865,25 +865,21 @@ section.menu {
         section.menu .row .menu-btn:last-child {
           margin-right: 0; } }
   section.menu .row .challenge_btn {
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    background: #477dca;
-    border-radius: 0.1875em;
-    color: white;
-    padding: .4em .6em;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    border-radius: 0;
+    color: #333333;
     text-align: center;
     margin-bottom: 15px;
-    font-weight: bold;
     letter-spacing: -1px;
     padding: 0 20px; }
     section.menu .row .challenge_btn:hover {
-      background: #6f99d5; }
-    section.menu .row .challenge_btn:hover {
-      background: #8eafdf;
-      color: #2b5695;
+      background: #e0eaf8;
+      color: #22569d;
       font-weight: normal;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      border-radius: 30px; }
       @media screen and (max-width: 480px) {
         section.menu .row .challenge_btn:hover {
           letter-spacing: 0; } }
@@ -896,68 +892,27 @@ section.menu {
         vertical-align: middle; }
         section.menu .row .challenge_btn div.wrapper .cell i {
           display: block;
-          font-size: 1.8em; }
+          font-size: 2.5em; }
         section.menu .row .challenge_btn div.wrapper .cell span {
           display: block;
           font-size: 15px;
           line-height: 15px; }
-  section.menu .row .choose_btn {
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    background: #aabb2f;
-    border-radius: 0.1875em;
-    color: white;
-    padding: .4em .6em;
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    padding: 0 20px; }
-    section.menu .row .choose_btn:hover {
-      background: #c1d24b; }
-    section.menu .row .choose_btn:hover {
-      background: #cdda6c;
-      color: #6f7a1f;
-      font-weight: normal;
-      letter-spacing: 1px; }
-      @media screen and (max-width: 480px) {
-        section.menu .row .choose_btn:hover {
-          letter-spacing: 0; } }
-    section.menu .row .choose_btn div.wrapper {
-      display: table;
-      height: 100px;
-      width: 100%; }
-      section.menu .row .choose_btn div.wrapper .cell {
-        display: table-cell;
-        vertical-align: middle; }
-        section.menu .row .choose_btn div.wrapper .cell i {
-          display: block;
-          font-size: 1.8em; }
-        section.menu .row .choose_btn div.wrapper .cell span {
-          display: block;
-          font-size: 15px;
-          line-height: 15px; }
   section.menu .row .random_btn {
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    background: #dd480d;
-    border-radius: 0.1875em;
-    color: white;
-    padding: .4em .6em;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    border-radius: 0;
+    color: #333333;
     text-align: center;
     margin-bottom: 15px;
-    font-weight: bold;
     letter-spacing: -1px;
     padding: 0 20px; }
     section.menu .row .random_btn:hover {
-      background: #f3632b; }
-    section.menu .row .random_btn:hover {
-      background: #f57f51;
-      color: #902f08;
+      background: #fadbcf;
+      color: #a03a11;
       font-weight: normal;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      border-radius: 30px; }
       @media screen and (max-width: 480px) {
         section.menu .row .random_btn:hover {
           letter-spacing: 0; } }
@@ -970,31 +925,60 @@ section.menu {
         vertical-align: middle; }
         section.menu .row .random_btn div.wrapper .cell i {
           display: block;
-          font-size: 1.8em; }
+          font-size: 2.5em; }
         section.menu .row .random_btn div.wrapper .cell span {
           display: block;
           font-size: 15px;
           line-height: 15px; }
-  section.menu .row .create_btn {
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    background: #efb600;
-    border-radius: 0.1875em;
-    color: white;
-    padding: .4em .6em;
+  section.menu .row .choose_btn {
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    border-radius: 0;
+    color: #333333;
     text-align: center;
     margin-bottom: 15px;
-    font-weight: bold;
+    letter-spacing: -1px;
+    padding: 0 20px; }
+    section.menu .row .choose_btn:hover {
+      background: #f1f5d4;
+      color: #838f22;
+      font-weight: normal;
+      letter-spacing: 1px;
+      border-radius: 30px; }
+      @media screen and (max-width: 480px) {
+        section.menu .row .choose_btn:hover {
+          letter-spacing: 0; } }
+    section.menu .row .choose_btn div.wrapper {
+      display: table;
+      height: 100px;
+      width: 100%; }
+      section.menu .row .choose_btn div.wrapper .cell {
+        display: table-cell;
+        vertical-align: middle; }
+        section.menu .row .choose_btn div.wrapper .cell i {
+          display: block;
+          font-size: 2.5em; }
+        section.menu .row .choose_btn div.wrapper .cell span {
+          display: block;
+          font-size: 15px;
+          line-height: 15px; }
+  section.menu .row .create_btn {
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    border-radius: 0;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 15px;
     letter-spacing: -1px;
     padding: 0 20px; }
     section.menu .row .create_btn:hover {
-      background: #ffcb23; }
-    section.menu .row .create_btn:hover {
-      background: #ffd44c;
-      color: #9d7800;
+      background: #fdf2cf;
+      color: #ab8409;
       font-weight: normal;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      border-radius: 30px; }
       @media screen and (max-width: 480px) {
         section.menu .row .create_btn:hover {
           letter-spacing: 0; } }
@@ -1007,7 +991,7 @@ section.menu {
         vertical-align: middle; }
         section.menu .row .create_btn div.wrapper .cell i {
           display: block;
-          font-size: 1.8em; }
+          font-size: 2.5em; }
         section.menu .row .create_btn div.wrapper .cell span {
           display: block;
           font-size: 15px;

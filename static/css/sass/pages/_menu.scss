@@ -18,16 +18,20 @@ section.menu {
 		}
 		
 		.challenge_btn {
-			@include menu-btn($base-accent-color, 100px);
-		}
-		.choose_btn {
-			@include menu-btn(#aabb2f, 100px);
+			//@include menu-btn($base-accent-color, 100px);
+			@include menu-btn(#988c7d, #b6ceef, 100px);
 		}
 		.random_btn {
-			@include menu-btn(#dd480d, 100px);
+			//@include menu-btn(#dd480d, 100px);
+			@include menu-btn(#988c7d, #f5b9a1, 100px);
+		}
+		.choose_btn {
+			//@include menu-btn(#aabb2f, 100px);
+			@include menu-btn(#988c7d, #e4ebab, 100px);
 		}
 		.create_btn {
-			@include menu-btn(#efb600, 100px);
+			//@include menu-btn(#efb600, 100px);
+			@include menu-btn(#988c7d, #fae49f, 100px);
 		}
 	} 
 
