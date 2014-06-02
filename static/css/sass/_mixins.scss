@@ -24,7 +24,7 @@
 		color: darken($bg_color_hover, 45);
 		font-weight: normal;
 		letter-spacing: 1px;
-		border-radius: 30px; 
+		border-radius: 40px; 
 
 		@include media ($mobile) {
 			letter-spacing: 0;

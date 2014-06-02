@@ -5,28 +5,83 @@
 {% block content %}
 <div id="highscore">
 
-	<h2>Highscore - Top 25</h2>
+	<h2>Highscore - Top 50</h2>
 
-	<div class="score-list">
-		<table>
-			<tr>
-				<th>Platz</th>
-				<th class="left">Benutzer</th>
-				<th>Punktestand</th>
-			</tr>
-			{% for score in score_list %}
-				{% if user == score.user %}
-			    <tr class="current_user">
-			    {% else %}
-			    <tr>
-			    {% endif %}
-			    	<td>{{ forloop.counter }}</td>
-			    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
-			    	<td>{{ score.score }}</td>
-			    </tr>
-		    {% endfor %}
-		</table>
-	</div>
+	<section>
+
+		<div class="score-list">
+			<table class="score">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Punktestand</th>
+				</tr>
+				{% for score in score_list %}
+					{% if user == score.user %}
+				    <tr class="current_user">
+				    {% else %}
+				    <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.score }}</td>
+				    </tr>
+			    {% endfor %}
+			</table>
+
+			<table class="per-question">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Punkte pro Frage</th>
+				</tr>
+				{% for score in per_question %}
+					{% if user == score.user %}
+				    <tr class="current_user">
+				    {% else %}
+				    <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.score }}</td>
+				    </tr>
+			    {% endfor %}
+			</table>
+
+			<table class="best-question">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Fehler der besten Schätzung</th>
+				</tr>
+				{% for score in best_question %}
+					{% if user == score.user %}
+				    <tr class="current_user">
+				    {% else %}
+				    <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.score|floatformat:"-2" }} %</td>
+				    </tr>
+			    {% endfor %}
+			</table>
+
+		</div>
+
+	</section>
+
+	<aside>
+
+		<h4>Weitere Highscores</h4>
+
+		<ul>
+			<li class="highscore-change selected" rel="score">Punktestand</li>
+			<li class="highscore-change" rel="per-question">Punkte pro Frage</li>
+			<li class="highscore-change" rel="best-question">Beste Schätzung</li>
+		</ul>
+
+	</aside>
 
 <!-- / #highscore -->
 </div>

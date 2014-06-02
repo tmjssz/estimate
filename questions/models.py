@@ -294,9 +294,9 @@ class Estimate(models.Model):
 # =============================================================================
 class ScoreManager(models.Manager):
 
-    def get_highscore(self):
+    def get_highscore(self, limit):
         """
-        Returns the score for every user (limited to best 25 users).
+        Returns the score for every user (limited to best 50 users).
         """
         from django.db import connection
         cursor = connection.cursor()
@@ -305,7 +305,45 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e
             GROUP BY e.user_id
             ORDER BY score DESC
-            LIMIT 0, 25""")
+            LIMIT 0, """ + str(limit))
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_per_question(self, limit):
+        """
+        Returns the score for every user (limited to best 50 users).
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, SUM(e.score) / count(*) as score_per_question
+            FROM questions_estimate e
+            GROUP BY e.user_id
+            ORDER BY score_per_question DESC
+            LIMIT 0, """ + str(limit))
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_best_question(self, limit):
+        """
+        Returns the score for every user (limited to best 50 users).
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, MIN(e.percentage_error) as percentage_error
+            FROM questions_estimate e
+            GROUP BY e.user_id
+            ORDER BY percentage_error ASC
+            LIMIT 0, """ + str(limit))
         result_list = []
         for row in cursor.fetchall():
             user = User.objects.get(pk=row[0])

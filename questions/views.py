@@ -393,8 +393,10 @@ def question_highscore(request):
     """
     Show a highscore
     """
-    scores = Score.objects.get_highscore()
-    return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores})
+    scores = Score.objects.get_highscore(50)
+    scores_per_question = Score.objects.get_highscore_per_question(50)
+    scores_best_question = Score.objects.get_highscore_best_question(50)
+    return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores, 'per_question': scores_per_question, 'best_question': scores_best_question})
 
 
 @login_required

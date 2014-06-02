@@ -344,7 +344,7 @@ body {
       border-radius: 0.1875em;
       padding: 5px 10px; }
     body #main table tr.current_user {
-      background: #ebebeb; }
+      background: #e0eaf8; }
     body #main table tr td, body #main table tr th {
       text-align: center;
       line-height: 1.1em; }
@@ -748,25 +748,26 @@ header {
           color: #333333; }
 
 #highscore div.score-list {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 69.23077%;
-  margin-left: 15.38462%;
   margin-bottom: 30px; }
-  #highscore div.score-list:last-child {
-    margin-right: 0; }
-  @media screen and (max-width: 480px) {
-    #highscore div.score-list {
-      float: left;
-      display: block;
-      margin-right: 6.66667%;
-      width: 100%;
-      margin-left: 0%; }
-      #highscore div.score-list:last-child {
-        margin-right: 0; } }
+  #highscore div.score-list table.per-question, #highscore div.score-list table.best-question {
+    display: none; }
   #highscore div.score-list table tr th:first-child, #highscore div.score-list table tr td:first-child {
     width: 60px; }
+#highscore aside .highscore-change {
+  color: #477dca;
+  text-decoration: none;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  cursor: pointer; }
+  #highscore aside .highscore-change:hover {
+    color: #2c5999; }
+  #highscore aside .highscore-change:active, #highscore aside .highscore-change:focus {
+    color: #2c5999;
+    outline: none; }
+  #highscore aside .highscore-change.selected {
+    color: #333333;
+    cursor: default; }
 
 #landing {
   float: left;
@@ -879,7 +880,7 @@ section.menu {
       color: #22569d;
       font-weight: normal;
       letter-spacing: 1px;
-      border-radius: 30px; }
+      border-radius: 40px; }
       @media screen and (max-width: 480px) {
         section.menu .row .challenge_btn:hover {
           letter-spacing: 0; } }
@@ -912,7 +913,7 @@ section.menu {
       color: #a03a11;
       font-weight: normal;
       letter-spacing: 1px;
-      border-radius: 30px; }
+      border-radius: 40px; }
       @media screen and (max-width: 480px) {
         section.menu .row .random_btn:hover {
           letter-spacing: 0; } }
@@ -945,7 +946,7 @@ section.menu {
       color: #838f22;
       font-weight: normal;
       letter-spacing: 1px;
-      border-radius: 30px; }
+      border-radius: 40px; }
       @media screen and (max-width: 480px) {
         section.menu .row .choose_btn:hover {
           letter-spacing: 0; } }
@@ -978,7 +979,7 @@ section.menu {
       color: #ab8409;
       font-weight: normal;
       letter-spacing: 1px;
-      border-radius: 30px; }
+      border-radius: 40px; }
       @media screen and (max-width: 480px) {
         section.menu .row .create_btn:hover {
           letter-spacing: 0; } }

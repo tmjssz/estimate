@@ -48,4 +48,16 @@ $( document ).ready(function() {
         $('div.pw-change').fadeIn();
     });
 
+    // Click handler for Highscore change Button
+    $('.highscore-change').click(function() {
+        if (!$(this).hasClass('selected')) {
+            $('.highscore-change.selected').toggleClass('selected');
+            $(this).toggleClass('selected');
+            var rel = $(this).attr('rel');
+            $('.score-list table').hide();
+            $('.score-list table.'+rel).fadeIn();
+            //window.history.pushState("", rel, "#"+rel);
+        }
+    });
+
 });

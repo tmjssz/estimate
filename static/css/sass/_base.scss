@@ -107,7 +107,7 @@ body {
 			tr {
 
 				&.current_user {
-					background: darken(white, 8);
+					background: lighten(#b6ceef, 10);
 				}
 
 				td, th {
