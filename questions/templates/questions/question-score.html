@@ -76,6 +76,7 @@
 				</tr>
 			</table>
 
+
 		{% else %}
 
 			<div class="timed_out">
@@ -141,6 +142,10 @@
 
 		{% if question.image %}
 			<p><img src="/{{ question.image }}" /></p>
+		{% endif %}
+
+		{% if question.source %}
+			<p>Quelle: {{ question.source }}</p>
 		{% endif %}
 
 	</aside>
