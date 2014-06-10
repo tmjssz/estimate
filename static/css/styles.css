@@ -344,7 +344,10 @@ body {
       border-radius: 0.1875em;
       padding: 5px 10px; }
     body #main table tr.current_user {
-      background: #e0eaf8; }
+      background: #e0eaf8;
+      -webkit-box-shadow: inset 0px 0px 18px 5px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: inset 0px 0px 18px 5px rgba(0, 0, 0, 0.75);
+      box-shadow: inset 0px 0px 18px 5px rgba(0, 0, 0, 0.75); }
     body #main table tr td, body #main table tr th {
       text-align: center;
       line-height: 1.1em; }
