@@ -4,9 +4,24 @@ $( document ).ready(function() {
     $("#countdown").countDown({
 		startNumber: 30,
 		callBack: function() {
+            if ($('#id_estimate').val() == "") {
+                var input = $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", "time_out").val("true");
+                $("form").append($(input));
+            }
+            
 			$("form").submit();
 		}
 	});
+
+    // Check if estimate is given, when submit button is clicked
+    $('#question-show form input[type=submit]').click(function(e) {
+        if ($('#id_estimate').val() == "") {
+            e.preventDefault();
+            $('#question-show form .errorlist').show().fadeOut(3000, 'swing');
+        }
+    });
 
     // Click handler for 'Show resolution' Button
 	$('#show_btn').click(function() {

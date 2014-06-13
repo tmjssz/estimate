@@ -11,12 +11,13 @@ from questions.models import Estimate, Question
 class EstimateForm(ModelForm):
     class Meta:
         model = Estimate
-        exclude = ('user', 'question', 'date', 'score', 'percentage_error', 'challenge')
+        exclude = ('user', 'question', 'date', 'score', 'time_out', 'percentage_error', 'challenge')
 
     def __init__(self, **kwargs):
         self.__user = kwargs.pop('user', None)
         self.__question = kwargs.pop('question', None)
         self.__challenge = kwargs.pop('challenge', None)
+        self.__time_out = kwargs.pop('time_out', False)
         super(EstimateForm, self).__init__(**kwargs)
 
     def clean(self):
@@ -32,6 +33,8 @@ class EstimateForm(ModelForm):
             self.instance.user = self.__user
             self.instance.question = self.__question
             self.instance.challenge = self.__challenge
+            self.instance.time_out = self.__time_out
+            
         return super(EstimateForm, self).save(commit)
 
 

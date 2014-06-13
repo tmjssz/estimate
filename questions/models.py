@@ -178,7 +178,10 @@ class EstimateManager(models.Manager):
         result = None
         row = cursor.fetchone()
         if row:
-            percentage_error = 100 * math.fabs(question.answer - row[0]) / question.answer
+            percentage_error = None
+            if row[0]:
+                percentage_error = 100 * math.fabs(question.answer - row[0]) / question.answer
+            
             result = self.model(user=User(), question=question, estimate=row[0], score=row[1], percentage_error=percentage_error)
         return result
 
@@ -237,6 +240,7 @@ class Estimate(models.Model):
     question = models.ForeignKey(to=Question, related_name='estimates', verbose_name=u'Frage', help_text='Bitte die Frage auswählen, zu der diese Schätzung gehören soll.')
     estimate = models.FloatField(verbose_name=u'Schätzwert', unique=False, help_text="Bitte hier einen Schätzwert eintragen. (Nur numerische Werte sind möglich)", null=True, blank=True)
     percentage_error = models.FloatField(verbose_name=u'Prozentualer Fehler', null=True, blank=True)
+    time_out = models.BooleanField(verbose_name=u'Zeit abgelaufen', default=False)
     date = models.DateTimeField(verbose_name=u'Datum', null=True, blank=True)
     score = models.IntegerField(verbose_name=u'Punkte', null=True, blank=True)
     challenge = models.ForeignKey(Challenge, verbose_name=u'Challenge', help_text="Hier bitte auswählen, zu welcher Challenge die Schätzung abgegeben wird.", blank=True, null=True)

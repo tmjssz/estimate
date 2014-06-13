@@ -31,6 +31,10 @@
 	                {{ hidden }}
 	            {% endfor %}
 
+	            <div class="error">
+	            	<ul class="errorlist"><li>Bitte gib einen Schätzwert ein.</li></ul>
+	            </div>
+
 	            {% for field in form.visible_fields %}
 	                {{ field.errors }}
 	                {{ field }}

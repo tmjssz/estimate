@@ -91,7 +91,13 @@ def question_view(request, slug):
     
     # current user hasn't already made an estimate for this question
     if request.method == 'POST':
-        form = EstimateForm(user=request.user, question=question, data=request.POST)
+        time_out = False
+
+        # get hidden post field
+        if request.POST.get("time_out", "") == "true":
+            time_out = True
+
+        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(question.get_absolute_url())
@@ -348,8 +354,8 @@ def statistics_user(request, username):
     Show statistics for current user 
     """
     user = get_object_or_404(User, username=username)
-    estimates = Estimate.objects.filter(user=user).exclude(estimate=None).order_by('percentage_error')
-    estimates_time_out = Estimate.objects.filter(user=user, estimate=None)
+    estimates = Estimate.objects.filter(user=user).exclude(time_out=True).order_by('percentage_error')
+    estimates_time_out = Estimate.objects.filter(user=user, time_out=True)
     
     score = 0
     score_per_question = 0

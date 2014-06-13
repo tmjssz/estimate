@@ -1442,6 +1442,10 @@ aside.menu {
           margin-bottom: 15px; }
           #question-show section form input[type=submit]:last-child {
             margin-right: 0; } }
+    #question-show section form .error {
+      height: 40px; }
+      #question-show section form .error .errorlist {
+        display: none; }
 #question-show aside {
   float: left;
   display: block;
