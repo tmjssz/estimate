@@ -37,19 +37,17 @@
                 <td><a href="{% url 'questions_statistics_question' estimate.question.slug %}">{{ estimate.question }}</a></td>
                 <td>{{ estimate.question.answer|floatformat }}</td>
                 <td class="no-mobile">
-                    {% if estimate.estimate %}
-                		{{ estimate.estimate|floatformat:"-2" }}
-                	{% endif %}
+                	{{ estimate.estimate|floatformat:"-2" }}
                 </td>
                 <td class="no-tablet">{% if estimate.percentage_error %}
                 		{{ estimate.percentage_error|floatformat:"-2" }} %                	
                 	{% endif %}
                 </td>
-                {% if estimate.estimate %}
-                        <td>{{ estimate.score }}
-                    {% else %}
-                        <td class="timed-out">Zeit abgelaufen.
-                    {% endif %}
+                {% if estimate.time_out %}
+                    <td class="timed-out">Zeit abgelaufen.
+                {% else %}
+                    <td>{{ estimate.score }}
+                {% endif %}
                 </td>
             </tr>
             {% endfor %}

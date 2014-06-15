@@ -8,9 +8,17 @@
     <h2>Crowd-Statistik</h2>
 
     <div class="error"> 
-        <span class="title">&#216; Fehler</span>
+        <span class="title">&#216; Fehler der Crowd</span>
         <span class="value">{{ avg_percentage_error|floatformat:"-2" }}%</span>
     </div>
+
+    <div class="error">
+    {% if best_avg_estimate %} 
+        <span class="title">&#216; Fehler von <a class="best" href="{% url 'questions_user' best_avg_estimate.user %}">{{ best_avg_estimate.user }}</a></span>
+        <span class="value">{{ best_avg_estimate.percentage_error|floatformat:"-2" }}%</span>
+    {% endif %}
+    </div>
+    
 
     {% if estimate_list %}
     <h3>Schätzungen</h3>

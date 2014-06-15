@@ -1,12 +1,13 @@
 #statistics-all {
 
 	.error {
-		@include span-columns(2.5 of 2.5);
+		@include span-columns(4 of 8);
+		@include omega;
 		@include number($base-font-color);
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 
 		@include media($mobile) {
-			@include span-columns(2 of 4);
+			@include span-columns(4 of 4);
 		}
 	}
 

@@ -15,11 +15,14 @@ $( document ).ready(function() {
 		}
 	});
 
+    $('#id_estimate').focus();
+
     // Check if estimate is given, when submit button is clicked
     $('#question-show form input[type=submit]').click(function(e) {
         if ($('#id_estimate').val() == "") {
             e.preventDefault();
             $('#question-show form .errorlist').show().fadeOut(3000, 'swing');
+            $('#id_estimate').focus();
         }
     });
 

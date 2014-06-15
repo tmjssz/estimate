@@ -752,7 +752,7 @@ header {
 
 #highscore div.score-list {
   margin-bottom: 30px; }
-  #highscore div.score-list table.per-question, #highscore div.score-list table.best-question {
+  #highscore div.score-list table.per-question, #highscore div.score-list table.best-question, #highscore div.score-list table.best_percentage_error {
     display: none; }
   #highscore div.score-list table tr th:first-child, #highscore div.score-list table tr td:first-child {
     width: 60px; }
@@ -1504,10 +1504,11 @@ aside.menu {
 #statistics-all .error {
   float: left;
   display: block;
-  margin-right: 11.11111%;
-  width: 100%;
+  margin-right: 3.22581%;
+  width: 48.3871%;
+  margin-right: 0;
   text-align: center;
-  margin-bottom: 20px; }
+  margin-bottom: 30px; }
   #statistics-all .error:last-child {
     margin-right: 0; }
   #statistics-all .error .title {
@@ -1527,7 +1528,7 @@ aside.menu {
       float: left;
       display: block;
       margin-right: 6.66667%;
-      width: 46.66667%; }
+      width: 100%; }
       #statistics-all .error:last-child {
         margin-right: 0; } }
 #statistics-all table td a.best {

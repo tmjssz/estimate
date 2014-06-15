@@ -126,7 +126,13 @@ def question_view_random(request, slug):
     
     # current user hasn't already made an estimate for this question
     if request.method == 'POST':
-        form = EstimateForm(user=request.user, question=question, data=request.POST)
+        time_out = False
+
+        # get hidden post field
+        if request.POST.get("time_out", "") == "true":
+            time_out = True
+
+        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(question.get_absolute_url_random())
@@ -273,7 +279,13 @@ def challenge_question_view(request, challenge, question):
         return HttpResponseRedirect("/challenge/"+challenge.slug)
 
     if request.method == 'POST':
-        form = EstimateForm(user=request.user, question=question, data=request.POST, challenge=challenge)
+        time_out = False
+
+        # get hidden post field
+        if request.POST.get("time_out", "") == "true":
+            time_out = True
+
+        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST, challenge=challenge)
         if form.is_valid():
             form.save()
             for q in questions:
@@ -295,33 +307,36 @@ def statistics_crowd(request):
     Show overall crowd statistics  
     """
     if request.user.is_active and request.user.is_superuser:
-        avg_percentage_error = 0
-
-        avg_estimates = Estimate.objects.get_avg_estimates()
-        best_estimates = []
-        count_estimates = []
-        show_estimate = []
-
-        for e in avg_estimates:
-            avg_percentage_error += e.percentage_error
-            best_estimate = Estimate.objects.get_best_estimate(e.question)
-            best_estimates.append(best_estimate)
-
-            count = Estimate.objects.filter(question=e.question).count()
-            count_estimates.append(count)
-
-            show = Estimate.objects.filter(question=e.question, user=request.user).exists() or e.question.author == request.user
-            show_estimate.append(show)
-
-        if len(avg_estimates) > 0:
-            avg_percentage_error = avg_percentage_error / len(avg_estimates)
-
-        #best_estimates = Estimate.objects.get_best_estimates()
-        estimate_list = zip(avg_estimates, best_estimates, count_estimates, show_estimate)
-        return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'estimate_list': estimate_list})
-
+        admin = True
     else:
-        raise Http404
+        admin = False
+
+    avg_percentage_error = 0
+
+    avg_estimates = Estimate.objects.get_avg_estimates(admin)
+    best_estimates = []
+    count_estimates = []
+    show_estimate = []
+
+    for e in avg_estimates:
+        avg_percentage_error += e.percentage_error
+        best_estimate = Estimate.objects.get_best_estimate(e.question)
+        best_estimates.append(best_estimate)
+
+        count = Estimate.objects.filter(question=e.question).count()
+        count_estimates.append(count)
+
+        show = Estimate.objects.filter(question=e.question, user=request.user).exists() or e.question.author == request.user
+        show_estimate.append(show)
+
+    if len(avg_estimates) > 0:
+        avg_percentage_error = avg_percentage_error / len(avg_estimates)
+
+    best_avg_estimate = Estimate.objects.get_best_avg_estimate(admin)
+
+    #best_estimates = Estimate.objects.get_best_estimates()
+    estimate_list = zip(avg_estimates, best_estimates, count_estimates, show_estimate)
+    return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'best_avg_estimate': best_avg_estimate, 'estimate_list': estimate_list})
 
 @login_required
 def question_statistics(request, slug):
@@ -354,7 +369,7 @@ def statistics_user(request, username):
     Show statistics for current user 
     """
     user = get_object_or_404(User, username=username)
-    estimates = Estimate.objects.filter(user=user).exclude(time_out=True).order_by('percentage_error')
+    estimates = Estimate.objects.filter(user=user).exclude(time_out=True).exclude(estimate=None).order_by('percentage_error')
     estimates_time_out = Estimate.objects.filter(user=user, time_out=True)
     
     score = 0
@@ -402,7 +417,8 @@ def question_highscore(request):
     scores = Score.objects.get_highscore(50)
     scores_per_question = Score.objects.get_highscore_per_question(50)
     scores_best_question = Score.objects.get_highscore_best_question(50)
-    return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores, 'per_question': scores_per_question, 'best_question': scores_best_question})
+    scores_best_percentage_error = Score.objects.get_highscore_best_percentage_error(50)
+    return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores, 'per_question': scores_per_question, 'best_question': scores_best_question, 'best_percentage_error': scores_best_percentage_error})
 
 
 @login_required

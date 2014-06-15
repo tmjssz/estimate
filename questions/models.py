@@ -150,13 +150,18 @@ class EstimateManager(models.Manager):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Statistics functions
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    def get_avg_estimates(self):
+    def get_avg_estimates(self, only_specified):
         from django.db import connection
         cursor = connection.cursor()
+
+        stats = ''
+        if only_specified:
+            stats = 'AND q.stats'
+
         cursor.execute("""
             SELECT e.question_id, AVG(e.estimate) as estimate, AVG(e.score) as score, 100*ABS(q.answer-AVG(e.estimate))/q.answer as percentage_error 
             FROM questions_estimate e, questions_question q
-            WHERE q.id == e.question_id AND q.stats
+            WHERE q.id == e.question_id """+stats+"""
             GROUP BY e.question_id
             ORDER BY percentage_error""")
         result_list = []
@@ -213,6 +218,43 @@ class EstimateManager(models.Manager):
         if row:
             user = User.objects.get(pk=row[0])
             result = self.model(user=user, question=question, estimate=row[1], score=row[2], percentage_error=row[3])
+        return result
+
+    def get_best_avg_estimate(self, only_specified):
+        """
+        Calculates for each user his personal average estimate from all his given estimates.
+        Returns the best one.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+
+        stats = ''
+        if only_specified:
+            stats = 'AND q.stats'
+
+        cursor.execute("""
+            SELECT COUNT(*) as number
+            FROM questions_estimate e, questions_question q
+            WHERE q.id == e.question_id """+stats+"""
+            GROUP BY e.question_id""")
+
+        number_questions = 0
+        for row in cursor.fetchall():
+            number_questions += 1
+
+        cursor.execute("""
+            SELECT AVG(e.estimate) as estimate, e.user_id, AVG(e.score) as score, AVG(e.percentage_error) as percentage_error 
+            FROM questions_estimate e, questions_question q
+            WHERE q.id == e.question_id """+stats+"""
+            GROUP BY e.user_id
+            HAVING COUNT(*)>="""+str(number_questions)+"""
+            ORDER BY percentage_error""")
+        result = None
+        row = cursor.fetchone()
+        if row:
+            user = User.objects.get(pk=row[1]) 
+            question = Question()           
+            result = self.model(user=user, question=question, estimate=row[0], score=row[2], percentage_error=row[3])
         return result
 
 
@@ -301,12 +343,12 @@ class ScoreManager(models.Manager):
 
     def get_highscore(self, limit):
         """
-        Returns the score for every user (limited to best 50 users).
+        Returns the score for every user.
         """
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
-            SELECT e.user_id as user, SUM(e.score) as score
+            SELECT e.user_id as user, SUM(e.score) as score, COUNT(*) as number
             FROM questions_estimate e
             GROUP BY e.user_id
             ORDER BY score DESC
@@ -314,18 +356,18 @@ class ScoreManager(models.Manager):
         result_list = []
         for row in cursor.fetchall():
             user = User.objects.get(pk=row[0])
-            s = self.model(user=user, score=row[1])
+            s = self.model(user=user, score=row[1], number=row[2])
             result_list.append(s)
         return result_list
 
     def get_highscore_per_question(self, limit):
         """
-        Returns the score for every user (limited to best 50 users).
+        Returns the score for every user.
         """
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
-            SELECT e.user_id as user, SUM(e.score) / count(*) as score_per_question
+            SELECT e.user_id as user, SUM(e.score) / count(*) as score_per_question, COUNT(*) as number
             FROM questions_estimate e
             GROUP BY e.user_id
             ORDER BY score_per_question DESC
@@ -333,18 +375,18 @@ class ScoreManager(models.Manager):
         result_list = []
         for row in cursor.fetchall():
             user = User.objects.get(pk=row[0])
-            s = self.model(user=user, score=row[1])
+            s = self.model(user=user, score=row[1], number=row[2])
             result_list.append(s)
         return result_list
 
     def get_highscore_best_question(self, limit):
         """
-        Returns the score for every user (limited to best 50 users).
+        Returns the score for every user.
         """
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
-            SELECT e.user_id as user, MIN(e.percentage_error) as percentage_error
+            SELECT e.user_id as user, MIN(e.percentage_error) as percentage_error, COUNT(*) as number
             FROM questions_estimate e
             GROUP BY e.user_id
             ORDER BY percentage_error ASC
@@ -352,7 +394,27 @@ class ScoreManager(models.Manager):
         result_list = []
         for row in cursor.fetchall():
             user = User.objects.get(pk=row[0])
-            s = self.model(user=user, score=row[1])
+            s = self.model(user=user, score=row[1], number=row[2])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_best_percentage_error(self, limit):
+        """
+        Returns the score for every user.
+        Ordered ascending by percentage error.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, AVG(e.percentage_error) as percentage_error, COUNT(*) as number
+            FROM questions_estimate e
+            GROUP BY e.user_id
+            ORDER BY percentage_error
+            LIMIT 0, """ + str(limit))
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1], number=row[2])
             result_list.append(s)
         return result_list
 
@@ -428,6 +490,7 @@ class ScoreManager(models.Manager):
 class Score(models.Model):
     user = models.ForeignKey(to=User, verbose_name=u'Benutzer')
     score = models.IntegerField(verbose_name=u'Punkte')
+    number = models.IntegerField(verbose_name=u'Anzahl')
     objects = ScoreManager()
 
     def __unicode__(self):
