@@ -216,7 +216,7 @@ class EstimateManager(models.Manager):
         result = None
         row = cursor.fetchone()
         if row:
-            user = User.objects.get(pk=row[0])
+            user = User.objects.get(id=row[0])
             result = self.model(user=user, question=question, estimate=row[1], score=row[2], percentage_error=row[3])
         return result
 
