@@ -212,7 +212,7 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id, e.estimate, e.score, MIN(e.percentage_error) as percentage_error
             FROM questions_estimate e
-            WHERE e.question_id == """+str(question.id))
+            WHERE e.question_id = """+str(question.id))
         result = None
         row = cursor.fetchone()
         if row:
@@ -235,7 +235,7 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT COUNT(*) as number
             FROM questions_estimate e, questions_question q
-            WHERE q.id == e.question_id """+stats+"""
+            WHERE q.id = e.question_id """+stats+"""
             GROUP BY e.question_id""")
 
         number_questions = 0
@@ -245,7 +245,7 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, e.user_id, AVG(e.score) as score, AVG(e.percentage_error) as percentage_error 
             FROM questions_estimate e, questions_question q
-            WHERE q.id == e.question_id """+stats+"""
+            WHERE q.id = e.question_id """+stats+"""
             GROUP BY e.user_id
             HAVING COUNT(*)>="""+str(number_questions)+"""
             ORDER BY percentage_error""")
@@ -430,10 +430,10 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, SUM(e.score) as score
             FROM questions_estimate e, questions_challenge_questions q
-            WHERE q.challenge_id == """+str(challenge.id)+""" 
-                AND q.question_id == e.question_id 
+            WHERE q.challenge_id = """+str(challenge.id)+""" 
+                AND q.question_id = e.question_id 
             GROUP BY e.user_id
-            HAVING COUNT(*) == """+str(len(challenge.questions.all()))+"""
+            HAVING COUNT(*) = """+str(len(challenge.questions.all()))+"""
             ORDER BY score DESC""")
         result_list = []
         for row in cursor.fetchall():
@@ -452,12 +452,12 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, SUM(e.score) as score
             FROM questions_estimate e, questions_challenge_questions q, questions_question q1
-            WHERE q.challenge_id == """+str(challenge.id)+""" 
-                AND q.question_id == e.question_id 
-                AND q1.id == q.question_id 
+            WHERE q.challenge_id = """+str(challenge.id)+""" 
+                AND q.question_id = e.question_id 
+                AND q1.id = q.question_id 
                 AND q1.author_id <> """ + str(user.id) + """
             GROUP BY e.user_id
-            HAVING COUNT(*) == """+str(len(challenge.questions.all().exclude(author=user)))+"""
+            HAVING COUNT(*) = """+str(len(challenge.questions.all().exclude(author=user)))+"""
             ORDER BY score DESC""")
         result_list = []
         for row in cursor.fetchall():
@@ -475,9 +475,9 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT SUM(e.score) as score
             FROM questions_estimate e, questions_challenge_questions q
-            WHERE q.challenge_id == """+str(challenge.id)+""" 
-                AND q.question_id == e.question_id
-                AND e.user_id == """+str(user.id))
+            WHERE q.challenge_id = """+str(challenge.id)+""" 
+                AND q.question_id = e.question_id
+                AND e.user_id = """+str(user.id))
         result = None
         row = cursor.fetchone()
         if row:
