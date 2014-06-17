@@ -216,7 +216,9 @@ class EstimateManager(models.Manager):
         result = None
         row = cursor.fetchone()
         if row:
+            logger.debug(row[0])
             best_user = User.objects.get(id=row[0])
+            logger.debug(best_user)
             result = self.model(user=best_user, question=question, estimate=row[1], score=row[2], percentage_error=row[3])
         return result
 
