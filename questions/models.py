@@ -161,7 +161,7 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT e.question_id, AVG(e.estimate) as estimate, AVG(e.score) as score, 100*ABS(q.answer-AVG(e.estimate))/q.answer as percentage_error 
             FROM questions_estimate e, questions_question q
-            WHERE q.id == e.question_id """+stats+"""
+            WHERE q.id = e.question_id """+stats+"""
             GROUP BY e.question_id
             ORDER BY percentage_error""")
         result_list = []
@@ -178,7 +178,7 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, AVG(e.score) as score 
             FROM questions_estimate e
-            WHERE e.question_id=="""+str(question.id)+
+            WHERE e.question_id="""+str(question.id)+
             """ GROUP BY e.question_id""")
         result = None
         row = cursor.fetchone()
