@@ -103,6 +103,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
 )
 
 STATICFILES_FINDERS = {
@@ -115,6 +116,8 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+# Media files (user-uploaded)
+MEDIA_URL = '/media/'
 
 # User Login
 

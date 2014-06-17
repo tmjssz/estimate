@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = patterns('questions.views',
     url(r'^$', 'menu_view', name='questions_menu'),
@@ -21,3 +23,5 @@ urlpatterns = patterns('questions.views',
     url(r'^highscore$', 'question_highscore', name='questions_highscore'),
     url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
 )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
