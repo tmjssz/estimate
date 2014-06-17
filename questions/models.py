@@ -178,8 +178,8 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, AVG(e.score) as score 
             FROM questions_estimate e
-            WHERE e.question_id == """+str(question.id)+"""
-            GROUP BY e.question_id""")
+            WHERE e.question_id=="""+str(question.id)+
+            """ GROUP BY e.question_id""")
         result = None
         row = cursor.fetchone()
         if row:
