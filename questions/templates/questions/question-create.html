@@ -18,9 +18,37 @@
 		</form>
 
 	{% else %}
+		<div class="title">
+			<h2>Frage eingereicht</h2>
 
-		<h2>Frage eingereicht</h2>
+			<div class="create-another">
+		        <a href="{% url 'questions_question_create' %}"><i class="fa fa-paper-plane"></i> Noch eine</a>
+		    </div>
+		</div>
+
 		<p>Danke, du hast deine Frage erfolgreich eingereicht. Bitte habe noch ein wenig Geduld! Deine Frage wird jetzt nochmal überprüft. Daher dauert es noch etwas, bis sie zum Schätzen verfügbar ist. </p>
+		
+		<h3>Vorschau: {{ question.title }}</h3>
+
+		{% if question.image %} 
+		<section>
+		{% else %}
+		<section class="without-aside">
+		{% endif %}
+
+				<p id="question">{{ question.question }}</p>
+
+				{% if question.unit %}
+				<small id="unit">Einheit: {{ question.unit }}</small>
+				{% endif %}
+
+		</section>
+
+		{% if question.image %}
+		<aside>
+			<p><img src="/{{ question.image }}" /></p>
+		</aside>
+		{% endif %}
 
 
 	{% endif %}

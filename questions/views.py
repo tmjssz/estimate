@@ -175,11 +175,12 @@ def question_create_view(request):
     """
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES, user=request.user)
-        logger.debug(request.FILES)
         if form.is_valid():
             form.save()
+            question_title = form.cleaned_data['title']
+            question = get_object_or_404(Question, title=question_title, author=request.user)
             return render(request, 'questions/question-create.html',
-                {'form': None})
+                {'form': None, 'question': question})
     else:
         form = QuestionForm()
     return render(request, 'questions/question-create.html',

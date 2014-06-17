@@ -24,4 +24,4 @@ urlpatterns = patterns('questions.views',
     url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
 )
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT+'/media')

@@ -1081,6 +1081,72 @@ aside.menu {
       text-align: left;
       font-size: 18px; }
 
+#question-create .title {
+  display: flex; }
+  #question-create .title h2 {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 69.23077%; }
+    #question-create .title h2:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 768px) {
+      #question-create .title h2 {
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 58.97436%; }
+        #question-create .title h2:last-child {
+          margin-right: 0; } }
+    @media screen and (max-width: 480px) {
+      #question-create .title h2 {
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 69.23077%; }
+        #question-create .title h2:last-child {
+          margin-right: 0; } }
+  #question-create .title .create-another {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 28.20513%;
+    margin-right: 0;
+    text-align: right;
+    font-weight: bold;
+    padding: 12px 0 15px 0; }
+    #question-create .title .create-another:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 768px) {
+      #question-create .title .create-another {
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 38.46154%;
+        font-weight: 500;
+        letter-spacing: -1px; }
+        #question-create .title .create-another:last-child {
+          margin-right: 0; } }
+    @media screen and (max-width: 480px) {
+      #question-create .title .create-another {
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 28.20513%;
+        margin-right: 0;
+        font-weight: 400; }
+        #question-create .title .create-another:last-child {
+          margin-right: 0; } }
+    #question-create .title .create-another a {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em; }
+      #question-create .title .create-another a:hover {
+        background: #6f99d5; }
 #question-create form {
   float: left;
   display: block;
@@ -1165,6 +1231,13 @@ aside.menu {
           font-size: 12px; }
           #question-create form p span.helptext:last-child {
             margin-right: 0; } }
+#question-create section.without-aside {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 100%; }
+  #question-create section.without-aside:last-child {
+    margin-right: 0; }
 
 #question-score .score, #question-score .resolution {
   float: left;

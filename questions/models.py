@@ -18,7 +18,7 @@ class Question(models.Model):
     answer = models.FloatField(verbose_name=u'Antwort', help_text="Bitte hier eine gültige Antwort eingeben. (Nur numerische Werte sind möglich)")
     unit = models.CharField(u'Einheit', max_length=100, help_text="Hier kann angegeben werden in welcher Einheit der Schätzwert sein soll. (optional)", blank=True, null=True)
     source = models.CharField(u'Quelle', max_length=300, help_text="Bitte hier die Quelle für die oben angegebene Antwort eintragen. (beispielsweise die URL zu einer Webseite)")
-    image = models.ImageField(u'Bild', help_text='Hier kann ein Bild hochgeladen werden. (optional)', upload_to='media/questions/', blank=True, null=True)
+    image = models.ImageField(u'Bild', help_text='Hier kann ein Bild hochgeladen werden. (optional)', upload_to='media/', blank=True, null=True)
     published = models.BooleanField(verbose_name=u'Veröffentlicht', default=True)
     stats = models.BooleanField(verbose_name=u'Statistik', default=False,  help_text='Soll diese Frage in die Statistiken einbezogen werden?')
     author = models.ForeignKey(User, verbose_name=u'Autor')

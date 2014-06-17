@@ -1,6 +1,46 @@
 // CREATE QUESTION PAGE 
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #question-create {
+	.title {
+		display: flex;
+
+		h2 {
+			@include span-columns(7 of 10);
+
+			@include media($tablet) {
+				@include span-columns(6 of 10);
+			}
+
+			@include media($mobile) {
+				@include span-columns(7 of 10);
+			}
+		}
+
+		.create-another {
+			@include span-columns(3 of 10);
+			@include omega;
+			text-align: right;
+			font-weight: bold;
+			padding: 12px 0 15px 0;	
+
+			@include media($tablet) {
+				@include span-columns(4 of 10);
+				font-weight: 500;
+				letter-spacing: -1px;
+			}
+
+			@include media($mobile) {
+				@include span-columns(3 of 10);
+				@include omega;
+				font-weight: 400;
+			}
+
+			a {
+				@include btn($base-accent-color);		
+			}
+		}
+	}
+
 	form {
 		@include span-columns(10);
 
@@ -47,5 +87,9 @@
 				}
 			}
 		}
+	}
+
+	section.without-aside {
+		@include span-columns(10 of 10);
 	}
 }
