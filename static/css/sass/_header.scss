@@ -187,6 +187,8 @@ header {
 
 			    	.login-btn {
 			    		line-height: 1em !important;
+			    		margin-top:7.5px;
+			    		margin-bottom: 7.5px;
 			    		@include btn($base-accent-color);
 			    	}
 

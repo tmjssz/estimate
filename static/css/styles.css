@@ -536,6 +536,8 @@ header {
               color: white; }
           header div.navigation-wrapper nav ul li .login-btn {
             line-height: 1em !important;
+            margin-top: 7.5px;
+            margin-bottom: 7.5px;
             -webkit-transition: all 0.2s ease-in-out;
             -moz-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
