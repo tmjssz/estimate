@@ -45,7 +45,7 @@
                 <td class="no-mobile">{{ avg.estimate|floatformat:"-2" }}</td>
                 <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
                 <td>{{ count }}</td>
-                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }}  {{ best.estimate }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
+                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
 
             {% else %}
 
@@ -54,7 +54,7 @@
                 <td class="no-mobile"></td>
                 <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
                 <td>{{ count }}</td>
-                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }} {{ best.estimate }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
+                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
 
             {% endif %}
             </tr>

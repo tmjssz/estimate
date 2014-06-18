@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render
+from django.db.models import Min
 
 from questions.forms import EstimateForm, QuestionForm, UserProfileForm
 from questions.models import Question, Estimate, Score, Challenge
@@ -321,7 +322,8 @@ def statistics_crowd(request):
 
     for e in avg_estimates:
         avg_percentage_error += e.percentage_error
-        best_estimate = Estimate.objects.get_best_estimate(e.question)
+        #best_estimate = Estimate.objects.get_best_estimate(e.question)
+        best_estimate = Estimate.objects.filter(question=e.question).order_by('percentage_error')[0]
         best_estimates.append(best_estimate)
 
         count = Estimate.objects.filter(question=e.question).count()

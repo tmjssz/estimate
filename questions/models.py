@@ -217,7 +217,7 @@ class EstimateManager(models.Manager):
         row = cursor.fetchone()
         if row:
             best_user = User.objects.get(id=row[0])
-            result = self.model(user=best_user, question=question, estimate=row[0], score=row[2], percentage_error=row[3])
+            result = self.model(user=best_user, question=question, estimate=question.id, score=row[2], percentage_error=row[3])
         return result
 
     def get_best_avg_estimate(self, only_specified):
