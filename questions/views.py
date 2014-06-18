@@ -322,7 +322,6 @@ def statistics_crowd(request):
 
     for e in avg_estimates:
         avg_percentage_error += e.percentage_error
-        #best_estimate = Estimate.objects.get_best_estimate(e.question)
         best_estimate = Estimate.objects.filter(question=e.question).order_by('percentage_error')[0]
         best_estimates.append(best_estimate)
 
@@ -337,7 +336,6 @@ def statistics_crowd(request):
 
     best_avg_estimate = Estimate.objects.get_best_avg_estimate(admin)
 
-    #best_estimates = Estimate.objects.get_best_estimates()
     estimate_list = zip(avg_estimates, best_estimates, count_estimates, show_estimate)
     return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'best_avg_estimate': best_avg_estimate, 'estimate_list': estimate_list})
 

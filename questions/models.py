@@ -190,36 +190,6 @@ class EstimateManager(models.Manager):
             result = self.model(user=User(), question=question, estimate=row[0], score=row[1], percentage_error=percentage_error)
         return result
 
-    def get_best_estimates(self):
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT e.question_id, e.user_id, e.estimate, e.score, MIN(e.percentage_error) as percentage_error
-            FROM questions_estimate e
-            GROUP BY e.question_id
-            ORDER BY e.percentage_error""")
-        result_list = []
-        for row in cursor.fetchall():
-            question = Question.objects.get(pk=row[0])
-            user = User.objects.get(pk=row[1])
-            s = self.model(user=user, question=question, estimate=row[2], score=row[3], percentage_error=row[4])
-            result_list.append(s)
-        return result_list
-
-    def get_best_estimate(self, question):
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT e.user_id, e.estimate, e.score, MIN(e.percentage_error) as percentage_error
-            FROM questions_estimate e
-            WHERE e.question_id = """+str(question.id))
-        result = None
-        row = cursor.fetchone()
-        if row:
-            best_user = User.objects.get(id=row[0])
-            result = self.model(user=best_user, question=question, estimate=question.id, score=row[2], percentage_error=row[3])
-        return result
-
     def get_best_avg_estimate(self, only_specified):
         """
         Calculates for each user his personal average estimate from all his given estimates.
