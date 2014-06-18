@@ -59,16 +59,16 @@
 					<th>Anzahl</th>
 					<th>Fehler der besten Schätzung</th>
 				</tr>
-				{% for score in best_question %}
-					{% if user == score.user %}
+				{% for s, e in best_estimates %}
+					{% if user == e.user %}
 				    <tr class="current_user">
 				    {% else %}
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
-				    	<td>{{ score.number }}</td>
-				    	<td>{{ score.score|floatformat:"-2" }} %</td>
+				    	<td class="left"><a href="{% url 'questions_user' e.user %}">{{ e.user }}</a></td>
+				    	<td>{{ s.number }}</td>
+				    	<td><a href="{% url 'questions_statistics_question' e.question.slug %}">{{ e.percentage_error|floatformat:"-2" }} %</a></td>
 				    </tr>
 			    {% endfor %}
 			</table>
