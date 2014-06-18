@@ -1576,6 +1576,20 @@ aside.menu {
       #questions-list-all .half:last-child {
         margin-right: 0; } }
 
+#register_done a.go {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: -1px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: #477dca;
+  border-radius: 0.1875em;
+  color: white;
+  padding: .4em .6em; }
+  #register_done a.go:hover {
+    background: #6f99d5; }
+
 #statistics-all .error {
   float: left;
   display: block;

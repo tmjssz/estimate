@@ -99,7 +99,7 @@
             </div>
 
             {% if question.image %}
-                <p><img src="/{{ question.image }}" /></p>
+                <p><a href="/{{ question.image }}" data-lightbox="{{ question.slug }}" data-title="{{ question.title }}"><img src="/{{ question.image }}" /></a></p>
             {% endif %}
 
             {% if question.source %}
