@@ -333,6 +333,8 @@ body {
             margin-right: 0; } }
       body #main aside img {
         width: 100%; }
+      body #main aside p {
+        word-wrap: break-word; }
     body #main form label {
       font-size: 12px; }
     body #main form span.helptext {
