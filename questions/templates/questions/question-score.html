@@ -136,7 +136,7 @@
 		<p>{{ question.question }}</p>
 
 		{% if question.unit %}
-			<small id="unit">Einheit: {{ question.unit }}</small>
+			<small id="unit"><b>Einheit:</b> {{ question.unit }}</small>
 		{% endif %}
 
 		{% if question.image %}
@@ -144,7 +144,7 @@
 		{% endif %}
 
 		{% if question.source %}
-			<p>Quelle: {{ question.source }}</p>
+			<p><small><b>Quelle:</b> {{ question.source|safe }}</small></p>
 		{% endif %}
 
 	</aside>
