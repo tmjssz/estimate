@@ -1,0 +1,18 @@
+<h1>{{ question.title }}</h1>
+
+<p id="question">{{ question.question }}</p>
+
+<p><b>Autor:</b> <a href="{{ host }}{% url 'questions_user' question.author %}">{{ question.author }}</a></p>
+
+<p><b>Antwort:</b> {{ question.answer }}
+<br>
+{% if question.unit %}
+<b>Einheit:</b> {{ question.unit }}
+{% endif %}
+</p>
+
+<p><b>Quelle:</b> {{ question.source|safe }}</p>
+
+{% if question.image %}
+	<p><a href="{{ host }}{{ media_url }}{{ question.image }}"><img width="100%" src="{{ host }}{{ media_url }}{{ question.image }}" /></a></p>
+{% endif %}

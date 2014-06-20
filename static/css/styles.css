@@ -335,6 +335,8 @@ body {
         width: 100%; }
       body #main aside p {
         word-wrap: break-word; }
+      body #main aside small {
+        line-height: 1em; }
     body #main form label {
       font-size: 12px; }
     body #main form span.helptext {

@@ -4,6 +4,10 @@ from django.forms import ModelForm, ValidationError
 from django.utils.text import slugify
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+from django.core.mail import mail_admins
+from django.template import Context
+from django.template.loader import get_template
+from django.conf import settings
 
 
 from questions.models import Estimate, Question
@@ -66,6 +70,12 @@ class QuestionForm(ModelForm):
             #self.instance.image = self.__image
             self.instance.published = False
             self.instance.stats = False
+
+        template = get_template('questions/mail-question-created.html')
+        context = Context({'question': self.instance, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'media_url': settings.MEDIA_URL})
+        content = template.render(context)
+        mail_admins('Neue Frage eingereicht von '+ self.__author.username, '', html_message=content, fail_silently=True)
+
         return super(QuestionForm, self).save(commit)
 
 class UserProfileForm(ModelForm):
