@@ -74,7 +74,7 @@ class QuestionForm(ModelForm):
         template = get_template('questions/mail-question-created.html')
         context = Context({'question': self.instance, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'media_url': settings.MEDIA_URL})
         content = template.render(context)
-        mail_admins('Neue Frage eingereicht von '+ self.__author.username, '', html_message=content, fail_silently=True)
+        mail_admins('[Neue Frage] '+ self.__author.username, '', html_message=content, fail_silently=True)
 
         return super(QuestionForm, self).save(commit)
 
