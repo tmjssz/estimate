@@ -40,7 +40,7 @@ class Question(models.Model):
         if not self.id:
             self.date_created = now()
         self.date_updated = now()
-        self.source = urlize(self.source).replace('<a ', '<a target="_blank" ')
+        self.source = urlize(self.source).replace('<a href="', '<a target="_blank" href="')
 
         super(Question, self).save(*args, **kwargs)
         
