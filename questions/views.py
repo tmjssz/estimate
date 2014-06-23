@@ -372,6 +372,7 @@ def statistics_user(request, username):
     user = get_object_or_404(User, username=username)
     estimates = Estimate.objects.filter(user=user).exclude(time_out=True).exclude(estimate=None).order_by('percentage_error')
     estimates_time_out = Estimate.objects.filter(user=user, time_out=True)
+    own_questions = Question.objects.filter(author=user, published=True)
     
     score = 0
     score_per_question = 0
@@ -380,7 +381,7 @@ def statistics_user(request, username):
 
     if estimates.count() == 0:
         estimates = None
-        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
+        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question, 'own_questions': own_questions})
     else:
         show_estimate = []
         for e in estimates:
@@ -395,7 +396,7 @@ def statistics_user(request, username):
 
         estimates = zip(estimates, show_estimate)
         
-        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question})
+        return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question, 'own_questions': own_questions})
 
 
 @login_required

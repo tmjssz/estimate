@@ -35,6 +35,14 @@
                 <td class="title">Fehler pro Frage</td>
                 <td class="value">{{ error_per_question|floatformat:"-2" }}%</td>
             </tr>
+            
+            {% if own_questions|length > 0 %}
+            <tr class="own-questions"> 
+                <td class="title">Gestellte Fragen</td>
+                <td class="value">{{ own_questions|length }}</td>
+            </tr>
+            {% endif %}
+
 
         </table>
     </div>
