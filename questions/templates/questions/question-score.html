@@ -55,6 +55,10 @@
 				<span class="value">{{ estimate.score }}</span>
 			</div>
 
+			{% if question.explanation %}
+				<p>{{ question.explanation }}</p>
+			{% endif %}
+
 			<table class="timed_out">
 				<tr>
 					<td class="left"><strong>&#216; Schätzung</strong></td> 
@@ -101,6 +105,10 @@
 				<h3>Sehr gut!</h3>
 			{% elif estimate.score >= 90 %}
 				<h3>Nicht schlecht!</h3>
+			{% endif %}
+
+			{% if question.explanation %}
+				<p>{{ question.explanation }}</p>
 			{% endif %}
 
 			<table>

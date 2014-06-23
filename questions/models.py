@@ -17,6 +17,7 @@ class Question(models.Model):
     question = models.TextField(u'Frage', help_text="Bitte hier die Schätz-Frage eingeben. Es sind nur Fragen mit numerischen Antworten erlaubt.")
     answer = models.FloatField(verbose_name=u'Antwort', help_text="Bitte hier eine gültige Antwort eingeben. (Nur numerische Werte sind möglich)")
     unit = models.CharField(u'Einheit', max_length=100, help_text="Hier kann angegeben werden in welcher Einheit der Schätzwert sein soll. (optional)", blank=True, null=True)
+    explanation = models.TextField(u'Erklärung', help_text="Hier kann eine Erklärung oder ein Kommentar zur Auflösung eingetragen werden. (optional)", blank=True, null=True)
     source = models.CharField(u'Quelle', max_length=300, help_text="Bitte hier die Quelle für die oben angegebene Antwort eintragen. (beispielsweise die URL zu einer Webseite)")
     image = models.ImageField(u'Bild', help_text='Hier kann ein Bild hochgeladen werden. (optional)', upload_to='media/', blank=True, null=True)
     published = models.BooleanField(verbose_name=u'Veröffentlicht', default=True)

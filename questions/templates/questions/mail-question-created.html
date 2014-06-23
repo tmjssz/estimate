@@ -13,6 +13,11 @@
 
 <p><b>Quelle:</b> {{ question.source|safe }}</p>
 
+{% if question.explanation %}
+    <p><b>Erklärung:</b> {{ question.explanation }}</p>
+{% endif %}
+
+
 {% if question.image %}
 	<p><a href="{{ host }}{{ media_url }}{{ question.image }}"><img width="100%" src="{{ host }}{{ media_url }}{{ question.image }}" /></a></p>
 {% endif %}
