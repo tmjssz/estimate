@@ -370,6 +370,9 @@ def statistics_user(request, username):
     Show statistics for current user 
     """
     user = get_object_or_404(User, username=username)
+    if user.is_superuser and not request.user.is_superuser:
+        raise Http404
+
     estimates = Estimate.objects.filter(user=user).exclude(time_out=True).exclude(estimate=None).order_by('percentage_error')
     estimates_time_out = Estimate.objects.filter(user=user, time_out=True)
     own_questions = Question.objects.filter(author=user, published=True)

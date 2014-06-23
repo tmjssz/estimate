@@ -96,7 +96,11 @@
     </table>
 
     {% else %}
-        <p>Du hast bisher noch keine Schätzungen abgegeben.</p>
+        {% if user == show_user %}
+            <p>Du hast bisher noch keine Schätzung abgegeben.</p>
+        {% else %}
+            <p>Der User hat bisher noch keine Schätzungen abgegeben.</p>
+        {% endif %}    
     {% endif %}
 
     <h3>Mitglied seit</h3>
