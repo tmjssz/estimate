@@ -155,6 +155,10 @@
 			<p><small><b>Quelle:</b> {{ question.source|safe }}</small></p>
 		{% endif %}
 
+		{% if not question.author.is_superuser %}
+			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author %}">{{ question.author }}</a></small></p>
+		{% endif %}
+
 	</aside>
 
 <!-- / #question-score -->

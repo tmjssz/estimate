@@ -1403,7 +1403,7 @@ aside.menu {
     width: 100%; }
     #question-score section:last-child {
       margin-right: 0; } }
-#question-score section.result h3 {
+#question-score section h3 {
   display: inline-block;
   text-align: center;
   width: 100%; }

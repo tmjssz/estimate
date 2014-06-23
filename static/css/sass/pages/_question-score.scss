@@ -120,12 +120,10 @@
 			@include span-columns(8 of 8);
 		}
 
-		&.result {
-			h3 {
-				display: inline-block;
-				text-align: center;
-				width: 100%;
-			}
+		h3 {
+			display: inline-block;
+			text-align: center;
+			width: 100%;
 		}
 	}
 
