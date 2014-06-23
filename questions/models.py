@@ -186,7 +186,11 @@ class EstimateManager(models.Manager):
         if row:
             percentage_error = None
             if row[0]:
-                percentage_error = 100 * math.fabs(question.answer - row[0]) / question.answer
+                if question.answer == 0:
+                    # if question answer is zero
+                    percentage_error = math.fabs(row[0])
+                else:
+                    percentage_error = 100 * math.fabs(question.answer - row[0]) / question.answer
             
             result = self.model(user=User(), question=question, estimate=row[0], score=row[1], percentage_error=percentage_error)
         return result
@@ -298,7 +302,12 @@ class Estimate(models.Model):
     def calculate_percentage_error(self):
         if self.estimate == None:
             return None
-        percentage_error = math.fabs((self.question.answer - self.estimate) / self.question.answer) * 100
+        
+        if self.question.answer == 0:
+            # if the question answer is zero
+            percentage_error = math.fabs(self.estimate)
+        else:
+            percentage_error = math.fabs((self.question.answer - self.estimate) / self.question.answer) * 100
         return percentage_error
 
     def update_percentage_error(self):
