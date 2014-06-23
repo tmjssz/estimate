@@ -116,9 +116,6 @@ body {
 
 				&.current_user {
 					background: lighten(#b6ceef, 10);
-					-webkit-box-shadow: inset 0px 0px 18px 5px rgba(0,0,0,0.75);
-					-moz-box-shadow: inset 0px 0px 18px 5px rgba(0,0,0,0.75);
-					box-shadow: inset 0px 0px 18px 5px rgba(0,0,0,0.75);
 				}
 
 				td, th {
