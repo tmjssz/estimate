@@ -63,6 +63,11 @@
 		display: none;
 	}
 
+	.explanation {
+		display: inline-block;
+		width: 100%;
+	}
+
 	.top-right {
 		@include span-columns(2 of 10);
 		@include omega;

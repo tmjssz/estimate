@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.timezone import now
+from django.utils.html import urlize
 import math
 import logging
 
@@ -39,6 +40,8 @@ class Question(models.Model):
         if not self.id:
             self.date_created = now()
         self.date_updated = now()
+        self.source = urlize(self.source).replace('<a ', '<a target="_blank" ')
+
         super(Question, self).save(*args, **kwargs)
         
         estimates = Estimate.objects.filter(question=self.id)

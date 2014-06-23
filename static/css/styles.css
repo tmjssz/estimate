@@ -1333,6 +1333,9 @@ aside.menu {
     color: rgba(51, 51, 51, 0.5); }
 #question-score table.timed_out {
   display: none; }
+#question-score .explanation {
+  display: inline-block;
+  width: 100%; }
 #question-score .top-right {
   float: left;
   display: block;
@@ -1680,6 +1683,9 @@ aside.menu {
 #statistics-question .resolution .value.really-tiny, #statistics-question .avg_estimate .value.really-tiny, #statistics-question .avg_error .value.really-tiny {
   letter-spacing: -2px;
   font-size: 20px; }
+#statistics-question .explanation {
+  display: inline-block;
+  width: 100%; }
 
 #statistics-user div.stats {
   float: left;
