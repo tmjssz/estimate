@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Ergebnis - {{ question.title }}{% endblock %}
+
+{% block content %}
+<div id="question-score-challenge">
+
+	<h2>{{ challenge.title }} {{ answered_questions }} / {{ all_questions }}</h2>
+
+	<div class="top-right">
+		<a class="next-btn" href="{% url 'questions_challenge_show' challenge.slug %}">
+			{% if answered_questions == all_questions %}
+				<i class="fa fa-list"></i>
+				<div class="label">
+					<span>Überblick</span>
+				</div>
+			{% else %}
+				<div class="label">
+					<span>Weiter</span>
+				</div>
+			<i class="fa fa-arrow-circle-right"></i> 
+			{% endif %}
+		</a>
+	</div>
+
+	<section>
+
+		{% if estimate.time_out %}
+
+			<div class="timed_out">
+				<p class="icon"><i class="fa fa-exclamation-triangle fa-3x"></i></p>
+				<p>Leider ist die Zeit abgelaufen.</p>
+			</div>
+
+			<div class="score">	
+				<span class="title">Punkte</span>
+				<span class="value">{{ estimate.score }}</span>
+			</div>
+
+			<div id="show_btn">Zeige Auflösung</div>
+
+			<table class="timed_out">
+				<tr>
+					<td class="left"><strong>Auflösung</strong></td>
+					<td class="right">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
+				</tr>
+			</table>
+
+			{% if question.explanation %}
+				<p class="explanation timed_out">{{ question.explanation }}</p>
+			{% endif %}
+
+
+		{% else %}
+
+			<div class="score">	
+				<span class="value">{{ estimate.score }}</span>
+				<span class="title">Punkte</span>
+			</div>
+			
+			{% if estimate.estimate == question.answer %}
+				<h3>Punktlandung!</h3>
+			{% elif estimate.score >= 95 %}
+				<h3>Wahnsinn!</h3>
+			{% elif estimate.score >= 93 %}
+				<h3>Ganz knapp daneben!</h3>
+			{% elif estimate.score >= 90 %}
+				<h3>Sehr gut!</h3>
+			{% elif estimate.score >= 85 %}
+				<h3>Nicht schlecht!</h3>
+			{% endif %}
+
+			<table>
+				<tr>
+					<td class="left"><strong>Auflösung</strong></td>
+					<td class="right">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
+				</tr>
+				<tr>
+					<td class="left"><strong>Schätzung</strong></td>
+					<td class="right">{{ estimate.estimate|floatformat:"-2" }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
+				</tr>
+				<tr>
+					<td class="left"><strong>Fehler</strong></td>
+					<td class="right">{{ estimate.percentage_error|floatformat:"-2" }} %</td>
+				</tr>
+			</table>
+
+			{% if question.explanation %}
+				<p class="explanation">{{ question.explanation }}</p>
+			{% endif %}
+
+		{% endif %}
+
+	</section>
+
+	<aside>
+
+		<h3>{{ question.title }}</h3>
+
+		<p>{{ question.question }}</p>
+
+		{% if question.unit %}
+			<small id="unit"><b>Einheit:</b> {{ question.unit }}</small>
+		{% endif %}
+
+		{% if question.image %}
+			<p><a href="/{{ question.image }}" data-lightbox="{{ question.slug }}" data-title="{{ question.title }}"><img src="/{{ question.image }}" /></a></p>
+		{% endif %}
+
+		{% if question.source %}
+			<p><small><b>Quelle:</b> {{ question.source|safe }}</small></p>
+		{% endif %}
+
+		{% if not question.author.is_superuser %}
+			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author %}">{{ question.author }}</a></small></p>
+		{% endif %}
+
+	</aside>
+
+<!-- / #question-score -->
+</div>
+{% endblock %}

@@ -147,6 +147,10 @@ body {
 			}
 		}
 
+		.new-line {
+			display: inline-block;
+		}
+
 		.center {
 			@include span-columns(6);
 			@include shift(2);

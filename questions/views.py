@@ -119,10 +119,9 @@ def question_view_random(request, slug):
     # for this questions does already exist an estimate from the current user
     if estimates:
         estimate = estimates[0]
-        avg_estimate = Estimate.objects.get_avg_estimate(question=question)
         next_random = True
         return render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'avg_estimate': avg_estimate, 'next_random': next_random})
+            {'question': question, 'estimate': estimate, 'next_random': next_random})
     
     # current user hasn't already made an estimate for this question
     if request.method == 'POST':
@@ -272,12 +271,18 @@ def challenge_question_view(request, challenge, question):
         # give 404, if question is not in challenge
         raise Http404
 
+    all_questions = challenge.questions.exclude(author=request.user).count()
+    answered_questions = Estimate.objects.number_answered_questions(request.user, challenge)
+    current_question = answered_questions + 1
+
     estimates = Estimate.objects.filter(question=question, user=request.user)
 
     # for this questions does already exist an estimate from the current user
     if estimates:
         # redirect to result page
-        return HttpResponseRedirect("/challenge/"+challenge.slug)
+        estimate = estimates[0]
+        return render(request, 'questions/question-score-challenge.html',
+            {'question': question, 'estimate': estimate, 'challenge': challenge, 'all_questions': all_questions, 'answered_questions': answered_questions})
 
     if request.method == 'POST':
         time_out = False
@@ -291,6 +296,8 @@ def challenge_question_view(request, challenge, question):
             form.save()
             for q in questions:
                 estimates = Estimate.objects.filter(question=q, user=request.user)
+                return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
+
                 if len(estimates) == 0 and q != question and q.author != request.user:
                     # redirect to next unsanswered question
                     return HttpResponseRedirect("/challenge/"+challenge.slug+"/"+q.slug)
@@ -299,7 +306,7 @@ def challenge_question_view(request, challenge, question):
     else:
         form = EstimateForm()
     return render(request, 'questions/question-show.html',
-       {'form': form, 'question': question, 'user': request.user})
+       {'form': form, 'question': question, 'user': request.user, 'challenge': challenge, 'all_questions': all_questions, 'current_question': current_question})
 
 
 @login_required

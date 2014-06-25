@@ -1,0 +1,121 @@
+// QUESTION SCORE PAGE 
+// - - - - - - - - - - - - - - - - - - - - - - - - 
+#question-score-challenge {
+
+	.score {
+		@include span-columns(5 of 5);
+		@include big-number($base-font-color);
+	}
+
+	#show_btn {
+		@include link-like;
+		@include span-columns(5 of 5);
+		text-align:center;
+		line-height: 60px;
+	}
+
+	#show_resolution {
+		@include span-columns(5 of 5);
+		@include number($base-font-color);
+		margin-bottom: 20px;
+		display:none;
+	}
+
+	.resolution, .show_resolution, #show_resolution {
+		.value {
+			&.small {
+				letter-spacing: -1.5px;
+				font-size: 35px;
+			}
+
+			&.smaller {
+				letter-spacing: -2px;
+				font-size: 30px;
+			}
+			&.tiny {
+				letter-spacing: -2px;
+				font-size: 25px;
+			}
+			&.really-tiny {
+				letter-spacing: -2px;
+				font-size: 20px;
+			}
+		}
+	}
+
+	div.timed_out {
+		text-align: center;
+		.icon {
+			color: transparentize($base-font-color, 0.5);
+		}
+	}
+
+	table.timed_out, .explanation.timed_out {
+		display: none;
+	}
+
+	.explanation {
+		display: inline-block;
+		width: 100%;
+	}
+
+	.top-right {
+		@include span-columns(2 of 10);
+		@include omega;
+
+		@include media ($tablet) {
+			@include span-columns(3 of 10);
+		}
+
+		.next-btn {
+			text-align:center;
+			@include btn($base-accent-color);
+			
+			float: right;
+
+			i {
+				display: inline-block;
+				font-size: 1.7em;
+			}
+
+			.label {
+				display: inline-block;
+				font-weight: bold;
+				span {
+					font-size: 14px;
+					display:block;
+					line-height: 18px;
+					float: left;
+				}
+			}
+		}
+	}
+
+	h2 {
+		@include span-columns(8 of 10);
+		@include media ($tablet) {
+			@include span-columns(7 of 10);
+		}
+	}
+
+	section {
+
+		@include media($tablet) {
+			margin-bottom: 15px;
+			text-align: center;
+			@include span-columns(8 of 8);
+		}
+
+		h3 {
+			display: inline-block;
+			text-align: center;
+			width: 100%;
+		}
+	}
+
+	aside {
+		@include media($tablet) {
+			@include span-columns(8 of 8);
+		}
+	}
+}

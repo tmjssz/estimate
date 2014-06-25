@@ -11,14 +11,24 @@
 	<section class="without-aside">
 	{% endif %}
 
-		<h2>{{ question.title }}</h2>
+		{% if challenge %}
+			<h2>{{ challenge.title }} {{ current_question }} / {{ all_questions }}</h2>
+		{% else %}
+			<h2>{{ question.title }}</h2>
+		{% endif %}
+		
 
 		{% if user != question.author %}
 
 			<!-- Countdown Timer -->
 			<div id="countdown"></div>
 
+			{% if challenge %}
+				<h3 class="new-line">{{ question.title }}</h3>
+			{% endif %}
+			
 			<p id="question">{{ question.question }}</p>
+			
 
 			{% if question.unit %}
 			<small id="unit"><b>Einheit:</b> {{ question.unit }}</small>
@@ -43,6 +53,10 @@
 			</form>
 
 		{% else %}
+
+			{% if challenge %}
+				<h3 class="new-line">{{ question.title }}</h3>
+			{% endif %}
 
 			<p>Nicht schummeln! Diese Frage hast du selbst erstellt. Aber schau dir doch die <a href="{% url 'questions_statistics_question' question.slug %}">Statistik</a> zu deiner Frage an.</p>
 
