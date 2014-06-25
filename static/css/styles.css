@@ -1638,41 +1638,18 @@ aside.menu {
     display: block;
     width: 100%;
     color: #333333; }
-#statistics-question .avg_estimate, #statistics-question .avg_error {
-  float: left;
-  display: block;
-  margin-right: 5.26316%;
-  width: 47.36842%;
-  text-align: center;
-  margin-bottom: 20px; }
-  #statistics-question .avg_estimate:last-child, #statistics-question .avg_error:last-child {
-    margin-right: 0; }
-  #statistics-question .avg_estimate .title, #statistics-question .avg_error .title {
-    font-weight: bold;
-    font-size: 12px;
-    color: #646464;
-    display: block;
-    width: 100%; }
-  #statistics-question .avg_estimate .value, #statistics-question .avg_error .value {
-    font-size: 40px;
-    font-weight: bold;
-    display: block;
-    width: 100%;
-    color: #333333; }
-#statistics-question .avg_error {
-  margin-right: 0; }
-#statistics-question .resolution .value.small, #statistics-question .avg_estimate .value.small, #statistics-question .avg_error .value.small {
-  letter-spacing: -1.5px;
-  font-size: 35px; }
-#statistics-question .resolution .value.smaller, #statistics-question .avg_estimate .value.smaller, #statistics-question .avg_error .value.smaller {
-  letter-spacing: -2px;
-  font-size: 30px; }
-#statistics-question .resolution .value.tiny, #statistics-question .avg_estimate .value.tiny, #statistics-question .avg_error .value.tiny {
-  letter-spacing: -2px;
-  font-size: 25px; }
-#statistics-question .resolution .value.really-tiny, #statistics-question .avg_estimate .value.really-tiny, #statistics-question .avg_error .value.really-tiny {
-  letter-spacing: -2px;
-  font-size: 20px; }
+  #statistics-question .resolution .value.small {
+    letter-spacing: -1.5px;
+    font-size: 35px; }
+  #statistics-question .resolution .value.smaller {
+    letter-spacing: -2px;
+    font-size: 30px; }
+  #statistics-question .resolution .value.tiny {
+    letter-spacing: -2px;
+    font-size: 25px; }
+  #statistics-question .resolution .value.really-tiny {
+    letter-spacing: -2px;
+    font-size: 20px; }
 #statistics-question .explanation {
   display: inline-block;
   width: 100%; }

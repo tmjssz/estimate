@@ -4,19 +4,7 @@
 		@include span-columns(1 of 1);
 		@include number($base-font-color);
 		margin-bottom: 20px;
-	}
 
-	.avg_estimate, .avg_error {
-		@include span-columns(2.5 of 5);
-		@include number($base-font-color);
-		margin-bottom: 20px;
-	}
-
-	.avg_error {
-		@include omega;
-	}
-
-	.resolution, .avg_estimate, .avg_error {
 		.value {
 			&.small {
 				letter-spacing: -1.5px;
