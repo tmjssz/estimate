@@ -85,10 +85,9 @@ def question_view(request, slug):
     # for this questions does already exist an estimate from the current user
     if estimates:
         estimate = estimates[0]
-        avg_estimate = Estimate.objects.get_avg_estimate(question=question)
         next_random = False
         return render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'avg_estimate': avg_estimate, 'next_random': next_random})
+            {'question': question, 'estimate': estimate, 'next_random': next_random})
     
     # current user hasn't already made an estimate for this question
     if request.method == 'POST':

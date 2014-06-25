@@ -27,108 +27,62 @@
 				<p>Leider ist die Zeit abgelaufen.</p>
 			</div>
 
-			<div id="show_btn">Zeige Auflösung</div>
-
-			<div id="show_resolution">
-				<span class="title">Auflösung</span>
-
-				{% if question.answer < 99999 %}
-					<span class="value">
-				{% elif question.answer < 999999999 %}
-					<span class="value small">
-				{% elif question.answer < 999999999999 %}
-					<span class="value smaller">
-				{% elif question.answer < 999999999999999 %}
-					<span class="value tiny">
-				{% else %}
-					<span class="value really-tiny">
-				{% endif %}
-
-				{{ question.answer|floatformat }}</span> 
-				{% if question.unit %}
-					<span class="unit">{{ question.unit }}</span>
-				{% endif %}
-			</div>
-
 			<div class="score">	
 				<span class="title">Punkte</span>
 				<span class="value">{{ estimate.score }}</span>
 			</div>
 
-			{% if question.explanation %}
-				<p>{{ question.explanation }}</p>
-			{% endif %}
+			<div id="show_btn">Zeige Auflösung</div>
 
 			<table class="timed_out">
 				<tr>
-					<td class="left"><strong>&#216; Schätzung</strong></td> 
-					<td class="right">{{ avg_estimate.estimate|floatformat:"-2" }}</td>
-				</tr>
-				<tr>
-					<td class="left"><strong>&#216; Punktzahl</strong></td>
-					<td class="right">{{ avg_estimate.score|floatformat:"0" }}</td>
+					<td class="left"><strong>Auflösung</strong></td>
+					<td class="right">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
 				</tr>
 			</table>
 
+			{% if question.explanation %}
+				<p class="explanation timed_out">{{ question.explanation }}</p>
+			{% endif %}
+
+
 		{% else %}
 
-			<div class="resolution">	
-				<span class="title">Auflösung</span>
-
-				{% if question.answer < 99999 %}
-					<span class="value">
-				{% elif question.answer < 999999999 %}
-					<span class="value small">
-				{% elif question.answer < 999999999999 %}
-					<span class="value smaller">
-				{% elif question.answer < 999999999999999 %}
-					<span class="value tiny">
-				{% else %}
-					<span class="value really-tiny">
-				{% endif %}
-
-				{{ question.answer|floatformat }}</span> {% if question.unit %}{{ question.unit }}{% endif %}
-			</div>
-
 			<div class="score">	
-				<span class="title">Punkte</span>
 				<span class="value">{{ estimate.score }}</span>
+				<span class="title">Punkte</span>
 			</div>
 			
 			{% if estimate.estimate == question.answer %}
 				<h3>Punktlandung!</h3>
-			{% elif estimate.score == 100 %}
-				<h3>Wahnsinn!</h3>
-			{% elif estimate.score >= 98 %}
-				<h3>Ganz knapp daneben!</h3>
 			{% elif estimate.score >= 95 %}
-				<h3>Sehr gut!</h3>
+				<h3>Wahnsinn!</h3>
+			{% elif estimate.score >= 93 %}
+				<h3>Ganz knapp daneben!</h3>
 			{% elif estimate.score >= 90 %}
+				<h3>Sehr gut!</h3>
+			{% elif estimate.score >= 85 %}
 				<h3>Nicht schlecht!</h3>
-			{% endif %}
-
-			{% if question.explanation %}
-				<p class="explanation">{{ question.explanation }}</p>
 			{% endif %}
 
 			<table>
 				<tr>
+					<td class="left"><strong>Auflösung</strong></td>
+					<td class="right">{{ question.answer|floatformat }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
+				</tr>
+				<tr>
 					<td class="left"><strong>Schätzung</strong></td>
-					<td class="right">{{ estimate.estimate|floatformat:"-2" }}</td>
+					<td class="right">{{ estimate.estimate|floatformat:"-2" }} {% if question.unit %}{{ question.unit }}{% endif %}</td>
 				</tr>
 				<tr>
 					<td class="left"><strong>Fehler</strong></td>
 					<td class="right">{{ estimate.percentage_error|floatformat:"-2" }} %</td>
 				</tr>
-				<tr>
-					<td class="left"><strong>&#216; Schätzung</strong></td> 
-					<td class="right">{{ avg_estimate.estimate|floatformat:"-2" }}</td>
-				</tr>
-				<tr>
-					<td class="left"><strong>&#216; Punktzahl</strong></td>
-					<td class="right">{{ avg_estimate.score|floatformat:"0" }}</td>
-				</tr>
 			</table>
+
+			{% if question.explanation %}
+				<p class="explanation">{{ question.explanation }}</p>
+			{% endif %}
 
 		{% endif %}
 

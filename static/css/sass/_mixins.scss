@@ -89,3 +89,23 @@
 		color: $color;
 	}
 }
+
+@mixin big-number($color) {
+	text-align: center;
+
+	.title {
+		font-weight: bold;
+		font-size: 16px;
+		color: $grey-text;
+		display: block;
+		width: 100%;
+	}
+	.value {
+		font-size: 50px;
+		font-weight: bold;
+		display: block;
+		width: 100%;
+		color: $color;
+		line-height: 0.8em;
+	}
+}

@@ -2,29 +2,20 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #question-score {
 
-	.score, .resolution {
-		@include span-columns(2.5 of 5);
-		@include number($base-font-color);
-		margin-bottom: 20px;
-
-		@include media($mobile) {
-			@include span-columns(2 of 4);
-		}
-	}
-
 	.score {
-		@include omega;
+		@include span-columns(5 of 5);
+		@include big-number($base-font-color);
 	}
 
 	#show_btn {
 		@include link-like;
-		@include span-columns(2.5 of 5);
+		@include span-columns(5 of 5);
 		text-align:center;
 		line-height: 60px;
 	}
 
 	#show_resolution {
-		@include span-columns(2.5 of 5);
+		@include span-columns(5 of 5);
 		@include number($base-font-color);
 		margin-bottom: 20px;
 		display:none;
@@ -52,14 +43,14 @@
 		}
 	}
 
-	.timed_out {
+	div.timed_out {
 		text-align: center;
 		.icon {
 			color: transparentize($base-font-color, 0.5);
 		}
 	}
 
-	table.timed_out {
+	table.timed_out, .explanation.timed_out {
 		display: none;
 	}
 

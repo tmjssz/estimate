@@ -1242,37 +1242,27 @@ aside.menu {
   #question-create section.without-aside:last-child {
     margin-right: 0; }
 
-#question-score .score, #question-score .resolution {
+#question-score .score {
   float: left;
   display: block;
   margin-right: 5.26316%;
-  width: 47.36842%;
-  text-align: center;
-  margin-bottom: 20px; }
-  #question-score .score:last-child, #question-score .resolution:last-child {
+  width: 100%;
+  text-align: center; }
+  #question-score .score:last-child {
     margin-right: 0; }
-  #question-score .score .title, #question-score .resolution .title {
+  #question-score .score .title {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
     color: #646464;
     display: block;
     width: 100%; }
-  #question-score .score .value, #question-score .resolution .value {
-    font-size: 40px;
+  #question-score .score .value {
+    font-size: 50px;
     font-weight: bold;
     display: block;
     width: 100%;
-    color: #333333; }
-  @media screen and (max-width: 480px) {
-    #question-score .score, #question-score .resolution {
-      float: left;
-      display: block;
-      margin-right: 6.66667%;
-      width: 46.66667%; }
-      #question-score .score:last-child, #question-score .resolution:last-child {
-        margin-right: 0; } }
-#question-score .score {
-  margin-right: 0; }
+    color: #333333;
+    line-height: 0.8em; }
 #question-score #show_btn {
   color: #477dca;
   text-decoration: none;
@@ -1283,7 +1273,7 @@ aside.menu {
   float: left;
   display: block;
   margin-right: 5.26316%;
-  width: 47.36842%;
+  width: 100%;
   text-align: center;
   line-height: 60px; }
   #question-score #show_btn:hover {
@@ -1297,7 +1287,7 @@ aside.menu {
   float: left;
   display: block;
   margin-right: 5.26316%;
-  width: 47.36842%;
+  width: 100%;
   text-align: center;
   margin-bottom: 20px;
   display: none; }
@@ -1327,11 +1317,11 @@ aside.menu {
 #question-score .resolution .value.really-tiny, #question-score .show_resolution .value.really-tiny, #question-score #show_resolution .value.really-tiny {
   letter-spacing: -2px;
   font-size: 20px; }
-#question-score .timed_out {
+#question-score div.timed_out {
   text-align: center; }
-  #question-score .timed_out .icon {
+  #question-score div.timed_out .icon {
     color: rgba(51, 51, 51, 0.5); }
-#question-score table.timed_out {
+#question-score table.timed_out, #question-score .explanation.timed_out {
   display: none; }
 #question-score .explanation {
   display: inline-block;

@@ -22,3 +22,7 @@ urlpatterns += patterns('',
         TemplateView.as_view(template_name='userauth/register_done.html'),
         name='userauth_register_done')
 )
+
+urlpatterns += patterns('userauth.views',
+    url(r'^neue-gruppe/$', 'create_group', name='create_group')
+)

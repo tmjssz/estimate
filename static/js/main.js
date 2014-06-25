@@ -29,8 +29,7 @@ $( document ).ready(function() {
     // Click handler for 'Show resolution' Button
 	$('#show_btn').click(function() {
 		$(this).hide();
-		$('#show_resolution').fadeIn();
-        $('table.timed_out').fadeIn();
+        $('.timed_out').fadeIn();
 	});
 
 

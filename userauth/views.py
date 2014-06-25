@@ -8,6 +8,8 @@ from django.core.mail import mail_admins
 from django.template import Context
 from django.template.loader import get_template
 from django.conf import settings
+from django.contrib.auth.models import Group
+from userauth.forms import GroupForm
 import logging
 
 logger = logging.getLogger('estimate.userauth.views')
@@ -39,3 +41,9 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
         form = UserCreationForm()
     return render_to_response(template_name, {'register_form': form},
         context_instance=RequestContext(request))
+
+def create_group(request):
+    mygroup, created = Group.objects.get_or_create(name='Web Design')
+    form = GroupForm()
+    logger.debug(form)
+    return render_to_response('userauth/create_group.html', {'form': form, 'test': 'test'}, context_instance=RequestContext(request))
