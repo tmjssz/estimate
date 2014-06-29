@@ -239,6 +239,15 @@ dl {
   dl dd {
     margin: 0; }
 
+html, body {
+  height: 100%;
+  min-height: 100%;
+  background: #333333; }
+  html #stage, body #stage {
+    min-height: 85%;
+    background: white;
+    padding-bottom: 15px; }
+
 body {
   margin: 0; }
   body .badge {
@@ -457,6 +466,17 @@ body {
           width: 28.20513%; }
           body #main .top-right:last-child {
             margin-right: 0; } }
+  body footer {
+    background: #333333;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto; }
+    body footer:after {
+      content: "";
+      display: table;
+      clear: both; }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0; }
