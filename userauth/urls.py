@@ -24,5 +24,7 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('userauth.views',
-    url(r'^neue-gruppe/$', 'create_group', name='create_group')
+    url(r'^neue-gruppe/$', 'create_group', name='create_group'),
+    url(r'^gruppe/$', 'group_list', name='group_list'),
+    url(r'^gruppe/(?P<id>[-\w]+)/$$', 'group_view', name='group_show')
 )

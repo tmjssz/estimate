@@ -4,7 +4,7 @@ section.menu {
 	padding: 20px 0;
 
 	@include media($mobile) {
-		padding: 10px 10px;
+		padding: 0px 10px;
 		text-align:center;
 	}
 
@@ -33,7 +33,11 @@ section.menu {
 			//@include menu-btn(#efb600, 100px);
 			@include menu-btn(#988c7d, #fae49f, 100px);
 		}
-	} 
+	}
+
+	p.invites {
+		text-align: center;
+	}
 
 }
 
@@ -54,9 +58,13 @@ aside.menu {
 
 
 		@include media($mobile) {
-			@include span-columns(1.5 of 4);
+			@include span-columns(3 of 4);
 			@include shift(0.5 of 4);
 			text-align: center;
+			border-top: 1px solid #E0E0E0;
+			border-bottom: 1px solid #E0E0E0;
+			padding-top: 20px;
+			padding-bottom: 20px;
 		}
 
 		.score, .number {
@@ -64,28 +72,35 @@ aside.menu {
 			@include number($dark-gray);
 
 			@include media($mobile) {
-				@include span-columns(1 of 1);
-				@include omega;
+				@include span-columns(1 of 2);
 				margin-bottom: 15px;
 			}
 		}
 	}
 
-	#statistics-menu {
+	h4 {
 		text-align: center;
-		padding: 15px 0;
+	}
+
+	#statistics-menu, #highscores-menu {
+		text-align: center;
+		padding: 0 0 15px 0;
 		@include span-columns(1 of 1);
 		@include omega;
 
 		@include media($mobile) {
 			@include span-columns(2 of 4);
-			text-align: left;
+			//text-align: left;
 		}
 
 		ul {
 			display: inline-block;
-			text-align: left;
-			font-size: 18px;
+			//text-align: left;
+			font-size: 16px;
+			@include media($mobile) {
+				font-size: 16px;
+				//text-align: center;
+			}
 		}
 	}
 

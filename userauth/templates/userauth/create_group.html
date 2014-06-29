@@ -8,6 +8,15 @@
 <div class="center" id="create-group">
 
 	<h2>Neue Gruppe</h2>
+
+	<form enctype="multipart/form-data" action="{% url 'create_group' %}" method="post" accept-charset="utf-8">
+		{% if group %}
+			<ul class="errorlist"><li>Dieser Gruppenname ist bereits vergeben. <a href="{% url 'group_show' group.id %}">{{ group }}</a></li></ul>
+		{% endif %}
+	    {{ form.as_p }}
+	    {% csrf_token %}
+	    <input type="submit" value="Erstellen"/>
+	</form>
     
 <!-- / #login -->
 </div>

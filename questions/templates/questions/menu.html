@@ -53,6 +53,16 @@
 	<!-- /.row --> 
 	</div>
 
+	{% if user.group_invitees.all %}
+		<p class="invites"><i class="fa fa-envelope"></i> 
+		{% if user.group_invitees.all.count == 1 %}
+			Du hast eine <a href="{% url 'group_list' %}">Gruppen-Einladung</a> erhalten.
+		{% elif user.group_invitees.all.count > 1 %}
+			Du hast <a href="{% url 'group_list' %}">{{ user.group_invitees.all.count }} Gruppen-Einladungen</a> erhalten.
+		{% endif %}
+		</p>
+	{% endif %}
+
 <!-- /#games-menu --> 
 </section>
 
@@ -72,11 +82,21 @@
 	<!-- /.short-stats -->
 	</div>
 
-	<div id="statistics-menu">
+	<div id="highscores-menu">
+		<h4>Highscore</h4>
 		<ul>
-			<li><a href="{% url 'questions_highscore' %}"><i class="fa fa-trophy"></i> Highscore</a></li>
-		    <li><a href="{% url 'questions_user' user %}"><i class="fa fa-bar-chart-o"></i> Statistik</a></li>
-		    <li><a href="{% url 'questions_statistics_crowd' %}"><i class="fa fa-users"></i> Crowd</a></li>
+			<li><a href="{% url 'questions_highscore' %}">TOP 50</a></li>
+			{% for group in user.groups.all %}
+		    <li><a href="{% url 'group_show' group.id %}">{{ group }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div id="statistics-menu">
+		<h4>Statistik</h4>
+		<ul>
+		    <li><a href="{% url 'questions_user' user %}">User-Statistik</a></li>
+		    <li><a href="{% url 'questions_statistics_crowd' %}">Crowd-Statistik</a></li>
 		</ul>
 	<!-- /#statistics-menu -->
 	</div>

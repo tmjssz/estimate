@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Gruppe{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+<div id="group-show">
+
+	<h2>Gruppe: {{ group }}</h2>
+
+	{% if is_member %}
+		<div class="top-right">
+			<form enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+				<input type="hidden" name="action" value="leave">
+				{% csrf_token %}
+				<a href="#" class="leave-group" onclick="$(this).closest('form').submit()">
+				{% if group.user_set.count == 1 %}
+					Gruppe löschen
+				{% else %}
+					Gruppe verlassen
+				{% endif %}
+				<i class="fa fa-times"></i></a>
+			</form>
+			<!-- <i class="fa fa-plus-square"></i> -->
+		</div>
+	{% else %}
+		<div class="top-right">
+			<form enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+				<input type="hidden" name="action" value="join">
+				{% csrf_token %}
+				<a href="#" class="join-group" onclick="$(this).closest('form').submit()">Beitreten <i class="fa fa-caret-square-o-right"></i></a>
+			</form>
+			<!-- <i class="fa fa-plus-square"></i> -->
+		</div>
+	{% endif %}
+
+	<section>
+
+		{% if gotten_invites %}
+			<div class="notice">
+			{% if gotten_invites.count == 1 %}
+				Du wurdest von <a href="{% url 'questions_user' gotten_invites.first.inviter %}">{{ gotten_invites.first.inviter }}</a> zu dieser Gruppe eingeladen. 
+
+				<br><br>
+
+				<form class="accept" enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+					<input type="hidden" name="action" value="join">
+					{% csrf_token %}
+					<a href="#" class="accept" onclick="$(this).closest('form').submit()"><i class="fa fa-check"></i> Annehmen</a>
+				</form>
+				<form class="deny" enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+					<input type="hidden" name="action" value="ignore-invite">
+					{% csrf_token %}
+					<a href="#" onclick="$(this).closest('form').submit()" class="deny"><i class="fa fa-times"></i> Ignorieren</a>
+				</form>
+
+			{% elif gotten_invites.count > 1 %}
+				Du wurdest zu dieser Gruppe eingeladen von folgenden Usern:
+				<ul>
+					{% for invite in gotten_invites %}
+					<li><a href="{% url 'questions_user' invite.inviter %}">{{ invite.inviter }}</a></li>
+					{% endfor %}
+				</ul>
+
+				<br>
+
+				<form class="accept" enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+					<input type="hidden" name="action" value="join">
+					{% csrf_token %}
+					<a href="#" class="accept" onclick="$(this).closest('form').submit()"><i class="fa fa-check"></i> Annehmen</a>
+				</form>
+				<form class="deny" enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+					<input type="hidden" name="action" value="ignore-invite">
+					{% csrf_token %}
+					<a href="#" onclick="$(this).closest('form').submit()" class="deny"><i class="fa fa-times"></i> Ignorieren</a>
+				</form>
+
+			{% endif %}
+			</div>
+		{% endif %}
+
+		<div class="score-list">
+
+			{% if scores %}
+			<table class="score">
+
+				{% for score in scores %}
+
+					{% if user == score.user %}
+					    <tr class="current_user">
+				    {% else %}
+				   	 <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.number }}</td>
+				    	<td>{{ score.score }}</td>
+				    </tr>
+
+				{% endfor %}
+
+			</table>
+			{% endif %}
+
+			{% if scores_per_question %}
+			<table class="per-question">
+
+				{% for score in scores_per_question %}
+
+					{% if user == score.user %}
+					    <tr class="current_user">
+				    {% else %}
+				   	 <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.number }}</td>
+				    	<td>{{ score.score }}</td>
+				    </tr>
+
+				{% endfor %}
+
+			</table>
+			{% endif %}
+
+			{% if best_estimates %}
+			<table class="best-question">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Anzahl</th>
+					<th>Fehler der besten Schätzung</th>
+				</tr>
+				{% for s, e in best_estimates %}
+					{% if user == e.user %}
+				    <tr class="current_user">
+				    {% else %}
+				    <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' e.user %}">{{ e.user }}</a></td>
+				    	<td>{{ s.number }}</td>
+				    	<td><a href="{% url 'questions_statistics_question' e.question.slug %}">{{ e.percentage_error|floatformat:"-2" }} %</a></td>
+				    </tr>
+			    {% endfor %}
+			</table>
+			{% endif %}
+
+			{% if best_percentage_error %}
+			<table class="best_percentage_error">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Anzahl</th>
+					<th>&#216; Relativer Fehler</th>
+				</tr>
+				{% for score in best_percentage_error %}
+					{% if user == score.user %}
+				    <tr class="current_user">
+				    {% else %}
+				    <tr>
+				    {% endif %}
+				    	<td>{{ forloop.counter }}</td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td>{{ score.number }}</td>
+				    	<td>{{ score.score|floatformat:"-2" }} %</td>
+				    </tr>
+			    {% endfor %}
+			</table>
+			{% endif %}
+
+		</div>
+
+	</section>
+
+	<aside>
+
+		{% if is_member and invitable_users %}
+			<div class="modal">
+			  <label for="modal-invite">
+			    <div class="btn"><i class="fa fa-plus-square"></i> User einladen</div>
+			  </label>
+			  <input class="modal-state" id="modal-invite" type="checkbox" />
+			  <div class="modal-window">
+			    <div class="modal-inner">
+			      <label class="modal-close" for="modal-invite"></label>
+			      <h1>User einladen</h1>
+			      
+			      <form enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+					{% if invitable_users %}
+					<select name="invitee" id="select-invitee" required size="5">
+						{% for u in invitable_users %}
+							{% if not u.is_superuser %}
+								<option>{{ u }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+					{% endif %}
+					
+					<input type="hidden" name="action" value="invite">
+					{% csrf_token %}
+					<input type="submit" value="Einladen"/>
+				</form>
+			    </div>
+			  </div>
+			</div>
+		{% endif %}
+
+		<h4>Kriterium</h4>
+
+		<ul>
+			<li class="highscore-change selected" rel="score">Punktestand</li>
+			<li class="highscore-change" rel="per-question">Punkte pro Frage</li>
+			<li class="highscore-change" rel="best-question">Beste Schätzung</li>
+			<li class="highscore-change" rel="best_percentage_error">&#216; Relativer Fehler</li>
+		</ul>
+
+		<br>
+
+		{% if group.group_invites.all %}
+		<h4>Eingeladen</h4>
+		<ul>
+			{% for invite in group.group_invites.all %}
+			<li><a href="{% url 'questions_user' invite.invitee %}">{{ invite.invitee }}</a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+	</aside>
+
+    
+<!-- / #group-show -->
+</div>
+{% endblock %}

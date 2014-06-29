@@ -10,7 +10,7 @@ from django.template.loader import get_template
 class GroupForm(ModelForm):
     class Meta:
         model = Group
-        #exclude = ('user', 'question', 'date', 'score', 'time_out', 'percentage_error', 'challenge')
+        exclude = ('permissions',)
 
     def __init__(self, **kwargs):
         super(GroupForm, self).__init__(**kwargs)

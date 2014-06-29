@@ -433,7 +433,6 @@ def question_highscore(request):
     best_estimates = []
     for s in scores_best_question:
         estimate = Estimate.objects.get(user=s.user, percentage_error=s.score)
-        logger.debug(estimate)
         best_estimates.append(estimate)
 
     best_estimates = zip(scores_best_question, best_estimates)

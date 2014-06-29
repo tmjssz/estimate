@@ -1,0 +1,24 @@
+#groups-list {
+
+	.new-group {
+		text-align: center;
+		font-weight: bold;
+		padding: 12px 0 15px 0;	
+
+
+		a {
+			@include btn($base-accent-color);		
+		}
+	}
+
+	.accept {
+		float:right;
+	}
+
+	.notice {
+		.accept-small, .deny-small {
+			float:right;
+		}
+	}
+
+}

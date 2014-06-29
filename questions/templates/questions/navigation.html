@@ -20,6 +20,14 @@
 		<ul class="logged_in">
 			<li><a href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
 			<li><a href="{% url 'questions_account' %}"><i class="fa fa-user"></i> Konto</a></li>
+			<li><a href="{% url 'group_list' %}">
+				{% if user.group_invitees.all %}
+					<i class="fa fa-users"></i><span class="badge success">{{ user.group_invitees.count }}</span>Gruppen
+				{% else %}
+					<i class="fa fa-users"></i> Gruppen
+				{% endif %}
+				
+			</a></li>
 	{% else %}
 	<nav class="logged_out">
 		<ul class="logged_out">

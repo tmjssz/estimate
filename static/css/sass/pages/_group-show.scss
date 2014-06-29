@@ -1,0 +1,66 @@
+#group-show {
+
+	h2 {
+		@include span-columns(8 of 10);
+		@include media ($tablet) {
+			@include span-columns(7 of 10);
+		}
+	}
+
+	.top-right {
+		.join-group {
+			margin: 5px 0;
+			display: inline-block;
+			@include btn($base-accent-color);
+			font-weight: bold;
+		}
+
+		.leave-group {
+			color: $error-red;
+			font-size: 14px;
+			padding: 10px 0;
+			display: inline-block;
+		}
+	}
+
+	div.score-list {
+		margin-bottom: 30px;
+		
+		table {
+
+			&.per-question, &.best-question, &.best_percentage_error {
+				display: none;
+			}
+
+			tr {
+				th:first-child, td:first-child {
+					width: 60px;
+				}
+			}
+		}
+	}
+
+	aside {
+
+		.highscore-change {
+			@include link-like;
+
+			&.selected {
+				color: #333333;
+				cursor: default;
+			}
+		}
+	}
+
+	.accept {
+		float:right;
+	}
+
+	.modal {
+		#select-invitee {
+			width: 100%;
+			font-size: 18px;
+		}
+	}
+
+}

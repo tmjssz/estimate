@@ -175,8 +175,15 @@ class EstimateManager(models.Manager):
         result_list = []
         for row in cursor.fetchall():
             question = Question.objects.get(pk=row[0])
-            #percentage_error = 100 * math.fabs(question.answer - row[1]) / question.answer
-            s = self.model(user=User(), question=question, estimate=row[1], score=row[2], percentage_error=row[3])
+            if not row[3]:
+                if question.answer == 0:
+                    percentage_error = math.fabs(row[1])
+                else:
+                    percentage_error = 100
+            else:
+                percentage_error = row[3]
+
+            s = self.model(user=User(), question=question, estimate=row[1], score=row[2], percentage_error=percentage_error)
             result_list.append(s)
         return result_list
     
@@ -217,12 +224,14 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT COUNT(*) as number
             FROM questions_estimate e, questions_question q
-            WHERE q.id = e.question_id """+stats+"""
-            GROUP BY e.question_id""")
+            WHERE e.question_id = q.id """+stats+"""
+            GROUP BY e.user_id
+            ORDER BY number DESC""")
 
         number_questions = 0
-        for row in cursor.fetchall():
-            number_questions += 1
+        row = cursor.fetchone()
+        if row:
+            number_questions = row[0]
 
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, e.user_id, AVG(e.score) as score, AVG(e.percentage_error) as percentage_error 
@@ -470,6 +479,90 @@ class ScoreManager(models.Manager):
         if row:
             result = self.model(user=user, score=row[0])
         return result
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Group's Scores
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    def group_highscore(self, group):
+        """
+        Returns the group score for every user in the given group.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, SUM(e.score) as score, COUNT(*)
+            FROM questions_estimate e, auth_user_groups a
+            WHERE a.group_id = """+str(group.id)+"""
+                AND a.user_id = e.user_id 
+            GROUP BY e.user_id
+            ORDER BY score DESC""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1], number=row[2])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_per_question_group(self, group):
+        """
+        Returns the score for every user in a given group.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, SUM(e.score) / count(*) as score_per_question, COUNT(*) as number
+            FROM questions_estimate e, auth_user_groups a
+            WHERE a.group_id = """+str(group.id)+"""
+                AND a.user_id = e.user_id
+            GROUP BY e.user_id
+            ORDER BY score_per_question DESC""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1], number=row[2])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_best_question_group(self, group):
+        """
+        Returns the score for every user.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, MIN(e.percentage_error) as percentage_error, COUNT(*) as number
+            FROM questions_estimate e, auth_user_groups a
+            WHERE a.group_id = """+str(group.id)+"""
+                AND a.user_id = e.user_id
+            GROUP BY e.user_id
+            ORDER BY percentage_error ASC""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1], number=row[2])
+            result_list.append(s)
+        return result_list
+
+    def get_highscore_best_percentage_error_group(self, group):
+        """
+        Returns the score for every user.
+        Ordered ascending by percentage error.
+        """
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT e.user_id as user, AVG(e.percentage_error) as percentage_error, COUNT(*) as number
+            FROM questions_estimate e, auth_user_groups a
+            WHERE a.group_id = """+str(group.id)+"""
+                AND a.user_id = e.user_id
+            GROUP BY e.user_id
+            ORDER BY percentage_error""")
+        result_list = []
+        for row in cursor.fetchall():
+            user = User.objects.get(pk=row[0])
+            s = self.model(user=user, score=row[1], number=row[2])
+            result_list.append(s)
+        return result_list
 
 # -----------------------------------------------------------------------------
 # SCORE MODEL
