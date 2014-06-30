@@ -266,7 +266,7 @@ body {
       background: #e6efc2;
       color: #333333; }
   body #main {
-    max-width: 50em;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -468,15 +468,28 @@ body {
             margin-right: 0; } }
   body footer {
     background: #333333;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.5);
     padding: 15px;
-    max-width: 50em;
+    max-width: 800px;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    font-size: 12px; }
     body footer:after {
       content: "";
       display: table;
       clear: both; }
+    body footer a {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      color: rgba(255, 255, 255, 0.5);
+      display: inline-block;
+      text-decoration: underline;
+      float: right;
+      padding-left: 5px; }
+      body footer a:hover {
+        color: white;
+        text-decoration: none; }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0; }
@@ -626,7 +639,7 @@ header {
     header {
       margin: 0; } }
   header div.navigation-wrapper {
-    max-width: 50em;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     position: relative;

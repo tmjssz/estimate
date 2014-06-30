@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('questions.urls')),
     url(r'^', include('userauth.urls')),
+    (r'^kontakt/', include('contact_form.urls')),
 )

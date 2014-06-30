@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Feedback{% endblock %}
+
+{% block content %}
+<div id="feedback">
+
+	<h2>Feedback</h2>
+	
+	<form method="post">{% csrf_token %}
+		<p>
+			<label for="name_id">Name:</label>
+			<input required type="text" id="name_id" name="name">
+		</p>
+		<p>
+			<label for="mail_id">E-Mail:</label>
+			<input required type="text" id="mail_id" name="email">
+		</p>
+		<p>
+			<label for="message_id">Nachricht:</label>
+			<textarea required name="body" id="message_id" rows="10" cols="50"></textarea>
+		</p>
+		<input type="submit" value="Absenden">
+	</form>
+
+<!-- / #feedback -->
+</div>
+{% endblock %}

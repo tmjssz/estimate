@@ -267,9 +267,24 @@ body {
 
 	footer {
 		background: $dark-gray;
-		color: transparentize(white, 0.3);
+		color: transparentize(white, 0.5);
 		padding: 15px;
 		@include outer-container;
+		font-size: 12px;
+
+		a {
+			@include transition (all 0.2s ease-in-out);
+    		color: transparentize(white, 0.5);
+    		display: inline-block;
+    		text-decoration:underline;
+    		float: right;
+    		padding-left: 5px;
+
+    		&:hover {
+				color: white;
+				text-decoration: none;
+			}
+    	}
 	}
 
 	.modal {
