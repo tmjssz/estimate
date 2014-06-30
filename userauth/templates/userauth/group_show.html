@@ -84,6 +84,12 @@
 
 			{% if scores %}
 			<table class="score">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Anzahl</th>
+					<th>Punktestand</th>
+				</tr>
 
 				{% for score in scores %}
 
@@ -105,6 +111,12 @@
 
 			{% if scores_per_question %}
 			<table class="per-question">
+				<tr>
+					<th>Platz</th>
+					<th class="left">Benutzer</th>
+					<th>Anzahl</th>
+					<th>Punkte pro Frage</th>
+				</tr>
 
 				{% for score in scores_per_question %}
 
