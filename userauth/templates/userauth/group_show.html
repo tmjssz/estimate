@@ -219,10 +219,11 @@
 		<br>
 
 		{% if group.group_invites.all %}
+		{% regroup group.group_invites.all by invitee as invitee_list %}
 		<h4>Eingeladen</h4>
 		<ul>
-			{% for invite in group.group_invites.all %}
-			<li><a href="{% url 'questions_user' invite.invitee %}">{{ invite.invitee }}</a></li>
+			{% for invitee in invitee_list %}
+			<li><a href="{% url 'questions_user' invitee.grouper %}">{{ invitee.grouper }}</a></li>
 			{% endfor %}
 		</ul>
 		{% endif %}
