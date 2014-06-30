@@ -137,7 +137,7 @@ def group_view(request, id):
     else:
         gotten_invites = None
 
-    invites = GroupInvitation.objects.filter(group=group, inviter=request.user)
+    invites = GroupInvitation.objects.filter(group=group)
     ids_to_exclude = [i.invitee.pk for i in invites]
     invitable_users = User.objects.exclude(pk__in=ids_to_exclude)
 
