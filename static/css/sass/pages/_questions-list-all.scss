@@ -2,6 +2,14 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #questions-list-all {
 
+	.open-questions, .answered-questions {
+		li {
+			i {
+				padding-left: 10px;
+			}
+		}
+	}
+
 	.full {
 		@include span-columns(10);
 		margin-bottom: 20px;

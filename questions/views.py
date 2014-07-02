@@ -78,12 +78,17 @@ def question_view(request, slug):
     """
     Show a question with estimate form or reached score
     """
+    if request.user.is_authenticated():
+        if request.user.is_active and request.user.is_superuser:
+            is_admin = True
+        else:
+            is_admin = False
+
     question = get_object_or_404(Question, slug=slug, published=True)
-    
     estimates = Estimate.objects.filter(question=question, user=request.user)
     
     # for this questions does already exist an estimate from the current user
-    if estimates:
+    if estimates and not is_admin:
         estimate = estimates[0]
         next_random = False
         return render(request, 'questions/question-score.html',
@@ -99,7 +104,8 @@ def question_view(request, slug):
 
         form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
         if form.is_valid():
-            form.save()
+            if not is_admin:
+                form.save()
             return HttpResponseRedirect(question.get_absolute_url())
     else:
         form = EstimateForm()

@@ -10,7 +10,7 @@
         {{ question.title }}
     </div>
 
-    {% if own_estimate or user == question.author %}
+    {% if own_estimate or user == question.author or user.is_superuser %}
 
         <section>
 

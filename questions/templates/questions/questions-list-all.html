@@ -9,9 +9,13 @@
 		{% if question_list.count > 0 %}
 
 			<h2>Offene Fragen</h2>
-			<ul>
+			<ul class="open-questions">
 			    {% for question in question_list %}
-			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
+					{% if user.is_superuser %}
+			    		<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+			    	{% endif %}
+			    </li>
 			    {% endfor %}
 			</ul>
 
@@ -29,9 +33,11 @@
 	<div class="half">
 
 		<h3><i class="fa fa-check-circle"></i> Beantwortet</h3>
-		<ul>
+		<ul class="answered-questions">
 			{% for question in ready_list %}
-		    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></li>
+		    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+		    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+		    </li>
 		    {% endfor %}
 		</ul>
 
