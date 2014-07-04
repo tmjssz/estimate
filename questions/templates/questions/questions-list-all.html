@@ -22,7 +22,7 @@
 		{% else %}
 
 		<h2>Alle Fragen beantwortet</h2>
-		<p>Sorry {{ user.username }}, du hast bereits zu jeder Frage eine Schätzung abgegeben. Leider stehen momentan keine weiteren Fragen zur Verfügung.</p>
+		<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="{% url 'questions_question_create' %}">weitere Fragen</a>.</p>
 		<p>Schaue dir deine <a href="{% url 'questions_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
 
 		{% endif %}
