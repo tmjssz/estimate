@@ -165,7 +165,7 @@ def question_random(request):
     if questions.count() == 0:
         # there are no unanswered questions left
         title = u'Alle Fragen beantwortet'
-        message = u'Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="/frage-einreichen">weitere Fragen</a>.'
+        message = u'Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal weitere Fragen.'
         return render(request, 'questions/message.html', {'title': title, 'message': message})
     
     question = random.choice(questions)
