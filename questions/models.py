@@ -346,7 +346,7 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, SUM(e.score) as score, COUNT(*) as number
             FROM questions_estimate e
-            WHERE NOT time_out
+            WHERE NOT e.time_out
             GROUP BY e.user_id
             ORDER BY score DESC
             LIMIT 0, """ + str(limit))
@@ -366,6 +366,7 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, SUM(e.score) / count(*) as score_per_question, COUNT(*) as number
             FROM questions_estimate e
+            WHERE NOT e.time_out
             GROUP BY e.user_id
             ORDER BY score_per_question DESC
             LIMIT 0, """ + str(limit))
@@ -385,6 +386,7 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, MIN(e.percentage_error) as percentage_error, COUNT(*) as number
             FROM questions_estimate e
+            WHERE NOT e.time_out
             GROUP BY e.user_id
             ORDER BY percentage_error ASC
             LIMIT 0, """ + str(limit))
@@ -405,6 +407,7 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, AVG(e.percentage_error) as percentage_error, COUNT(*) as number
             FROM questions_estimate e
+            WHERE NOT e.time_out
             GROUP BY e.user_id
             ORDER BY percentage_error
             LIMIT 0, """ + str(limit))
@@ -442,7 +445,7 @@ class ScoreManager(models.Manager):
     def challenge_highscore(self, challenge, user):
         """
         Returns the challenge score for every user, who played a given challenge.
-        Does not take scores from estimates for questions, that were created by te given user.
+        Does not take scores from estimates for questions, that were created by the given user.
         """
         from django.db import connection
         cursor = connection.cursor()
@@ -495,6 +498,7 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e, auth_user_groups a
             WHERE a.group_id = """+str(group.id)+"""
                 AND a.user_id = e.user_id 
+                AND NOT e.time_out
             GROUP BY e.user_id
             ORDER BY score DESC""")
         result_list = []
@@ -515,6 +519,7 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e, auth_user_groups a
             WHERE a.group_id = """+str(group.id)+"""
                 AND a.user_id = e.user_id
+                AND NOT e.time_out
             GROUP BY e.user_id
             ORDER BY score_per_question DESC""")
         result_list = []
@@ -535,6 +540,7 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e, auth_user_groups a
             WHERE a.group_id = """+str(group.id)+"""
                 AND a.user_id = e.user_id
+                AND NOT e.time_out
             GROUP BY e.user_id
             ORDER BY percentage_error ASC""")
         result_list = []
@@ -556,6 +562,7 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e, auth_user_groups a
             WHERE a.group_id = """+str(group.id)+"""
                 AND a.user_id = e.user_id
+                AND NOT e.time_out
             GROUP BY e.user_id
             ORDER BY percentage_error""")
         result_list = []
