@@ -47,7 +47,7 @@
 				    	<td>{{ forloop.counter }}</td>
 				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
-				    	<td>{{ score.score|floatformat:"-2" }}</td>
+				    	<td>{{ score.score|floatformat }}</td>
 				    </tr>
 			    {% endfor %}
 			</table>
