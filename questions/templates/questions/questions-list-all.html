@@ -1,43 +1,54 @@
 {% extends "base.html" %}
+{% load mathfilters %}
 
 {% block title %}{{ block.super }} - Alle Fragen{% endblock %}
 
 {% block content %}
 <div id="questions-list-all">
-	<div class="full">
 
 		{% if question_list.count > 0 %}
 
 			<h2>Offene Fragen</h2>
-			<ul class="open-questions">
+
+			<div class="half">
+				<ul class="open-questions">
 			    {% for question in question_list %}
-			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
-					{% if user.is_superuser %}
-			    		<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
-			    	{% endif %}
-			    </li>
+			    	{% if question_list.count > 1 and forloop.counter0 >= question_list.count|div:2 %}
+						</ul></div><div class="half"><ul class="open-questions">
+					{% endif %}
+				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
+						{% if user.is_superuser %}
+				    		<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+				    	{% endif %}
+				    </li>
 			    {% endfor %}
-			</ul>
+				</ul>
+			</div>
 
 		{% else %}
 
 		<h2>Alle Fragen beantwortet</h2>
-		<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="{% url 'questions_question_create' %}">weitere Fragen</a>.</p>
-		<p>Schaue dir deine <a href="{% url 'questions_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
+		<div class="full">
+			<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="{% url 'questions_question_create' %}">weitere Fragen</a>.</p>
+			<p>Schaue dir deine <a href="{% url 'questions_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
+		</div>
 
 		{% endif %}
 
-	</div>
+	
 
 	{% if ready_list %}
-	<div class="half">
+	<h3><i class="fa fa-check-circle"></i> Beantwortet</h3>
 
-		<h3><i class="fa fa-check-circle"></i> Beantwortet</h3>
+	<div class="half">
 		<ul class="answered-questions">
 			{% for question in ready_list %}
-		    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
-		    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
-		    </li>
+				{% if ready_list.count > 1 and forloop.counter0 == ready_list.count|div:2 %}
+					</ul></div><div class="half"><ul class="answered-questions">
+				{% endif %}
+			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+			    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+			    </li>
 		    {% endfor %}
 		</ul>
 
@@ -45,11 +56,15 @@
 	{% endif %}
 
 	{% if own_questions.count > 0 %}
+	<h3><i class="fa fa-pencil"></i> Eigene Fragen</h3>
+
 	<div class="half">
 
-		<h3><i class="fa fa-pencil"></i> Eigene Fragen</h3>
 		<ul>
 			{% for question in own_questions %}
+				{% if own_questions.count > 1 and forloop.counter0 == own_questions.count|div:2 %}
+					</ul></div><div class="half"><ul>
+				{% endif %}
 		    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
 		    {% endfor %}
 		</ul>

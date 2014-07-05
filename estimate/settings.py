@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'contact_form',
     'userauth',
     'questions',
+    'mathfilters',
 )
 
 MIDDLEWARE_CLASSES = (
