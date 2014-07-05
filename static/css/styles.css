@@ -2034,9 +2034,14 @@ aside.menu {
   float: left;
   display: block;
   margin-right: 2.5641%;
-  width: 48.71795%; }
+  width: 48.71795%;
+  margin-bottom: 15px; }
   #questions-list-all .half:last-child {
     margin-right: 0; }
+  #questions-list-all .half:nth-child(3n) {
+    margin-right: 0; }
+  #questions-list-all .half:nth-child(3n+1) {
+    clear: left; }
   @media screen and (max-width: 480px) {
     #questions-list-all .half {
       float: left;
@@ -2044,9 +2049,16 @@ aside.menu {
       margin-right: 6.66667%;
       width: 100%;
       margin-bottom: 15px;
-      text-align: center; }
+      text-align: center;
+      margin-bottom: 0; }
       #questions-list-all .half:last-child {
         margin-right: 0; } }
+#questions-list-all h3 {
+  display: inline-block !important;
+  width: 100%; }
+@media screen and (max-width: 480px) {
+  #questions-list-all h2, #questions-list-all h3 {
+    text-align: center; } }
 
 #register_done a.go {
   text-align: center;

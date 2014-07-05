@@ -13,8 +13,10 @@
 			<div class="half">
 				<ul class="open-questions">
 			    {% for question in question_list %}
-			    	{% if question_list.count > 1 and forloop.counter0 >= question_list.count|div:2 %}
-						</ul></div><div class="half"><ul class="open-questions">
+			    	{% if question_list.count > 1 %}
+			    		{% if forloop.counter0 == question_list.count|div:2 or forloop.counter0 == question_list.count|add:1|div:2 %}
+							</ul></div><div class="half"><ul class="open-questions">
+						{% endif %}
 					{% endif %}
 				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
 						{% if user.is_superuser %}
@@ -43,8 +45,10 @@
 	<div class="half">
 		<ul class="answered-questions">
 			{% for question in ready_list %}
-				{% if ready_list.count > 1 and forloop.counter0 == ready_list.count|div:2 %}
-					</ul></div><div class="half"><ul class="answered-questions">
+				{% if ready_list.count > 1 %}
+					{% if forloop.counter0 == ready_list.count|div:2 or forloop.counter0 == ready_list.count|add:1|div:2 %}
+						</ul></div><div class="half"><ul class="answered-questions">
+					{% endif %}
 				{% endif %}
 			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
 			    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
@@ -62,8 +66,10 @@
 
 		<ul>
 			{% for question in own_questions %}
-				{% if own_questions.count > 1 and forloop.counter0 == own_questions.count|div:2 %}
-					</ul></div><div class="half"><ul>
+				{% if own_questions.count > 1 %}
+					{% if forloop.counter0 == own_questions.count|div:2 or forloop.counter0 == own_questions.count|add:1|div:2 %}
+						</ul></div><div class="half"><ul>
+					{% endif %}
 				{% endif %}
 		    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
 		    {% endfor %}
