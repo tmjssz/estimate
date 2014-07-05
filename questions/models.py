@@ -346,6 +346,7 @@ class ScoreManager(models.Manager):
         cursor.execute("""
             SELECT e.user_id as user, SUM(e.score) as score, COUNT(*) as number
             FROM questions_estimate e
+            WHERE NOT time_out
             GROUP BY e.user_id
             ORDER BY score DESC
             LIMIT 0, """ + str(limit))
