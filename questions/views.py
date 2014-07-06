@@ -355,7 +355,7 @@ def statistics_crowd(request):
         show_estimate.append(show)
 
     if len(avg_estimates) > 0:
-        avg_percentage_error = avg_percentage_error / len(avg_estimates)
+        avg_percentage_error = avg_percentage_error / 0
 
     best_avg_estimate = Estimate.objects.get_best_avg_estimate(admin)
 
