@@ -148,8 +148,11 @@ def group_view(request, id):
     scores_best_question = Score.objects.get_highscore_best_question_group(group)
     best_estimates = []
     for s in scores_best_question:
-        estimate = Estimate.objects.get(user=s.user, percentage_error=s.score)
-        best_estimates.append(estimate)
+        estimate = Estimate.objects.filter(user=s.user, percentage_error=s.score)
+        if estimate:
+            best_estimates.append(estimate[0])
+        else:
+            best_estimates.append(None)
 
     best_estimates = zip(scores_best_question, best_estimates)
 
