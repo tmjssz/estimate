@@ -64,13 +64,17 @@ def questions_list_all(request):
     # filter out questions, which were already answered
     estimates = Estimate.objects.filter(user=request.user)
     ready_questions = []
+    time_out = []
     for e in estimates:
         questions = questions.exclude(pk=e.question.pk)
-        ready_questions.append(e.question)
+        if e.time_out:
+            time_out.append(e.question)
+        else:
+            ready_questions.append(e.question)
 
     own_questions = Question.objects.filter(published=True, author=request.user)
 
-    return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
+    return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'time_out': time_out, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
 
 @login_required

@@ -59,6 +59,28 @@
 	</div>
 	{% endif %}
 
+
+	{% if time_out %}
+	<h3><i class="fa fa-exclamation-triangle"></i> Zeit abgelaufen ({{ time_out|length }})</h3>
+
+	<div class="half">
+		<ul class="time-out">
+			{% for question in time_out %}
+				{% if time_out|length > 1 %}
+					{% if forloop.counter0 == time_out|length|div:2 or forloop.counter0 == time_out|length|add:1|div:2 %}
+						</ul></div><div class="half"><ul class="time-out">
+					{% endif %}
+				{% endif %}
+			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+			    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+			    </li>
+		    {% endfor %}
+		</ul>
+
+	</div>
+	{% endif %}
+
+
 	{% if own_questions.count > 0 %}
 	<h3><i class="fa fa-pencil"></i> Eigene Fragen ({{ own_questions.count }})</h3>
 

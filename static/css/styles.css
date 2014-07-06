@@ -2011,7 +2011,7 @@ aside.menu {
   #question-show aside img {
     width: 100%; }
 
-#questions-list-all .open-questions li i, #questions-list-all .answered-questions li i {
+#questions-list-all .open-questions li i, #questions-list-all .answered-questions li i, #questions-list-all .time-out li i {
   padding-left: 10px; }
 #questions-list-all .full {
   float: left;
