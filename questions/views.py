@@ -222,7 +222,9 @@ def challenges_list_all(request):
 
     own_challenges = Challenge.objects.own_challenges(request.user)
 
-    return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges, 'own_challenges': own_challenges})
+    open_questions = len(Question.objects.filter(published=True).exclude(author=request.user)) > len(Estimate.objects.filter(user=request.user))
+
+    return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges, 'own_challenges': own_challenges, 'open_questions': open_questions})
 
 
 @login_required
