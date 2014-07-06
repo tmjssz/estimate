@@ -170,6 +170,7 @@ class EstimateManager(models.Manager):
             SELECT e.question_id, AVG(e.estimate) as estimate, AVG(e.score) as score, 100*ABS(q.answer-AVG(e.estimate))/q.answer as percentage_error 
             FROM questions_estimate e, questions_question q
             WHERE q.id = e.question_id """+stats+"""
+                AND NOT e.time_out
             GROUP BY e.question_id
             ORDER BY percentage_error""")
         result_list = []
@@ -193,8 +194,9 @@ class EstimateManager(models.Manager):
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, AVG(e.score) as score 
             FROM questions_estimate e
-            WHERE e.question_id="""+str(question.id)+
-            """ GROUP BY e.question_id""")
+            WHERE e.question_id="""+str(question.id)+"""
+                AND NOT e.time_out
+            GROUP BY e.question_id""")
         result = None
         row = cursor.fetchone()
         if row:
@@ -225,6 +227,7 @@ class EstimateManager(models.Manager):
             SELECT COUNT(*) as number
             FROM questions_estimate e, questions_question q
             WHERE e.question_id = q.id """+stats+"""
+                AND NOT e.time_out
             GROUP BY e.user_id
             ORDER BY number DESC""")
 
@@ -237,6 +240,7 @@ class EstimateManager(models.Manager):
             SELECT AVG(e.estimate) as estimate, e.user_id, AVG(e.score) as score, AVG(e.percentage_error) as percentage_error 
             FROM questions_estimate e, questions_question q
             WHERE q.id = e.question_id """+stats+"""
+                AND NOT e.time_out 
             GROUP BY e.user_id
             HAVING COUNT(*)>="""+str(number_questions)+"""
             ORDER BY percentage_error""")
