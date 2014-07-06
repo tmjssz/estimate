@@ -2011,54 +2011,63 @@ aside.menu {
   #question-show aside img {
     width: 100%; }
 
-#questions-list-all .open-questions li i, #questions-list-all .answered-questions li i, #questions-list-all .time-out li i {
-  padding-left: 10px; }
-#questions-list-all .full {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 100%;
-  margin-bottom: 20px; }
-  #questions-list-all .full:last-child {
-    margin-right: 0; }
+#questions-list-all {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto; }
+  #questions-list-all:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #questions-list-all .open-questions .half, #questions-list-all .answered-questions .half, #questions-list-all .time-out .half, #questions-list-all .own-questions .half {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 48.71795%;
+    margin-bottom: 15px; }
+    #questions-list-all .open-questions .half:last-child, #questions-list-all .answered-questions .half:last-child, #questions-list-all .time-out .half:last-child, #questions-list-all .own-questions .half:last-child {
+      margin-right: 0; }
+    #questions-list-all .open-questions .half:nth-child(3n), #questions-list-all .answered-questions .half:nth-child(3n), #questions-list-all .time-out .half:nth-child(3n), #questions-list-all .own-questions .half:nth-child(3n) {
+      margin-right: 0; }
+    #questions-list-all .open-questions .half:nth-child(3n+1), #questions-list-all .answered-questions .half:nth-child(3n+1), #questions-list-all .time-out .half:nth-child(3n+1), #questions-list-all .own-questions .half:nth-child(3n+1) {
+      clear: left; }
+    @media screen and (max-width: 480px) {
+      #questions-list-all .open-questions .half, #questions-list-all .answered-questions .half, #questions-list-all .time-out .half, #questions-list-all .own-questions .half {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+        margin-bottom: 0; }
+        #questions-list-all .open-questions .half:last-child, #questions-list-all .answered-questions .half:last-child, #questions-list-all .time-out .half:last-child, #questions-list-all .own-questions .half:last-child {
+          margin-right: 0; } }
+  #questions-list-all .open-questions li i, #questions-list-all .answered-questions li i, #questions-list-all .time-out li i, #questions-list-all .own-questions li i {
+    padding-left: 10px; }
+  #questions-list-all .full {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px; }
+    #questions-list-all .full:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 480px) {
+      #questions-list-all .full {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%;
+        text-align: center; }
+        #questions-list-all .full:last-child {
+          margin-right: 0; } }
+  #questions-list-all h3 {
+    display: inline-block !important;
+    width: 100%; }
   @media screen and (max-width: 480px) {
-    #questions-list-all .full {
-      float: left;
-      display: block;
-      margin-right: 6.66667%;
-      width: 100%;
-      text-align: center; }
-      #questions-list-all .full:last-child {
-        margin-right: 0; } }
-#questions-list-all .half {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 48.71795%;
-  margin-bottom: 15px; }
-  #questions-list-all .half:last-child {
-    margin-right: 0; }
-  #questions-list-all .half:nth-child(3n) {
-    margin-right: 0; }
-  #questions-list-all .half:nth-child(3n+1) {
-    clear: left; }
-  @media screen and (max-width: 480px) {
-    #questions-list-all .half {
-      float: left;
-      display: block;
-      margin-right: 6.66667%;
-      width: 100%;
-      margin-bottom: 15px;
-      text-align: center;
-      margin-bottom: 0; }
-      #questions-list-all .half:last-child {
-        margin-right: 0; } }
-#questions-list-all h3 {
-  display: inline-block !important;
-  width: 100%; }
-@media screen and (max-width: 480px) {
-  #questions-list-all h2, #questions-list-all h3 {
-    text-align: center; } }
+    #questions-list-all h2, #questions-list-all h3 {
+      text-align: center; } }
 
 #register_done a.go {
   text-align: center;

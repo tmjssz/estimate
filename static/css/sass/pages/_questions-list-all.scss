@@ -1,8 +1,22 @@
 // LIST ALL QUESTIONS PAGE 
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #questions-list-all {
+	@include outer-container;
 
-	.open-questions, .answered-questions, .time-out {
+	.open-questions, .answered-questions, .time-out, .own-questions {
+		.half {
+			@include span-columns(5 of 10);
+			@include omega(3n);
+			margin-bottom: 15px;
+
+			@include media($mobile) {
+				@include span-columns(4 of 4);
+				margin-bottom: 15px;
+				text-align: center;
+				margin-bottom: 0;
+			}
+		}
+
 		li {
 			i {
 				padding-left: 10px;
@@ -11,24 +25,12 @@
 	}
 
 	.full {
-		@include span-columns(10);
+		@include span-columns(10 of 10);
+		@include omega;
 		margin-bottom: 20px;
 		@include media($mobile) {
 			@include span-columns(4 of 4);
 			text-align: center;
-		}
-	}
-
-	.half {
-		@include span-columns(5 of 10);
-		@include omega(3n);
-		margin-bottom: 15px;
-
-		@include media($mobile) {
-			@include span-columns(4 of 4);
-			margin-bottom: 15px;
-			text-align: center;
-			margin-bottom: 0;
 		}
 	}
 

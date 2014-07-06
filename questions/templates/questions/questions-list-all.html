@@ -6,16 +6,21 @@
 {% block content %}
 <div id="questions-list-all">
 
+	<div class="open-questions">
 		{% if question_list.count > 0 %}
 
 			<h2>Offene Fragen ({{ question_list.count }})</h2>
 
+			{% if question_list.count < 2 %}
+			<div class="full">
+			{% else %}
 			<div class="half">
-				<ul class="open-questions">
+			{% endif %}
+				<ul>
 			    {% for question in question_list %}
 			    	{% if question_list.count > 1 %}
 			    		{% if forloop.counter0 == question_list.count|div:2 or forloop.counter0 == question_list.count|add:1|div:2 %}
-							</ul></div><div class="half"><ul class="open-questions">
+							</ul></div><div class="half"><ul>
 						{% endif %}
 					{% endif %}
 				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
@@ -29,74 +34,92 @@
 
 		{% else %}
 
-		<h2>Alle Fragen beantwortet</h2>
-		<div class="full">
-			<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="{% url 'questions_question_create' %}">weitere Fragen</a>.</p>
-			<p>Schaue dir deine <a href="{% url 'questions_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
-		</div>
+			<h2>Alle Fragen beantwortet</h2>
+			<div class="full">
+				<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal <a href="{% url 'questions_question_create' %}">weitere Fragen</a>.</p>
+				<p>Schaue dir deine <a href="{% url 'questions_user' user.username %}">Statistik</a> mit all deinen Schätzungen an.</p>
+			</div>
 
 		{% endif %}
-
+	</div>
 	
 
 	{% if ready_list %}
-	<h3><i class="fa fa-check-circle"></i> Beantwortet ({{ ready_list|length }})</h3>
+	<div class="answered-questions">
+		<h3><i class="fa fa-check-circle"></i> Beantwortet ({{ ready_list|length }})</h3>
 
-	<div class="half">
-		<ul class="answered-questions">
-			{% for question in ready_list %}
-				{% if ready_list|length > 1 %}
-					{% if forloop.counter0 == ready_list|length|div:2 or forloop.counter0 == ready_list|length|add:1|div:2 %}
-						</ul></div><div class="half"><ul class="answered-questions">
+		{% if ready_list|length < 2 %}
+		<div class="full">
+		{% else %}
+		<div class="half">
+		{% endif %}
+			<ul>
+				{% for question in ready_list %}
+					{% if ready_list|length > 1 %}
+						{% if forloop.counter0 == ready_list|length|div:2 or forloop.counter0 == ready_list|length|add:1|div:2 %}
+							</ul></div><div class="half"><ul>
+						{% endif %}
 					{% endif %}
-				{% endif %}
-			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
-			    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
-			    </li>
-		    {% endfor %}
-		</ul>
+				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+				    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+				    </li>
+			    {% endfor %}
+			</ul>
 
+		</div>
 	</div>
 	{% endif %}
 
 
 	{% if time_out %}
-	<h3><i class="fa fa-exclamation-triangle"></i> Zeit abgelaufen ({{ time_out|length }})</h3>
+	<div class="time-out">
+		<h3><i class="fa fa-exclamation-triangle"></i> Zeit abgelaufen ({{ time_out|length }})</h3>
 
-	<div class="half">
-		<ul class="time-out">
-			{% for question in time_out %}
-				{% if time_out|length > 1 %}
-					{% if forloop.counter0 == time_out|length|div:2 or forloop.counter0 == time_out|length|add:1|div:2 %}
-						</ul></div><div class="half"><ul class="time-out">
+		{% if time_out|length < 2 %}
+		<div class="full">
+		{% else %}
+		<div class="half">
+		{% endif %}
+			<ul>
+				{% for question in time_out %}
+					{% if time_out|length > 1 %}
+						{% if forloop.counter0 == time_out|length|div:2 or forloop.counter0 == time_out|length|add:1|div:2 %}
+							</ul></div><div class="half"><ul>
+						{% endif %}
 					{% endif %}
-				{% endif %}
-			    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
-			    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
-			    </li>
-		    {% endfor %}
-		</ul>
+				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+				    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
+				    </li>
+			    {% endfor %}
+			</ul>
 
+		</div>
 	</div>
 	{% endif %}
 
 
 	{% if own_questions.count > 0 %}
-	<h3><i class="fa fa-pencil"></i> Eigene Fragen ({{ own_questions.count }})</h3>
+	<div class="own-questions">
+		<h3><i class="fa fa-pencil"></i> Eigene Fragen ({{ own_questions.count }})</h3>
 
-	<div class="half">
+		{% if own_questions.count < 2 %}
+		<div class="full">
+		{% else %}
+		<div class="half">
+		{% endif %}
 
-		<ul>
-			{% for question in own_questions %}
-				{% if own_questions.count > 1 %}
-					{% if forloop.counter0 == own_questions.count|div:2 or forloop.counter0 == own_questions.count|add:1|div:2 %}
-						</ul></div><div class="half"><ul>
+			<ul>
+				{% for question in own_questions %}
+					{% if own_questions.count > 1 %}
+						{% if forloop.counter0 == own_questions.count|div:2 or forloop.counter0 == own_questions.count|add:1|div:2 %}
+							</ul></div><div class="half"><ul>
+						{% endif %}
 					{% endif %}
-				{% endif %}
-		    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
-		    {% endfor %}
-		</ul>
+			    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
+			    {% endfor %}
+			</ul>
 
+		</div>
 	</div>
 	{% endif %}
 	
