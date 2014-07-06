@@ -334,8 +334,11 @@ def statistics_crowd(request):
 
     for e in avg_estimates:
         avg_percentage_error += e.percentage_error
-        best_estimate = Estimate.objects.filter(question=e.question, time_out=False).order_by('percentage_error')[0]
-        best_estimates.append(best_estimate)
+        best_estimate = Estimate.objects.filter(question=e.question, time_out=False).order_by('percentage_error')
+        if best_estimate:
+            best_estimates.append(best_estimate[0])
+        else:
+            best_estimates.append(None)
 
         count = Estimate.objects.filter(question=e.question).count()
         count_estimates.append(count)
