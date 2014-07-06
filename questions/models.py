@@ -432,6 +432,7 @@ class ScoreManager(models.Manager):
             FROM questions_estimate e, questions_challenge_questions q
             WHERE q.challenge_id = """+str(challenge.id)+""" 
                 AND q.question_id = e.question_id 
+                AND NOT e.time_out
             GROUP BY e.user_id
             HAVING COUNT(*) = """+str(len(challenge.questions.all()))+"""
             ORDER BY score DESC""")
@@ -456,6 +457,7 @@ class ScoreManager(models.Manager):
                 AND q.question_id = e.question_id 
                 AND q1.id = q.question_id 
                 AND q1.author_id <> """ + str(user.id) + """
+                AND NOT e.time_out
             GROUP BY e.user_id
             HAVING COUNT(*) = """+str(len(challenge.questions.all().exclude(author=user)))+"""
             ORDER BY score DESC""")
