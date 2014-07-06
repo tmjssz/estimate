@@ -8,7 +8,7 @@
 
 		{% if question_list.count > 0 %}
 
-			<h2>Offene Fragen</h2>
+			<h2>Offene Fragen ({{ question_list.count }})</h2>
 
 			<div class="half">
 				<ul class="open-questions">
@@ -40,13 +40,13 @@
 	
 
 	{% if ready_list %}
-	<h3><i class="fa fa-check-circle"></i> Beantwortet</h3>
+	<h3><i class="fa fa-check-circle"></i> Beantwortet ({{ ready_list|length }})</h3>
 
 	<div class="half">
 		<ul class="answered-questions">
 			{% for question in ready_list %}
-				{% if ready_list.count > 1 %}
-					{% if forloop.counter0 == ready_list.count|div:2 or forloop.counter0 == ready_list.count|add:1|div:2 %}
+				{% if ready_list|length > 1 %}
+					{% if forloop.counter0 == ready_list|length|div:2 or forloop.counter0 == ready_list|length|add:1|div:2 %}
 						</ul></div><div class="half"><ul class="answered-questions">
 					{% endif %}
 				{% endif %}

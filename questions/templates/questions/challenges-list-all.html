@@ -47,7 +47,13 @@
 			<p>Momentan gibt es leider keine offenen Challenges mehr.</p>
 
 			{% if open_questions %}
-				<p>Es gibt aber noch ein paar <a href="{% url 'questions_question_all' %}">unbeantwortete Fragen</a>.</p>
+				<p>Es gibt aber noch <a href="{% url 'questions_question_all' %}">
+				{% if open_questions < 2 %}
+					eine
+				{% else %}
+					{{ open_questions }} 
+				{% endif %}
+				unbeantwortete Fragen</a>.</p>
 			{% endif %}
 		{% endif %}
 
