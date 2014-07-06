@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
 	// Countdown for question
     $("#countdown").countDown({
-		startNumber: 30,
+		startNumber: 4000,
 		callBack: function() {
             if ($('#id_estimate').val() == "") {
                 var input = $("<input>")
@@ -15,13 +15,37 @@ $( document ).ready(function() {
 		}
 	});
 
+    // Format the input content, that all 3 digits are separated
     $('#id_estimate').focus();
+    $('#id_estimate').keyup(function() {
+        var num = $(this).val().replace(/(\s)/g, '');
+        $(this).val(num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "));
+    });
+    // reformat input value before submitting
+    $('#estimate_form').submit(function() { 
+        var value = $('#id_estimate').val().replace(/ /g, '');
+        value = value.replace(/,/g, '.');
+
+        if (!isNumber(value)) {
+            $('#question-show form .errorlist').hide();
+            $('#question-show form .errorlist.not-number').show().fadeOut(4000, 'swing');
+            return false;
+        }
+
+        $('#id_estimate').val(value);
+    });
+
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
 
     // Check if estimate is given, when submit button is clicked
     $('#question-show form input[type=submit]').click(function(e) {
         if ($('#id_estimate').val() == "") {
             e.preventDefault();
-            $('#question-show form .errorlist').show().fadeOut(3000, 'swing');
+            $('#question-show form .errorlist').hide();
+            $('#question-show form .errorlist.empty').show().fadeOut(4000, 'swing');
             $('#id_estimate').focus();
         }
     });

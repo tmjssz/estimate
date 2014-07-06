@@ -35,20 +35,20 @@
 			{% endif %}
 
 			<!-- Estimate Add Form -->
-			<form action="{{ action_url }}" method="post" accept-charset="utf-8">
+			<form action="{{ action_url }}" id="estimate_form" method="post" accept-charset="utf-8">
 			    {% csrf_token %}
 			    {% for hidden in form.hidden_fields %}
 	                {{ hidden }}
 	            {% endfor %}
 
 	            <div class="error">
-	            	<ul class="errorlist"><li>Bitte gib einen Schätzwert ein.</li></ul>
+	            	<ul class="errorlist empty"><li>Bitte gib einen Schätzwert ein.</li></ul>
+	            	<ul class="errorlist not-number"><li>Bitte gib einen gültigen numerischen Wert an.</li></ul>
 	            </div>
 
-	            {% for field in form.visible_fields %}
-	                {{ field.errors }}
-	                {{ field }}
-	            {% endfor %}
+
+	            <input id="id_estimate" name="estimate" step="any" type="tel">
+
 			    <input type="submit" value="Speichern"/>
 			</form>
 
