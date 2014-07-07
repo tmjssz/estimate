@@ -11,6 +11,8 @@
 
 		<h2>Frage einreichen</h2>
 
+		<p>Hier kannst du selber eine Frage verfassen und einsenden. Wenn sie gut ist, wird sie unter deinem Namen veröffentlicht und für alle Anderen sichtbar sein. Eine Schätzfrage ist gut, wenn es unmöglich ist, dafür die exakte Antwort zu kennen und wenn auch den ungefähren Wert möglichst Wenige kennen. Jedoch sollte die Frage auch so gestellt werden, dass man sich das Gefragte ungefähr vorstellen kann. Gegebenenfalls solltest du dafür als Hilfestellung einen kleinen Tip geben. Auch Fragen in Verbindung mit einem Bild sind gut geeignet. Bitte gebe möglichst dazu an, woher du deine Antwort hast.</p>
+
 		<form enctype="multipart/form-data" action="{% url 'questions_question_create' %}" method="post" accept-charset="utf-8">
 		    {{ form.as_p }}
 		    {% csrf_token %}
