@@ -7,7 +7,8 @@ $( document ).ready(function() {
             if ($('#id_estimate').val() == "") {
                 var input = $("<input>")
                     .attr("type", "hidden")
-                    .attr("name", "time_out").val("true");
+                    .attr("name", "time_out")
+                    .attr("id", "time_out").val("true");
                 $("form").append($(input));
             }
             
@@ -26,7 +27,9 @@ $( document ).ready(function() {
         var value = $('#id_estimate').val().replace(/ /g, '');
         value = value.replace(/,/g, '.');
 
-        if (!isNumber(value)) {
+        var time_out = $('#question-show form #time_out').val();
+
+        if (!isNumber(value) && !time_out) {
             $('#question-show form .errorlist').hide();
             $('#question-show form .errorlist.not-number').show().fadeOut(4000, 'swing');
             return false;
