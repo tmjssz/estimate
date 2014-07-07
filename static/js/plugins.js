@@ -53,6 +53,22 @@ jQuery.fn.countDown = function(settings,to) {
                 settings.callBack(this);
             }
         });
-                
+
+        //document.cookie="time="+to - 1;
+        setCookie('time', to-1, 100);
+
     });
 };
+
+var setCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}

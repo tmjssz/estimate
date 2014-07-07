@@ -1,8 +1,37 @@
 $( document ).ready(function() {
 
+    var time = getCookie('time');
+    if (time == '') {
+        time = 40;
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        }
+        return "";
+    }
+
+    var setCookie = function(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else {
+            expires = "";
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
 	// Countdown for question
     $("#countdown").countDown({
-		startNumber: 40,
+		startNumber: time,
 		callBack: function() {
             if ($('#id_estimate').val() == "") {
                 var input = $("<input>")
@@ -36,6 +65,9 @@ $( document ).ready(function() {
         }
 
         $('#id_estimate').val(value);
+
+        // reset cookie
+        setCookie('time', 40, 0);
     });
 
     function isNumber(n) {
