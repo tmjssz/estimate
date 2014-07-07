@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
 	// Countdown for question
     $("#countdown").countDown({
-		startNumber: 4000,
+		startNumber: 40,
 		callBack: function() {
             if ($('#id_estimate').val() == "") {
                 var input = $("<input>")
