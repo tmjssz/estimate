@@ -592,3 +592,25 @@ class Score(models.Model):
             return str(self.score) + u' Punkt'
         return str(self.score) + u' Punkte'
 
+
+
+# -----------------------------------------------------------------------------
+# QUESTION VIEW MODEL
+# -----------------------------------------------------------------------------
+class QuestionView(models.Model):
+    user = models.ForeignKey(to=User, verbose_name=u'Benutzer')
+    question = models.ForeignKey(to=Question, verbose_name=u'Frage')
+    time = models.DateTimeField(editable=False, verbose_name=u'Zeitpunkt')
+
+    class Meta:
+        verbose_name = u'Fragen-Aufruf'
+        verbose_name_plural = u'Fragen-Aufrufe'
+        ordering = ['-time']
+
+    def __unicode__(self):
+        return self.user.username + ': ' + self.question.title
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.time = now()
+        super(QuestionView, self).save(*args, **kwargs)

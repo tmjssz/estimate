@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 
-    //var time = getCookie('time');
-    //if (time == '') {
+    /*var time = getCookie('time');
+    if (time == '') {
         time = 40;
-    //}
+    }
 
     function getCookie(cname) {
         var name = cname + "=";
@@ -27,23 +27,32 @@ $( document ).ready(function() {
             expires = "";
         }
         document.cookie = name + "=" + value + expires + "; path=/";
-    }
+    }*/
 
-	// Countdown for question
-    $("#countdown").countDown({
-		startNumber: time,
-		callBack: function() {
-            if ($('#id_estimate').val() == "") {
-                var input = $("<input>")
-                    .attr("type", "hidden")
-                    .attr("name", "time_out")
-                    .attr("id", "time_out").val("true");
-                $("form").append($(input));
+    //time = 40;
+    
+    
+    // COUNTDOWN FOR QUESTIONS -----------------------------------------------
+    var countdown = $("#countdown");
+
+    if (countdown.length > 0) {
+        time = $('#time_left').val();
+
+        $("#countdown").countDown({
+            startNumber: time,
+            callBack: function() {
+                if ($('#id_estimate').val() == "") {
+                    var input = $("<input>")
+                        .attr("type", "hidden")
+                        .attr("name", "time_out")
+                        .attr("id", "time_out").val("true");
+                    $("form").append($(input));
+                }
+                
+                $("form").submit();
             }
-            
-			$("form").submit();
-		}
-	});
+        });
+    }
 
     // Format the input content, that all 3 digits are separated
     $('#id_estimate').focus();

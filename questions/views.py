@@ -8,9 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.db.models import Min
+from django.utils.timezone import now
 
 from questions.forms import EstimateForm, QuestionForm, UserProfileForm
-from questions.models import Question, Estimate, Score, Challenge
+from questions.models import Question, Estimate, Score, Challenge, QuestionView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 import logging
@@ -110,11 +111,37 @@ def question_view(request, slug):
         if form.is_valid():
             if not is_admin:
                 form.save()
+                views = QuestionView.objects.filter(user=request.user, question=question)
+                if views:
+                    # delete saved view timestamps
+                    views.delete()
+
             return HttpResponseRedirect(question.get_absolute_url())
     else:
+        time_max = 40
         form = EstimateForm()
+        views = QuestionView.objects.filter(user=request.user, question=question)
+        if views:
+            # question was already viewed before
+            time = views[0].time
+            current_time = now()
+            timediff = current_time - time
+            seconds = int(timediff.total_seconds())
+            time_left = max(0, time_max - seconds)
+
+            if time_left == 0:
+                # no time left
+                too_late = Estimate(user=request.user, question=question, time_out=True)
+                too_late.save()
+                views.delete()
+                return HttpResponseRedirect(question.get_absolute_url())
+        else:
+            # question view for first time
+            view = QuestionView(user=request.user, question=question)
+            view.save()
+            time_left = time_max
     return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question, 'user': request.user})
+        {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
 
 
 @login_required
@@ -122,12 +149,17 @@ def question_view_random(request, slug):
     """
     Show a randomly chosen question with estimate form or reached score
     """
+    if request.user.is_authenticated():
+        if request.user.is_active and request.user.is_superuser:
+            is_admin = True
+        else:
+            is_admin = False
+
     question = get_object_or_404(Question, slug=slug, published=True)
-    
     estimates = Estimate.objects.filter(question=question, user=request.user)
     
     # for this questions does already exist an estimate from the current user
-    if estimates:
+    if estimates and not is_admin:
         estimate = estimates[0]
         next_random = True
         return render(request, 'questions/question-score.html',
@@ -143,12 +175,39 @@ def question_view_random(request, slug):
 
         form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(question.get_absolute_url_random())
+            if not is_admin:
+                form.save()
+                views = QuestionView.objects.filter(user=request.user, question=question)
+                if views:
+                    # delete saved view timestamps
+                    views.delete()
+
+            return HttpResponseRedirect(question.get_absolute_url())
     else:
+        time_max = 40
         form = EstimateForm()
+        views = QuestionView.objects.filter(user=request.user, question=question)
+        if views:
+            # question was already viewed before
+            time = views[0].time
+            current_time = now()
+            timediff = current_time - time
+            seconds = int(timediff.total_seconds())
+            time_left = max(0, time_max - seconds)
+
+            if time_left == 0:
+                # no time left
+                too_late = Estimate(user=request.user, question=question, time_out=True)
+                too_late.save()
+                views.delete()
+                return HttpResponseRedirect("/zufall")
+        else:
+            # question view for first time
+            view = QuestionView(user=request.user, question=question)
+            view.save()
+            time_left = time_max
     return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question, 'user': request.user})
+        {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
 
 @login_required
 def question_random(request):
@@ -285,6 +344,12 @@ def challenge_question_view(request, challenge, question):
         # give 404, if question is not in challenge
         raise Http404
 
+    if request.user.is_authenticated():
+        if request.user.is_active and request.user.is_superuser:
+            is_admin = True
+        else:
+            is_admin = False
+
     all_questions = challenge.questions.exclude(author=request.user).count()
     answered_questions = Estimate.objects.number_answered_questions(request.user, challenge)
     current_question = answered_questions + 1
@@ -292,7 +357,7 @@ def challenge_question_view(request, challenge, question):
     estimates = Estimate.objects.filter(question=question, user=request.user)
 
     # for this questions does already exist an estimate from the current user
-    if estimates:
+    if estimates and not is_admin:
         # redirect to result page
         estimate = estimates[0]
         return render(request, 'questions/question-score-challenge.html',
@@ -307,20 +372,48 @@ def challenge_question_view(request, challenge, question):
 
         form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST, challenge=challenge)
         if form.is_valid():
-            form.save()
-            for q in questions:
-                estimates = Estimate.objects.filter(question=q, user=request.user)
-                return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
+            if not is_admin:
+                form.save()
+                views = QuestionView.objects.filter(user=request.user, question=question)
+                if views:
+                    # delete saved view timestamps
+                    views.delete()
 
-                if len(estimates) == 0 and q != question and q.author != request.user:
-                    # redirect to next unsanswered question
-                    return HttpResponseRedirect("/challenge/"+challenge.slug+"/"+q.slug)
-            # all questions answered -> redirect to result page
-            return HttpResponseRedirect("/challenge/"+challenge.slug)
+                for q in questions:
+                    estimates = Estimate.objects.filter(question=q, user=request.user)
+                    #return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
+
+                    if len(estimates) == 0 and q != question and q.author != request.user:
+                        # redirect to next unsanswered question
+                        return HttpResponseRedirect("/challenge/"+challenge.slug+"/"+q.slug)
+                # all questions answered -> redirect to result page
+                return HttpResponseRedirect("/challenge/"+challenge.slug)
     else:
+        time_max = 40
         form = EstimateForm()
+        views = QuestionView.objects.filter(user=request.user, question=question)
+        if views:
+            # question was already viewed before
+            time = views[0].time
+            current_time = now()
+            timediff = current_time - time
+            seconds = int(timediff.total_seconds())
+            time_left = max(0, time_max - seconds)
+
+            if time_left == 0:
+                # no time left
+                too_late = Estimate(user=request.user, question=question, time_out=True, challenge=challenge)
+                too_late.save()
+                views.delete()
+                # all questions answered -> redirect to result page
+                return HttpResponseRedirect("/challenge/"+challenge.slug)
+        else:
+            # question view for first time
+            view = QuestionView(user=request.user, question=question)
+            view.save()
+            time_left = time_max
     return render(request, 'questions/question-show.html',
-       {'form': form, 'question': question, 'user': request.user, 'challenge': challenge, 'all_questions': all_questions, 'current_question': current_question})
+        {'form': form, 'question': question, 'user': request.user, 'challenge': challenge, 'all_questions': all_questions, 'current_question': current_question, 'time_left': time_left})
 
 
 @login_required

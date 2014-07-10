@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.timezone import now
 
-from .models import Question, Estimate, Challenge
+from .models import Question, Estimate, Challenge, QuestionView
 
 
 # =============================================================================
@@ -92,7 +93,39 @@ class ChallengeAdmin(admin.ModelAdmin):
     readonly_fields = ['date_created', 'date_updated']
 
 
+# =============================================================================
+# QUESTION VIEW MODEL
+# =============================================================================
+class QuestionViewAdmin(admin.ModelAdmin):
+    def benutzer(self):
+        html = '<a href="/admin/auth/user/'+str(self.user.id)+'/">'+str(self.user)+'</a>'
+        return html
+    benutzer.allow_tags = True
+
+    def frage(self):
+        html = '<a href="/admin/questions/question/'+str(self.question.id)+'/">'+str(self.question)+'</a>'
+        return html
+    frage.allow_tags = True
+
+    def restzeit(self):
+        time_max = 40
+        time = self.time
+        current_time = now()
+        timediff = current_time - time
+        seconds = int(timediff.total_seconds())
+        time_left = max(0, time_max - seconds)
+        html = '<a href="/admin/questions/questionview/'+str(self.id)+'/">'+str(time_left)+'</a>'
+        return html
+    restzeit.allow_tags = True
+
+    list_display = (benutzer, frage, restzeit, 'time')
+    search_fields = ('user__username', 'frage__title', 'time')
+    list_filter = ('user', 'question')
+    readonly_fields = ['time']
+
+
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Estimate, EstimateAdmin)
 admin.site.register(Challenge, ChallengeAdmin)
+admin.site.register(QuestionView, QuestionViewAdmin)
