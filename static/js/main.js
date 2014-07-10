@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 
-    var time = getCookie('time');
-    if (time == '') {
+    //var time = getCookie('time');
+    //if (time == '') {
         time = 40;
-    }
+    //}
 
     function getCookie(cname) {
         var name = cname + "=";
