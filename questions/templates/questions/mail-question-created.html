@@ -4,8 +4,10 @@
 
 <p><b>Autor:</b> <a href="{{ host }}{% url 'questions_user' question.author %}">{{ question.author }}</a></p>
 
-<p><b>Antwort:</b> {{ question.answer }}
-<br>
+<p>{% if question.answer %}
+	<b>Antwort:</b> ***
+	<br>
+	{% endif %}
 {% if question.unit %}
 <b>Einheit:</b> {{ question.unit }}
 {% endif %}
