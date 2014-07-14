@@ -24,6 +24,9 @@
 						{% endif %}
 					{% endif %}
 				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a> 
+				    	{% if question.image %}
+				    		<a href="{{ question.get_absolute_url }}"><i class="fa fa-picture-o"></i></a> 
+				    	{% endif %}
 						{% if user.is_superuser %}
 				    		<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
 				    	{% endif %}
@@ -61,6 +64,9 @@
 						{% endif %}
 					{% endif %}
 				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+				    	{% if question.image %}
+				    		<a href="{{ question.get_absolute_url }}"><i class="fa fa-picture-o"></i></a> 
+				    	{% endif %}
 				    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
 				    </li>
 			    {% endfor %}
@@ -88,6 +94,9 @@
 						{% endif %}
 					{% endif %}
 				    <li><a href="{{ question.get_absolute_url }}">{{ question.title }}</a>
+				    	{% if question.image %}
+				    		<a href="{{ question.get_absolute_url }}"><i class="fa fa-picture-o"></i></a> 
+				    	{% endif %}
 				    	<a href="{% url 'questions_statistics_question' question.slug %}"> <i class="fa fa-bar-chart-o"></i></a>
 				    </li>
 			    {% endfor %}
@@ -115,7 +124,11 @@
 							</ul></div><div class="half"><ul>
 						{% endif %}
 					{% endif %}
-			    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a></li>
+			    <li><a href="{% url 'questions_statistics_question' question.slug %}">{{ question.title }}</a>
+			    	{% if question.image %}
+			    		<a href="{% url 'questions_statistics_question' question.slug %}"><i class="fa fa-picture-o"></i></a> 
+			    	{% endif %}
+			    </li>
 			    {% endfor %}
 			</ul>
 

@@ -2043,7 +2043,7 @@ aside.menu {
         #questions-list-all .open-questions .half:last-child, #questions-list-all .answered-questions .half:last-child, #questions-list-all .time-out .half:last-child, #questions-list-all .own-questions .half:last-child {
           margin-right: 0; } }
   #questions-list-all .open-questions li i, #questions-list-all .answered-questions li i, #questions-list-all .time-out li i, #questions-list-all .own-questions li i {
-    padding-left: 10px; }
+    padding-left: 3px; }
   #questions-list-all .full {
     float: left;
     display: block;
