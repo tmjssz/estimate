@@ -182,7 +182,7 @@ def question_view_random(request, slug):
                     # delete saved view timestamps
                     views.delete()
 
-            return HttpResponseRedirect(question.get_absolute_url())
+            return HttpResponseRedirect("/zufall/"+question.slug)
     else:
         time_max = 40
         form = EstimateForm()
@@ -381,7 +381,7 @@ def challenge_question_view(request, challenge, question):
 
                 for q in questions:
                     estimates = Estimate.objects.filter(question=q, user=request.user)
-                    #return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
+                    return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
 
                     if len(estimates) == 0 and q != question and q.author != request.user:
                         # redirect to next unsanswered question
