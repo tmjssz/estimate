@@ -21,6 +21,9 @@
 
 		h2 {
 			@include span-columns(8 of 10);
+			text-transform: uppercase;
+			font-size: 24px;
+			font-weight: 500;
 		}
 
 		#countdown {
@@ -34,9 +37,12 @@
 		p {
 			@include span-columns(1 of 1);
 			margin-bottom: 15px;
+			font-size: 30px;
+			letter-spacing: -1px;
+			font-weight: 300;
 		}
 
-		small#unit {
+		span#unit {
 			@include span-columns(1 of 1);
 		}
 

@@ -10,7 +10,11 @@
 	<form method="post">{% csrf_token %}
 		<p>
 			<label for="name_id">Name:</label>
-			<input required type="text" id="name_id" name="name">
+			{% if user.is_authenticated %}
+				<input required type="text" id="name_id" name="name" value="{{ user.username }}">
+			{% else %}
+				<input required type="text" id="name_id" name="name">
+			{% endif %}
 		</p>
 		<p>
 			<label for="mail_id">E-Mail:</label>

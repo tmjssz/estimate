@@ -2,7 +2,7 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - 
 #landing-stage {
 	@include outer-container;
-	padding-top: 50px;
+	padding-top: 30px;
 
 	@include media ($tablet) {
 		padding: 15px;
