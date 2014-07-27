@@ -50,8 +50,7 @@ INSTALLED_APPS = (
     'contact_form',
     'userauth',
     'questions',
-    'mathfilters',
-    'django_extensions',
+    'mathfilters'
 )
 
 MIDDLEWARE_CLASSES = (
