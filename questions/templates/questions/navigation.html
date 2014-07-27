@@ -1,42 +1,44 @@
-<div class="navigation-wrapper">
-	<div id="corporate">
-		<a href="/">
-			<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-farbe.png" alt="">
-		</a>
-		<a href="/">
-			<div id="font">
-				<div id="esti">esti</div>
-				<div id="mate">mate</div>
-			</div>
-		</a>
+<header class="navi-header">
+	<div class="navigation-wrapper">
+		<div id="corporate">
+			<a href="/">
+				<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-farbe.png" alt="">
+			</a>
+			<a href="/">
+				<div id="font">
+					<div id="esti">esti</div>
+					<div id="mate">mate</div>
+				</div>
+			</a>
+		</div>
+
+		{% if user.is_authenticated %}
+
+		<div id="naviToggle"><i class="fa fa-bars"></i></div>
+		<a href="{% url 'questions_user' user %}" id="username">Eingeloggt als <br><span>{{ user.username }}</span></a>
+
+		<nav class="logged_in">
+			<ul class="logged_in">
+				<li><a href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
+				<li><a href="{% url 'questions_account' %}"><i class="fa fa-user"></i> Konto</a></li>
+				<li><a href="{% url 'group_list' %}">
+					{% if user.group_invitees.all %}
+						<i class="fa fa-users"></i><span class="badge success">{{ user.group_invitees.count }}</span>Gruppen
+					{% else %}
+						<i class="fa fa-users"></i> Gruppen
+					{% endif %}
+					
+				</a></li>
+		{% else %}
+		<nav class="logged_out">
+			<ul class="logged_out">
+		{% endif %}
+			{% include "userauth/toggle_login.html" %}
+			</ul>
+		</nav>
+
+		
+
+	<!-- / .navigation-wrapper -->
 	</div>
-
-	{% if user.is_authenticated %}
-
-	<div id="naviToggle"><i class="fa fa-bars"></i></div>
-	<a href="{% url 'questions_user' user %}" id="username">Eingeloggt als <br><span>{{ user.username }}</span></a>
-
-	<nav class="logged_in">
-		<ul class="logged_in">
-			<li><a href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
-			<li><a href="{% url 'questions_account' %}"><i class="fa fa-user"></i> Konto</a></li>
-			<li><a href="{% url 'group_list' %}">
-				{% if user.group_invitees.all %}
-					<i class="fa fa-users"></i><span class="badge success">{{ user.group_invitees.count }}</span>Gruppen
-				{% else %}
-					<i class="fa fa-users"></i> Gruppen
-				{% endif %}
-				
-			</a></li>
-	{% else %}
-	<nav class="logged_out">
-		<ul class="logged_out">
-	{% endif %}
-		{% include "userauth/toggle_login.html" %}
-		</ul>
-	</nav>
-
-	
-
-<!-- / .navigation-wrapper -->
-</div>
+</header>

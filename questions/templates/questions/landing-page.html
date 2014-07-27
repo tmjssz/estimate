@@ -2,31 +2,53 @@
 
 {% block title %}{{ block.super }}{% endblock %}
 
+{% block navigation %}{% endblock %}
 
-{% block content %}
+{% block stage %}
 
-<div id="landing">
-	<h2>Willkommen</h2>
-	<p>Dies ist eine Plattform zum Sammeln von Schätzwerten. Du bist herzlich eingeladen, zu interessanten Themen deine eigenen Schätzungen abzugeben. Finde heraus, wie gut du im Vergleich zu anderen Teilnehmern schätzen kannst. </p>
-<!-- / #landing -->
-</div>
+<header class="landing">
+	<div id="header-wrapper">
+		<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-schriftzug-grau.png"></img>
 
-
-<div id="register-login">
-	<ul class="accordion">
-  		<li class="selected" rel="register-form"><i class="fa fa-user"></i> Neuer Account</li>
-  		<li class="not-selected" rel="login-form"><i class="fa fa-sign-in"></i> Login</li>
-  	</ul>
-
-	<div class="form" id="register-form">
-		{% include "userauth/register_form.html" %}
-	<!-- / #register-form -->
+		<div id="login-form">
+			<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
+			    {{ form.as_p }}
+			    <p>
+			    	<input type="hidden" name="next" value="{{ next }}" />
+			    	<input type="submit" value="Login"/>
+			    </p>
+			    {% csrf_token %}
+			</form>
+		</div>
 	</div>
-	<div class="form" id="login-form">
-		{% include "userauth/login_form.html" %}
-	<!-- / #login-form -->
+</header>
+
+<div id="landing-stage">
+
+	<div id="landing">
+		<h2>Schätz doch mal.</h2>
+		<h3>{{ question.question }}</h3>
+
+		<p>Estimate fordert dich heraus! Wie gut bist du im Schätzen? Gib deine Schätzungen zu spannenden, interessanten und lustigen Fragen ab. Finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufällige Fragen, spiele Challenges oder such dir Fragen aus der Sammlung heraus. Du kannst den anderen <i>estiMATES</i> sogar auch selber Fragen stellen. Mach mit, Schätzen macht Spaß!</p>
+	<!-- / #landing -->
 	</div>
-<!-- / #register-login -->
+
+
+	<div id="register">
+
+		<h3><i class="fa fa-user"></i> Neuer Account</h3>
+
+		<p>Wähle deinen Namen und ein Passwort und lege direkt los.</p>
+
+		<div class="form" id="register-form">
+			{% include "userauth/register_form.html" %}
+		<!-- / #register-form -->
+		</div>
+
+	<!-- / #register -->
+	</div>
+
 </div>
 
 {% endblock %}
+

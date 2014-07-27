@@ -46,7 +46,11 @@ def menu_view(request):
     else:
         register_form = UserCreationForm()
         login_form = AuthenticationForm()
-        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form}, context_instance=RequestContext(request))
+
+        questions = Question.objects.filter(published=True)
+        question = random.choice(questions)
+
+        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question}, context_instance=RequestContext(request))
 
 @login_required
 def questions_list_all(request):

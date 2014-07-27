@@ -1,54 +1,92 @@
 // LANDING PAGE 
 // - - - - - - - - - - - - - - - - - - - - - - - - 
-#landing {
-	@include span-columns(5);
-	@include media($mobile) {
-		@include span-columns(4);
-		margin-bottom: 10px;
-	}
-}
+#landing-stage {
+	@include outer-container;
+	padding-top: 50px;
 
-// REGISTER / LOGIN PART ON LANDING PAGE
-#register-login {
-	@include span-columns(5);
-	@include media($mobile) {
-		@include span-columns(4);
+	@include media ($tablet) {
+		padding: 15px;
 	}
 
-	ul.accordion {
-		margin-bottom: $base-line-height;
-		display: flex;
+	@include media ($mobile) {
+		padding: 10px;
+	}
 
-		li {
-			float:left;
-			padding: 5px 0;
-			@include span-columns(2.5 of 5);
+	#landing {
+		@include span-columns(5);
+		@include media($mobile) {
+			@include span-columns(4);
+			margin-bottom: 10px;
+		}
 
-			&.not-selected {
-				@include link-like;
-				border-bottom: 1px solid $base-border-color;
-			}
+		h2 {
+			color: $light-coffee;
+			margin: 10px 0 15px 0;
+			letter-spacing: -1.8px;
+			font-size: 2.7em;
+			display: block;
+			font-weight: 400;
+		}
 
-			&.selected {
-				font-weight: bold;
-				border-bottom: 1px solid $dark-gray;
-			}
+		h3 {
+			color: transparentize(white, 0.3);
+			margin: 20px 0 35px 0;
+			letter-spacing: -1.8px;
+			font-size: 1.8em;
+			display: block;
+			font-weight: 300;
+			line-height: 0.85em;
+		}
 
-			@include media($mobile) {
-				@include span-columns(2 of 4);
-			}
+		p {
+			color: white;
+			line-height: 1.2em;
 		}
 	}
 
-	span.helptext {
-		display: none;
-	}
-
-	#login-form {
-		display:none;
-
-		a.new-account {
-			display:none;
+	// REGISTER / LOGIN PART ON LANDING PAGE
+	#register {
+		@include span-columns(5);
+		@include media($mobile) {
+			@include span-columns(4);
 		}
+
+		h3 {
+			color: transparentize(white, 0.3);
+			margin: 20px 0 35px 0;
+			letter-spacing: -1.8px;
+			font-size: 1.8em;
+			display: block;
+			font-weight: 300;
+			line-height: 0.85em;
+		}
+
+		p {
+			color: white;
+			line-height: 1.2em;
+		}
+
+		span.helptext {
+			display: none;
+		}
+
+		#register-form {
+			label {
+				color: transparentize(white, 0.3);
+				font-weight: normal;
+				font-size: 14px;
+			}
+
+			input[type="text"], input[type="password"] {
+				background: transparentize(white, 0.9);
+				color: white;
+				border: 1px solid transparentize(white, 0.3);
+			}
+
+			input[type="submit"] {
+				@include button(simple, #68a24f);
+			}
+		}
+
 	}
 }

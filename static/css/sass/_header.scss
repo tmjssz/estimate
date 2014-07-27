@@ -12,7 +12,76 @@ $username-line-height: 13px;
 $username-border-color: #646464;
 
 
-header {
+header.landing {
+	background-color: white;
+
+	@include media ($tablet) {
+		padding: 15px;
+	}
+
+	@include media ($mobile) {
+		padding: 10px;
+	}
+
+	#header-wrapper {
+		@include outer-container;
+	    position: relative;
+	    z-index: 9999;
+	    height: 150px;
+	    padding: 50px 0 30px 0;
+
+	    @include media ($tablet) {
+			padding: 10px 0 30px 0;
+		}
+
+	    #logo {
+	    	height: 70px;
+
+	    	@include media ($tablet) {
+				display: block;
+			}
+	    }
+
+	    #login-form {
+	    	float: right;
+
+	    	@include media ($tablet) {
+	    		padding-top: 10px;
+				display: block;
+				float: left;
+			}
+
+	    	p {
+	    		display: inline;
+				margin-left: 8px;
+				float: left;
+
+	    		label {
+	    			font-size: 14px;
+	    		}
+
+	    		input {
+	    			width: 160px;
+					font-size: 16px;
+					padding: 5px;
+
+					@include media ($mobile) {
+						width: 120px;
+					}
+	    		}
+
+	    		input[type="submit"] {
+					padding: 6px 15px;
+					display: block;
+					width: auto;
+					margin: 29px 0 0 0;
+	    		}
+	    	}
+	    }
+	}
+}
+
+header.navi-header {
 	background-color: $navigation-background;
 	border-bottom: 1px solid darken($navigation-background, 10);
 	font-family: $sans-serif;

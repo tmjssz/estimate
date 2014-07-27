@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'userauth',
     'questions',
     'mathfilters',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -626,7 +626,61 @@ body {
   body .modal .modal-state:checked + .modal-window .modal-inner {
     top: 0; }
 
-header {
+header.landing {
+  background-color: white; }
+  @media screen and (max-width: 768px) {
+    header.landing {
+      padding: 15px; } }
+  @media screen and (max-width: 480px) {
+    header.landing {
+      padding: 10px; } }
+  header.landing #header-wrapper {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 9999;
+    height: 150px;
+    padding: 50px 0 30px 0; }
+    header.landing #header-wrapper:after {
+      content: "";
+      display: table;
+      clear: both; }
+    @media screen and (max-width: 768px) {
+      header.landing #header-wrapper {
+        padding: 10px 0 30px 0; } }
+    header.landing #header-wrapper #logo {
+      height: 70px; }
+      @media screen and (max-width: 768px) {
+        header.landing #header-wrapper #logo {
+          display: block; } }
+    header.landing #header-wrapper #login-form {
+      float: right; }
+      @media screen and (max-width: 768px) {
+        header.landing #header-wrapper #login-form {
+          padding-top: 10px;
+          display: block;
+          float: left; } }
+      header.landing #header-wrapper #login-form p {
+        display: inline;
+        margin-left: 8px;
+        float: left; }
+        header.landing #header-wrapper #login-form p label {
+          font-size: 14px; }
+        header.landing #header-wrapper #login-form p input {
+          width: 160px;
+          font-size: 16px;
+          padding: 5px; }
+          @media screen and (max-width: 480px) {
+            header.landing #header-wrapper #login-form p input {
+              width: 120px; } }
+        header.landing #header-wrapper #login-form p input[type="submit"] {
+          padding: 6px 15px;
+          display: block;
+          width: auto;
+          margin: 29px 0 0 0; }
+
+header.navi-header {
   background-color: #333333;
   border-bottom: 1px solid #1a1a1a;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -636,54 +690,54 @@ header {
   line-height: 1em;
   margin: 0px 0px 15px 0px; }
   @media screen and (max-width: 480px) {
-    header {
+    header.navi-header {
       margin: 0; } }
-  header div.navigation-wrapper {
+  header.navi-header div.navigation-wrapper {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
     z-index: 9999;
     height: 45px; }
-    header div.navigation-wrapper:after {
+    header.navi-header div.navigation-wrapper:after {
       content: "";
       display: table;
       clear: both; }
-    header div.navigation-wrapper #corporate {
+    header.navi-header div.navigation-wrapper #corporate {
       display: inline-block;
       height: 45px;
       padding-left: 15px;
       padding-right: 15px; }
       @media screen and (max-width: 480px) {
-        header div.navigation-wrapper #corporate {
+        header.navi-header div.navigation-wrapper #corporate {
           padding-left: 8px;
           padding-right: 8px; } }
-      header div.navigation-wrapper #corporate a {
+      header.navi-header div.navigation-wrapper #corporate a {
         display: inline; }
-      header div.navigation-wrapper #corporate #logo {
+      header.navi-header div.navigation-wrapper #corporate #logo {
         float: left;
         max-height: 45px;
         padding: 5.625px 4.23px 5.625px 0;
         border: 0; }
-      header div.navigation-wrapper #corporate #font {
+      header.navi-header div.navigation-wrapper #corporate #font {
         font-family: 'Yanone Kaffeesatz', sans-serif;
         font-size: 31.20827px;
         float: left;
         padding: 10.50188px 5.625px 11.25px 0px; }
-        header div.navigation-wrapper #corporate #font #esti {
+        header.navi-header div.navigation-wrapper #corporate #font #esti {
           font-weight: 200;
           color: #cab69a;
           letter-spacing: -0.07em;
           margin-right: 2.25px;
           float: left;
           line-height: 23.24813px; }
-        header div.navigation-wrapper #corporate #font #mate {
+        header.navi-header div.navigation-wrapper #corporate #font #mate {
           font-weight: 400;
           color: #f0e3cf;
           letter-spacing: -0.02em;
           float: left;
           line-height: 23.24813px; }
-    header div.navigation-wrapper #username {
+    header.navi-header div.navigation-wrapper #username {
       display: inline-block;
       color: rgba(255, 255, 255, 0.7);
       float: right;
@@ -693,48 +747,48 @@ header {
       font-size: 11px;
       border-left: 1px solid #646464; }
       @media screen and (max-width: 480px) {
-        header div.navigation-wrapper #username {
+        header.navi-header div.navigation-wrapper #username {
           padding-left: 8px;
           padding-right: 8px;
           border-left: 0; } }
-      header div.navigation-wrapper #username span {
+      header.navi-header div.navigation-wrapper #username span {
         font-size: 16px;
         font-weight: 600;
         color: white; }
-    header div.navigation-wrapper #naviToggle {
+    header.navi-header div.navigation-wrapper #naviToggle {
       display: none;
       color: rgba(255, 255, 255, 0.7);
       float: right;
       cursor: pointer;
       padding: 0px 8px; }
-      header div.navigation-wrapper #naviToggle:hover {
+      header.navi-header div.navigation-wrapper #naviToggle:hover {
         color: white; }
-      header div.navigation-wrapper #naviToggle i {
+      header.navi-header div.navigation-wrapper #naviToggle i {
         font-size: 1.5em;
         line-height: 45px; }
       @media screen and (max-width: 480px) {
-        header div.navigation-wrapper #naviToggle {
+        header.navi-header div.navigation-wrapper #naviToggle {
           display: inline-block; } }
-    header div.navigation-wrapper nav {
+    header.navi-header div.navigation-wrapper nav {
       display: inline-block;
       float: right;
       font-size: 16px;
       height: 45px; }
       @media screen and (max-width: 480px) {
-        header div.navigation-wrapper nav.logged_in {
+        header.navi-header div.navigation-wrapper nav.logged_in {
           width: 100%;
           top: -2px;
           position: relative;
           height: 0; } }
-      header div.navigation-wrapper nav ul {
+      header.navi-header div.navigation-wrapper nav ul {
         display: inline-block;
         line-height: 45px;
         font-size: 16px; }
         @media screen and (max-width: 768px) {
-          header div.navigation-wrapper nav ul {
+          header.navi-header div.navigation-wrapper nav ul {
             font-size: 15px; } }
         @media screen and (max-width: 480px) {
-          header div.navigation-wrapper nav ul {
+          header.navi-header div.navigation-wrapper nav ul {
             font-size: 16px;
             padding-right: 0;
             clear: both;
@@ -744,22 +798,22 @@ header {
             padding: 0;
             width: 100%;
             z-index: 9999; }
-            header div.navigation-wrapper nav ul.logged_in {
+            header.navi-header div.navigation-wrapper nav ul.logged_in {
               display: none; }
-            header div.navigation-wrapper nav ul.logged_out {
+            header.navi-header div.navigation-wrapper nav ul.logged_out {
               font-size: 14px; } }
-        header div.navigation-wrapper nav ul li {
+        header.navi-header div.navigation-wrapper nav ul li {
           float: left;
           padding-right: 20px;
           letter-spacing: -0.8px; }
-          header div.navigation-wrapper nav ul li:last-child {
+          header.navi-header div.navigation-wrapper nav ul li:last-child {
             padding-right: 10px; }
-          header div.navigation-wrapper nav ul li a {
+          header.navi-header div.navigation-wrapper nav ul li a {
             color: rgba(255, 255, 255, 0.7);
             display: block; }
-            header div.navigation-wrapper nav ul li a:hover {
+            header.navi-header div.navigation-wrapper nav ul li a:hover {
               color: white; }
-          header div.navigation-wrapper nav ul li .login-btn {
+          header.navi-header div.navigation-wrapper nav ul li .login-btn {
             line-height: 1em !important;
             margin-top: 7.5px;
             margin-bottom: 7.5px;
@@ -770,16 +824,16 @@ header {
             border-radius: 0.1875em;
             color: white;
             padding: .4em .6em; }
-            header div.navigation-wrapper nav ul li .login-btn:hover {
+            header.navi-header div.navigation-wrapper nav ul li .login-btn:hover {
               background: #6f99d5; }
           @media screen and (max-width: 768px) {
-            header div.navigation-wrapper nav ul li {
+            header.navi-header div.navigation-wrapper nav ul li {
               letter-spacing: -1px;
               padding-right: 15px; }
-              header div.navigation-wrapper nav ul li:last-child {
+              header.navi-header div.navigation-wrapper nav ul li:last-child {
                 padding-right: 10px; } }
         @media screen and (max-width: 480px) {
-          header div.navigation-wrapper nav ul.logged_in li {
+          header.navi-header div.navigation-wrapper nav ul.logged_in li {
             background: #333333;
             display: block;
             line-height: 45px;
@@ -790,9 +844,9 @@ header {
             -webkit-transition: all 0.2s ease-in-out;
             -moz-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out; }
-            header div.navigation-wrapper nav ul.logged_in li:hover {
+            header.navi-header div.navigation-wrapper nav ul.logged_in li:hover {
               background: #595959; } }
-      header div.navigation-wrapper nav .badge {
+      header.navi-header div.navigation-wrapper nav .badge {
         padding: 1px 3px;
         font-size: 0.6em;
         vertical-align: 0.8em; }
@@ -1082,80 +1136,118 @@ header {
     color: #333333;
     cursor: default; }
 
-#landing {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 48.71795%; }
-  #landing:last-child {
-    margin-right: 0; }
+#landing-stage {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px; }
+  #landing-stage:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (max-width: 768px) {
+    #landing-stage {
+      padding: 15px; } }
   @media screen and (max-width: 480px) {
-    #landing {
-      float: left;
+    #landing-stage {
+      padding: 10px; } }
+  #landing-stage #landing {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 48.71795%; }
+    #landing-stage #landing:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 480px) {
+      #landing-stage #landing {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%;
+        margin-bottom: 10px; }
+        #landing-stage #landing:last-child {
+          margin-right: 0; } }
+    #landing-stage #landing h2 {
+      color: #f0e3cf;
+      margin: 10px 0 15px 0;
+      letter-spacing: -1.8px;
+      font-size: 2.7em;
       display: block;
-      margin-right: 6.66667%;
-      width: 100%;
-      margin-bottom: 10px; }
-      #landing:last-child {
-        margin-right: 0; } }
-
-#register-login {
-  float: left;
-  display: block;
-  margin-right: 2.5641%;
-  width: 48.71795%; }
-  #register-login:last-child {
-    margin-right: 0; }
-  @media screen and (max-width: 480px) {
-    #register-login {
-      float: left;
+      font-weight: 400; }
+    #landing-stage #landing h3 {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 20px 0 35px 0;
+      letter-spacing: -1.8px;
+      font-size: 1.8em;
       display: block;
-      margin-right: 6.66667%;
-      width: 100%; }
-      #register-login:last-child {
-        margin-right: 0; } }
-  #register-login ul.accordion {
-    margin-bottom: 1.5em;
-    display: flex; }
-    #register-login ul.accordion li {
-      float: left;
-      padding: 5px 0;
-      float: left;
+      font-weight: 300;
+      line-height: 0.85em; }
+    #landing-stage #landing p {
+      color: white;
+      line-height: 1.2em; }
+  #landing-stage #register {
+    float: left;
+    display: block;
+    margin-right: 2.5641%;
+    width: 48.71795%; }
+    #landing-stage #register:last-child {
+      margin-right: 0; }
+    @media screen and (max-width: 480px) {
+      #landing-stage #register {
+        float: left;
+        display: block;
+        margin-right: 6.66667%;
+        width: 100%; }
+        #landing-stage #register:last-child {
+          margin-right: 0; } }
+    #landing-stage #register h3 {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 20px 0 35px 0;
+      letter-spacing: -1.8px;
+      font-size: 1.8em;
       display: block;
-      margin-right: 5.26316%;
-      width: 47.36842%; }
-      #register-login ul.accordion li:last-child {
-        margin-right: 0; }
-      #register-login ul.accordion li.not-selected {
-        color: #477dca;
-        text-decoration: none;
-        -webkit-transition: color 0.1s linear;
-        -moz-transition: color 0.1s linear;
-        transition: color 0.1s linear;
-        cursor: pointer;
-        border-bottom: 1px solid #dddddd; }
-        #register-login ul.accordion li.not-selected:hover {
-          color: #2c5999; }
-        #register-login ul.accordion li.not-selected:active, #register-login ul.accordion li.not-selected:focus {
-          color: #2c5999;
-          outline: none; }
-      #register-login ul.accordion li.selected {
-        font-weight: bold;
-        border-bottom: 1px solid #333333; }
-      @media screen and (max-width: 480px) {
-        #register-login ul.accordion li {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 46.66667%; }
-          #register-login ul.accordion li:last-child {
-            margin-right: 0; } }
-  #register-login span.helptext {
-    display: none; }
-  #register-login #login-form {
-    display: none; }
-    #register-login #login-form a.new-account {
+      font-weight: 300;
+      line-height: 0.85em; }
+    #landing-stage #register p {
+      color: white;
+      line-height: 1.2em; }
+    #landing-stage #register span.helptext {
       display: none; }
+    #landing-stage #register #register-form label {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: normal;
+      font-size: 14px; }
+    #landing-stage #register #register-form input[type="text"], #landing-stage #register #register-form input[type="password"] {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.7); }
+    #landing-stage #register #register-form input[type="submit"] {
+      border: 1px solid #467a30;
+      border-radius: 3px;
+      box-shadow: inset 0 1px 0 0 #95b885;
+      color: white;
+      display: inline-block;
+      font-size: inherit;
+      font-weight: bold;
+      background-color: #68a24f;
+      background-image: -webkit-linear-gradient(#68a24f, #4c8534);
+      background-image: linear-gradient(#68a24f, #4c8534);
+      padding: 7px 18px;
+      text-decoration: none;
+      text-shadow: 0 1px 0 #3c6f26;
+      background-clip: padding-box; }
+      #landing-stage #register #register-form input[type="submit"]:hover:not(:disabled) {
+        box-shadow: inset 0 1px 0 0 #78a764;
+        cursor: pointer;
+        background-color: #5f8d4b;
+        background-image: -webkit-linear-gradient(#5f8d4b, #467931);
+        background-image: linear-gradient(#5f8d4b, #467931); }
+      #landing-stage #register #register-form input[type="submit"]:active:not(:disabled), #landing-stage #register #register-form input[type="submit"]:focus:not(:disabled) {
+        border: 1px solid #467a30;
+        box-shadow: inset 0 0 8px 4px #406d2d, inset 0 0 8px 4px #406d2d; }
+      #landing-stage #register #register-form input[type="submit"]:disabled {
+        opacity: 0.5;
+        cursor: not-allowed; }
 
 section.menu {
   padding: 20px 0; }
