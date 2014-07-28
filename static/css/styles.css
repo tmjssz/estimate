@@ -1373,9 +1373,7 @@ header.navi-header {
           display: table-cell;
           width: 25px; }
         #landing-stage #register #social-login .social-login span {
-          top: -2px;
-          left: -2px;
-          position: relative;
+          vertical-align: middle;
           display: table-cell;
           text-align: center;
           font-weight: 500; }
