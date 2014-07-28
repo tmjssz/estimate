@@ -13,10 +13,22 @@ from django.contrib.auth.models import User, Group
 from userauth.models import GroupInvitation
 from questions.models import Score, Estimate
 from userauth.forms import GroupForm
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 import logging
 
 logger = logging.getLogger('estimate.userauth.views')
 
+
+@receiver(post_save, sender=User)
+def ensure_profile_exists(sender, **kwargs):
+    """ Sends a mail to the admins, when a new User object is saved to the DB. """
+    if kwargs.get('created', False):
+            template = get_template('userauth/mail-user-registered.html')
+            new_user = kwargs.get('instance')
+            context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
+            content = template.render(context)
+            mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
 
 
 def register(request, template_name='userauth/register.html', next_page_name=None):
@@ -30,10 +42,10 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
             new_user = authenticate(username=username, password=pwd)
             login(request, new_user)
 
-            template = get_template('userauth/mail-user-registered.html')
-            context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
-            content = template.render(context)
-            mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
+            #template = get_template('userauth/mail-user-registered.html')
+            #context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
+            #content = template.render(context)
+            #mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
 
             if next_page_name is None:
                 next_page = '/'
