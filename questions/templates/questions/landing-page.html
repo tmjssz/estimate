@@ -13,7 +13,7 @@
 		<div id="login-form">
 			<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
 			    {{ form.as_p }}
-			    <p>
+			    <p id="login-submit">
 			    	<input type="hidden" name="next" value="{{ next }}" />
 			    	<input type="submit" value="Login"/>
 			    </p>

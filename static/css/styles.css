@@ -662,6 +662,10 @@ header.landing {
       @media screen and (max-width: 768px) {
         header.landing #header-wrapper #logo {
           display: block; } }
+      @media screen and (max-width: 480px) {
+        header.landing #header-wrapper #logo {
+          margin: auto;
+          height: 60px; } }
     header.landing #header-wrapper #login-form {
       float: right; }
       @media screen and (max-width: 768px) {
@@ -669,6 +673,14 @@ header.landing {
           padding-top: 10px;
           display: block;
           float: left; } }
+      @media screen and (max-width: 480px) {
+        header.landing #header-wrapper #login-form {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%; }
+          header.landing #header-wrapper #login-form:last-child {
+            margin-right: 0; } }
       header.landing #header-wrapper #login-form p {
         display: inline;
         margin-left: 8px;
@@ -684,13 +696,34 @@ header.landing {
           padding: 3px; }
           @media screen and (max-width: 480px) {
             header.landing #header-wrapper #login-form p input {
-              width: 120px; } }
+              width: 100%; } }
         header.landing #header-wrapper #login-form p input[type="submit"] {
           padding: 4px 15px;
           display: block;
           width: auto;
           margin: 29px 0 0 0;
           font-weight: 500; }
+          @media screen and (max-width: 480px) {
+            header.landing #header-wrapper #login-form p input[type="submit"] {
+              width: 100%; } }
+        @media screen and (max-width: 480px) {
+          header.landing #header-wrapper #login-form p {
+            margin-left: 0;
+            float: left;
+            display: block;
+            margin-right: 3.22581%;
+            width: 35.48387%; }
+            header.landing #header-wrapper #login-form p:last-child {
+              margin-right: 0; } }
+        @media screen and (max-width: 480px) {
+          header.landing #header-wrapper #login-form p#login-submit {
+            float: left;
+            display: block;
+            margin-right: 3.22581%;
+            width: 22.58065%;
+            margin-right: 0; }
+            header.landing #header-wrapper #login-form p#login-submit:last-child {
+              margin-right: 0; } }
       header.landing #header-wrapper #login-form b {
         display: inline-block; }
 
@@ -1190,6 +1223,9 @@ header.navi-header {
       font-size: 2em;
       display: block;
       font-weight: 400; }
+      @media screen and (max-width: 480px) {
+        #landing-stage #landing h2 {
+          text-align: center; } }
     #landing-stage #landing h3 {
       color: rgba(255, 255, 255, 0.7);
       margin: 20px 0 35px 0;
@@ -1198,6 +1234,9 @@ header.navi-header {
       display: block;
       font-weight: 300;
       line-height: 0.85em; }
+      @media screen and (max-width: 480px) {
+        #landing-stage #landing h3 {
+          text-align: center; } }
     #landing-stage #landing p {
       color: white;
       line-height: 1.2em;
