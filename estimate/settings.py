@@ -146,6 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR)
 LOGIN_URL = '/anmelden/'
 LOGOUT_URL = '/abmelden/'
 LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/willkommen/'
 
 
 # Local Settings
