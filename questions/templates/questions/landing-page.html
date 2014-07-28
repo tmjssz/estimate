@@ -50,7 +50,7 @@
 
 		<div id="social-login">
 			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
-			<!-- <a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a> -->
+			<a class="social-login facebook" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a>
 		</div>
 
 		<div class="divider"></div>
