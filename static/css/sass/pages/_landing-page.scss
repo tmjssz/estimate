@@ -3,6 +3,7 @@
 #landing-stage {
 	@include outer-container;
 	padding-top: 30px;
+	margin-bottom: 50px;
 
 	@include media ($tablet) {
 		padding: 15px;
@@ -10,6 +11,7 @@
 
 	@include media ($mobile) {
 		padding: 10px;
+		margin-bottom: 20px;
 	}
 
 	#landing {
