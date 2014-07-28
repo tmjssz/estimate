@@ -473,15 +473,18 @@ body {
   body footer {
     background: #333333;
     color: rgba(255, 255, 255, 0.5);
-    padding: 15px;
+    padding: 15px 0;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12px; }
+    font-size: 11px; }
     body footer:after {
       content: "";
       display: table;
       clear: both; }
+    @media screen and (max-width: 768px) {
+      body footer {
+        padding: 15px; } }
     body footer a {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
@@ -490,7 +493,8 @@ body {
       display: inline-block;
       text-decoration: underline;
       float: right;
-      padding-left: 5px; }
+      padding-left: 5px;
+      font-size: 13px; }
       body footer a:hover {
         color: white;
         text-decoration: none; }
