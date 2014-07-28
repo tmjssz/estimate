@@ -118,7 +118,8 @@
 		}
 
 		#social-login {
-			display: flex;
+			display:table;
+			width:100%;
 
 			.social-login {
 				@include span-columns(2.5 of 5);

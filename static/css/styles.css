@@ -1351,7 +1351,8 @@ header.navi-header {
     #landing-stage #register span.helptext {
       display: none; }
     #landing-stage #register #social-login {
-      display: flex; }
+      display: table;
+      width: 100%; }
       #landing-stage #register #social-login .social-login {
         float: left;
         display: block;
