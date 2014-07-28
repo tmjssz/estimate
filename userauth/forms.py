@@ -1,10 +1,12 @@
 # coding=utf8
 # -*- coding: utf8 -*-
-from django.forms import ModelForm, ValidationError
+from django.forms import ModelForm, ValidationError, TextInput
+import django.forms as forms
 from django.contrib.auth.models import User, Group
 from django.core.mail import mail_admins
 from django.template import Context
 from django.template.loader import get_template
+from django.contrib.auth.forms import UserCreationForm
 
 
 class GroupForm(ModelForm):
@@ -26,3 +28,17 @@ class GroupForm(ModelForm):
             self.instance.time_out = self.__time_out"""
             
         return super(GroupForm, self).save(commit)
+
+
+class UserCreationFormCustom(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationFormCustom, self).__init__(*args, **kwargs)
+
+        for key, field in self.fields.items():
+            if isinstance(field.widget, forms.TextInput) or \
+                isinstance(field.widget, forms.Textarea) or \
+                isinstance(field.widget, forms.DateInput) or \
+                isinstance(field.widget, forms.DateTimeInput) or \
+                isinstance(field.widget, forms.TimeInput):
+                field.widget.attrs.update({'placeholder': field.label})

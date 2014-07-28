@@ -9,11 +9,17 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.db.models import Min
 from django.utils.timezone import now
+from django.template.loader import get_template
+from django.template import Context
+from django.conf import settings
+from django.core.mail import mail_admins
 
 from questions.forms import EstimateForm, QuestionForm, UserProfileForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django.contrib.auth import authenticate, login
+from userauth.forms import UserCreationFormCustom
 import logging
 import random
 
@@ -44,14 +50,30 @@ def menu_view(request):
         
         return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
     else:
-        register_form = UserCreationForm()
         login_form = AuthenticationForm()
-
         questions = Question.objects.filter(published=True)
         question = random.choice(questions)
 
-        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question}, context_instance=RequestContext(request))
+        if request.method == 'POST':
+            register_form = UserCreationFormCustom(request.POST)
+            if register_form.is_valid():
+                register_form.save()
+                username = request.POST[u'username']
+                pwd = request.POST[u'password1']
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
 
+                template = get_template('userauth/mail-user-registered.html')
+                context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
+                content = template.render(context)
+                mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
+
+                return HttpResponseRedirect('willkommen/')
+        else:
+            register_form = UserCreationFormCustom()
+        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
+            context_instance=RequestContext(request))
+        
 @login_required
 def questions_list_all(request):
     """

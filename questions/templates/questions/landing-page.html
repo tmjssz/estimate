@@ -19,6 +19,11 @@
 			    </p>
 			    {% csrf_token %}
 			</form>
+
+			<!-- <b><i class="fa fa-sign-in"></i> Einloggen mit</b>
+
+			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google"></i> Google</a>
+			<a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> Facebook</a> -->
 		</div>
 	</div>
 </header>
@@ -30,18 +35,34 @@
 		<h3>{{ question.question }}</h3>
 
 		<p>Estimate fordert dich heraus! Wie gut bist du im Schätzen? Gib deine Schätzungen zu spannenden, interessanten und lustigen Fragen ab. Finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufällige Fragen, spiele Challenges oder such dir Fragen aus der Sammlung aus. Du kannst deinen <i>estiMATES</i> auch selber Fragen stellen. Mach mit, Schätzen macht Spaß!</p>
+
+		<!-- <div id="social-login">
+			<h4><i class="fa fa-sign-in"></i> Einloggen mit</h4>
+
+			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google"></i> Google</a>
+			<a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> Facebook</a>
+		</div> -->
 	<!-- / #landing -->
 	</div>
 
 
 	<div id="register">
 
-		<h3><i class="fa fa-user"></i> Neuer Account</h3>
+		<div id="social-login">
+			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
+			<!-- <a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a> -->
+		</div>
 
-		<p>Wähle deinen Namen und ein Passwort und schon bist du am Start.</p>
+		<div class="divider"></div>
+
+		<p>Wähle deine Benutzerdaten und schon bist du am Start.</p>
 
 		<div class="form" id="register-form">
-			{% include "userauth/register_form.html" %}
+			<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">
+				{{ register_form.as_p }}
+				{% csrf_token %}
+				<input type="submit" value="Account erstellen"/>
+			</form>
 		<!-- / #register-form -->
 		</div>
 

@@ -265,6 +265,10 @@ body {
     body .badge.success {
       background: #e6efc2;
       color: #333333; }
+  body .divider {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 1px;
+    margin: 20px 0px; }
   body #main {
     max-width: 800px;
     margin-left: auto;
@@ -664,21 +668,27 @@ header.landing {
       header.landing #header-wrapper #login-form p {
         display: inline;
         margin-left: 8px;
-        float: left; }
+        float: left;
+        margin-bottom: 0px; }
         header.landing #header-wrapper #login-form p label {
-          font-size: 14px; }
+          font-size: 12px;
+          line-height: 10px;
+          margin-top: 14px; }
         header.landing #header-wrapper #login-form p input {
           width: 160px;
           font-size: 16px;
-          padding: 5px; }
+          padding: 3px; }
           @media screen and (max-width: 480px) {
             header.landing #header-wrapper #login-form p input {
               width: 120px; } }
         header.landing #header-wrapper #login-form p input[type="submit"] {
-          padding: 6px 15px;
+          padding: 4px 15px;
           display: block;
           width: auto;
-          margin: 29px 0 0 0; }
+          margin: 29px 0 0 0;
+          font-weight: 500; }
+      header.landing #header-wrapper #login-form b {
+        display: inline-block; }
 
 header.navi-header {
   background-color: #333333;
@@ -1170,22 +1180,102 @@ header.navi-header {
     #landing-stage #landing h2 {
       color: #f0e3cf;
       margin: 10px 0 15px 0;
-      letter-spacing: -1.8px;
-      font-size: 2.7em;
+      letter-spacing: -2.5px;
+      font-size: 2em;
       display: block;
       font-weight: 400; }
     #landing-stage #landing h3 {
       color: rgba(255, 255, 255, 0.7);
       margin: 20px 0 35px 0;
-      letter-spacing: -1.8px;
-      font-size: 1.8em;
+      letter-spacing: -1.4px;
+      font-size: 1.6em;
       display: block;
       font-weight: 300;
       line-height: 0.85em; }
     #landing-stage #landing p {
       color: white;
-      line-height: 1.2em; }
+      line-height: 1.2em;
+      font-size: 14px; }
+    #landing-stage #landing #social-login h4 {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 20px 0 10px 0;
+      letter-spacing: -1.4px;
+      font-size: 1.4em;
+      display: block;
+      font-weight: 300;
+      line-height: 0.85em; }
+    #landing-stage #landing #social-login .social-login {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 47.36842%;
+      padding: 3px 10px !important;
+      margin-bottom: 20px; }
+      #landing-stage #landing #social-login .social-login:last-child {
+        margin-right: 0; }
+      #landing-stage #landing #social-login .social-login:nth-child(3n) {
+        margin-right: 0; }
+      #landing-stage #landing #social-login .social-login:nth-child(3n+1) {
+        clear: left; }
+      #landing-stage #landing #social-login .social-login i {
+        padding: 0 8px 0 0 !important; }
+      #landing-stage #landing #social-login .social-login.google {
+        border: 1px solid #ba2715;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 0 0 #e28b81;
+        color: white;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: bold;
+        background-color: #dd4b39;
+        background-image: -webkit-linear-gradient(#dd4b39, #c72a17);
+        background-image: linear-gradient(#dd4b39, #c72a17);
+        padding: 7px 18px;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #ad1f0d;
+        background-clip: padding-box; }
+        #landing-stage #landing #social-login .social-login.google:hover:not(:disabled) {
+          box-shadow: inset 0 1px 0 0 #da6456;
+          cursor: pointer;
+          background-color: #d23d2a;
+          background-image: -webkit-linear-gradient(#d23d2a, #b92816);
+          background-image: linear-gradient(#d23d2a, #b92816); }
+        #landing-stage #landing #social-login .social-login.google:active:not(:disabled), #landing-stage #landing #social-login .social-login.google:focus:not(:disabled) {
+          border: 1px solid #ba2715;
+          box-shadow: inset 0 0 8px 4px #aa2615, inset 0 0 8px 4px #aa2615; }
+        #landing-stage #landing #social-login .social-login.google:disabled {
+          opacity: 0.5;
+          cursor: not-allowed; }
+      #landing-stage #landing #social-login .social-login.facebook {
+        border: 1px solid #3a5488;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 0 0 #98a5bf;
+        color: white;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: bold;
+        background-color: #5f78ab;
+        background-image: -webkit-linear-gradient(#5f78ab, #3f5b93);
+        background-image: linear-gradient(#5f78ab, #3f5b93);
+        padding: 7px 18px;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #2f497f;
+        background-clip: padding-box; }
+        #landing-stage #landing #social-login .social-login.facebook:hover:not(:disabled) {
+          box-shadow: inset 0 1px 0 0 #7789ac;
+          cursor: pointer;
+          background-color: #586d99;
+          background-image: -webkit-linear-gradient(#586d99, #3b5487);
+          background-image: linear-gradient(#586d99, #3b5487); }
+        #landing-stage #landing #social-login .social-login.facebook:active:not(:disabled), #landing-stage #landing #social-login .social-login.facebook:focus:not(:disabled) {
+          border: 1px solid #3a5488;
+          box-shadow: inset 0 0 8px 4px #374e7c, inset 0 0 8px 4px #374e7c; }
+        #landing-stage #landing #social-login .social-login.facebook:disabled {
+          opacity: 0.5;
+          cursor: not-allowed; }
   #landing-stage #register {
+    margin-top: 15px;
+    margin-bottom: 20px;
     float: left;
     display: block;
     margin-right: 2.5641%;
@@ -1202,52 +1292,98 @@ header.navi-header {
           margin-right: 0; } }
     #landing-stage #register h3 {
       color: rgba(255, 255, 255, 0.7);
-      margin: 20px 0 35px 0;
-      letter-spacing: -1.8px;
-      font-size: 1.8em;
+      margin: 20px 0 15px 0;
+      letter-spacing: -1.4px;
+      font-size: 1.6em;
       display: block;
       font-weight: 300;
       line-height: 0.85em; }
     #landing-stage #register p {
       color: white;
-      line-height: 1.2em; }
+      line-height: 1.2em;
+      font-size: 14px;
+      margin-bottom: 20px; }
     #landing-stage #register span.helptext {
       display: none; }
+    #landing-stage #register #social-login {
+      display: flex; }
+      #landing-stage #register #social-login .social-login {
+        float: left;
+        display: block;
+        margin-right: 5.26316%;
+        width: 47.36842%;
+        padding: 0 !important;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        display: table; }
+        #landing-stage #register #social-login .social-login:last-child {
+          margin-right: 0; }
+        #landing-stage #register #social-login .social-login:nth-child(3n) {
+          margin-right: 0; }
+        #landing-stage #register #social-login .social-login:nth-child(3n+1) {
+          clear: left; }
+        #landing-stage #register #social-login .social-login i {
+          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          font-size: 22px;
+          padding: 5px 7px 2px 7px !important;
+          display: table-cell;
+          width: 25px; }
+        #landing-stage #register #social-login .social-login span {
+          top: -2px;
+          left: -2px;
+          position: relative;
+          display: table-cell;
+          text-align: center;
+          font-weight: 500; }
+        #landing-stage #register #social-login .social-login.google {
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+          background: #dd4b39;
+          border-radius: 0.1875em;
+          color: white;
+          padding: .4em .6em; }
+          #landing-stage #register #social-login .social-login.google:hover {
+            background: #e47365; }
+        #landing-stage #register #social-login .social-login.facebook {
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+          background: #5f78ab;
+          border-radius: 0.1875em;
+          color: white;
+          padding: .4em .6em; }
+          #landing-stage #register #social-login .social-login.facebook:hover {
+            background: #8094bd; }
     #landing-stage #register #register-form label {
       color: rgba(255, 255, 255, 0.7);
       font-weight: normal;
-      font-size: 14px; }
+      font-size: 14px;
+      display: none; }
     #landing-stage #register #register-form input[type="text"], #landing-stage #register #register-form input[type="password"] {
       background: rgba(255, 255, 255, 0.1);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.7); }
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px; }
     #landing-stage #register #register-form input[type="submit"] {
-      border: 1px solid #467a30;
-      border-radius: 3px;
-      box-shadow: inset 0 1px 0 0 #95b885;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #68a24f;
+      border-radius: 0.1875em;
       color: white;
-      display: inline-block;
-      font-size: inherit;
-      font-weight: bold;
-      background-color: #68a24f;
-      background-image: -webkit-linear-gradient(#68a24f, #4c8534);
-      background-image: linear-gradient(#68a24f, #4c8534);
-      padding: 7px 18px;
-      text-decoration: none;
-      text-shadow: 0 1px 0 #3c6f26;
-      background-clip: padding-box; }
-      #landing-stage #register #register-form input[type="submit"]:hover:not(:disabled) {
-        box-shadow: inset 0 1px 0 0 #78a764;
-        cursor: pointer;
-        background-color: #5f8d4b;
-        background-image: -webkit-linear-gradient(#5f8d4b, #467931);
-        background-image: linear-gradient(#5f8d4b, #467931); }
-      #landing-stage #register #register-form input[type="submit"]:active:not(:disabled), #landing-stage #register #register-form input[type="submit"]:focus:not(:disabled) {
-        border: 1px solid #467a30;
-        box-shadow: inset 0 0 8px 4px #406d2d, inset 0 0 8px 4px #406d2d; }
-      #landing-stage #register #register-form input[type="submit"]:disabled {
-        opacity: 0.5;
-        cursor: not-allowed; }
+      padding: .4em .6em;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      padding: 8px 0;
+      width: 100%; }
+      #landing-stage #register #register-form input[type="submit"]:hover {
+        background: #83b86c; }
+    #landing-stage #register #register-form .errorlist {
+      color: #D46A6A;
+      font-size: 14px; }
+      #landing-stage #register #register-form .errorlist + p > input {
+        border: 1px solid #D46A6A !important; }
 
 section.menu {
   padding: 20px 0; }

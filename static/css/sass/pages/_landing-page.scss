@@ -22,8 +22,8 @@
 		h2 {
 			color: $light-coffee;
 			margin: 10px 0 15px 0;
-			letter-spacing: -1.8px;
-			font-size: 2.7em;
+			letter-spacing: -2.5px;
+			font-size: 2em;
 			display: block;
 			font-weight: 400;
 		}
@@ -31,8 +31,8 @@
 		h3 {
 			color: transparentize(white, 0.3);
 			margin: 20px 0 35px 0;
-			letter-spacing: -1.8px;
-			font-size: 1.8em;
+			letter-spacing: -1.4px;
+			font-size: 1.6em;
 			display: block;
 			font-weight: 300;
 			line-height: 0.85em;
@@ -41,11 +41,46 @@
 		p {
 			color: white;
 			line-height: 1.2em;
+			font-size: 14px;
+		}
+
+		#social-login {
+			h4 {
+				color: transparentize(white, 0.3);
+				margin: 20px 0 10px 0;
+				letter-spacing: -1.4px;
+				font-size: 1.4em;
+				display: block;
+				font-weight: 300;
+				line-height: 0.85em;
+			}
+
+			.social-login {
+				@include span-columns(2.5 of 5);
+				@include omega(3n);
+				padding: 3px 10px !important;
+				margin-bottom: 20px;
+
+				i {
+					padding: 0 8px 0 0 !important;
+					//font-size: 1.5em;
+				}
+
+				&.google {
+					@include button(simple, #dd4b39);
+				}
+
+				&.facebook {
+					@include button(simple, #5f78ab);
+				}
+			}
 		}
 	}
 
 	// REGISTER / LOGIN PART ON LANDING PAGE
 	#register {
+		margin-top: 15px;
+		margin-bottom: 20px;
 		@include span-columns(5);
 		@include media($mobile) {
 			@include span-columns(4);
@@ -53,9 +88,9 @@
 
 		h3 {
 			color: transparentize(white, 0.3);
-			margin: 20px 0 35px 0;
-			letter-spacing: -1.8px;
-			font-size: 1.8em;
+			margin: 20px 0 15px 0;
+			letter-spacing: -1.4px;
+			font-size: 1.6em;
 			display: block;
 			font-weight: 300;
 			line-height: 0.85em;
@@ -64,10 +99,50 @@
 		p {
 			color: white;
 			line-height: 1.2em;
+			font-size: 14px;
+			margin-bottom: 20px;
 		}
 
 		span.helptext {
 			display: none;
+		}
+
+		#social-login {
+			display: flex;
+
+			.social-login {
+				@include span-columns(2.5 of 5);
+				@include omega(3n);
+				padding: 0 !important;
+				border: 1px solid transparentize(black, 0.8);
+				display: table;
+				//margin-bottom: 20px;
+
+				i {
+					border-right: 1px solid transparentize(black, 0.8);
+					font-size: 22px;
+					padding: 5px 7px 2px 7px !important;
+					display: table-cell;
+					width: 25px;
+				}
+
+				span {
+					top: -2px;
+					left: -2px;
+					position: relative;
+					display: table-cell;
+					text-align: center;
+					font-weight: 500;
+				}
+
+				&.google {
+					@include btn(#dd4b39);
+				}
+
+				&.facebook {
+					@include btn(#5f78ab);
+				}
+			}
 		}
 
 		#register-form {
@@ -75,16 +150,32 @@
 				color: transparentize(white, 0.3);
 				font-weight: normal;
 				font-size: 14px;
+				display: none;
 			}
 
 			input[type="text"], input[type="password"] {
 				background: transparentize(white, 0.9);
 				color: white;
 				border: 1px solid transparentize(white, 0.3);
+				margin-bottom: 20px;
 			}
 
 			input[type="submit"] {
-				@include button(simple, #68a24f);
+				@include btn(#68a24f);
+				border: 0;
+				box-shadow: none;
+				text-shadow: none;
+				padding: 8px 0;
+				width: 100%;
+			}
+
+			.errorlist {
+				color: #D46A6A;
+				font-size: 14px;
+
+				& + p > input {
+					border: 1px solid #D46A6A !important;
+				}
 			}
 		}
 

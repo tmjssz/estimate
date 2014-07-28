@@ -42,6 +42,12 @@ body {
 	    }
 	}
 
+	.divider {
+		background-color: transparentize(white, 0.8);
+		height: 1px;
+		margin: 20px 0px;
+	}
+
 	#main {
 
 		@include outer-container;
