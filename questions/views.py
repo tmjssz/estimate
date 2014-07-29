@@ -63,10 +63,10 @@ def menu_view(request):
                 new_user = authenticate(username=username, password=pwd)
                 login(request, new_user)
 
-                template = get_template('userauth/mail-user-registered.html')
+                """template = get_template('userauth/mail-user-registered.html')
                 context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
                 content = template.render(context)
-                mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
+                mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)"""
 
                 return HttpResponseRedirect('willkommen/')
         else:
@@ -258,6 +258,14 @@ def question_random(request):
         return render(request, 'questions/message.html', {'title': title, 'message': message})
     
     question = random.choice(questions)
+
+    # get another questions for statistics, so that those questions are preferred
+    questions_stats = questions.filter(stats=True)
+    if questions_stats.count() > 0:
+        question_stats = random.choice(questions_stats)
+        # make a list of both selected questions and choose randomly one of them
+        both_questions = [question_stats, question]
+        question = random.choice(both_questions)
 
     return HttpResponseRedirect("/zufall/"+question.slug)
 

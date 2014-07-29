@@ -9,3 +9,4 @@ userauth/fixtures/*
 .sass-cache/*
 static/css/sass/.sass-cache/*
 media/*
+fixtures/*
