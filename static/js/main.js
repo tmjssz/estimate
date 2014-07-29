@@ -46,10 +46,10 @@ $( document ).ready(function() {
                         .attr("type", "hidden")
                         .attr("name", "time_out")
                         .attr("id", "time_out").val("true");
-                    $("form").append($(input));
+                    $("form#estimate_form").append($(input));
                 }
                 
-                $("form").submit();
+                $("form#estimate_form").submit();
             }
         });
     }
