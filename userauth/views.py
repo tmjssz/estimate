@@ -15,6 +15,9 @@ from questions.models import Score, Estimate
 from userauth.forms import GroupForm
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.validators import validate_email
+from django.forms import ValidationError
+from django.core.mail import EmailMultiAlternatives
 import logging
 
 logger = logging.getLogger('estimate.userauth.views')
@@ -171,4 +174,32 @@ def group_view(request, id):
     scores_best_percentage_error = Score.objects.get_highscore_best_percentage_error_group(group)
 
     return render_to_response('userauth/group_show.html', {'group': group, 'invitable_users': invitable_users, 'gotten_invites': gotten_invites, 'scores': scores, 'is_member': is_member, 'scores_per_question': scores_per_question, 'best_estimates': best_estimates, 'best_percentage_error': scores_best_percentage_error}, context_instance=RequestContext(request))    
+
+
+def invite_friend(request):
+    if request.method == 'POST':
+        email = request.POST[u'email']
+        message = request.POST[u'message']
+        name = request.POST[u'name']
+
+        try:
+            validate_email(email)
+        except ValidationError:
+            return render_to_response('userauth/friend-invite.html', {'error': True, 'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
+
+        template = get_template('userauth/mail-friend-invitation.html')
+        context = Context({'message': message, 'email': email, 'name': name, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'static_url': settings.STATIC_URL})
+        content = template.render(context)
+        
+        subject, from_email, to = 'Einladung von ' + name + ' zu esti|mate', 'esti|mate <etamitse@gmail.com>', email
+        text_content = u'Du wurdest von ' + name + u' zum Schaetzspiel estimate eingeladen. \n\n"' + message + u'"\n\n Schau doch mal vorbei: ' + settings.EMAIL_HTML_CONTENT_HOST + u'\n\n Estimate fordert dich heraus! Wie gut bist du im Schaetzen? Gib deine Schaetzungen zu spannenden, interessanten und lustigen Fragen ab. Finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufaellige Fragen, spiele Challenges oder such dir Fragen aus der Sammlung aus. Du kannst deinen estiMATES auch selber Fragen stellen. Mach mit, Schaetzen macht Spass!'
+        
+        html_content = content
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        return render_to_response('userauth/friend-invite.html', {'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
+
+    return render_to_response('userauth/friend-invite.html', {}, context_instance=RequestContext(request))
 

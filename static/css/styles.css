@@ -477,7 +477,7 @@ body {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 11px; }
+    font-size: 10px; }
     body footer:after {
       content: "";
       display: table;
@@ -1123,6 +1123,18 @@ header.navi-header {
         color: #646464; }
         #challenge-list-all aside #played-challenges ul li a span.detail:hover, #challenge-list-all aside #own-challenges ul li a span.detail:hover {
           color: #333333; }
+
+#friend_invite .another-invite {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: #477dca;
+  border-radius: 0.1875em;
+  color: white;
+  padding: .4em .6em;
+  display: inline-block; }
+  #friend_invite .another-invite:hover {
+    background: #6f99d5; }
 
 #groups-list .new-group {
   text-align: center;

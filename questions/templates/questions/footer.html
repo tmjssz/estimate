@@ -35,7 +35,7 @@
 	  </div>
 	</div>
 
-	<!-- <div class="modal">
+	<div class="modal">
 	  <label for="modal-invite-friend">
 	    Weitersagen
 	  </label>
@@ -45,9 +45,12 @@
 	      <label class="modal-close" for="modal-invite-friend"></label>
 
 	      <h1>Freund einladen</h1>
-	      <form enctype="multipart/form-data" action="" method="post" accept-charset="utf-8">
+	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
 			<p>
-				<input id="id_mail" required maxlength="254" name="mail" type="email" placeholder="E-Mail">
+				<input id="id_mail" required maxlength="254" name="email" type="email" placeholder="E-Mail">
+			</p>
+			<p>
+				<input id="id_name" required maxlength="254" name="name" type="text" value="{{ user.username }}" placeholder="Dein Name">
 			</p>
 			<p>
 				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht"></textarea>
@@ -59,6 +62,6 @@
 		</form>
 	    </div>
 	  </div>
-	</div> -->
+	</div>
 
 </footer>

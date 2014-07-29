@@ -1,0 +1,8 @@
+#friend_invite {
+
+	.another-invite {
+		@include btn($base-accent-color);
+		display: inline-block;
+	}
+
+}

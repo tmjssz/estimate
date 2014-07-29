@@ -276,7 +276,7 @@ body {
 		color: transparentize(white, 0.5);
 		padding: 15px 0;
 		@include outer-container;
-		font-size: 11px;
+		font-size: 10px;
 
 		@include media ($tablet) {
 			padding: 15px;

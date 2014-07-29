@@ -71,7 +71,7 @@ class QuestionForm(ModelForm):
             self.instance.published = False
             self.instance.stats = False
 
-        template = get_template('questions/mail-question-created.html')
+        template = get_template('userauth/mail-friend-invitation.html')
         context = Context({'question': self.instance, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'media_url': settings.MEDIA_URL})
         content = template.render(context)
         mail_admins('[Neue Frage] '+self.instance.title, self.__author.username+' hat eine neue Frage eingereicht.', html_message=content, fail_silently=True)
