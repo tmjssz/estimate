@@ -24,6 +24,11 @@ def no_stats_question(modeladmin, request, queryset):
     queryset.update(stats=False)
 no_stats_question.short_description = "Ausgewählte Fragen nicht in Statistik einbeziehen"
 
+def update_date_created(modeladmin, request, queryset):
+    queryset.update(date_created=now())
+    queryset.update(date_updated=now())
+update_date_created.short_description = "Erstellungsdatum der ausgewählten Fragen neu setzen (jetzt)"
+
 class QuestionAdmin(admin.ModelAdmin):
     def autor(self):
         html = '<a href="/admin/auth/user/'+str(self.author.id)+'/">'+str(self.author)+'</a>'
@@ -34,7 +39,7 @@ class QuestionAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author__username')
     list_filter = ['author', 'published', 'stats']
     readonly_fields = ['date_created', 'date_updated']
-    actions = [publish_question, unpublish_question, stats_question, no_stats_question]
+    actions = [publish_question, unpublish_question, stats_question, no_stats_question, update_date_created]
 
 
 # =============================================================================
