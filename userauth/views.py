@@ -199,6 +199,8 @@ def invite_friend(request):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
+        mail_admins(name+' hat '+email+' eingeladen', name+' hat einen Freund eingeladen.', html_message=content, fail_silently=True)
+
         return render_to_response('userauth/friend-invite.html', {'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
 
     return render_to_response('userauth/friend-invite.html', {}, context_instance=RequestContext(request))
