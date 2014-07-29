@@ -290,10 +290,66 @@ body {
     		float: right;
     		padding-left: 5px;
     		font-size: 13px;
+    		margin-left: 10px;
 
     		&:hover {
 				color: white;
 				text-decoration: none;
+			}
+    	}
+
+    	.modal {
+    		display: inline-block;
+			float: right;
+
+			label {
+				@include transition (all 0.2s ease-in-out);
+	    		color: transparentize(white, 0.5);
+	    		display: inline-block;
+	    		text-decoration:underline;
+	    		float: right;
+	    		padding-left: 5px;
+	    		font-size: 13px;
+	    		font-weight: normal;
+	    		margin-left: 10px;
+
+	    		&:hover {
+					color: white;
+					text-decoration: none;
+				}
+			}
+
+			.modal-inner {
+				font-size: 16px;
+
+				h1 {
+					margin: 5px 0 15px 0;
+					letter-spacing: -2px;
+					display: block;
+					font-size: 2.5em;
+					font-weight: 200;
+					color: $dark-gray;
+				}
+
+				label {
+					font-size: 1em;
+					color: $dark-gray;
+					float: none;
+					margin: 0;
+					padding: 0;
+					text-decoration:none;
+					font-size: 11px;
+					font-weight: bold;
+				}
+
+				input[type="text"], input[type="email"], textarea {
+					padding: 5px;
+					margin: 0;
+				}
+
+				.modal-close {
+					font-size: 1em;
+				}
 			}
     	}
 	}

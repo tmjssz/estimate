@@ -494,10 +494,52 @@ body {
       text-decoration: underline;
       float: right;
       padding-left: 5px;
-      font-size: 13px; }
+      font-size: 13px;
+      margin-left: 10px; }
       body footer a:hover {
         color: white;
         text-decoration: none; }
+    body footer .modal {
+      display: inline-block;
+      float: right; }
+      body footer .modal label {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        color: rgba(255, 255, 255, 0.5);
+        display: inline-block;
+        text-decoration: underline;
+        float: right;
+        padding-left: 5px;
+        font-size: 13px;
+        font-weight: normal;
+        margin-left: 10px; }
+        body footer .modal label:hover {
+          color: white;
+          text-decoration: none; }
+      body footer .modal .modal-inner {
+        font-size: 16px; }
+        body footer .modal .modal-inner h1 {
+          margin: 5px 0 15px 0;
+          letter-spacing: -2px;
+          display: block;
+          font-size: 2.5em;
+          font-weight: 200;
+          color: #333333; }
+        body footer .modal .modal-inner label {
+          font-size: 1em;
+          color: #333333;
+          float: none;
+          margin: 0;
+          padding: 0;
+          text-decoration: none;
+          font-size: 11px;
+          font-weight: bold; }
+        body footer .modal .modal-inner input[type="text"], body footer .modal .modal-inner input[type="email"], body footer .modal .modal-inner textarea {
+          padding: 5px;
+          margin: 0; }
+        body footer .modal .modal-inner .modal-close {
+          font-size: 1em; }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0; }
