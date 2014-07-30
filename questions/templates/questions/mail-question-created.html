@@ -2,7 +2,7 @@
 
 <p id="question">{{ question.question }}</p>
 
-<p><b>Autor:</b> <a href="{{ host }}{% url 'questions_user' question.author %}">{{ question.author }}</a></p>
+<p><b>Autor:</b> <a href="{{ host }}{% url 'questions_user' question.author.id %}">{{ question.author }}</a></p>
 
 <p>{% if question.answer %}
 	<b>Antwort:</b> ***

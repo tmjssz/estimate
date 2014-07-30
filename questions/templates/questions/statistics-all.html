@@ -14,7 +14,7 @@
 
     <div class="error">
     {% if best_avg_estimate %} 
-        <span class="title">&#216; Fehler von <a class="best" href="{% url 'questions_user' best_avg_estimate.user %}">{{ best_avg_estimate.user }}</a></span>
+        <span class="title">&#216; Fehler von <a class="best" href="{% url 'questions_user' best_avg_estimate.user.id %}">{{ best_avg_estimate.user }}</a></span>
         <span class="value">{{ best_avg_estimate.percentage_error|floatformat:"-2" }}%</span>
     {% endif %}
     </div>
@@ -45,7 +45,7 @@
                 <td class="no-mobile">{{ avg.estimate|floatformat:"-2" }}</td>
                 <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
                 <td>{{ count }}</td>
-                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
+                <td><a class="best" href="{% url 'questions_user' best.user.id %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
 
             {% else %}
 
@@ -54,7 +54,7 @@
                 <td class="no-mobile"></td>
                 <td>{{ avg.percentage_error|floatformat:"-2" }} %</td>
                 <td>{{ count }}</td>
-                <td><a class="best" href="{% url 'questions_user' best.user %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
+                <td><a class="best" href="{% url 'questions_user' best.user.id %}">{{ best.user }}</a>{{ best.percentage_error|floatformat:"-2" }}%</td>
 
             {% endif %}
             </tr>

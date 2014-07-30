@@ -24,7 +24,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score }}</td>
 				    </tr>
@@ -45,7 +45,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score|floatformat }}</td>
 				    </tr>
@@ -66,7 +66,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' e.user %}">{{ e.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' e.user.id %}">{{ e.user }}</a></td>
 				    	<td>{{ s.number }}</td>
 				    	<td><a href="{% url 'questions_statistics_question' e.question.slug %}">{{ e.percentage_error|floatformat:"-2" }} %</a></td>
 				    </tr>
@@ -87,7 +87,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score|floatformat:"-2" }} %</td>
 				    </tr>

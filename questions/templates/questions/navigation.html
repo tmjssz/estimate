@@ -15,7 +15,7 @@
 		{% if user.is_authenticated %}
 
 		<div id="naviToggle"><i class="fa fa-bars"></i></div>
-		<a href="{% url 'questions_user' user %}" id="username">Eingeloggt als <br><span>{{ user.username }}</span></a>
+		<a href="{% url 'questions_user' user.id %}" id="username">Eingeloggt als <br><span>{{ user.username }}</span></a>
 
 		<nav class="logged_in">
 			<ul class="logged_in">

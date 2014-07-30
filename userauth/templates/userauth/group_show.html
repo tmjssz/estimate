@@ -40,7 +40,7 @@
 		{% if gotten_invites %}
 			<div class="notice">
 			{% if gotten_invites.count == 1 %}
-				Du wurdest von <a href="{% url 'questions_user' gotten_invites.first.inviter %}">{{ gotten_invites.first.inviter }}</a> zu dieser Gruppe eingeladen. 
+				Du wurdest von <a href="{% url 'questions_user' gotten_invites.first.inviter.id %}">{{ gotten_invites.first.inviter }}</a> zu dieser Gruppe eingeladen. 
 
 				<br><br>
 
@@ -59,7 +59,7 @@
 				Du wurdest zu dieser Gruppe eingeladen von folgenden Usern:
 				<ul>
 					{% for invite in gotten_invites %}
-					<li><a href="{% url 'questions_user' invite.inviter %}">{{ invite.inviter }}</a></li>
+					<li><a href="{% url 'questions_user' invite.inviter.id %}">{{ invite.inviter }}</a></li>
 					{% endfor %}
 				</ul>
 
@@ -99,7 +99,7 @@
 				   	 <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score }}</td>
 				    </tr>
@@ -126,7 +126,7 @@
 				   	 <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score|floatformat }}</td>
 				    </tr>
@@ -151,7 +151,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' e.user %}">{{ e.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' e.user.id %}">{{ e.user }}</a></td>
 				    	<td>{{ s.number }}</td>
 				    	<td><a href="{% url 'questions_statistics_question' e.question.slug %}">{{ e.percentage_error|floatformat:"-2" }} %</a></td>
 				    </tr>
@@ -174,7 +174,7 @@
 				    <tr>
 				    {% endif %}
 				    	<td>{{ forloop.counter }}</td>
-				    	<td class="left"><a href="{% url 'questions_user' score.user %}">{{ score.user }}</a></td>
+				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score|floatformat:"-2" }} %</td>
 				    </tr>
@@ -234,7 +234,7 @@
 		<h4>Eingeladen</h4>
 		<ul>
 			{% for invite in group.group_invites.all %}
-			<li><a href="{% url 'questions_user' invite.invitee %}">{{ invite.invitee }}</a></li>
+			<li><a href="{% url 'questions_user' invite.invitee.id %}">{{ invite.invitee }}</a></li>
 			{% endfor %}
 		</ul>
 		{% endif %}

@@ -20,7 +20,7 @@ urlpatterns = patterns('questions.views',
     url(r'^statistik/(?P<slug>[-\w]+)/$', 'question_statistics', name='questions_statistics_question'),
 
     url(r'^konto$', 'account_settings', name='questions_account'),
-    url(r'^benutzer/(?P<username>[-\w]+)/$', 'statistics_user', name='questions_user'),
+    url(r'^benutzer/(?P<user_id>[-\w]+)/$', 'statistics_user', name='questions_user'),
     url(r'^highscore$', 'question_highscore', name='questions_highscore'),
     url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
 )

@@ -515,11 +515,11 @@ def question_statistics(request, slug):
     return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates, 'avg_estimate': avg_estimate})
 
 @login_required
-def statistics_user(request, username):
+def statistics_user(request, user_id):
     """
     Show statistics for current user 
     """
-    user = get_object_or_404(User, username=username)
+    user = get_object_or_404(User, id=user_id)
     if user.is_superuser and not request.user.is_superuser:
         raise Http404
 

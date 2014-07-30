@@ -42,3 +42,10 @@ class UserCreationFormCustom(UserCreationForm):
                 isinstance(field.widget, forms.DateTimeInput) or \
                 isinstance(field.widget, forms.TimeInput):
                 field.widget.attrs.update({'placeholder': field.label})
+
+    """def clean(self):
+        username = self.cleaned_data['username']
+        chars = set('.@$,')
+        if any((c in chars) for c in username):
+            raise forms.ValidationError(u'FEHLER.')
+        return self.cleaned_data"""

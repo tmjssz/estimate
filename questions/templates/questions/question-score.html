@@ -110,7 +110,7 @@
 		{% endif %}
 
 		{% if not question.author.is_superuser %}
-			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author %}">{{ question.author }}</a></small></p>
+			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author.id %}">{{ question.author }}</a></small></p>
 		{% endif %}
 
 	</aside>

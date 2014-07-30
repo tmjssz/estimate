@@ -14,7 +14,7 @@
 	{% if user.group_invitees.all %}
 		<div class="notice">
 		{% if user.group_invitees.all.count == 1 %}
-			Du wurdest von <a href="{% url 'questions_user' user.group_invitees.first.inviter %}">{{ user.group_invitees.first.inviter }}</a> eingeladen, der Gruppe <a href="{% url 'group_show' user.group_invitees.first.group.id %}">{{ user.group_invitees.first.group }}</a> beizutreten. 
+			Du wurdest von <a href="{% url 'questions_user' user.group_invitees.first.inviter.id %}">{{ user.group_invitees.first.inviter }}</a> eingeladen, der Gruppe <a href="{% url 'group_show' user.group_invitees.first.group.id %}">{{ user.group_invitees.first.group }}</a> beizutreten. 
 
 			<br><br>
 
@@ -36,7 +36,7 @@
 			<ul>
 				{% for invite in user.group_invitees.all %}
 				<li>
-					<a href="{% url 'group_show' invite.group.id %}">{{ invite.group }}</a> <i class="fa fa-envelope"></i> <i>eingeladen von</i> <a href="{% url 'questions_user' invite.inviter %}">{{ invite.inviter }}</a> 
+					<a href="{% url 'group_show' invite.group.id %}">{{ invite.group }}</a> <i class="fa fa-envelope"></i> <i>eingeladen von</i> <a href="{% url 'questions_user' invite.inviter.id %}">{{ invite.inviter }}</a> 
 
 					<form class="accept-small" enctype="multipart/form-data" action="{% url 'group_show' invite.group.id %}" method="post" accept-charset="utf-8">
 						<input type="hidden" name="action" value="join">
