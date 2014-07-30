@@ -459,6 +459,11 @@ body {
 			  text-align: left;
 			}
 
+			input[type="text"], input[type="email"], textarea {
+				padding: 5px;
+				margin: 0;
+			}
+
 			a.cta {
 				color: white;
 				display: inline-block;

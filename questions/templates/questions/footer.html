@@ -14,17 +14,13 @@
 			<form method="post" action="{% url 'contact_form' %}">{% csrf_token %}
 				<p>
 					{% if user.is_authenticated %}
-						<input required type="text" id="name_id" name="name" placeholder="Name" value="{{ user.username }}">
+						<input type="hidden" id="name_id" name="name" placeholder="Name" value="{{ user.username }}">
 					{% else %}
 						<input required type="text" id="name_id" name="name" placeholder="Name">
 					{% endif %}
 				</p>
 				<p>
-					{% if user.is_authenticated %}
 					<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
-					{% else %}
-						<input required type="email" id="mail_id" name="email" placeholder="E-Mail">
-					{% endif %}
 				</p>
 				<p>
 					<textarea required name="body" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
@@ -50,7 +46,11 @@
 				<input id="id_mail" required maxlength="254" name="email" type="email" placeholder="E-Mail">
 			</p>
 			<p>
-				<input id="id_name" required maxlength="254" name="name" type="text" value="{{ user.username }}" placeholder="Dein Name">
+				{% if user.is_authenticated %}
+					<input id="id_name" maxlength="254" name="name" type="hidden" value="{{ user.username }}" placeholder="Dein Name">
+				{% else %}
+					<input id="id_name" required maxlength="254" name="name" type="text" placeholder="Dein Name">
+				{% endif %}
 			</p>
 			<p>
 				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht"></textarea>
