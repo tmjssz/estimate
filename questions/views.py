@@ -569,11 +569,11 @@ def question_highscore(request):
     """
     Show a highscore
     """
-    scores = Score.objects.get_highscore(50)
+    scores = Score.objects.get_highscore(100)
     
-    scores_per_question = Score.objects.get_highscore_per_question(50)
+    scores_per_question = Score.objects.get_highscore_per_question(100)
     
-    scores_best_question = Score.objects.get_highscore_best_question(50)
+    scores_best_question = Score.objects.get_highscore_best_question(100)
     best_estimates = []
     for s in scores_best_question:
         estimate = Estimate.objects.filter(user=s.user, percentage_error=s.score)
@@ -584,7 +584,7 @@ def question_highscore(request):
 
     best_estimates = zip(scores_best_question, best_estimates)
 
-    scores_best_percentage_error = Score.objects.get_highscore_best_percentage_error(50)
+    scores_best_percentage_error = Score.objects.get_highscore_best_percentage_error(100)
     
     return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores, 'per_question': scores_per_question, 'best_estimates': best_estimates, 'best_percentage_error': scores_best_percentage_error})
 

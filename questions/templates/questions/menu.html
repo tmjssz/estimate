@@ -85,7 +85,7 @@
 	<div id="highscores-menu">
 		<h4>Highscore</h4>
 		<ul>
-			<li><a href="{% url 'questions_highscore' %}">TOP 50</a></li>
+			<li><a href="{% url 'questions_highscore' %}">TOP 100</a></li>
 			{% for group in user.groups.all %}
 		    <li><a href="{% url 'group_show' group.id %}">{{ group }}</a></li>
 			{% endfor %}
