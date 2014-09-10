@@ -103,7 +103,7 @@
 			      <label class="modal-close" for="modal-question-feedback"></label>
 			      
 			      <h3>Feedback: {{ question.title }}</h3>
-					<form method="post" action="{% url 'contact_form' %}">{% csrf_token %}
+					<form method="post" action="{% url 'feedback' %}">{% csrf_token %}
 						<p>
 							<input type="hidden" id="name_id" name="name" value="{{ question.title }}" placeholder="Fragen">
 						</p>
@@ -111,7 +111,7 @@
 							<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
 						</p>
 						<p>
-							<textarea required name="body" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
+							<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
 						</p>
 						<input type="submit" value="Feedback senden ">
 					</form>
@@ -142,6 +142,14 @@
 		{% if not question.author.is_superuser %}
 			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author.id %}">{{ question.author }}</a></small></p>
 		{% endif %}
+
+		<div class="rating">
+		    <i class="fa fa-star active"></i>
+		    <i class="fa fa-star active"></i>
+		    <i class="fa fa-star active"></i>
+		    <i class="fa fa-star"></i>
+		    <i class="fa fa-star"></i>
+		</div>
 
 	</aside>
 

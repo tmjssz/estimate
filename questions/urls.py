@@ -23,6 +23,8 @@ urlpatterns = patterns('questions.views',
     url(r'^benutzer/(?P<user_id>[-\w]+)/$', 'statistics_user', name='questions_user'),
     url(r'^highscore$', 'question_highscore', name='questions_highscore'),
     url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
+
+    url(r'^feedback/$', 'feedback', name='feedback')
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT+'/media')

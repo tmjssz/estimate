@@ -1,0 +1,11 @@
+<div style="width: 500px;">
+
+	<a href="{{ host }}"><img src="{{ host }}{{ static_url }}img/estimate-logo-schriftzug-grau.png" height="60px"></img></a>
+
+	<h1 style="font-weight: 300; letter-spacing: -2px;">Feedback von <i>{{ name }}</i></h1>
+
+	<p>{{ message }}</p>
+
+	<p><a href='mailto:{{ email }}?Subject=Feedback%20zu%20esti|mate&body=Hi%20{{ name }},%0A%0ADanke%20für%20dein%20Feedback!%0A%0A%0A%0AViele%20Grüße,%0ATim%0A%0A--------------%0A%0A"{{ message }}"' target="_top">{{ email }}</a></p>
+
+</div>

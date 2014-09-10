@@ -13,8 +13,10 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from django.core.mail import mail_admins
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
-from questions.forms import EstimateForm, QuestionForm, UserProfileForm
+from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
@@ -606,3 +608,26 @@ def challenge_highscore(request, slug):
         scores = Score.objects.challenge_highscore(challenge, request.user)
 
     return render(request, 'questions/challenge-highscore.html', {'user': request.user, 'challenge': challenge, 'score_list': scores, 'own_questions': own_questions, 'own_challenge': own_challenge})
+
+
+def feedback(request):
+    """ Send Feedback Mail. """
+    if request.method == 'POST':
+        email = request.POST[u'email']
+        message = request.POST[u'message']
+        name = request.POST[u'name']
+        userid = request.POST[u'userid']
+
+        form = FeedbackForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return render_to_response('questions/message.html', {'title': 'Feedback gesendet', 'message': 'Vielen Dank für dein Feedback!'}, context_instance=RequestContext(request))
+
+        #return render_to_response('userauth/friend-invite.html', {'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
+
+    else:
+        form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})
+    
+    return render_to_response('questions/feedback.html', {'form': form}, context_instance=RequestContext(request))
+

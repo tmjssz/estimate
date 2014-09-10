@@ -354,6 +354,26 @@ body {
     	}
 	}
 
+	.rating {
+	    i {
+	    	color: transparentize(black, 0.8);
+
+	    	&:hover {
+    			color: $dark-gray;
+    		}
+
+	    	&.active {
+	    		color: $dark-gray;
+
+	    		&:hover, &:hover ~ .active {
+	    			color: transparentize(black, 0.8);
+	    		}
+	    	}
+	    }
+	}
+
+
+
 	.modal {
 		$modal-padding: 2em;
 		$modal-background: $base-body-color;

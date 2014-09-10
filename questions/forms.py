@@ -1,6 +1,6 @@
 # coding=utf8
 # -*- coding: utf8 -*-
-from django.forms import ModelForm, ValidationError
+from django.forms import ModelForm, ValidationError, Form, CharField, EmailField, TextInput, Textarea, HiddenInput
 from django.utils.text import slugify
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
@@ -8,6 +8,7 @@ from django.core.mail import mail_admins
 from django.template import Context
 from django.template.loader import get_template
 from django.conf import settings
+from django.core.validators import validate_email
 
 
 from questions.models import Estimate, Question
@@ -82,3 +83,36 @@ class UserProfileForm(ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', )
+
+class FeedbackForm(Form):
+    name = CharField(required=True, label='Name', widget=TextInput(attrs={'placeholder': 'Name'}))
+    userid = CharField(required=False, label='User ID', widget=HiddenInput())
+    email = EmailField(required=True, label='E-Mail', widget=TextInput(attrs={'placeholder': 'E-Mail'}))
+    message = CharField(required=True, label='Nachricht', widget=Textarea(attrs={'placeholder': 'Nachricht'}))
+    
+    def __init__(self, *args, **kwargs):
+        self.__name = kwargs.pop('name', None)
+        self.__email = kwargs.pop('email', None)
+        self.__message = kwargs.pop('message', None)
+        self.__userid = kwargs.pop('userid', None)
+        super(FeedbackForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        data = self.cleaned_data
+        name = self.cleaned_data['name']
+        userid = self.cleaned_data['userid']
+        email = self.cleaned_data['email']
+        message = self.cleaned_data['message']
+
+        if userid:
+            user = User.objects.get(id=userid)
+            if not user.email:
+                user.email = email
+                user.save()
+
+        template = get_template('questions/mail-feedback.html')
+        context = Context({'message': message, 'email': email, 'name': name, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'static_url': settings.STATIC_URL})
+        content = template.render(context)
+        
+        mail_admins('[Feedback] ' + name, 'Feedback von ' + name, html_message=content, fail_silently=True)
+

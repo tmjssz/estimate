@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Feedback{% endblock %}
+
+{% block content %}
+<div id="feedback-sent">
+
+	{% if error %}
+
+		<h2>Feedback</h2>
+	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
+	      	<ul class="errorlist"><li>Bitte eine gültige E-Mail Adresse eingeben.</li></ul>
+			<p>
+				<input id="id_mail" required maxlength="254" name="email" type="email" value="{{ email }}" placeholder="E-Mail">
+			</p>
+			<p>
+				<input id="id_name" required maxlength="254" name="name" type="text" value="{{ name }}" placeholder="Dein Name">
+			</p>
+			<p>
+				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht">{{ message }}</textarea>
+			</p>
+			
+			<input type="hidden" name="action" value="invite">
+			{% csrf_token %}
+			<input type="submit" value="Einladung senden"/>
+		</form>
+
+	{% elif email %}
+
+		<h2>Nachricht gesendet</h2>
+
+		<p>Vielen Dank für deine Nachricht!</p>
+
+		<p>"{{ message }}"</p>
+
+	{% else %}
+
+		<h2>Feedback</h2>
+
+		<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
+			{% csrf_token %}
+		    
+		    {% for field in form.hidden_fields %}
+		        {{ field }}
+		    {% endfor %}
+
+		    {% for field in form.visible_fields %}
+		        <p>
+		        	{{ field.errors }}
+		        	{{ field }}
+		        </p>
+		    {% endfor %}
+
+		    <button type="submit">Feedback senden</button>
+		</form>
+
+	{% endif %}
+
+<!-- / #feedback-sent -->
+</div>
+{% endblock %}

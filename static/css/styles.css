@@ -540,6 +540,14 @@ body {
           margin: 0; }
         body footer .modal .modal-inner .modal-close {
           font-size: 1em; }
+  body .rating i {
+    color: rgba(0, 0, 0, 0.2); }
+    body .rating i:hover {
+      color: #333333; }
+    body .rating i.active {
+      color: #333333; }
+      body .rating i.active:hover, body .rating i.active:hover ~ .active {
+        color: rgba(0, 0, 0, 0.2); }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0; }

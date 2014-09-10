@@ -11,22 +11,31 @@
 	      <label class="modal-close" for="modal-feedback"></label>
 	      
 	      <h1>Feedback</h1>
-			<form method="post" action="{% url 'contact_form' %}">{% csrf_token %}
-				<p>
-					{% if user.is_authenticated %}
-						<input type="hidden" id="name_id" name="name" placeholder="Name" value="{{ user.username }}">
-					{% else %}
-						<input required type="text" id="name_id" name="name" placeholder="Name">
-					{% endif %}
-				</p>
-				<p>
-					<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
-				</p>
-				<p>
-					<textarea required name="body" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
-				</p>
-				<input type="submit" value="Feedback senden ">
+
+			<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
+				{% csrf_token %}
+			    
+		        {% if user.is_authenticated %}
+		        	<input name="userid" type="hidden" value="{{ user.id }}">
+					<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
+				{% else %}
+					<p>
+						<input name="userid" type="hidden">
+						<input id="id_name" name="name" placeholder="Name" type="text">
+					</p>
+				{% endif %}
+		    
+		        <p>
+		        	<input id="id_email" name="email" placeholder="E-Mail" type="email" value="{{ user.email }}">
+		        </p>
+		    
+		        <p>
+		        	<textarea cols="40" id="id_message" name="message" placeholder="Nachricht" rows="5"></textarea>
+		        </p>
+
+			    <button type="submit">Feedback senden</button>
 			</form>
+
 	    </div>
 	  </div>
 	</div>

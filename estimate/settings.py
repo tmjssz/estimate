@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'userauth',
     'questions',
     'mathfilters',
-    'thirdauth',
     'social.apps.django_app.default',
 )
 
