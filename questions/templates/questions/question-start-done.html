@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block content %}
+<div id="question-register-done">
+
+	<div class="description">
+		<h2>Weiter spielen?</h2>
+		<p>Glückwunsch, die ersten Fragen hast du fertig beantwortet. Willst du weiter spielen? Dann wähle deinen persönlichen Benutzernamen und melde dich an. Danach hast du Zugriff auf viele weitere Fragen, kannst Challenges spielen und Punkte sammeln, um dich mit anderen Spielern messen zu können. Es gibt eine Highscore und du kannst Gruppen erstellen, zu denen du deine Freunde einladen kannst. </p>
+	</div>
+
+	<div class="register-form">
+		<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">
+			{{ register_form.as_p }}
+			{% csrf_token %}
+			<input type="submit" value="Account erstellen"/>
+		</form>
+	</div>
+
+<!-- / #message -->
+</div>
+{% endblock %}

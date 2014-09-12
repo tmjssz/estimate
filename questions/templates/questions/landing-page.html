@@ -48,14 +48,14 @@
 
 	<div id="register">
 
-		<div id="social-login">
+		<!--<div id="social-login">
 			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
 			<a class="social-login facebook" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a>
-		</div>
+		</div>-->
 
-		<div class="divider"></div>
+		<a class="start-demo-btn" href="{% url 'questions_start' %}"><span>Jetzt spielen! <i class="fa fa-arrow-circle-right"></i></span></a>
 
-		<p>Wähle deine Benutzerdaten und schon bist du am Start.</p>
+		<p>Als registrierter Nutzer kannst du dich mit anderen Spielern messen. Es gibt Highscores, du kannst Challenges spielen und eigene Fragen einreichen. Wähle deine Benutzerdaten und schon bist du am Start.</p>
 
 		<div class="form" id="register-form">
 			<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">

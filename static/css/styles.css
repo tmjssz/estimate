@@ -1462,6 +1462,31 @@ header.navi-header {
           padding: .4em .6em; }
           #landing-stage #register #social-login .social-login.facebook:hover {
             background: #8094bd; }
+    #landing-stage #register .start-demo-btn {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 100%;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #68a24f;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      padding: 8px 0;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px; }
+      #landing-stage #register .start-demo-btn:last-child {
+        margin-right: 0; }
+      #landing-stage #register .start-demo-btn:hover {
+        background: #83b86c; }
     #landing-stage #register #register-form label {
       color: rgba(255, 255, 255, 0.7);
       font-weight: normal;
@@ -1476,7 +1501,7 @@ header.navi-header {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
-      background: #68a24f;
+      background: #477dca;
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em;
@@ -1484,9 +1509,10 @@ header.navi-header {
       box-shadow: none;
       text-shadow: none;
       padding: 8px 0;
-      width: 100%; }
+      width: 100%;
+      font-weight: 400; }
       #landing-stage #register #register-form input[type="submit"]:hover {
-        background: #83b86c; }
+        background: #6f99d5; }
     #landing-stage #register #register-form .errorlist {
       color: #D46A6A;
       font-size: 14px; }
@@ -1893,6 +1919,22 @@ aside.menu {
   #question-create section.without-aside:last-child {
     margin-right: 0; }
 
+#question-register-done .description, #question-register-done .register-form {
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 48.71795%; }
+  #question-register-done .description:last-child, #question-register-done .register-form:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    #question-register-done .description, #question-register-done .register-form {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%; }
+      #question-register-done .description:last-child, #question-register-done .register-form:last-child {
+        margin-right: 0; } }
+
 #question-score-challenge .score {
   float: left;
   display: block;
@@ -2185,13 +2227,13 @@ aside.menu {
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-    background: #477dca;
+    background: #68a24f;
     border-radius: 0.1875em;
     color: white;
     padding: .4em .6em;
     float: right; }
     #question-score .top-right .next-random-btn:hover {
-      background: #6f99d5; }
+      background: #83b86c; }
     #question-score .top-right .next-random-btn i {
       display: inline-block;
       font-size: 1.7em; }

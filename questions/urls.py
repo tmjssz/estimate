@@ -12,6 +12,9 @@ urlpatterns = patterns('questions.views',
     url(r'^zufall$', 'question_random', name='questions_random'),
     url(r'^zufall/(?P<slug>[-\w]+)/$', 'question_view_random', name='questions_question_random'),
 
+    url(r'^start$', 'question_start', name='questions_start'),
+    url(r'^start/(?P<slug>[-\w]+)/$', 'question_view_start', name='questions_question_start'),
+
     url(r'^challenge/$', 'challenges_list_all', name='questions_challenge_all'),
     url(r'^challenge/(?P<slug>[-\w]+)/$', 'challenge_view', name='questions_challenge_show'),
     url(r'^challenge/(?P<challenge>[-\w]+)/(?P<question>[-\w]+)/$', 'challenge_question_view', name='questions_challenge_question_show'),

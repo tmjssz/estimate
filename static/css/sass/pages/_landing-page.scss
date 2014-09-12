@@ -153,6 +153,20 @@
 			}
 		}
 
+		.start-demo-btn {
+			@include span-columns(5 of 5);
+			@include btn(#68a24f);
+			border: 0;
+			box-shadow: none;
+			text-shadow: none;
+			padding: 8px 0;
+			width: 100%;
+			margin-bottom: 20px;
+			text-align: center;
+			font-weight: 600;
+			font-size: 20px;
+		}
+
 		#register-form {
 			label {
 				color: transparentize(white, 0.3);
@@ -169,12 +183,13 @@
 			}
 
 			input[type="submit"] {
-				@include btn(#68a24f);
+				@include btn(#477DCA);
 				border: 0;
 				box-shadow: none;
 				text-shadow: none;
 				padding: 8px 0;
 				width: 100%;
+				font-weight: 400;
 			}
 
 			.errorlist {

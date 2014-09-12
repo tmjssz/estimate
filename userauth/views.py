@@ -35,26 +35,43 @@ def ensure_profile_exists(sender, **kwargs):
 
 
 def register(request, template_name='userauth/register.html', next_page_name=None):
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+    logger.debug(guest_id)
     
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
             username = request.POST[u'username']
             pwd = request.POST[u'password1']
-            new_user = authenticate(username=username, password=pwd)
-            login(request, new_user)
 
-            #template = get_template('userauth/mail-user-registered.html')
-            #context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
-            #content = template.render(context)
-            #mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
+            # check if user already answered questions as guest
+            user = None
+            if guest_id:
+                users = User.objects.filter(id=guest_id)
+                if users:
+                    user = users[0]
+
+            if user:
+                user.username = username
+                user.set_password(pwd)
+                user.save()
+                logger.debug(user)
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
+            else:
+                register_form.save()
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
 
             if next_page_name is None:
                 next_page = '/'
             else:
                 next_page = reverse(next_page_name)
-            return HttpResponseRedirect(next_page)
+
+            response = HttpResponseRedirect(next_page)
+            response.delete_cookie('estimate_guest_id')
+            return response
     else:
         form = UserCreationForm()
     return render_to_response(template_name, {'register_form': form},

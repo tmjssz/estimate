@@ -15,6 +15,7 @@ from django.conf import settings
 from django.core.mail import mail_admins
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import datetime
 
 from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
@@ -32,6 +33,10 @@ def menu_view(request):
     """
     Shows a menu
     """
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+    logger.debug(guest_id)
+
     if request.user.is_authenticated():
         if request.user.is_active and request.user.is_superuser:
             is_admin = True
@@ -59,18 +64,31 @@ def menu_view(request):
         if request.method == 'POST':
             register_form = UserCreationFormCustom(request.POST)
             if register_form.is_valid():
-                register_form.save()
                 username = request.POST[u'username']
                 pwd = request.POST[u'password1']
-                new_user = authenticate(username=username, password=pwd)
-                login(request, new_user)
 
-                """template = get_template('userauth/mail-user-registered.html')
-                context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
-                content = template.render(context)
-                mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)"""
+                # check if user already answered questions as guest
+                user = None
+                if guest_id:
+                    users = User.objects.filter(id=guest_id)
+                    if users:
+                        user = users[0]
 
-                return HttpResponseRedirect('willkommen/')
+                if user:
+                    user.username = username
+                    user.set_password(pwd)
+                    user.save()
+                    logger.debug(user)
+                    new_user = authenticate(username=username, password=pwd)
+                    login(request, new_user)
+                else:
+                    register_form.save()
+                    new_user = authenticate(username=username, password=pwd)
+                    login(request, new_user)
+
+                response = HttpResponseRedirect('willkommen/')
+                response.delete_cookie('estimate_guest_id')
+                return response
         else:
             register_form = UserCreationFormCustom()
         return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
@@ -270,6 +288,166 @@ def question_random(request):
         question = random.choice(both_questions)
 
     return HttpResponseRedirect("/zufall/"+question.slug)
+
+
+def question_start(request):
+    """
+    Show selected questions without login necessary.
+    """
+    questions = Question.objects.filter(published=True, stats=True)
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+
+    # create guest user
+    username = 'gast'
+    user = User(username=username)
+
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+
+    if guest_id:
+        # get guest user
+        users = User.objects.filter(id=guest_id)
+        if users:
+            user = users[0]
+    else:
+        # create user
+        user.save()
+        user.username = username + '-' + str(user.id)
+        user.save()
+
+    # new user registration
+    if request.method == 'POST':
+        register_form = UserCreationFormCustom(request.POST)
+        if register_form.is_valid():
+            username = request.POST[u'username']
+            pwd = request.POST[u'password1']
+
+            if user:
+                user.username = username
+                user.set_password(pwd)
+                user.save()
+                logger.debug(user)
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
+            else:
+                register_form.save()
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
+
+            response = HttpResponseRedirect('willkommen/')
+            response.delete_cookie('estimate_guest_id')
+            return response
+
+    # filter out questions, which were already answered
+    estimates = Estimate.objects.filter(user=user)
+    for e in estimates:
+        questions = questions.exclude(pk=e.question.pk)
+    
+    if questions.count() == 0:
+        # there are no unanswered questions left
+        register_form = UserCreationFormCustom()
+        response = render(request, 'questions/question-start-done.html', {'register_form': register_form})
+    else:
+        # choose a random question
+        question = random.choice(questions)
+        response = HttpResponseRedirect("/start/"+question.slug)
+
+    if not guest_id:
+        # set cookie with guest id
+        set_cookie(response, 'estimate_guest_id', user.id, 1)
+
+    return response
+
+
+def question_view_start(request, slug):
+    """
+    Show a randomly chosen question with estimate form or reached score
+    """
+    question = get_object_or_404(Question, slug=slug, published=True)
+
+    # create guest user
+    username = 'gast'
+    user = User(username=username)
+
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+
+    if guest_id:
+        # get guest user
+        users = User.objects.filter(id=guest_id)
+        if users:
+            user = users[0]
+    else:
+        # create user
+        user.save()
+        user.username = username + '-' + str(user.id)
+        user.save()
+
+    # already made estimate? 
+    estimates = Estimate.objects.filter(question=question, user=user)
+    if estimates:
+        # for this questions does already exist an estimate from the current user
+        # show score for this question
+        estimate = estimates[0]
+        next_start = True
+        response = render(request, 'questions/question-score.html',
+            {'question': question, 'estimate': estimate, 'next_start': next_start})
+    else:
+        # no estimate from this user for this question
+        if request.method == 'POST':
+            time_out = False
+
+            # get hidden post field
+            if request.POST.get("time_out", "") == "true":
+                time_out = True
+
+            form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
+            if form.is_valid():
+                form.save()
+
+                views = QuestionView.objects.filter(user=user, question=question)
+                if views:
+                    # delete saved view timestamps
+                    views.delete()
+
+                response = HttpResponseRedirect("/start/"+question.slug)
+        else:
+            form = EstimateForm()
+            time_max = 40
+
+            views = QuestionView.objects.filter(user=user, question=question)
+            if views:
+                # question was already viewed before
+                time = views[0].time
+                current_time = now()
+                timediff = current_time - time
+                seconds = int(timediff.total_seconds())
+                time_left = max(0, time_max - seconds)
+
+                if time_left == 0:
+                    # no time left
+                    too_late = Estimate(user=user, question=question, time_out=True)
+                    too_late.save()
+                    views.delete()
+                    return HttpResponseRedirect("/start")
+            else:
+                # question view for first time
+                view = QuestionView(user=user, question=question)
+                view.save()
+                time_left = time_max
+
+            response = render(request, 'questions/question-show.html',
+                {'form': form, 'question': question, 'user': None, 'time_left': time_left})
+
+    if not guest_id:
+        # set cookie with guest id
+        set_cookie(response, 'estimate_guest_id', user.id, 1)
+
+    return response
+
 
 
 @login_required
@@ -630,4 +808,13 @@ def feedback(request):
         form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})
     
     return render_to_response('questions/feedback.html', {'form': form}, context_instance=RequestContext(request))
+
+
+def set_cookie(response, key, value, days_expire = 7):
+    if days_expire is None:
+        max_age = 365 * 24 * 60 * 60  #one year
+    else:
+        max_age = days_expire * 24 * 60 * 60 
+        expires = datetime.datetime.strftime(datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
+        response.set_cookie(key, value, max_age=max_age, expires=expires, domain=settings.SESSION_COOKIE_DOMAIN, secure=settings.SESSION_COOKIE_SECURE or None)
 

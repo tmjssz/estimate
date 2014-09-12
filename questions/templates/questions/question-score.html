@@ -7,9 +7,13 @@
 
 	<h2>{{ question.title }}</h2>
 
-	{% if next_random %}
+	{% if next_random or next_start %}
 		<div class="top-right">
+			{% if next_random %}
 			<a class="next-random-btn" href="{% url 'questions_random' %}">
+			{% elif next_start %}
+			<a class="next-random-btn" href="{% url 'questions_start' %}">
+			{% endif %}
 				<div class="label">
 					<span>Nächste</span><span>Frage</span>
 				</div>
@@ -142,14 +146,6 @@
 		{% if not question.author.is_superuser %}
 			<p><small><b>Fragensteller:</b> <a href="{% url 'questions_user' question.author.id %}">{{ question.author }}</a></small></p>
 		{% endif %}
-
-		<div class="rating">
-		    <i class="fa fa-star active"></i>
-		    <i class="fa fa-star active"></i>
-		    <i class="fa fa-star active"></i>
-		    <i class="fa fa-star"></i>
-		    <i class="fa fa-star"></i>
-		</div>
 
 	</aside>
 
