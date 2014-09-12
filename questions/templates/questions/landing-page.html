@@ -61,7 +61,9 @@
 			<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">
 				{{ register_form.as_p }}
 				{% csrf_token %}
+				
 				<input type="submit" value="Account erstellen"/>
+				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
 			</form>
 		<!-- / #register-form -->
 		</div>

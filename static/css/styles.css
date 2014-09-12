@@ -1498,6 +1498,10 @@ header.navi-header {
       border: 1px solid rgba(255, 255, 255, 0.7);
       margin-bottom: 20px; }
     #landing-stage #register #register-form input[type="submit"] {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 47.36842%;
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
@@ -1509,10 +1513,48 @@ header.navi-header {
       box-shadow: none;
       text-shadow: none;
       padding: 8px 0;
-      width: 100%;
-      font-weight: 400; }
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0; }
+      #landing-stage #register #register-form input[type="submit"]:last-child {
+        margin-right: 0; }
       #landing-stage #register #register-form input[type="submit"]:hover {
         background: #6f99d5; }
+    #landing-stage #register #register-form .social-login {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 47.36842%;
+      font-weight: 400;
+      padding: 0 !important;
+      display: table; }
+      #landing-stage #register #register-form .social-login:last-child {
+        margin-right: 0; }
+      #landing-stage #register #register-form .social-login:nth-child(3n) {
+        margin-right: 0; }
+      #landing-stage #register #register-form .social-login:nth-child(3n+1) {
+        clear: left; }
+      #landing-stage #register #register-form .social-login i {
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 22px;
+        padding: 7px 7px 3px 7px !important;
+        display: table-cell;
+        width: 25px; }
+      #landing-stage #register #register-form .social-login span {
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+        font-weight: 500; }
+      #landing-stage #register #register-form .social-login.google {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #dd4b39;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em; }
+        #landing-stage #register #register-form .social-login.google:hover {
+          background: #e47365; }
     #landing-stage #register #register-form .errorlist {
       color: #D46A6A;
       font-size: 14px; }

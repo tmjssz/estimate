@@ -183,13 +183,42 @@
 			}
 
 			input[type="submit"] {
+				@include span-columns(2.5 of 5);
 				@include btn(#477DCA);
 				border: 0;
 				box-shadow: none;
 				text-shadow: none;
 				padding: 8px 0;
-				width: 100%;
 				font-weight: 400;
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
+			.social-login {
+				@include span-columns(2.5 of 5);
+				@include omega(3n);
+				font-weight: 400;
+				padding: 0 !important;
+				display: table;
+
+				i {
+					border-right: 1px solid transparentize(black, 0.8);
+					font-size: 22px;
+					padding: 7px 7px 3px 7px !important;
+					display: table-cell;
+					width: 25px;
+				}
+
+				span {
+					vertical-align: middle;
+					display: table-cell;
+					text-align: center;
+					font-weight: 500;
+				}
+
+				&.google {
+					@include btn(#dd4b39);
+				}
 			}
 
 			.errorlist {
