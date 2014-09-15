@@ -377,6 +377,10 @@ body {
       padding: 5px 10px; }
     body #main table tr.current_user {
       background: #e0eaf8; }
+    body #main table tr.no_stats {
+      color: #b3b3b3; }
+      body #main table tr.no_stats a {
+        color: #b3b3b3; }
     body #main table tr td, body #main table tr th {
       text-align: center;
       line-height: 1.1em; }
@@ -386,6 +390,10 @@ body {
       body #main table tr td:last-child, body #main table tr td.right, body #main table tr th:last-child, body #main table tr th.right {
         text-align: right;
         padding-right: 10px; }
+      body #main table tr td.small, body #main table tr th.small {
+        width: 35px; }
+      body #main table tr td.medium, body #main table tr th.medium {
+        width: 50px; }
     body #main .notice {
       background: #e6efc2;
       padding: 15px;

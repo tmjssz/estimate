@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load l10n %}
 
 {% block title %}{{ block.super }} - Statistik - {{ question.title }} {% endblock %}
 
@@ -35,21 +36,47 @@
 
                 <table>
                     <tr>
+                        <th class="medium"><i class="fa fa-chevron-down"></i></th>
                         <th class="left">Benutzer</th>
                         <th>Punkte</th>
                         <th>Schätzung</th>
                         <th class="right">Fehler</th>
+                        {% if admin %}
+                            <th class="small"><i class="fa fa-eye"></i></th>
+                        {% endif %}
                     </tr>
                     {% for e in estimate_list %}
                         {% if user == e.user %}
                             <tr class="current_user">
+                        {% elif admin and not e.stats %}
+                            <tr class="no_stats">
                         {% else %}
                             <tr>
                         {% endif %}
+                        <td class="medium">{{ forloop.counter }}</td>
                         <td class="left"><a href="{% url 'questions_user' e.user.id %}">{{ e.user }}</a></td>
                         <td>{{ e.score }}</td>
                         <td>{{ e.estimate|floatformat:"-2" }}</td>
                         <td class="right">{{ e.percentage_error|floatformat:"-2" }} %</td>
+                        {% if admin %}
+                            {% if e.stats %}
+                                <td class="small">
+                                    <form action="{% url 'questions_statistics_question' question.slug %}" method="post" accept-charset="utf-8" class="deactivate-stats">
+                                        {% csrf_token %}
+                                        <input id="estimate_id" type="hidden" name="estimate_id" value="{{ e.id|unlocalize }}">
+                                        <input type="checkbox" name="stats" checked>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td class="small">
+                                    <form action="{% url 'questions_statistics_question' question.slug %}" method="post" accept-charset="utf-8" class="activate-stats">
+                                        {% csrf_token %}
+                                        <input id="estimate_id" type="hidden" name="estimate_id" value="{{ e.id|unlocalize }}">
+                                        <input type="checkbox" name="stats">
+                                    </form>
+                                </td>
+                            {% endif %}
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </table>

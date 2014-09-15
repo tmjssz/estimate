@@ -161,6 +161,14 @@ body {
 					background: lighten(#b6ceef, 10);
 				}
 
+				&.no_stats {
+					color: lighten(#333333, 50);
+
+					a {
+						color: lighten(#333333, 50);
+					}
+				}
+
 				td, th {
 					text-align: center;
 					line-height: 1.1em;
@@ -173,6 +181,14 @@ body {
 					&:last-child, &.right {
 						text-align: right;
 						padding-right: 10px;
+					}
+
+					&.small {
+						width: 35px;
+					}
+
+					&.medium {
+						width: 50px;
 					}
 				}
 			}

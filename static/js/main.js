@@ -145,4 +145,10 @@ $( document ).ready(function() {
         }
     });
 
+
+    $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
+        var id = $(this).val();
+        $(this).parent().submit();
+    });
+
 });

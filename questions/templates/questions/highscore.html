@@ -12,7 +12,7 @@
 		<div class="score-list">
 			<table class="score">
 				<tr>
-					<th>Platz</th>
+					<th class="medium"><i class="fa fa-chevron-down"></i></th>
 					<th class="left">Benutzer</th>
 					<th>Anzahl</th>
 					<th>Punktestand</th>
@@ -23,7 +23,7 @@
 				    {% else %}
 				    <tr>
 				    {% endif %}
-				    	<td>{{ forloop.counter }}</td>
+				    	<td class="medium">{{ forloop.counter }}</td>
 				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score }}</td>
@@ -33,7 +33,7 @@
 
 			<table class="per-question">
 				<tr>
-					<th>Platz</th>
+					<th class="medium"><i class="fa fa-chevron-down"></i></th>
 					<th class="left">Benutzer</th>
 					<th>Anzahl</th>
 					<th>Punkte pro Frage</th>
@@ -54,7 +54,7 @@
 
 			<table class="best-question">
 				<tr>
-					<th>Platz</th>
+					<th class="medium"><i class="fa fa-chevron-down"></i></th>
 					<th class="left">Benutzer</th>
 					<th>Anzahl</th>
 					<th>Fehler der besten Schätzung</th>
@@ -65,7 +65,7 @@
 				    {% else %}
 				    <tr>
 				    {% endif %}
-				    	<td>{{ forloop.counter }}</td>
+				    	<td class="medium">{{ forloop.counter }}</td>
 				    	<td class="left"><a href="{% url 'questions_user' e.user.id %}">{{ e.user }}</a></td>
 				    	<td>{{ s.number }}</td>
 				    	<td><a href="{% url 'questions_statistics_question' e.question.slug %}">{{ e.percentage_error|floatformat:"-2" }} %</a></td>
@@ -75,7 +75,7 @@
 
 			<table class="best_percentage_error">
 				<tr>
-					<th>Platz</th>
+					<th class="medium"><i class="fa fa-chevron-down"></i></th>
 					<th class="left">Benutzer</th>
 					<th>Anzahl</th>
 					<th>&#216; Relativer Fehler</th>
@@ -86,7 +86,7 @@
 				    {% else %}
 				    <tr>
 				    {% endif %}
-				    	<td>{{ forloop.counter }}</td>
+				    	<td class="medium">{{ forloop.counter }}</td>
 				    	<td class="left"><a href="{% url 'questions_user' score.user.id %}">{{ score.user }}</a></td>
 				    	<td>{{ score.number }}</td>
 				    	<td>{{ score.score|floatformat:"-2" }} %</td>

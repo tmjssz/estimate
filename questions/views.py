@@ -635,10 +635,9 @@ def statistics_crowd(request):
     """
     Show overall crowd statistics  
     """
+    admin = False
     if request.user.is_active and request.user.is_superuser:
-        admin = True
-    else:
-        admin = False
+        admin = True        
 
     avg_percentage_error = 0
 
@@ -676,10 +675,21 @@ def question_statistics(request, slug):
     """
     question = get_object_or_404(Question, slug=slug, published=True)
 
+    admin = False
     if request.user.is_active and request.user.is_superuser:
-        admin = True
-    else:
-        admin = False
+        admin = True 
+
+    if request.method == 'POST':
+        if admin:
+            estimate_id = request.POST.get('estimate_id')
+            change_estimate = get_object_or_404(Estimate, id=estimate_id)
+
+            if change_estimate.stats == True:
+                change_estimate.stats = False
+            else:
+                change_estimate.stats = True
+            
+            change_estimate.save()
     
     estimates = Estimate.objects.filter(question=question).exclude(estimate=None).order_by('percentage_error')
 
@@ -690,7 +700,7 @@ def question_statistics(request, slug):
         own_estimate = None
 
     # get the average estimate for this question
-    avg_estimate = Estimate.objects.get_avg_estimate(question=question)
+    avg_estimate = Estimate.objects.get_avg_estimate(question, admin)
 
     return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates, 'avg_estimate': avg_estimate})
 

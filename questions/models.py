@@ -159,12 +159,18 @@ class EstimateManager(models.Manager):
     # Statistics functions
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     def get_avg_estimates(self, only_specified):
+        """
+        Calculates for each question the average estimate, average score and average percentage error.
+        Returns a list of estimate objects ordered by percentage error.
+        If only_specified is True, only questions with parameter stats=True are being taken into calculation.
+        """
         from django.db import connection
         cursor = connection.cursor()
 
         stats = ''
         if only_specified:
-            stats = 'AND q.stats'
+            stats = 'AND q.stats AND e.stats'
+
 
         cursor.execute("""
             SELECT e.question_id, AVG(e.estimate) as estimate, AVG(e.score) as score, 100*ABS(q.answer-AVG(e.estimate))/q.answer as percentage_error 
@@ -188,14 +194,23 @@ class EstimateManager(models.Manager):
             result_list.append(s)
         return result_list
     
-    def get_avg_estimate(self, question):
+    def get_avg_estimate(self, question, only_specified):
+        """
+        Calculates the average estimate and score for a given question.
+        Returns an estimate object.
+        """
         from django.db import connection
         cursor = connection.cursor()
+
+        stats = ''
+        if only_specified:
+            stats = 'AND e.stats'
+
         cursor.execute("""
             SELECT AVG(e.estimate) as estimate, AVG(e.score) as score 
             FROM questions_estimate e
             WHERE e.question_id="""+str(question.id)+"""
-                AND NOT e.time_out
+                AND NOT e.time_out """+stats+"""
             GROUP BY e.question_id""")
         result = None
         row = cursor.fetchone()
@@ -214,14 +229,15 @@ class EstimateManager(models.Manager):
     def get_best_avg_estimate(self, only_specified):
         """
         Calculates for each user his personal average estimate from all his given estimates.
-        Returns the best one.
+        Returns the best one as estimate object.
+        If only_specified is True, only questions with parameter stats=True are being taken into calculation.
         """
         from django.db import connection
         cursor = connection.cursor()
 
         stats = ''
         if only_specified:
-            stats = 'AND q.stats'
+            stats = 'AND q.stats AND e.stats'
 
         cursor.execute("""
             SELECT COUNT(*) as number
@@ -258,7 +274,7 @@ class EstimateManager(models.Manager):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     def number_answered_questions(self, user, challenge):
         """
-        Returns the number of how many questions are already answered for the given challenge
+        Returns the number of how many questions are already answered by given user for given challenge.
         """
         questions = challenge.questions.filter(published=True).exclude(author=user)
         counter = 0
@@ -281,6 +297,7 @@ class Estimate(models.Model):
     date = models.DateTimeField(verbose_name=u'Datum', null=True, blank=True)
     score = models.IntegerField(verbose_name=u'Punkte', null=True, blank=True)
     challenge = models.ForeignKey(Challenge, verbose_name=u'Challenge', help_text="Hier bitte auswählen, zu welcher Challenge die Schätzung abgegeben wird.", blank=True, null=True)
+    stats = models.BooleanField(verbose_name=u'Statistik', default=True,  help_text='Soll diese Schätzung in die Statistiken einbezogen werden?')
     objects = EstimateManager()
     
     class Meta:
@@ -363,7 +380,7 @@ class ScoreManager(models.Manager):
 
     def get_highscore_per_question(self, limit):
         """
-        Returns the score for every user.
+        Returns the score per question for every user.
         """
         from django.db import connection
         cursor = connection.cursor()
@@ -383,7 +400,7 @@ class ScoreManager(models.Manager):
 
     def get_highscore_best_question(self, limit):
         """
-        Returns the score for every user.
+        Returns the personal best score for every user.
         """
         from django.db import connection
         cursor = connection.cursor()
@@ -403,7 +420,7 @@ class ScoreManager(models.Manager):
 
     def get_highscore_best_percentage_error(self, limit):
         """
-        Returns the score for every user.
+        Returns the personal best percentage error for every user.
         Ordered ascending by percentage error.
         """
         from django.db import connection
