@@ -1,11 +1,3 @@
-{% extends "base.html" %}
-
-{% block title %}{{ block.super }} - Login{% endblock %}
-
-{% block navigation %}{% endblock %}
-
-{% block stage %}
-
 <header class="landing">
 	<div id="header-wrapper">
 
@@ -19,7 +11,7 @@
 			  <label for="modal-login" class="login-btn">
 			    <i class="fa fa-sign-in"></i> Login
 			  </label>
-			  <input class="modal-state" id="modal-login" type="checkbox" checked/>
+			  <input class="modal-state" id="modal-login" type="checkbox" />
 			  <div class="modal-window">
 			    <div class="modal-inner">
 			      <label class="modal-close" for="modal-login"></label>
@@ -49,22 +41,3 @@
 		</div>
 	</div>
 </header>
-<div class="black_area">
-
-	<div id="landing-stage">
-
-		<h1>Schätz' doch mal.</h1>
-			
-		<h3>{{ question.question }}</h3>
-
-		<a class="start-demo-btn" href="{% url 'questions_start' %}"><span>Jetzt spielen! <i class="fa fa-arrow-circle-right"></i></span></a>
-
-
-		<p>Estimate fordert dich heraus! Wie gut bist du im Schätzen? Gib deine Schätzungen zu spannenden, interessanten und lustigen Fragen ab. Sammle Punkte und finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufällige Fragen, spiele Challenges oder such' dir Fragen aus der Sammlung aus. Und ist dir das noch nicht genug, kannst du auch selber Fragen stellen. Mach mit, Schätzen macht Spaß!</p>
-
-	</div>
-
-</div>
-
-{% endblock %}
-

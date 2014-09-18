@@ -623,7 +623,7 @@ body {
 			margin-top: 9em;
 
 			@include media($tablet) {
-				padding: $modal-padding;
+				padding: $modal-padding/2;
 				@include span-columns(4 of 8);
 				@include shift(2 of 8);
 				max-height: 60%;
@@ -631,7 +631,7 @@ body {
 			}
 
 			@include media($mobile) {
-				padding: $modal-padding/2;
+				padding: $modal-padding/3;
 				@include span-columns(3.5 of 4);
 				@include shift(0.25 of 4);
 				max-height: 60%;

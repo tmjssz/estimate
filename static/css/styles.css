@@ -822,7 +822,7 @@ body {
       margin-right: 0; }
     @media screen and (max-width: 768px) {
       body .modal .modal-inner {
-        padding: 2em;
+        padding: 1em;
         float: left;
         display: block;
         margin-right: 3.22581%;
@@ -834,7 +834,7 @@ body {
           margin-right: 0; } }
     @media screen and (max-width: 480px) {
       body .modal .modal-inner {
-        padding: 1em;
+        padding: 0.66667em;
         float: left;
         display: block;
         margin-right: 6.66667%;
