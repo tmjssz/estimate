@@ -10,7 +10,7 @@
 	<div id="header-wrapper">
 		<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-schriftzug-grau.png"></img>
 
-		<div id="login-form">
+		<div class="login">
 
 			<div class="modal">
 			  <label for="modal-login" class="login-btn">
@@ -52,47 +52,19 @@
 	</div>
 </header>
 
-<div id="landing-stage">
+<div class="black_area">
 
-	<div id="landing">
-		<h2>Schätz' doch mal.</h2>
+	<div id="landing-stage">
+
+		<h1>Schätz' doch mal.</h1>
+			
 		<h3>{{ question.question }}</h3>
-
-		<p>Estimate fordert dich heraus! Wie gut bist du im Schätzen? Gib deine Schätzungen zu spannenden, interessanten und lustigen Fragen ab. Sammle Punkte und finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufällige Fragen, spiele Challenges oder such' dir Fragen aus der Sammlung aus. Und ist dir das noch nicht genug, kannst du auch selber Fragen stellen. Mach mit, Schätzen macht Spaß!</p>
-
-		<!-- <div id="social-login">
-			<h4><i class="fa fa-sign-in"></i> Einloggen mit</h4>
-
-			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google"></i> Google</a>
-			<a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> Facebook</a>
-		</div> -->
-	<!-- / #landing -->
-	</div>
-
-
-	<div id="register">
-
-		<!--<div id="social-login">
-			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
-			<a class="social-login facebook" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a>
-		</div>-->
 
 		<a class="start-demo-btn" href="{% url 'questions_start' %}"><span>Jetzt spielen! <i class="fa fa-arrow-circle-right"></i></span></a>
 
-		<p>Hier kannst du direkt loslegen und deine ersten Fragen beantworten. Als registrierter Nutzer hast du ein eigenes Punktekonto und vollen Zugriff auf alle Fragen. Wähle deinen Benutzernamen, unter dem andere Spieler deine Schätzungen sehen können und schon bist du am Start.</p>
 
-		<div class="form" id="register-form">
-			<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">
-				{{ register_form.as_p }}
-				{% csrf_token %}
-				
-				<input type="submit" value="Account erstellen"/>
-				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
-			</form>
-		<!-- / #register-form -->
-		</div>
+		<p>Estimate fordert dich heraus! Wie gut bist du im Schätzen? Gib deine Schätzungen zu spannenden, interessanten und lustigen Fragen ab. Sammle Punkte und finde heraus, wie gut du im Vergleich zu anderen Spielern bist. Beantworte zufällige Fragen, spiele Challenges oder such' dir Fragen aus der Sammlung aus. Und ist dir das noch nicht genug, kannst du auch selber Fragen stellen. Mach mit, Schätzen macht Spaß!</p>
 
-	<!-- / #register -->
 	</div>
 
 </div>

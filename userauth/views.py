@@ -20,6 +20,9 @@ from django.forms import ValidationError
 from django.core.mail import EmailMultiAlternatives
 import logging
 
+from userauth.forms import UserCreationFormCustom
+
+
 logger = logging.getLogger('estimate.userauth.views')
 
 
@@ -73,7 +76,7 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
             response.delete_cookie('estimate_guest_id')
             return response
     else:
-        form = UserCreationForm()
+        form = UserCreationFormCustom()
     return render_to_response(template_name, {'register_form': form},
         context_instance=RequestContext(request))
 

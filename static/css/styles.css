@@ -533,6 +533,197 @@ body {
       color: #333333; }
       body .rating i.active:hover, body .rating i.active:hover ~ .active {
         color: rgba(0, 0, 0, 0.2); }
+  body .black_area {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+    margin-bottom: 50px; }
+    body .black_area:after {
+      content: "";
+      display: table;
+      clear: both; }
+    @media screen and (max-width: 768px) {
+      body .black_area {
+        padding: 15px; } }
+    @media screen and (max-width: 480px) {
+      body .black_area {
+        padding: 10px;
+        margin-bottom: 20px; } }
+    body .black_area .half {
+      float: left;
+      display: block;
+      margin-right: 2.5641%;
+      width: 48.71795%; }
+      body .black_area .half:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body .black_area .half {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 100%;
+          margin-bottom: 10px; }
+          body .black_area .half:last-child {
+            margin-right: 0; } }
+    body .black_area h1 {
+      color: #f0e3cf;
+      margin: 10px 0 15px 0;
+      letter-spacing: -2.5px;
+      font-size: 2em;
+      display: block;
+      font-weight: 400; }
+      @media screen and (max-width: 480px) {
+        body .black_area h1 {
+          text-align: center; } }
+    body .black_area h2 {
+      color: #f0e3cf;
+      margin: 10px 0 15px 0;
+      letter-spacing: -2.5px;
+      font-size: 2em;
+      display: block;
+      font-weight: 400; }
+      @media screen and (max-width: 480px) {
+        body .black_area h2 {
+          text-align: center; } }
+    body .black_area h3 {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 20px 0 35px 0;
+      letter-spacing: -1.4px;
+      font-size: 1.6em;
+      display: block;
+      font-weight: 300;
+      line-height: 0.85em; }
+      @media screen and (max-width: 480px) {
+        body .black_area h3 {
+          text-align: center; } }
+    body .black_area p {
+      color: white;
+      line-height: 1.2em;
+      font-size: 14px;
+      margin-bottom: 20px; }
+    body .black_area span.helptext {
+      display: none; }
+    body .black_area #social-login {
+      display: table;
+      width: 100%; }
+      body .black_area #social-login .social-login {
+        float: left;
+        display: block;
+        margin-right: 5.26316%;
+        width: 47.36842%;
+        padding: 0 !important;
+        display: table; }
+        body .black_area #social-login .social-login:last-child {
+          margin-right: 0; }
+        body .black_area #social-login .social-login:nth-child(3n) {
+          margin-right: 0; }
+        body .black_area #social-login .social-login:nth-child(3n+1) {
+          clear: left; }
+        body .black_area #social-login .social-login i {
+          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          font-size: 22px;
+          padding: 5px 7px 2px 7px !important;
+          display: table-cell;
+          width: 25px; }
+        body .black_area #social-login .social-login span {
+          vertical-align: middle;
+          display: table-cell;
+          text-align: center;
+          font-weight: 500; }
+        body .black_area #social-login .social-login.google {
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+          background: #dd4b39;
+          border-radius: 0.1875em;
+          color: white;
+          padding: .4em .6em; }
+          body .black_area #social-login .social-login.google:hover {
+            background: #e47365; }
+        body .black_area #social-login .social-login.facebook {
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+          background: #5f78ab;
+          border-radius: 0.1875em;
+          color: white;
+          padding: .4em .6em; }
+          body .black_area #social-login .social-login.facebook:hover {
+            background: #8094bd; }
+    body .black_area #register-form label {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: normal;
+      font-size: 14px;
+      display: none; }
+    body .black_area #register-form input[type="text"], body .black_area #register-form input[type="password"] {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px; }
+    body .black_area #register-form input[type="submit"] {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 47.36842%;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      padding: 8px 0;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0; }
+      body .black_area #register-form input[type="submit"]:last-child {
+        margin-right: 0; }
+      body .black_area #register-form input[type="submit"]:hover {
+        background: #6f99d5; }
+    body .black_area #register-form .social-login {
+      float: left;
+      display: block;
+      margin-right: 5.26316%;
+      width: 47.36842%;
+      font-weight: 400;
+      padding: 0 !important;
+      display: table; }
+      body .black_area #register-form .social-login:last-child {
+        margin-right: 0; }
+      body .black_area #register-form .social-login:nth-child(3n) {
+        margin-right: 0; }
+      body .black_area #register-form .social-login:nth-child(3n+1) {
+        clear: left; }
+      body .black_area #register-form .social-login i {
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 22px;
+        padding: 7px 7px 3px 7px !important;
+        display: table-cell;
+        width: 25px; }
+      body .black_area #register-form .social-login span {
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+        font-weight: 500; }
+      body .black_area #register-form .social-login.google {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #dd4b39;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em; }
+        body .black_area #register-form .social-login.google:hover {
+          background: #e47365; }
+    body .black_area #register-form .errorlist {
+      color: #D46A6A;
+      font-size: 14px; }
+      body .black_area #register-form .errorlist + p > input {
+        border: 1px solid #D46A6A !important; }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0; }
@@ -731,33 +922,27 @@ header.landing {
       clear: both; }
     @media screen and (max-width: 768px) {
       header.landing #header-wrapper {
+        height: 100px;
         padding: 10px 0 30px 0; } }
+    @media screen and (max-width: 480px) {
+      header.landing #header-wrapper {
+        height: 80px; } }
     header.landing #header-wrapper #logo {
       height: 70px; }
-      @media screen and (max-width: 768px) {
-        header.landing #header-wrapper #logo {
-          display: block; } }
       @media screen and (max-width: 480px) {
         header.landing #header-wrapper #logo {
           margin: auto;
           height: 60px; } }
-    header.landing #header-wrapper #login-form {
+    header.landing #header-wrapper .login {
       float: right;
       margin-top: 20px; }
       @media screen and (max-width: 768px) {
-        header.landing #header-wrapper #login-form {
-          padding-top: 10px;
-          display: block;
-          float: left; } }
+        header.landing #header-wrapper .login {
+          margin-top: 15px; } }
       @media screen and (max-width: 480px) {
-        header.landing #header-wrapper #login-form {
-          float: left;
-          display: block;
-          margin-right: 6.66667%;
-          width: 100%; }
-          header.landing #header-wrapper #login-form:last-child {
-            margin-right: 0; } }
-      header.landing #header-wrapper #login-form .login-btn {
+        header.landing #header-wrapper .login {
+          margin-top: 12px; } }
+      header.landing #header-wrapper .login .login-btn {
         line-height: 1em !important;
         margin-top: 7.5px;
         margin-bottom: 7.5px;
@@ -768,11 +953,10 @@ header.landing {
         border-radius: 0.1875em;
         color: white;
         padding: .4em .6em;
-        font-weight: 400; }
-        header.landing #header-wrapper #login-form .login-btn:hover {
+        font-weight: 400;
+        display: block; }
+        header.landing #header-wrapper .login .login-btn:hover {
           background: #6f99d5; }
-      header.landing #header-wrapper #login-form b {
-        display: inline-block; }
 
 header.navi-header {
   background-color: #333333;
@@ -1243,240 +1427,74 @@ header.navi-header {
     cursor: default; }
 
 #landing-stage {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 30px;
-  margin-bottom: 50px; }
-  #landing-stage:after {
-    content: "";
-    display: table;
-    clear: both; }
+  text-align: center;
+  float: left;
+  display: block;
+  margin-right: 2.5641%;
+  width: 69.23077%;
+  margin-left: 15.38462%; }
+  #landing-stage:last-child {
+    margin-right: 0; }
   @media screen and (max-width: 768px) {
     #landing-stage {
-      padding: 15px; } }
+      float: left;
+      display: block;
+      margin-right: 4.34783%;
+      width: 82.6087%;
+      margin-left: 8.69565%; }
+      #landing-stage:last-child {
+        margin-right: 0; } }
   @media screen and (max-width: 480px) {
     #landing-stage {
-      padding: 10px;
-      margin-bottom: 20px; } }
-  #landing-stage #landing {
+      float: left;
+      display: block;
+      margin-right: 6.66667%;
+      width: 100%;
+      margin-left: 0%; }
+      #landing-stage:last-child {
+        margin-right: 0; } }
+  #landing-stage .start-demo-btn {
     float: left;
     display: block;
-    margin-right: 2.5641%;
-    width: 48.71795%; }
-    #landing-stage #landing:last-child {
+    margin-right: 4.34783%;
+    width: 65.21739%;
+    margin-left: 17.3913%;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background: #68a24f;
+    border-radius: 0.1875em;
+    color: white;
+    padding: .4em .6em;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    display: block; }
+    #landing-stage .start-demo-btn:last-child {
       margin-right: 0; }
     @media screen and (max-width: 480px) {
-      #landing-stage #landing {
+      #landing-stage .start-demo-btn {
         float: left;
         display: block;
         margin-right: 6.66667%;
         width: 100%;
-        margin-bottom: 10px; }
-        #landing-stage #landing:last-child {
+        margin-left: 0%; }
+        #landing-stage .start-demo-btn:last-child {
           margin-right: 0; } }
-    #landing-stage #landing h2 {
-      color: #f0e3cf;
-      margin: 10px 0 15px 0;
-      letter-spacing: -2.5px;
-      font-size: 2em;
-      display: block;
-      font-weight: 400; }
-      @media screen and (max-width: 480px) {
-        #landing-stage #landing h2 {
-          text-align: center; } }
-    #landing-stage #landing h3 {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 20px 0 35px 0;
-      letter-spacing: -1.4px;
-      font-size: 1.6em;
-      display: block;
-      font-weight: 300;
-      line-height: 0.85em; }
-      @media screen and (max-width: 480px) {
-        #landing-stage #landing h3 {
-          text-align: center; } }
-    #landing-stage #landing p {
-      color: white;
-      line-height: 1.2em;
-      font-size: 14px; }
-  #landing-stage #register {
-    margin-top: 15px;
-    margin-bottom: 20px;
+    #landing-stage .start-demo-btn:hover {
+      background: #83b86c; }
+  #landing-stage p {
     float: left;
     display: block;
-    margin-right: 2.5641%;
-    width: 48.71795%; }
-    #landing-stage #register:last-child {
+    margin-right: 4.34783%;
+    width: 100%; }
+    #landing-stage p:last-child {
       margin-right: 0; }
-    @media screen and (max-width: 480px) {
-      #landing-stage #register {
-        float: left;
-        display: block;
-        margin-right: 6.66667%;
-        width: 100%; }
-        #landing-stage #register:last-child {
-          margin-right: 0; } }
-    #landing-stage #register h3 {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 20px 0 15px 0;
-      letter-spacing: -1.4px;
-      font-size: 1.6em;
-      display: block;
-      font-weight: 300;
-      line-height: 0.85em; }
-    #landing-stage #register p {
-      color: white;
-      line-height: 1.2em;
-      font-size: 14px;
-      margin-bottom: 20px; }
-    #landing-stage #register span.helptext {
-      display: none; }
-    #landing-stage #register #social-login {
-      display: table;
-      width: 100%; }
-      #landing-stage #register #social-login .social-login {
-        float: left;
-        display: block;
-        margin-right: 5.26316%;
-        width: 47.36842%;
-        padding: 0 !important;
-        display: table; }
-        #landing-stage #register #social-login .social-login:last-child {
-          margin-right: 0; }
-        #landing-stage #register #social-login .social-login:nth-child(3n) {
-          margin-right: 0; }
-        #landing-stage #register #social-login .social-login:nth-child(3n+1) {
-          clear: left; }
-        #landing-stage #register #social-login .social-login i {
-          border-right: 1px solid rgba(0, 0, 0, 0.2);
-          font-size: 22px;
-          padding: 5px 7px 2px 7px !important;
-          display: table-cell;
-          width: 25px; }
-        #landing-stage #register #social-login .social-login span {
-          vertical-align: middle;
-          display: table-cell;
-          text-align: center;
-          font-weight: 500; }
-        #landing-stage #register #social-login .social-login.google {
-          -webkit-transition: all 0.2s ease-in-out;
-          -moz-transition: all 0.2s ease-in-out;
-          transition: all 0.2s ease-in-out;
-          background: #dd4b39;
-          border-radius: 0.1875em;
-          color: white;
-          padding: .4em .6em; }
-          #landing-stage #register #social-login .social-login.google:hover {
-            background: #e47365; }
-        #landing-stage #register #social-login .social-login.facebook {
-          -webkit-transition: all 0.2s ease-in-out;
-          -moz-transition: all 0.2s ease-in-out;
-          transition: all 0.2s ease-in-out;
-          background: #5f78ab;
-          border-radius: 0.1875em;
-          color: white;
-          padding: .4em .6em; }
-          #landing-stage #register #social-login .social-login.facebook:hover {
-            background: #8094bd; }
-    #landing-stage #register .start-demo-btn {
-      float: left;
-      display: block;
-      margin-right: 5.26316%;
-      width: 100%;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      background: #68a24f;
-      border-radius: 0.1875em;
-      color: white;
-      padding: .4em .6em;
-      border: 0;
-      box-shadow: none;
-      text-shadow: none;
-      padding: 8px 0;
-      width: 100%;
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 20px; }
-      #landing-stage #register .start-demo-btn:last-child {
-        margin-right: 0; }
-      #landing-stage #register .start-demo-btn:hover {
-        background: #83b86c; }
-    #landing-stage #register #register-form label {
-      color: rgba(255, 255, 255, 0.7);
-      font-weight: normal;
-      font-size: 14px;
-      display: none; }
-    #landing-stage #register #register-form input[type="text"], #landing-stage #register #register-form input[type="password"] {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      margin-bottom: 20px; }
-    #landing-stage #register #register-form input[type="submit"] {
-      float: left;
-      display: block;
-      margin-right: 5.26316%;
-      width: 47.36842%;
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      background: #477dca;
-      border-radius: 0.1875em;
-      color: white;
-      padding: .4em .6em;
-      border: 0;
-      box-shadow: none;
-      text-shadow: none;
-      padding: 8px 0;
-      font-weight: 400;
-      margin-top: 0;
-      margin-bottom: 0; }
-      #landing-stage #register #register-form input[type="submit"]:last-child {
-        margin-right: 0; }
-      #landing-stage #register #register-form input[type="submit"]:hover {
-        background: #6f99d5; }
-    #landing-stage #register #register-form .social-login {
-      float: left;
-      display: block;
-      margin-right: 5.26316%;
-      width: 47.36842%;
-      font-weight: 400;
-      padding: 0 !important;
-      display: table; }
-      #landing-stage #register #register-form .social-login:last-child {
-        margin-right: 0; }
-      #landing-stage #register #register-form .social-login:nth-child(3n) {
-        margin-right: 0; }
-      #landing-stage #register #register-form .social-login:nth-child(3n+1) {
-        clear: left; }
-      #landing-stage #register #register-form .social-login i {
-        border-right: 1px solid rgba(0, 0, 0, 0.2);
-        font-size: 22px;
-        padding: 7px 7px 3px 7px !important;
-        display: table-cell;
-        width: 25px; }
-      #landing-stage #register #register-form .social-login span {
-        vertical-align: middle;
-        display: table-cell;
-        text-align: center;
-        font-weight: 500; }
-      #landing-stage #register #register-form .social-login.google {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        background: #dd4b39;
-        border-radius: 0.1875em;
-        color: white;
-        padding: .4em .6em; }
-        #landing-stage #register #register-form .social-login.google:hover {
-          background: #e47365; }
-    #landing-stage #register #register-form .errorlist {
-      color: #D46A6A;
-      font-size: 14px; }
-      #landing-stage #register #register-form .errorlist + p > input {
-        border: 1px solid #D46A6A !important; }
 
 section.menu {
   padding: 20px 0; }

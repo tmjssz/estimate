@@ -2,14 +2,89 @@
 
 {% block title %}{{ block.super }} - Neuer Account{% endblock %}
 
-{% block toggle_login %}{% endblock %}
+{% block navigation %}{% endblock %}
 
-{% block content %}
-<div class="center" id="register">
+{% block stage %}
+
+<header class="landing">
+	<div id="header-wrapper">
+		<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-schriftzug-grau.png"></img>
+
+		<div class="login">
+
+			<div class="modal">
+			  <label for="modal-login" class="login-btn">
+			    <i class="fa fa-sign-in"></i> Login
+			  </label>
+			  <input class="modal-state" id="modal-login" type="checkbox" />
+			  <div class="modal-window">
+			    <div class="modal-inner">
+			      <label class="modal-close" for="modal-login"></label>
+			      
+			      <h1>Login</h1>
+
+					<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
+					    <p>
+					    	<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername">
+					    </p>
+					    <p>
+					    	<input id="id_password" name="password" type="password" placeholder="Passwort">
+					    </p>
+					    <p id="login-submit">
+					    	<input type="hidden" name="next" value="{{ next }}" />
+					    	<input type="submit" value="Login"/>
+					    </p>
+					    <p>
+					    	Noch kein Account? Dann <a href="{% url 'userauth_register' %}">registriere</a> dich jetzt.
+					    </p>
+					    {% csrf_token %}
+					</form>
+
+			    </div>
+			  </div>
+			</div>
+
+			<!-- <b><i class="fa fa-sign-in"></i> Einloggen mit</b>
+
+			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google"></i> Google</a>
+			<a class="social-login facebook" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> Facebook</a> -->
+		</div>
+	</div>
+</header>
+
+<div class="black_area">
 
 	<h2>Neuer Account</h2>
-	{% include "userauth/register_form.html" %}
 
-<!-- / #register -->
+	<div class="half">
+
+		<!--<div id="social-login">
+			<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
+			<a class="social-login facebook" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i> <span>Facebook</span></a>
+		</div>-->
+
+		<div class="form" id="register-form">
+
+			<form action="{% url 'userauth_register' %}" method="post" accept-charset="utf-8">
+				{{ register_form.as_p }}
+				{% csrf_token %}
+				
+				<input type="submit" value="Account erstellen"/>
+				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
+			</form>
+		<!-- / #register-form -->
+		</div>
+
+	<!-- / #register -->
+	</div>
+
+	<div class="half">
+		
+		<p>Hier kannst du deinen Account erstellen, mit dem du ein eigenes Punktekonto und vollen Zugriff auf alle Fragen hast. Außerdem kannst du Challenges spielen, Statistiken und Highscores sehen und zusammen mit deinen Freunden Gruppen bilden. Und ist dir das noch nicht genug, kannst du sogar selber Fragen stellen. Wähle deinen Benutzernamen, unter dem andere Spieler deine Schätzungen sehen können und schon bist du am Start.</p>
+
+	</div>
+
 </div>
+
 {% endblock %}
+

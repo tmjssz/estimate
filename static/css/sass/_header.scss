@@ -31,15 +31,16 @@ header.landing {
 	    padding: 50px 0 30px 0;
 
 	    @include media ($tablet) {
+	    	height: 100px;
 			padding: 10px 0 30px 0;
+		}
+
+	    @include media ($mobile) {
+	    	height: 80px;
 		}
 
 	    #logo {
 	    	height: 70px;
-
-	    	@include media ($tablet) {
-				display: block;
-			}
 
 			@include media ($mobile) {
 				margin: auto;
@@ -47,18 +48,16 @@ header.landing {
 			}
 	    }
 
-	    #login-form {
+	    .login {
 	    	float: right;
 	    	margin-top: 20px;
 
 	    	@include media ($tablet) {
-	    		padding-top: 10px;
-				display: block;
-				float: left;
+		    	margin-top: 15px;
 			}
 
-			@include media ($mobile) {
-				@include span-columns(4 of 4);
+		    @include media ($mobile) {
+		    	margin-top: 12px;
 			}
 
     		.login-btn {
@@ -67,10 +66,7 @@ header.landing {
 	    		margin-bottom: 7.5px;
 	    		@include btn($base-accent-color);
 	    		font-weight:400;
-	    	}
-
-	    	b {
-	    		display: inline-block;
+	    		display:block;
 	    	}
 	    }
 	}
