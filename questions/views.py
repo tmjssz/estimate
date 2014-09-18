@@ -300,23 +300,15 @@ def question_start(request):
         message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
         return render(request, 'questions/message.html', {'title': title, 'message': message})
 
-    # create guest user
-    username = 'gast'
-    user = User(username=username)
-
+    user = User()
     # read cookie
     guest_id = request.COOKIES.get('estimate_guest_id')
 
-    if guest_id:
+    if guest_id != 'None':
         # get guest user
         users = User.objects.filter(id=guest_id)
         if users:
             user = users[0]
-    else:
-        # create user
-        user.save()
-        user.username = username + '-' + str(user.id)
-        user.save()
 
     # new user registration
     if request.method == 'POST':
@@ -368,81 +360,94 @@ def question_view_start(request, slug):
     """
     question = get_object_or_404(Question, slug=slug, published=True)
 
-    # create guest user
-    username = 'gast'
-    user = User(username=username)
+    user = None
 
     # read cookie
     guest_id = request.COOKIES.get('estimate_guest_id')
 
-    if guest_id:
+    if guest_id != 'None':
         # get guest user
         users = User.objects.filter(id=guest_id)
         if users:
             user = users[0]
-    else:
-        # create user
-        user.save()
-        user.username = username + '-' + str(user.id)
-        user.save()
 
-    # already made estimate? 
-    estimates = Estimate.objects.filter(question=question, user=user)
-    if estimates:
-        # for this questions does already exist an estimate from the current user
-        # show score for this question
-        estimate = estimates[0]
-        next_start = True
-        response = render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'next_start': next_start})
-    else:
-        # no estimate from this user for this question
-        if request.method == 'POST':
-            time_out = False
+        # already made estimate? 
+        estimates = Estimate.objects.filter(question=question, user=user)
+        if estimates:
+            # for this questions does already exist an estimate from the current user
+            # show score for this question
+            estimate = estimates[0]
+            next_start = True
+            response = render(request, 'questions/question-score.html',
+                {'question': question, 'estimate': estimate, 'next_start': next_start})
 
-            # get hidden post field
-            if request.POST.get("time_out", "") == "true":
-                time_out = True
+            # set cookie with guest id
+            set_cookie(response, 'estimate_guest_id', user.id, 1) 
+            return response
+    
 
-            form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
-            if form.is_valid():
-                form.save()
+    # no estimate from this user for this question
+    if request.method == 'POST':
+        time_out = False
 
-                views = QuestionView.objects.filter(user=user, question=question)
-                if views:
-                    # delete saved view timestamps
-                    views.delete()
+        # get hidden post field
+        if request.POST.get("time_out", "") == "true":
+            time_out = True
 
-                response = HttpResponseRedirect("/start/"+question.slug)
-        else:
-            form = EstimateForm()
-            time_max = 40
+        if not user:
+            # new User has to be created
+            username = 'gast'
+            user = User(username=username)
+            user.save()
+            user.username = username + '-' + str(user.id)
+            user.save()
+
+        form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
+        if form.is_valid():
+            form.save()
 
             views = QuestionView.objects.filter(user=user, question=question)
             if views:
-                # question was already viewed before
-                time = views[0].time
-                current_time = now()
-                timediff = current_time - time
-                seconds = int(timediff.total_seconds())
-                time_left = max(0, time_max - seconds)
+                # delete saved view timestamps
+                views.delete()
 
-                if time_left == 0:
-                    # no time left
-                    too_late = Estimate(user=user, question=question, time_out=True)
-                    too_late.save()
-                    views.delete()
-                    return HttpResponseRedirect("/start")
-            else:
-                # question view for first time
+            response = HttpResponseRedirect("/start/"+question.slug)
+
+            # set cookie with guest id
+            set_cookie(response, 'estimate_guest_id', user.id, 1)
+    else:
+        form = EstimateForm()
+        time_max = 40
+
+        views = None
+        if user:
+            views = QuestionView.objects.filter(user=user, question=question)
+
+        if views:
+            # question was already viewed before
+            time = views[0].time
+            current_time = now()
+            timediff = current_time - time
+            seconds = int(timediff.total_seconds())
+            time_left = max(0, time_max - seconds)
+
+            if time_left == 0:
+                # no time left
+                too_late = Estimate(user=user, question=question, time_out=True)
+                too_late.save()
+                views.delete()
+                return HttpResponseRedirect("/start")
+        else:
+            # question view for first time
+            if user:
                 view = QuestionView(user=user, question=question)
                 view.save()
-                time_left = time_max
+            time_left = time_max
 
-            response = render(request, 'questions/question-show.html',
-                {'form': form, 'question': question, 'user': None, 'time_left': time_left})
+        response = render(request, 'questions/question-show.html',
+            {'form': form, 'question': question, 'user': None, 'time_left': time_left})
 
-    if not guest_id:
+    if user:
         # set cookie with guest id
         set_cookie(response, 'estimate_guest_id', user.id, 1)
 
