@@ -11,14 +11,38 @@
 		<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-schriftzug-grau.png"></img>
 
 		<div id="login-form">
-			<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
-			    {{ form.as_p }}
-			    <p id="login-submit">
-			    	<input type="hidden" name="next" value="{{ next }}" />
-			    	<input type="submit" value="Login"/>
-			    </p>
-			    {% csrf_token %}
-			</form>
+
+			<div class="modal">
+			  <label for="modal-login" class="login-btn">
+			    <i class="fa fa-sign-in"></i> Login
+			  </label>
+			  <input class="modal-state" id="modal-login" type="checkbox" />
+			  <div class="modal-window">
+			    <div class="modal-inner">
+			      <label class="modal-close" for="modal-login"></label>
+			      
+			      <h1>Login</h1>
+
+					<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
+					    <p>
+					    	<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername">
+					    </p>
+					    <p>
+					    	<input id="id_password" name="password" type="password" placeholder="Passwort">
+					    </p>
+					    <p id="login-submit">
+					    	<input type="hidden" name="next" value="{{ next }}" />
+					    	<input type="submit" value="Login"/>
+					    </p>
+					    <p>
+					    	Noch kein Account? Dann <a href="{% url 'userauth_register' %}">registriere</a> dich jetzt.
+					    </p>
+					    {% csrf_token %}
+					</form>
+
+			    </div>
+			  </div>
+			</div>
 
 			<!-- <b><i class="fa fa-sign-in"></i> Einloggen mit</b>
 

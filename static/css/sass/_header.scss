@@ -49,6 +49,7 @@ header.landing {
 
 	    #login-form {
 	    	float: right;
+	    	margin-top: 20px;
 
 	    	@include media ($tablet) {
 	    		padding-top: 10px;
@@ -60,52 +61,12 @@ header.landing {
 				@include span-columns(4 of 4);
 			}
 
-	    	p {
-	    		display: inline;
-				margin-left: 8px;
-				float: left;
-				margin-bottom: 0px;
-
-	    		label {
-	    			font-size: 12px;
-					line-height: 10px;
-					margin-top: 14px;
-	    		}
-
-	    		input {
-	    			width: 160px;
-					font-size: 16px;
-					padding: 3px;
-
-					@include media ($mobile) {
-						width: 100%;
-					}
-	    		}
-
-	    		input[type="submit"] {
-					padding: 4px 15px;
-					display: block;
-					width: auto;
-					margin: 29px 0 0 0;
-					font-weight: 500;
-
-					@include media ($mobile) {
-						width: 100%;
-					}
-	    		}
-
-	    		@include media ($mobile) {
-	    			margin-left: 0;
-					@include span-columns(3 of 8);
-					//@include omega(3n);
-				}
-
-	    		&#login-submit {
-	    			@include media ($mobile) {
-						@include span-columns(2 of 8);
-						@include omega();
-					}
-	    		}
+    		.login-btn {
+	    		line-height: 1em !important;
+	    		margin-top:7.5px;
+	    		margin-bottom: 7.5px;
+	    		@include btn($base-accent-color);
+	    		font-weight:400;
 	    	}
 
 	    	b {

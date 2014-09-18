@@ -525,29 +525,6 @@ body {
         body footer .modal label:hover {
           color: white;
           text-decoration: none; }
-      body footer .modal .modal-inner {
-        font-size: 16px; }
-        body footer .modal .modal-inner h1 {
-          margin: 5px 0 15px 0;
-          letter-spacing: -2px;
-          display: block;
-          font-size: 2.5em;
-          font-weight: 200;
-          color: #333333; }
-        body footer .modal .modal-inner label {
-          font-size: 1em;
-          color: #333333;
-          float: none;
-          margin: 0;
-          padding: 0;
-          text-decoration: none;
-          font-size: 11px;
-          font-weight: bold; }
-        body footer .modal .modal-inner input[type="text"], body footer .modal .modal-inner input[type="email"], body footer .modal .modal-inner textarea {
-          padding: 5px;
-          margin: 0; }
-        body footer .modal .modal-inner .modal-close {
-          font-size: 1em; }
   body .rating i {
     color: rgba(0, 0, 0, 0.2); }
     body .rating i:hover {
@@ -648,7 +625,8 @@ body {
     width: 38.46154%;
     margin-left: 30.76923%;
     padding: 2em;
-    margin-top: 9em; }
+    margin-top: 9em;
+    font-size: 16px; }
     body .modal .modal-inner:last-child {
       margin-right: 0; }
     @media screen and (max-width: 768px) {
@@ -675,13 +653,49 @@ body {
         margin-top: 5em; }
         body .modal .modal-inner:last-child {
           margin-right: 0; } }
+    body .modal .modal-inner h1 {
+      margin: 5px 0 15px 0;
+      letter-spacing: -2px;
+      display: block;
+      font-size: 2.5em;
+      font-weight: 200;
+      color: #333333; }
+    body .modal .modal-inner label {
+      font-size: 1em;
+      color: #333333;
+      float: none;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: bold; }
+    body .modal .modal-inner input[type="text"], body .modal .modal-inner input[type="email"], body .modal .modal-inner input[type="password"], body .modal .modal-inner textarea {
+      padding: 5px;
+      margin: 0; }
+    body .modal .modal-inner input[type="submit"] {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      padding: 8px 0;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 100%; }
+      body .modal .modal-inner input[type="submit"]:hover {
+        background: #6f99d5; }
+    body .modal .modal-inner .modal-close {
+      font-size: 1em; }
     body .modal .modal-inner p {
       max-width: 100% !important;
       padding: 0;
       text-align: left; }
-    body .modal .modal-inner input[type="text"], body .modal .modal-inner input[type="email"], body .modal .modal-inner textarea {
-      padding: 5px;
-      margin: 0; }
     body .modal .modal-inner a.cta {
       color: white;
       display: inline-block;
@@ -728,7 +742,8 @@ header.landing {
           margin: auto;
           height: 60px; } }
     header.landing #header-wrapper #login-form {
-      float: right; }
+      float: right;
+      margin-top: 20px; }
       @media screen and (max-width: 768px) {
         header.landing #header-wrapper #login-form {
           padding-top: 10px;
@@ -742,49 +757,20 @@ header.landing {
           width: 100%; }
           header.landing #header-wrapper #login-form:last-child {
             margin-right: 0; } }
-      header.landing #header-wrapper #login-form p {
-        display: inline;
-        margin-left: 8px;
-        float: left;
-        margin-bottom: 0px; }
-        header.landing #header-wrapper #login-form p label {
-          font-size: 12px;
-          line-height: 10px;
-          margin-top: 14px; }
-        header.landing #header-wrapper #login-form p input {
-          width: 160px;
-          font-size: 16px;
-          padding: 3px; }
-          @media screen and (max-width: 480px) {
-            header.landing #header-wrapper #login-form p input {
-              width: 100%; } }
-        header.landing #header-wrapper #login-form p input[type="submit"] {
-          padding: 4px 15px;
-          display: block;
-          width: auto;
-          margin: 29px 0 0 0;
-          font-weight: 500; }
-          @media screen and (max-width: 480px) {
-            header.landing #header-wrapper #login-form p input[type="submit"] {
-              width: 100%; } }
-        @media screen and (max-width: 480px) {
-          header.landing #header-wrapper #login-form p {
-            margin-left: 0;
-            float: left;
-            display: block;
-            margin-right: 3.22581%;
-            width: 35.48387%; }
-            header.landing #header-wrapper #login-form p:last-child {
-              margin-right: 0; } }
-        @media screen and (max-width: 480px) {
-          header.landing #header-wrapper #login-form p#login-submit {
-            float: left;
-            display: block;
-            margin-right: 3.22581%;
-            width: 22.58065%;
-            margin-right: 0; }
-            header.landing #header-wrapper #login-form p#login-submit:last-child {
-              margin-right: 0; } }
+      header.landing #header-wrapper #login-form .login-btn {
+        line-height: 1em !important;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        background: #477dca;
+        border-radius: 0.1875em;
+        color: white;
+        padding: .4em .6em;
+        font-weight: 400; }
+        header.landing #header-wrapper #login-form .login-btn:hover {
+          background: #6f99d5; }
       header.landing #header-wrapper #login-form b {
         display: inline-block; }
 
@@ -1314,83 +1300,6 @@ header.navi-header {
       color: white;
       line-height: 1.2em;
       font-size: 14px; }
-    #landing-stage #landing #social-login h4 {
-      color: rgba(255, 255, 255, 0.7);
-      margin: 20px 0 10px 0;
-      letter-spacing: -1.4px;
-      font-size: 1.4em;
-      display: block;
-      font-weight: 300;
-      line-height: 0.85em; }
-    #landing-stage #landing #social-login .social-login {
-      float: left;
-      display: block;
-      margin-right: 5.26316%;
-      width: 47.36842%;
-      padding: 3px 10px !important;
-      margin-bottom: 20px; }
-      #landing-stage #landing #social-login .social-login:last-child {
-        margin-right: 0; }
-      #landing-stage #landing #social-login .social-login:nth-child(3n) {
-        margin-right: 0; }
-      #landing-stage #landing #social-login .social-login:nth-child(3n+1) {
-        clear: left; }
-      #landing-stage #landing #social-login .social-login i {
-        padding: 0 8px 0 0 !important; }
-      #landing-stage #landing #social-login .social-login.google {
-        border: 1px solid #ba2715;
-        border-radius: 3px;
-        box-shadow: inset 0 1px 0 0 #e28b81;
-        color: white;
-        display: inline-block;
-        font-size: inherit;
-        font-weight: bold;
-        background-color: #dd4b39;
-        background-image: -webkit-linear-gradient(#dd4b39, #c72a17);
-        background-image: linear-gradient(#dd4b39, #c72a17);
-        padding: 7px 18px;
-        text-decoration: none;
-        text-shadow: 0 1px 0 #ad1f0d;
-        background-clip: padding-box; }
-        #landing-stage #landing #social-login .social-login.google:hover:not(:disabled) {
-          box-shadow: inset 0 1px 0 0 #da6456;
-          cursor: pointer;
-          background-color: #d23d2a;
-          background-image: -webkit-linear-gradient(#d23d2a, #b92816);
-          background-image: linear-gradient(#d23d2a, #b92816); }
-        #landing-stage #landing #social-login .social-login.google:active:not(:disabled), #landing-stage #landing #social-login .social-login.google:focus:not(:disabled) {
-          border: 1px solid #ba2715;
-          box-shadow: inset 0 0 8px 4px #aa2615, inset 0 0 8px 4px #aa2615; }
-        #landing-stage #landing #social-login .social-login.google:disabled {
-          opacity: 0.5;
-          cursor: not-allowed; }
-      #landing-stage #landing #social-login .social-login.facebook {
-        border: 1px solid #3a5488;
-        border-radius: 3px;
-        box-shadow: inset 0 1px 0 0 #98a5bf;
-        color: white;
-        display: inline-block;
-        font-size: inherit;
-        font-weight: bold;
-        background-color: #5f78ab;
-        background-image: -webkit-linear-gradient(#5f78ab, #3f5b93);
-        background-image: linear-gradient(#5f78ab, #3f5b93);
-        padding: 7px 18px;
-        text-decoration: none;
-        text-shadow: 0 1px 0 #2f497f;
-        background-clip: padding-box; }
-        #landing-stage #landing #social-login .social-login.facebook:hover:not(:disabled) {
-          box-shadow: inset 0 1px 0 0 #7789ac;
-          cursor: pointer;
-          background-color: #586d99;
-          background-image: -webkit-linear-gradient(#586d99, #3b5487);
-          background-image: linear-gradient(#586d99, #3b5487); }
-        #landing-stage #landing #social-login .social-login.facebook:active:not(:disabled), #landing-stage #landing #social-login .social-login.facebook:focus:not(:disabled) {
-          border: 1px solid #3a5488;
-          box-shadow: inset 0 0 8px 4px #374e7c, inset 0 0 8px 4px #374e7c; }
-        #landing-stage #landing #social-login .social-login.facebook:disabled {
-          opacity: 0.5;
-          cursor: not-allowed; }
   #landing-stage #register {
     margin-top: 15px;
     margin-bottom: 20px;

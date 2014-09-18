@@ -334,39 +334,6 @@ body {
 					text-decoration: none;
 				}
 			}
-
-			.modal-inner {
-				font-size: 16px;
-
-				h1 {
-					margin: 5px 0 15px 0;
-					letter-spacing: -2px;
-					display: block;
-					font-size: 2.5em;
-					font-weight: 200;
-					color: $dark-gray;
-				}
-
-				label {
-					font-size: 1em;
-					color: $dark-gray;
-					float: none;
-					margin: 0;
-					padding: 0;
-					text-decoration:none;
-					font-size: 11px;
-					font-weight: bold;
-				}
-
-				input[type="text"], input[type="email"], textarea {
-					padding: 5px;
-					margin: 0;
-				}
-
-				.modal-close {
-					font-size: 1em;
-				}
-			}
     	}
 	}
 
@@ -489,15 +456,54 @@ body {
 				margin-top: 5em;
 			}
 
+			font-size: 16px;
+
+			h1 {
+				margin: 5px 0 15px 0;
+				letter-spacing: -2px;
+				display: block;
+				font-size: 2.5em;
+				font-weight: 200;
+				color: $dark-gray;
+			}
+
+			label {
+				font-size: 1em;
+				color: $dark-gray;
+				float: none;
+				margin: 0;
+				padding: 0;
+				text-decoration:none;
+				font-size: 11px;
+				font-weight: bold;
+			}
+
+			input[type="text"], input[type="email"], input[type="password"], textarea {
+				padding: 5px;
+				margin: 0;
+			}
+
+			input[type="submit"] {
+				//@include span-columns(2.5 of 5);
+				@include btn($base-accent-color);
+				border: 0;
+				box-shadow: none;
+				text-shadow: none;
+				padding: 8px 0;
+				font-weight: 400;
+				margin-top: 0;
+				margin-bottom: 0;
+				width:100%;
+			}
+
+			.modal-close {
+				font-size: 1em;
+			}
+
 			p {
 			  max-width: 100% !important;
 			  padding: 0;
 			  text-align: left;
-			}
-
-			input[type="text"], input[type="email"], textarea {
-				padding: 5px;
-				margin: 0;
 			}
 
 			a.cta {
