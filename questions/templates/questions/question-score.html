@@ -105,31 +105,35 @@
 			  <div class="modal-window">
 			    <div class="modal-inner">
 			      <label class="modal-close" for="modal-question-feedback"></label>
+
+			      <div class="modal-content" id="feedback-question-content">
 			      
-			      <h3>Feedback: {{ question.title }}</h3>
-					<form method="post" action="{% url 'feedback' %}">{% csrf_token %}
-						<p>
-							<input type="hidden" id="question_id" name="questionid" value="{{ question.id }}" placeholder="Frage">
-						</p>
-
-						{% if user.is_authenticated %}
-				        	<input name="userid" type="hidden" value="{{ user.id }}">
-							<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
-						{% else %}
+				      <h3>Feedback: {{ question.title }}</h3>
+						<form method="post" action="{% url 'feedback' %}">{% csrf_token %}
 							<p>
-								<input name="userid" type="hidden">
-								<input id="id_name" name="name" placeholder="Name" type="text">
+								<input type="hidden" id="question_id" name="questionid" value="{{ question.id }}" placeholder="Frage">
 							</p>
-						{% endif %}
 
-						<p>
-							<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
-						</p>
-						<p>
-							<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
-						</p>
-						<input type="submit" value="Feedback senden ">
-					</form>
+							{% if user.is_authenticated %}
+					        	<input name="userid" type="hidden" value="{{ user.id }}">
+								<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
+							{% else %}
+								<p>
+									<input name="userid" type="hidden">
+									<input id="id_name" name="name" placeholder="Name" type="text">
+								</p>
+							{% endif %}
+
+							<p>
+								<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
+							</p>
+							<p>
+								<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
+							</p>
+							<input type="submit" value="Feedback senden ">
+						</form>
+					</div>
+					
 			    </div>
 			  </div>
 			</div>

@@ -7,7 +7,7 @@
 
 	{% if error %}
 
-		<h2>Feedback</h2>
+		<h1>Feedback</h1>
 	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
 	      	<ul class="errorlist"><li>Bitte eine gültige E-Mail Adresse eingeben.</li></ul>
 			<p>
@@ -27,7 +27,7 @@
 
 	{% elif email %}
 
-		<h2>Nachricht gesendet</h2>
+		<h1>Nachricht gesendet</h1>
 
 		<p>Vielen Dank für deine Nachricht!</p>
 
@@ -35,7 +35,7 @@
 
 	{% else %}
 
-		<h2>Feedback</h2>
+		<h1>Feedback</h1>
 
 		<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
 			{% csrf_token %}
@@ -51,7 +51,7 @@
 		        </p>
 		    {% endfor %}
 
-		    <button type="submit">Feedback senden</button>
+		    <input type="submit" value="Feedback senden">
 		</form>
 
 	{% endif %}

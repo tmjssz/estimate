@@ -820,8 +820,7 @@ def feedback(request):
 
         if form.is_valid():
             form.save()
-            logger.debug('saved')
-            return render_to_response('questions/message.html', {'title': 'Feedback gesendet', 'message': 'Vielen Dank für dein Feedback!'}, context_instance=RequestContext(request))
+            return render_to_response('questions/message.html', {'title': 'Feedback gesendet', 'message': '<i class="fa feedback-sent-icon fa-5x fa-check-circle"></i> <p class="centered-text">Vielen Dank für dein Feedback!</p>'}, context_instance=RequestContext(request))
 
     else:
         form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})

@@ -10,35 +10,39 @@
 	    <div class="modal-inner">
 	      <label class="modal-close" for="modal-feedback"></label>
 	      
-	      <h1>Feedback</h1>
+	      <div class="modal-content" id="feedback-content">
 
-			<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
-				{% csrf_token %}
+		      <h1>Feedback</h1>
 
-				<p>
-					<input type="hidden" id="question_id" name="questionid" value="" placeholder="Frage">
-				</p>
-			    
-		        {% if user.is_authenticated %}
-		        	<input name="userid" type="hidden" value="{{ user.id }}">
-					<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
-				{% else %}
+				<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
+					{% csrf_token %}
+
 					<p>
-						<input name="userid" type="hidden">
-						<input id="id_name" name="name" placeholder="Name" type="text">
+						<input type="hidden" id="question_id" name="questionid" value="" placeholder="Frage">
 					</p>
-				{% endif %}
-		    
-		        <p>
-		        	<input id="id_email" name="email" placeholder="E-Mail" type="email" value="{{ user.email }}">
-		        </p>
-		    
-		        <p>
-		        	<textarea cols="40" id="id_message" name="message" placeholder="Nachricht" rows="5"></textarea>
-		        </p>
+				    
+			        {% if user.is_authenticated %}
+			        	<input name="userid" type="hidden" value="{{ user.id }}">
+						<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
+					{% else %}
+						<p>
+							<input name="userid" type="hidden">
+							<input id="id_name" name="name" placeholder="Name" type="text">
+						</p>
+					{% endif %}
+			    
+			        <p>
+			        	<input id="id_email" name="email" placeholder="E-Mail" type="email" value="{{ user.email }}">
+			        </p>
+			    
+			        <p>
+			        	<textarea cols="40" id="id_message" name="message" placeholder="Nachricht" rows="5"></textarea>
+			        </p>
 
-			    <input type="submit" class="feedback-submit" value="Feedback senden">
-			</form>
+				    <input type="submit" value="Feedback senden">
+				</form>
+
+			</div>
 
 	    </div>
 	  </div>

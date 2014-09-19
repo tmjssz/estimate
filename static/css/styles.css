@@ -269,6 +269,16 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     height: 1px;
     margin: 20px 0px; }
+  body form label {
+    font-size: 12px; }
+  body form span.helptext {
+    font-size: 14px;
+    line-height: 1.3em; }
+  body form ul.errorlist {
+    color: #a60000;
+    background: #ffd5d5;
+    border-radius: 0.1875em;
+    padding: 5px 10px; }
   body #main {
     max-width: 800px;
     margin-left: auto;
@@ -365,16 +375,6 @@ body {
         word-wrap: break-word; }
       body #main aside small {
         line-height: 1em; }
-    body #main form label {
-      font-size: 12px; }
-    body #main form span.helptext {
-      font-size: 14px;
-      line-height: 1.3em; }
-    body #main form ul.errorlist {
-      color: #a60000;
-      background: #ffd5d5;
-      border-radius: 0.1875em;
-      padding: 5px 10px; }
     body #main table tr.current_user {
       background: #e0eaf8; }
     body #main table tr.no_stats {
@@ -858,7 +858,8 @@ body {
       display: block;
       font-size: 2.5em;
       font-weight: 200;
-      color: #333333; }
+      color: #333333;
+      text-align: center; }
     body .modal .modal-inner label {
       font-size: 1em;
       color: #333333;
@@ -897,7 +898,10 @@ body {
       max-width: 100% !important;
       padding: 0;
       text-align: left;
-      line-height: 1em; }
+      line-height: 1em;
+      color: #333333; }
+      body .modal .modal-inner p.centered-text {
+        text-align: center; }
     body .modal .modal-inner a.cta {
       color: white;
       display: inline-block;
@@ -905,6 +909,11 @@ body {
       margin-top: 1em; }
       body .modal .modal-inner a.cta:last-child {
         padding: 0 2em; }
+    body .modal .modal-inner .feedback-sent-icon {
+      color: #68A24F;
+      display: block;
+      text-align: center;
+      margin-bottom: 20px; }
   body .modal .modal-state:checked + .modal-window {
     opacity: 1;
     visibility: visible; }

@@ -145,15 +145,67 @@ $( document ).ready(function() {
         }
     });
 
+    // SPINNER OPTIONS
+    var opts = {
+      lines: 13, // The number of lines to draw
+      length: 7, // The length of each line
+      width: 3, // The line thickness
+      radius: 10, // The radius of the inner circle
+      corners: 0.5, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      direction: 1, // 1: clockwise, -1: counterclockwise
+      color: '#000', // #rgb or #rrggbb or array of colors
+      speed: 1, // Rounds per second
+      trail: 54, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: '50%', // Top position relative to parent
+      left: '50%' // Left position relative to parent
+    };
+    
 
     // Click handler for Feedback Form Submit Buttons
-    /*$('.feedback-submit').click(function(e) {
+    $('#feedback-content input[type="submit"]').click(function(e) {
         e.preventDefault();
-        $.post( "/feedback/", function( data ) {
-          $( ".modal-inner" ).html( data );
-        });
-    });*/
 
+        var target = document.getElementById('feedback-content');
+        var spinner = new Spinner(opts).spin(target);
+
+        $.ajax({
+            url : "/feedback/",
+            type: "POST",
+            data: $('#feedback-content form').serialize(),
+            success: function( response ){
+                $( ".modal-content" ).html( $(response).find('#main >') );
+            }
+        });
+
+        $('#feedback-content form input, #feedback-content form textarea').attr('disabled', 'disabled');
+    });
+
+
+    // Click handler for Question-Feedback Form Submit Buttons
+    $('#feedback-question-content input[type="submit"]').click(function(e) {
+        e.preventDefault();
+
+        var target = document.getElementById('feedback-question-content');
+        var spinner = new Spinner(opts).spin(target);
+
+        $.ajax({
+            url : "/feedback/",
+            type: "POST",
+            data: $('#feedback-question-content form').serialize(),
+            success: function( response ){
+                $( ".modal-content" ).html( $(response).find('#main >') );
+            }
+        });
+
+        $('#feedback-question-content form input, #feedback-question-content form textarea').attr('disabled', 'disabled');
+    });
+
+    
 
     // Click Listener on question statistics checkboxes next to estimates
     $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
