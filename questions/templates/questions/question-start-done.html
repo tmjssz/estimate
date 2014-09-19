@@ -1,23 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }}{% endblock %}
+{% block title %}{{ block.super }} - Neuer Account{% endblock %}
 
-{% block content %}
-<div id="question-register-done">
+{% block navigation %}{% endblock %}
 
-	<div class="description">
+{% block stage %}
+
+{% include "questions/header-landing.html" %}
+
+<div class="black_area">
+
+	<div class="half">
+
 		<h2>Weiter spielen?</h2>
-		<p>Glückwunsch, die ersten Fragen hast du fertig beantwortet. Willst du weiter spielen? Dann wähle deinen persönlichen Benutzernamen und melde dich an. Danach hast du Zugriff auf viele weitere Fragen, kannst Challenges spielen und Punkte sammeln, um dich mit anderen Spielern messen zu können. Es gibt eine Highscore und du kannst Gruppen erstellen, zu denen du deine Freunde einladen kannst. </p>
+		
+		<p>Glückwunsch, die ersten Fragen hast du fertig beantwortet. Willst du weiter spielen? Dann wähle deinen persönlichen Benutzernamen und melde dich an. Danach hast du Zugriff auf viele weitere Fragen, kannst Challenges spielen und Punkte sammeln, um dich mit anderen Spielern messen zu können. Es gibt Highscores und Statistiken und du kannst zusammen mit deinen Freunden Gruppen bilden. Und ist dir das noch nicht genug, kannst du sogar selber Fragen stellen. </p>
+
 	</div>
 
-	<div class="register-form">
-		<form action="{% url 'questions_menu' %}" method="post" accept-charset="utf-8">
-			{{ register_form.as_p }}
-			{% csrf_token %}
-			<input type="submit" value="Account erstellen"/>
-		</form>
+	<div class="half top-padding">
+
+		<div class="form" id="register-form">
+
+			<form action="{% url 'userauth_register' %}" method="post" accept-charset="utf-8">
+				{{ register_form.as_p }}
+				{% csrf_token %}
+				
+				<input type="submit" value="Account erstellen"/>
+				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
+			</form>
+
+		</div>
+
 	</div>
 
-<!-- / #message -->
 </div>
+
 {% endblock %}

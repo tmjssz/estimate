@@ -39,6 +39,10 @@ header.landing {
 	    	height: 80px;
 		}
 
+		a.logo-link {
+			border:0;
+		}
+
 	    #logo {
 	    	height: 70px;
 
@@ -236,7 +240,7 @@ header.navi-header {
 						padding-right: 10px;
 					}
 
-					a {
+					a.navi-link {
 			    		color: $navigation-color;
 			    		display: block;
 

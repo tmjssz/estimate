@@ -379,6 +379,18 @@ body {
 				@include span-columns(4);
 				margin-bottom: 10px;
 			}
+
+			&.top-padding {
+				padding-top: 25px;
+
+				@include media($tablet) {
+					padding-top: 15px;
+				}
+
+				@include media($mobile) {
+					padding-top: 0px;
+				}
+			}
 		}
 
 		h1 {
@@ -515,7 +527,6 @@ body {
 					vertical-align: middle;
 					display: table-cell;
 					text-align: center;
-					font-weight: 500;
 				}
 
 				&.google {
@@ -549,6 +560,7 @@ body {
 		label {
 			cursor: pointer;
 			margin-bottom: 0;
+			font-weight: 400;
 		}
 
 		input[type="checkbox"] {
@@ -663,6 +675,7 @@ body {
 			input[type="text"], input[type="email"], input[type="password"], textarea {
 				padding: 5px;
 				margin: 0;
+				line-height: 1em;
 			}
 
 			input[type="submit"] {
@@ -676,6 +689,7 @@ body {
 				margin-top: 0;
 				margin-bottom: 0;
 				width:100%;
+				line-height: 1em;
 			}
 
 			.modal-close {
@@ -686,6 +700,7 @@ body {
 			  max-width: 100% !important;
 			  padding: 0;
 			  text-align: left;
+			  line-height: 1em;
 			}
 
 			a.cta {
