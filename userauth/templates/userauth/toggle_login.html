@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
     <li><a class="navi-link logout-btn" href="{% url 'userauth_logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
 {% else %}
-    <li><a class="navi-link" href="{% url 'userauth_register' %}"><i class="fa fa-user"></i> Neuer Account</a></li>
+    <li><a class="navi-link" href="{% url 'userauth_register' %}"><i class="fa fa-user"></i> Account erstellen</a></li>
     <li>
     	<div class="modal">
 		  <label for="modal-login" class="login-btn">
