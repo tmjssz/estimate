@@ -61,6 +61,7 @@
 				border-radius: $base-border-radius;
 				margin: 5px 0;
 				height: 6px;
+				display: inline-block !important;
 
 				> .meter {
 					background-color: $progress-meter-color;

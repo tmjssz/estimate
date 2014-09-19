@@ -36,6 +36,10 @@
 				<span class="value">{{ estimate.score }}</span>
 			</div>
 
+			<div class="progress-bar-indication">
+				<div class="meter" style="width: {{ estimate.score }}%"></div>
+			</div>
+
 			<div id="show_btn">Zeige Auflösung</div>
 
 			<table class="timed_out">
@@ -55,6 +59,11 @@
 			<div class="score">	
 				<span class="value">{{ estimate.score }}</span>
 				<span class="title">Punkte</span>
+				{% if estimate.score > 0 %}
+					<div class="progress-bar-indication">
+						<div class="meter" style="width: {{ estimate.score }}%"></div>
+					</div>
+				{% endif %}
 			</div>
 			
 			{% if estimate.estimate == question.answer %}
