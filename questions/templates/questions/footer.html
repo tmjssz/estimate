@@ -9,6 +9,8 @@
 	  <div class="modal-window">
 	    <div class="modal-inner">
 	      <label class="modal-close" for="modal-feedback"></label>
+
+	      <div class="modal-answer" id="feedback-answer"></div>
 	      
 	      <div class="modal-content" id="feedback-content">
 
@@ -16,10 +18,6 @@
 
 				<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
 					{% csrf_token %}
-
-					<p>
-						<input type="hidden" id="question_id" name="questionid" value="" placeholder="Frage">
-					</p>
 				    
 			        {% if user.is_authenticated %}
 			        	<input name="userid" type="hidden" value="{{ user.id }}">

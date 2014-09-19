@@ -810,10 +810,10 @@ def feedback(request):
         message = request.POST[u'message']
         name = request.POST[u'name']
         userid = request.POST[u'userid']
-        question = request.POST[u'questionid']
+        questionid = request.POST.get(u'questionid')
 
         form = FeedbackForm()
-        if question != '':
+        if questionid:
             form = FeedbackQuestionForm(request.POST)
         else:
             form = FeedbackForm(request.POST)
