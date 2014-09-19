@@ -1,0 +1,15 @@
+<form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
+	{% csrf_token %}
+    
+    {% for field in invite_friend_form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+
+    {% for field in invite_friend_form.visible_fields %}
+        <p>
+        	{{ field.errors }}
+        	{{ field }}
+        </p>
+    {% endfor %}
+	<input type="submit" value="Einladung sendenn"/>
+</form>

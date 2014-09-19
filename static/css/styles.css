@@ -914,6 +914,8 @@ body {
       display: block;
       text-align: center;
       margin-bottom: 20px; }
+    body .modal .modal-inner .close-modal-btn {
+      margin-top: 20px; }
   body .modal .modal-state:checked + .modal-window {
     opacity: 1;
     visibility: visible; }
@@ -964,6 +966,19 @@ header.landing {
       @media screen and (max-width: 480px) {
         header.landing #header-wrapper .login {
           margin-top: 12px; } }
+      header.landing #header-wrapper .login .navi-link {
+        color: #333333;
+        margin-right: 10px;
+        -webkit-transition: all 0.25s ease-in-out;
+        -moz-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out; }
+        header.landing #header-wrapper .login .navi-link:hover {
+          color: #666666; }
+        @media screen and (max-width: 480px) {
+          header.landing #header-wrapper .login .navi-link {
+            display: none; } }
+      header.landing #header-wrapper .login .modal {
+        display: inline-block; }
       header.landing #header-wrapper .login .login-btn {
         line-height: 1em !important;
         margin-top: 7.5px;
@@ -975,8 +990,7 @@ header.landing {
         border-radius: 0.1875em;
         color: white;
         padding: .4em .6em;
-        font-weight: 400;
-        display: block; }
+        font-weight: 400; }
         header.landing #header-wrapper .login .login-btn:hover {
           background: #6f99d5; }
 
@@ -1334,18 +1348,6 @@ header.navi-header {
         color: #646464; }
         #challenge-list-all aside #played-challenges ul li a span.detail:hover, #challenge-list-all aside #own-challenges ul li a span.detail:hover {
           color: #333333; }
-
-#friend_invite .another-invite {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  background: #477dca;
-  border-radius: 0.1875em;
-  color: white;
-  padding: .4em .6em;
-  display: inline-block; }
-  #friend_invite .another-invite:hover {
-    background: #6f99d5; }
 
 #groups-list .new-group {
   text-align: center;

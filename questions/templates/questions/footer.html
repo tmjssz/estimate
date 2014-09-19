@@ -57,26 +57,32 @@
 	    <div class="modal-inner">
 	      <label class="modal-close" for="modal-invite-friend"></label>
 
-	      <h1>Freund einladen</h1>
-	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
-			<p>
-				<input id="id_mail" required maxlength="254" name="email" type="email" placeholder="E-Mail">
-			</p>
-			<p>
-				{% if user.is_authenticated %}
-					<input id="id_name" maxlength="254" name="name" type="hidden" value="{{ user.username }}" placeholder="Dein Name">
-				{% else %}
-					<input id="id_name" required maxlength="254" name="name" type="text" placeholder="Dein Name">
-				{% endif %}
-			</p>
-			<p>
-				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht"></textarea>
-			</p>
-			
-			<input type="hidden" name="action" value="invite">
-			{% csrf_token %}
-			<input type="submit" value="Einladung senden"/>
-		</form>
+	      <div class="modal-answer" id="invite-friend-answer"></div>
+
+	      <div class="modal-content" id="invite-friend-content">
+
+		      <h1>Freund einladen</h1>
+		      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
+				<p>
+					<input id="id_mail" required maxlength="254" name="email" type="email" placeholder="E-Mail">
+				</p>
+				<p>
+					{% if user.is_authenticated %}
+						<input id="id_username" maxlength="254" name="username" type="hidden" value="{{ user.username }}" placeholder="Dein Name">
+					{% else %}
+						<input id="id_username" required maxlength="254" name="username" type="text" placeholder="Dein Name">
+					{% endif %}
+				</p>
+				<p>
+					<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht"></textarea>
+				</p>
+				
+				<input type="hidden" name="action" value="invite">
+				{% csrf_token %}
+				<input type="submit" value="Einladung senden"/>
+			</form>
+
+		  </div>
 	    </div>
 	  </div>
 	</div>

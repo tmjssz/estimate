@@ -185,7 +185,6 @@ $( document ).ready(function() {
         $('#feedback-content form input, #feedback-content form textarea').attr('disabled', 'disabled');
     });
 
-
     // Click handler for Question-Feedback Form Submit Buttons
     $('#feedback-question-content input[type="submit"]').click(function(e) {
         e.preventDefault();
@@ -204,6 +203,37 @@ $( document ).ready(function() {
 
         $('#feedback-question-content form input, #feedback-question-content form textarea').attr('disabled', 'disabled');
     });
+
+    // Click handler for Friend Invitation Form Submit Buttons
+    var content_id = 'invite-friend-content';
+    var answer_id = 'invite-friend-answer';
+    $('#' + content_id + ' input[type="submit"]').click(function(e) {
+        e.preventDefault();
+
+        var target = document.getElementById(content_id);
+        var spinner = new Spinner(opts).spin(target);
+
+        $.ajax({
+            url : "/freund-einladen/",
+            type: "POST",
+            data: $('#' + content_id + ' form').serialize(),
+            success: function( response ){
+                $('#' + answer_id).html( $(response).find('#main >') );
+                $('#' + content_id).hide();
+                spinner.stop();
+                $('#' + content_id + ' form input, #' + content_id + ' form textarea').removeAttr('disabled');
+                $('#' + content_id + ' form #id_mail, #' + content_id + ' form #id_message').val('');
+                
+                $('#' + answer_id + ' .close-modal-btn').click(function() {
+                    $('#' + answer_id).html('');
+                    $('#' + content_id).fadeIn();
+                });
+            }
+        });
+
+        $('#' + content_id + ' form input, #' + content_id + ' form textarea').attr('disabled', 'disabled');
+    });
+    
 
     
 

@@ -64,13 +64,30 @@ header.landing {
 		    	margin-top: 12px;
 			}
 
+			.navi-link {
+				color: $dark-gray;
+				margin-right: 10px;
+				@include transition (all 0.25s ease-in-out);
+
+				&:hover {
+					color: lighten($dark-gray, 20);
+				}
+
+				@include media ($mobile) {
+					display: none;
+				}
+			}
+
+			.modal {
+				display: inline-block;
+			}
+
     		.login-btn {
 	    		line-height: 1em !important;
 	    		margin-top:7.5px;
 	    		margin-bottom: 7.5px;
 	    		@include btn($base-accent-color);
 	    		font-weight:400;
-	    		display:block;
 	    	}
 	    }
 	}

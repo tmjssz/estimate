@@ -5,51 +5,34 @@
 {% block content %}
 <div id="friend_invite">
 
-	{% if error %}
+	{% if email %}
 
-		<h2>Freund einladen</h2>
-	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
-	      	<ul class="errorlist"><li>Bitte eine gültige E-Mail Adresse eingeben.</li></ul>
-			<p>
-				<input id="id_mail" required maxlength="254" name="email" type="email" value="{{ email }}" placeholder="E-Mail">
-			</p>
-			<p>
-				<input id="id_name" required maxlength="254" name="name" type="text" value="{{ name }}" placeholder="Dein Name">
-			</p>
-			<p>
-				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht">{{ message }}</textarea>
-			</p>
-			
-			<input type="hidden" name="action" value="invite">
-			{% csrf_token %}
-			<input type="submit" value="Einladung senden"/>
-		</form>
+		<h1>Einladung gesendet</h1>
 
-	{% elif email %}
+		<i class="fa feedback-sent-icon fa-5x fa-check-circle"></i> 
 
-		<h2>Einladung gesendet</h2>
+		<p class="centered-text">
+			Sehr schön, du hast an {{ email }} eine Einladung gesendet.
+		</p>
 
-		<p>Sehr schön, du hast an {{ email }} die folgende Nachricht gesendet.</p>
-		<p>"{{ message }}"</p>
-
-		<p><label class="another-invite" for="modal-invite-friend">Weitere Einladung versenden</label></p>
+		<input class="close-modal-btn" type="submit" value="Noch jemanden einladen"/>
 
 	{% else %}
 
-		<h2>Freund einladen</h2>
-	      <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
-			<p>
-				<input id="id_mail" required maxlength="254" name="email" type="email" value="{{ email }}" placeholder="E-Mail">
-			</p>
-			<p>
-				<input id="id_name" required maxlength="254" name="name" type="text" value="{{ user.username }}" placeholder="Dein Name">
-			</p>
-			<p>
-				<textarea cols="40" id="id_message" name="message" rows="5" placeholder="Nachricht">{{ message }}</textarea>
-			</p>
-			
-			<input type="hidden" name="action" value="invite">
+		<h1>Freund einladen</h1>
+	    <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
 			{% csrf_token %}
+		    
+		    {% for field in form.hidden_fields %}
+		        {{ field }}
+		    {% endfor %}
+
+		    {% for field in form.visible_fields %}
+		        <p>
+		        	{{ field.errors }}
+		        	{{ field }}
+		        </p>
+		    {% endfor %}
 			<input type="submit" value="Einladung senden"/>
 		</form>
 
