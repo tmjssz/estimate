@@ -14,6 +14,10 @@
 
 			<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
 				{% csrf_token %}
+
+				<p>
+					<input type="hidden" id="question_id" name="questionid" value="" placeholder="Frage">
+				</p>
 			    
 		        {% if user.is_authenticated %}
 		        	<input name="userid" type="hidden" value="{{ user.id }}">
@@ -33,7 +37,7 @@
 		        	<textarea cols="40" id="id_message" name="message" placeholder="Nachricht" rows="5"></textarea>
 		        </p>
 
-			    <input type="submit" value="Feedback senden">
+			    <input type="submit" class="feedback-submit" value="Feedback senden">
 			</form>
 
 	    </div>

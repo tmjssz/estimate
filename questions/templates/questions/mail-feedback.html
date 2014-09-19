@@ -2,10 +2,35 @@
 
 	<a href="{{ host }}"><img src="{{ host }}{{ static_url }}img/estimate-logo-schriftzug-grau.png" height="60px"></img></a>
 
-	<h1 style="font-weight: 300; letter-spacing: -2px;">Feedback von <i>{{ name }}</i></h1>
+	<h1 style="font-weight: 300; letter-spacing: -2px;">Feedback von <a href='mailto:{{ email }}?Subject=Feedback%20zu%20esti|mate&body=Hi%20{{ name }},%0A%0ADanke%20für%20dein%20Feedback!%0A%0A%0A%0AViele%20Grüße,%0ATim%0A%0A--------------%0A%0A"{{ message }}"' style="color: black; text-decoration: none;"><i>{{ name }}</i></a> (<a href='mailto:{{ email }}?Subject=Feedback%20zu%20esti|mate&body=Hi%20{{ name }},%0A%0ADanke%20für%20dein%20Feedback!%0A%0A%0A%0AViele%20Grüße,%0ATim%0A%0A--------------%0A%0A"{{ message }}"' target="_top">{{ email }}</a>)</h1>
 
-	<p>{{ message }}</p>
+	<p style="font-size: 15px;">&quot;{{ message }}&quot;</p>
 
-	<p><a href='mailto:{{ email }}?Subject=Feedback%20zu%20esti|mate&body=Hi%20{{ name }},%0A%0ADanke%20für%20dein%20Feedback!%0A%0A%0A%0AViele%20Grüße,%0ATim%0A%0A--------------%0A%0A"{{ message }}"' target="_top">{{ email }}</a></p>
+	{% if question %}
+		<h2>Frage: <a href="{{ host }}/admin/questions/question/{{ question.id }}">{{ question.title }}</a></h2>
+		<p>{{ question.question }}</p>
+		<p><b>Antwort:</b> {{ question.answer }} <br>
+
+		{% if question.unit %}
+			<b>Einheit:</b> {{ question.unit }} <br>
+		{% endif %}
+
+		{% if question.explanation %}
+			<b>Erklärung:</b> {{ question.explanation }} <br>
+		{% endif %}
+
+		{% if question.source %}
+			<b>Quelle:</b> {{ question.source }} <br>
+		{% endif %}
+
+		<b>Autor:</b> {{ question.author }}</p>
+
+		{% if question.image %}
+			<p><img width="100%" src="{{ host }}/{{ question.image }}"></img></p>
+		{% endif %}
+
+	{% endif %}
+
+	
 
 </div>

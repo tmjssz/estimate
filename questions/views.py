@@ -17,7 +17,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import datetime
 
-from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm
+from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm, FeedbackQuestionForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
@@ -810,14 +810,18 @@ def feedback(request):
         message = request.POST[u'message']
         name = request.POST[u'name']
         userid = request.POST[u'userid']
+        question = request.POST[u'questionid']
 
-        form = FeedbackForm(request.POST)
+        form = FeedbackForm()
+        if question != '':
+            form = FeedbackQuestionForm(request.POST)
+        else:
+            form = FeedbackForm(request.POST)
 
         if form.is_valid():
             form.save()
+            logger.debug('saved')
             return render_to_response('questions/message.html', {'title': 'Feedback gesendet', 'message': 'Vielen Dank für dein Feedback!'}, context_instance=RequestContext(request))
-
-        #return render_to_response('userauth/friend-invite.html', {'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
 
     else:
         form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})

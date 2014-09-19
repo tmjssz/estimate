@@ -146,6 +146,16 @@ $( document ).ready(function() {
     });
 
 
+    // Click handler for Feedback Form Submit Buttons
+    /*$('.feedback-submit').click(function(e) {
+        e.preventDefault();
+        $.post( "/feedback/", function( data ) {
+          $( ".modal-inner" ).html( data );
+        });
+    });*/
+
+
+    // Click Listener on question statistics checkboxes next to estimates
     $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
         var id = $(this).val();
         $(this).parent().submit();

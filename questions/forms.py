@@ -117,3 +117,42 @@ class FeedbackForm(Form):
         
         mail_admins('[Feedback] ' + name, 'Feedback von ' + name, html_message=content, fail_silently=True)
 
+
+class FeedbackQuestionForm(Form):
+    questionid = CharField(required=True, label='Question ID', widget=HiddenInput())
+    name = CharField(required=True, label='Name', widget=TextInput(attrs={'placeholder': 'Name'}))
+    userid = CharField(required=False, label='User ID', widget=HiddenInput())
+    email = EmailField(required=True, label='E-Mail', widget=TextInput(attrs={'placeholder': 'E-Mail'}))
+    message = CharField(required=True, label='Nachricht', widget=Textarea(attrs={'placeholder': 'Nachricht'}))
+    
+    def __init__(self, *args, **kwargs):
+        self.__questionid = kwargs.pop('questionid', None)
+        self.__name = kwargs.pop('name', None)
+        self.__email = kwargs.pop('email', None)
+        self.__message = kwargs.pop('message', None)
+        self.__userid = kwargs.pop('userid', None)
+        super(FeedbackQuestionForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        data = self.cleaned_data
+        questionid = self.cleaned_data['questionid']
+        name = self.cleaned_data['name']
+        userid = self.cleaned_data['userid']
+        email = self.cleaned_data['email']
+        message = self.cleaned_data['message']
+
+        if userid:
+            user = User.objects.get(id=userid)
+            if not user.email:
+                user.email = email
+                user.save()
+
+        question = Question.objects.get(id=questionid)
+
+        template = get_template('questions/mail-feedback.html')
+        context = Context({'message': message, 'email': email, 'name': name, 'question': question, 'host': settings.EMAIL_HTML_CONTENT_HOST, 'static_url': settings.STATIC_URL})
+        content = template.render(context)
+        
+        mail_admins('[Feedback] ' + name + ' zur Frage "' + question.title + '"', 'Feedback von ' + name + ' zur Frage "' + question.title + '"', html_message=content, fail_silently=True)
+
+

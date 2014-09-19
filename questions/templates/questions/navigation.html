@@ -19,9 +19,9 @@
 
 		<nav class="logged_in">
 			<ul class="logged_in">
-				<li><a href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
-				<li><a href="{% url 'questions_account' %}"><i class="fa fa-user"></i> Konto</a></li>
-				<li><a href="{% url 'group_list' %}">
+				<li><a class="navi-link" href="{% url 'questions_menu' %}"><i class="fa fa-home"></i> Hauptmenü</a></li>
+				<li><a class="navi-link" href="{% url 'questions_account' %}"><i class="fa fa-user"></i> Konto</a></li>
+				<li><a class="navi-link" href="{% url 'group_list' %}">
 					{% if user.group_invitees.all %}
 						<i class="fa fa-users"></i><span class="badge success">{{ user.group_invitees.count }}</span>Gruppen
 					{% else %}
