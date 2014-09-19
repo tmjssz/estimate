@@ -58,7 +58,13 @@
 
 			<div class="score">	
 				<span class="value">{{ estimate.score }}</span>
-				<span class="title">Punkte</span>
+				<span class="title">
+					{% if estimate.score == 1 %}
+					Punkt
+					{% else %}
+					Punkte
+					{% endif %}
+				</span>
 				{% if estimate.score > 0 %}
 					<div class="progress-bar-indication">
 						<div class="meter" style="width: {{ estimate.score }}%"></div>
