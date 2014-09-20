@@ -17,14 +17,12 @@ urlpatterns = patterns('django.contrib.auth.views',
 urlpatterns += patterns('',
     url(r'^neuer-account/$', 'userauth.views.register',
         {'next_page_name': 'userauth_register_done'},
-        name='userauth_register'),
-    url(r'^willkommen/$',
-        TemplateView.as_view(template_name='userauth/register_done.html'),
-        name='userauth_register_done')
+        name='userauth_register')
 )
 
 urlpatterns += patterns('userauth.views',
     url(r'^gruppe/$', 'group_list', name='group_list'),
     url(r'^gruppe/(?P<id>[-\w]+)/$$', 'group_view', name='group_show'),
-    url(r'^freund-einladen/$', 'invite_friend', name='invite_friend')
+    url(r'^freund-einladen/$', 'invite_friend', name='invite_friend'), 
+    url(r'^willkommen/$', 'register_done', name='userauth_register_done')
 )

@@ -11,7 +11,7 @@ from django.template.loader import get_template
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from userauth.models import GroupInvitation
-from questions.models import Score, Estimate
+from questions.models import Score, Estimate, Challenge
 from userauth.forms import GroupForm
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -62,7 +62,7 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
                 new_user = authenticate(username=username, password=pwd)
                 login(request, new_user)
             else:
-                register_form.save()
+                form.save()
                 new_user = authenticate(username=username, password=pwd)
                 login(request, new_user)
 
@@ -78,6 +78,31 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
         form = UserCreationFormCustom()
     return render_to_response(template_name, {'register_form': form},
         context_instance=RequestContext(request))
+
+
+@login_required
+def register_done(request):
+    """
+    Shows a menu
+    """
+    if request.user.is_active and request.user.is_superuser:
+        is_admin = True
+    else:
+        is_admin = False
+
+    challenges = Challenge.objects.filter(published=True)
+    if len(challenges) == 0:
+        challenges = None
+
+    estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
+    
+    score = 0
+    for e in estimates:
+        score += e.score
+
+    number_estimates = len(estimates)
+    
+    return render_to_response('userauth/register_done.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
 
 
 @login_required

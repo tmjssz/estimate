@@ -1,18 +1,124 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }} - Account erstellt{% endblock %}
+{% block title %}{{ block.super }} - Willkommen{% endblock %}
 
 {% block content %}
-<div id="register_done">
 
-	<h2>Account wurde erstellt</h2>
+<div class="modal register_done">
+  <input class="modal-state" id="modal-welcome" type="checkbox" checked/>
+  <div class="modal-window welcome">
+    <div class="modal-inner welcome">
+      <label class="modal-close welcome" for="modal-welcome"></label>
 
-	<p>Hi {{ user.username }}, du hast jetzt deinen eigenen Account. Im Menu unter dem Punkt <a href="{% url 'questions_account' %}"> <i class="fa fa-user"></i> Konto</a> kannst du deinen Benutzernamen und dein Passwort ändern. Viel Spaß beim Schätzen!</p>
+      <div class="modal-answer" id="welcome-answer"></div>
+      
+      <div class="modal-content" id="welcome-content">
 
-	<br>
+	      <h1>Willkommen</h1>
+	      <div class="greeting">Hi {{ user.username }}, du hast jetzt deinen eigenen Account.</div>
+		  <p>Im Menu unter dem Punkt <a href="{% url 'questions_account' %}"> <i class="fa fa-user"></i> Konto</a> kannst du deinen Benutzernamen und dein Passwort ändern. Viel Spaß beim Schätzen!</p>
 
-	<p><a class="go" href="{% url 'questions_menu' %}">Los geht's! <i class="fa fa-arrow-circle-right"></i></a></p>
+		  <label class="register_done go" for="modal-welcome">Los geht's! <i class="fa fa-arrow-circle-right"></i></label>
+	  </div>
 
-<!-- / #register_done -->
+    </div>
+  </div>
 </div>
+
+<section class="menu">
+
+	<div class="row">
+		<a class="menu-btn challenge_btn" href="{% url 'questions_challenge_all' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-flag"></i>
+					<span>Challenge</span>
+				</div>
+			</div>
+		</a>
+
+		<a class="menu-btn random_btn" href="{% url 'questions_random' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-random"></i>
+					<span>Zufällige Fragen</span>
+				</div>
+			</div>
+		</a>
+
+	<!-- /.row --> 
+	</div>
+
+	<div class="row">
+		<a class="menu-btn choose_btn" href="{% url 'questions_question_all' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-list"></i>
+					<span>Frage wählen</span>
+				</div>
+			</div>
+		</a>
+
+		<a class="menu-btn create_btn" href="{% url 'questions_question_create' %}">
+			<div class="wrapper">
+				<div class="cell">
+					<i class="fa fa-paper-plane"></i>
+					<span>Frage einreichen</span>
+				</div>
+			</div>
+		</a>
+
+	<!-- /.row --> 
+	</div>
+
+	{% if user.group_invitees.all %}
+		<p class="invites"><i class="fa fa-envelope"></i> 
+		{% if user.group_invitees.all.count == 1 %}
+			Du hast eine <a href="{% url 'group_list' %}">Gruppen-Einladung</a> erhalten.
+		{% elif user.group_invitees.all.count > 1 %}
+			Du hast <a href="{% url 'group_list' %}">{{ user.group_invitees.all.count }} Gruppen-Einladungen</a> erhalten.
+		{% endif %}
+		</p>
+	{% endif %}
+
+<!-- /#games-menu --> 
+</section>
+
+
+<aside class="menu">
+
+	<div class="short-stats">
+		<div class="score">	
+			<span class="title">Punktestand</span>
+			<span class="value">{{ score }}</span>
+		</div>
+
+		<div class="number">	
+			<span class="title">Beantwortet</span>
+			<span class="value">{{ number_estimates }}</span>
+		</div>
+	<!-- /.short-stats -->
+	</div>
+
+	<div id="highscores-menu">
+		<h4>Highscore</h4>
+		<ul>
+			<li><a href="{% url 'questions_highscore' %}">TOP 100</a></li>
+			{% for group in user.groups.all %}
+		    <li><a href="{% url 'group_show' group.id %}">{{ group }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div id="statistics-menu">
+		<h4>Statistik</h4>
+		<ul>
+		    <li><a href="{% url 'questions_user' user.id %}">User-Statistik</a></li>
+		    <li><a href="{% url 'questions_statistics_crowd' %}">Crowd-Statistik</a></li>
+		</ul>
+	<!-- /#statistics-menu -->
+	</div>
+
+</aside>
+
 {% endblock %}
