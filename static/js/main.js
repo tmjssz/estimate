@@ -243,11 +243,11 @@ $( document ).ready(function() {
     });
     
 
+    // Function to set click handlers for clicks outside a modal window to close it
     function closeModalOnClickOutside(modalWindow, modalInner, closeLabel) {
         $(modalWindow).click(function() {
             $(closeLabel).click();
         });
-
         $(modalInner).click(function(event){
             event.stopPropagation();
         });

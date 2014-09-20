@@ -41,4 +41,12 @@
 	p {
 		@include span-columns(6 of 6);
 	}
+
+	.features-list {
+		margin-top: 10px !important;
+
+		.name {
+			font-size: 15px;
+		}
+	}
 }

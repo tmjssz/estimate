@@ -341,7 +341,19 @@ def question_start(request):
     if questions.count() == 0:
         # there are no unanswered questions left
         register_form = UserCreationFormCustom()
-        response = render(request, 'questions/question-start-done.html', {'register_form': register_form})
+
+        # calculate the users score
+        estimates = Estimate.objects.filter(user=user).exclude(estimate=None).order_by('percentage_error')
+        score = 0
+        for e in estimates:
+            score += e.score
+
+        # users avg score
+        avg_score = 0
+        if len(estimates) > 0:
+            avg_score = score / len(estimates)
+
+        response = render(request, 'questions/question-start-done.html', {'register_form': register_form, 'score': score, 'avg_score': avg_score})
     else:
         # choose a random question
         question = random.choice(questions)

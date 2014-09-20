@@ -377,6 +377,8 @@ body {
 
 		.half {
 			@include span-columns(5);
+			@include omega(2n);
+
 			@include media($mobile) {
 				@include span-columns(4);
 				margin-bottom: 10px;
@@ -478,6 +480,73 @@ body {
 				top: 50%;
 				z-index: -1;
 			}
+		}
+
+		.short-stats {
+			@include span-columns(1 of 1);
+			margin-bottom: 20px;
+
+			@include media($mobile) {
+				@include span-columns(3 of 4);
+				@include shift(0.5 of 4);
+				text-align: center;
+			}
+
+			.title {
+				color: lighten($dark-gray, 40) !important;
+			}
+
+			.value {
+				color: white !important;
+				font-weight: 300 !important;
+			}
+
+			.score, .number {
+				@include span-columns(3 of 6);
+				@include number($dark-gray);
+
+				@include media($mobile) {
+					@include span-columns(1 of 2);
+					margin-bottom: 15px;
+				}
+			}
+		}
+
+		.features-list {
+			@include span-columns(1 of 1);
+			margin-top: 35px;
+
+			.feature {
+				@include span-columns(2.5 of 10);
+				text-align: center; 
+
+				@include media($mobile) {
+					@include span-columns(1 of 2);
+					@include omega(2n);
+					margin-bottom: 15px;
+				}
+
+				.icon {
+					color: lighten($dark-gray, 35) !important;
+				}
+
+				.name {
+					color: lighten($dark-gray, 40) !important;
+					font-size: 16px;
+					display: block;
+					width: 100%;
+					line-height: 1.5em;
+					letter-spacing: -1px;
+				}
+			}
+		}
+
+		.shadow-font {
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+			text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+			-moz-text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+			-webkit-text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
 		}
 	}
 

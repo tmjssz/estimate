@@ -561,6 +561,10 @@ body {
       width: 48.71795%; }
       body .black_area .half:last-child {
         margin-right: 0; }
+      body .black_area .half:nth-child(2n) {
+        margin-right: 0; }
+      body .black_area .half:nth-child(2n+1) {
+        clear: left; }
       @media screen and (max-width: 480px) {
         body .black_area .half {
           float: left;
@@ -643,6 +647,102 @@ body {
         position: absolute;
         top: 50%;
         z-index: -1; }
+    body .black_area .short-stats {
+      float: left;
+      display: block;
+      margin-right: 33.33333%;
+      width: 100%;
+      margin-bottom: 20px; }
+      body .black_area .short-stats:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body .black_area .short-stats {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 73.33333%;
+          margin-left: 13.33333%;
+          text-align: center; }
+          body .black_area .short-stats:last-child {
+            margin-right: 0; } }
+      body .black_area .short-stats .title {
+        color: #999999 !important; }
+      body .black_area .short-stats .value {
+        color: white !important;
+        font-weight: 300 !important; }
+      body .black_area .short-stats .score, body .black_area .short-stats .number {
+        float: left;
+        display: block;
+        margin-right: 4.34783%;
+        width: 47.82609%;
+        text-align: center; }
+        body .black_area .short-stats .score:last-child, body .black_area .short-stats .number:last-child {
+          margin-right: 0; }
+        body .black_area .short-stats .score .title, body .black_area .short-stats .number .title {
+          font-weight: bold;
+          font-size: 12px;
+          color: #646464;
+          display: block;
+          width: 100%; }
+        body .black_area .short-stats .score .value, body .black_area .short-stats .number .value {
+          font-size: 40px;
+          font-weight: bold;
+          display: block;
+          width: 100%;
+          color: #333333; }
+        @media screen and (max-width: 480px) {
+          body .black_area .short-stats .score, body .black_area .short-stats .number {
+            float: left;
+            display: block;
+            margin-right: 14.28571%;
+            width: 42.85714%;
+            margin-bottom: 15px; }
+            body .black_area .short-stats .score:last-child, body .black_area .short-stats .number:last-child {
+              margin-right: 0; } }
+    body .black_area .features-list {
+      float: left;
+      display: block;
+      margin-right: 33.33333%;
+      width: 100%;
+      margin-top: 35px; }
+      body .black_area .features-list:last-child {
+        margin-right: 0; }
+      body .black_area .features-list .feature {
+        float: left;
+        display: block;
+        margin-right: 2.5641%;
+        width: 23.07692%;
+        text-align: center; }
+        body .black_area .features-list .feature:last-child {
+          margin-right: 0; }
+        @media screen and (max-width: 480px) {
+          body .black_area .features-list .feature {
+            float: left;
+            display: block;
+            margin-right: 14.28571%;
+            width: 42.85714%;
+            margin-bottom: 15px; }
+            body .black_area .features-list .feature:last-child {
+              margin-right: 0; }
+            body .black_area .features-list .feature:nth-child(2n) {
+              margin-right: 0; }
+            body .black_area .features-list .feature:nth-child(2n+1) {
+              clear: left; } }
+        body .black_area .features-list .feature .icon {
+          color: #8c8c8c !important; }
+        body .black_area .features-list .feature .name {
+          color: #999999 !important;
+          font-size: 16px;
+          display: block;
+          width: 100%;
+          line-height: 1.5em;
+          letter-spacing: -1px; }
+    body .black_area .shadow-font {
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+      -moz-text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+      -webkit-text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3); }
   body .modal label {
     cursor: pointer;
     margin-bottom: 0;
@@ -1535,6 +1635,10 @@ header.navi-header {
     width: 100%; }
     #landing-stage p:last-child {
       margin-right: 0; }
+  #landing-stage .features-list {
+    margin-top: 10px !important; }
+    #landing-stage .features-list .name {
+      font-size: 15px; }
 
 section.menu {
   padding: 20px 0; }

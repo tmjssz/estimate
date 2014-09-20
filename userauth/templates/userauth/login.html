@@ -41,7 +41,7 @@
 					        	{{ field.errors }}
 					        	{% if field.name == 'username' %}
 					        		{% if form.username.value %}
-					        			<input id="id_username" maxlength="254" name="username" type="text" value="{{ form.username.value }}" placeholder="Benutzername">
+					        			<input id="id_username" maxlength="254" name="username" type="text" value="{{ form.username.value }}" placeholder="Benutzername" autofocus>
 					        		{% else %}
 					        			<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername">
 					        		{% endif %}
