@@ -13,7 +13,7 @@
 			<img id="logo" src="{{ STATIC_URL }}img/estimate-logo-schriftzug-grau.png"></img>
 		</a>
 		
-		<div class="login">
+		<div class="login-navi">
 
 			<a class="navi-link" href="{% url 'userauth_register' %}"><i class="fa fa-user"></i> Account erstellen</a>
 
@@ -22,26 +22,53 @@
 			    <i class="fa fa-sign-in"></i> Login
 			  </label>
 			  <input class="modal-state" id="modal-login" type="checkbox" checked/>
-			  <div class="modal-window">
-			    <div class="modal-inner">
+			  <div class="modal-window login">
+			    <div class="modal-inner login">
 			      <label class="modal-close" for="modal-login"></label>
 			      
 			      <h1>Login</h1>
 
 					<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
-					    <p>
-					    	<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername">
-					    </p>
-					    <p>
-					    	<input id="id_password" name="password" type="password" placeholder="Passwort">
-					    </p>
+
+						{% for field in form.hidden_fields %}
+					        {{ field }}
+					    {% endfor %}
+
+					    {{ form.non_field_errors }}
+
+					    {% for field in form.visible_fields %}
+					        <p>
+					        	{{ field.errors }}
+					        	{% if field.name == 'username' %}
+					        		{% if form.username.value %}
+					        			<input id="id_username" maxlength="254" name="username" type="text" value="{{ form.username.value }}" placeholder="Benutzername">
+					        		{% else %}
+					        			<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername">
+					        		{% endif %}
+					        	{% else %}
+					    			<input id="id_password" name="password" type="password" placeholder="Passwort">
+					        	{% endif %}
+					        </p>
+					    {% endfor %}
+
+
 					    <p id="login-submit">
 					    	<input type="hidden" name="next" value="{{ next }}" />
 					    	<input type="submit" value="Login"/>
 					    </p>
-					    <p>
-					    	Noch kein Account? Dann <a href="{% url 'userauth_register' %}">registriere</a> dich jetzt.
+					    <p class="centered-text">
+					    	Noch kein Account? <a href="{% url 'userauth_register' %}">Registrieren</a>
 					    </p>
+
+					    <strong class="line-thru">oder</strong>
+
+					    <a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Mit Google anmelden</span></a>
+					    {% csrf_token %}
+
+					    <div class="smaller">
+					    	Wenn du dich mit Google anmeldest und noch keinen Account besitzt, registrierst du dich und solltest dich auch in Zukunft mit Google anmelden.
+					    </div>
+
 					    {% csrf_token %}
 					</form>
 

@@ -27,7 +27,10 @@
 				{% csrf_token %}
 				
 				<input type="submit" value="Account erstellen"/>
-				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Google</span></a>
+
+				<strong class="line-thru">oder</strong>
+				
+				<a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Mit Google registrieren</span></a>
 			</form>
 
 		</div>

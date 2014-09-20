@@ -44,6 +44,8 @@
 		        {{ field }}
 		    {% endfor %}
 
+		    {{ form.non_field_errors }}
+
 		    {% for field in form.visible_fields %}
 		        <p>
 		        	{{ field.errors }}

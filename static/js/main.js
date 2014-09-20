@@ -243,6 +243,20 @@ $( document ).ready(function() {
     });
     
 
+    function closeModalOnClickOutside(modalWindow, modalInner, closeLabel) {
+        $(modalWindow).click(function() {
+            $(closeLabel).click();
+        });
+
+        $(modalInner).click(function(event){
+            event.stopPropagation();
+        });
+    }
+
+    closeModalOnClickOutside('.modal-window.login', '.modal-inner.login', 'label.login-btn');
+    closeModalOnClickOutside('.modal-window.feedback', '.modal-inner.feedback', 'label.modal-close.feedback');
+    closeModalOnClickOutside('.modal-window.friend-invite', '.modal-inner.friend-invite', 'label.modal-close.friend-invite');
+    closeModalOnClickOutside('.modal-window.question-feedback', '.modal-inner.question-feedback', 'label.modal-close.question-feedback');
     
 
     // Click Listener on question statistics checkboxes next to estimates

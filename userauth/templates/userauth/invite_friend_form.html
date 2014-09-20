@@ -5,6 +5,8 @@
         {{ field }}
     {% endfor %}
 
+    {{ invite_friend_form.non_field_errors }}
+
     {% for field in invite_friend_form.visible_fields %}
         <p>
         	{{ field.errors }}
