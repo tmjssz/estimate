@@ -57,9 +57,51 @@
 		</div>
 	{% endif %}
 
-	<div class="new-group">
-        <a href="{% url 'create_group' %}"><i class="fa fa-plus"></i> Neue Gruppe erstellen</a>
-    </div>
+
+    <div class="modal">
+	  <label for="modal-group" class="new-group">
+	    <i class="fa fa-plus"></i> Neue Gruppe
+	  </label>
+
+	  {% if group %}
+	  	<input class="modal-state" id="modal-group" type="checkbox" checked/>
+	  {% else %}
+	  	<input class="modal-state" id="modal-group" type="checkbox"/>
+	  {% endif %}
+
+	  <div class="modal-window group">
+	    <div class="modal-inner group">
+	      <label class="modal-close group" for="modal-group"></label>
+
+	      <div class="modal-answer" id="group-answer"></div>
+	      
+	      <div class="modal-content" id="group-content">
+
+		      <h1>Neue Gruppe</h1>
+		      	<p>
+					Eine neue Gruppe zu erstellen ist ganz einfach. Wähle den Namen deiner Gruppe und lade anschließend deine Freunde dazu ein.
+				</p>
+				<form enctype="multipart/form-data" action="{% url 'group_list' %}" method="post" accept-charset="utf-8">
+					<input type="hidden" name="action" value="create-group">
+					{% if group %}
+						<p>
+							<ul class="errorlist"><li>Dieser Gruppenname ist bereits vergeben (<a href="{% url 'group_show' group.id %}">{{ group }}</a>), bitte wähle einen anderen Namen.</li></ul>
+					    	<input id="id_name" maxlength="80" name="name" type="text" placeholder="Gruppenname" value="{{ group }}">
+					    </p>
+					{% else %}
+					    <p>
+					    	<input id="id_name" maxlength="80" name="name" type="text" placeholder="Gruppenname">
+					    </p>
+					{% endif %}
+				    {% csrf_token %}
+				    <input type="submit" value="Gruppe erstellen"/>
+				</form>
+
+			</div>
+
+	    </div>
+	  </div>
+	</div>
 
 
 		{% if user.groups.all %}
@@ -87,7 +129,7 @@
 		<table>
 
 			<tr>
-		    	<th class="left">Weitere Gruppen</th>
+		    	<th class="left">Gruppen</th>
 		    	<th>Mitglieder</th>
 		    </tr>
 

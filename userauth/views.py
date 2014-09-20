@@ -79,33 +79,6 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
     return render_to_response(template_name, {'register_form': form},
         context_instance=RequestContext(request))
 
-@login_required
-def create_group(request):
-    if request.method == 'POST':
-        name = request.POST[u'name']
-        if name:
-            #form.save()
-            name = request.POST[u'name']
-            groups = Group.objects.filter(name=name)
-            if groups:
-                # group does already exist
-                form = GroupForm()
-                group = groups[0]
-                return render_to_response('userauth/create_group.html', {'form': form, 'group': group}, context_instance=RequestContext(request))
-
-            group, created = Group.objects.get_or_create(name=name)
-            group.user_set.add(request.user)
-
-            template = get_template('userauth/mail-group-created.html')
-            context = Context({'user': request.user, 'group': group, 'host': settings.EMAIL_HTML_CONTENT_HOST})
-            content = template.render(context)
-            mail_admins('[Neue Gruppe] '+ group.name, 'Der User '+request.user.username+' hat eine neue Gruppe namens "'+group.name+'" erstellt.', html_message=content, fail_silently=True)
-            
-            return HttpResponseRedirect("/gruppe/"+str(group.id))
-    else:
-        form = GroupForm()
-        return render_to_response('userauth/create_group.html', {'form': form}, context_instance=RequestContext(request))
-
 
 @login_required
 def group_list(request):
@@ -118,6 +91,25 @@ def group_list(request):
             inviter = User.objects.get(pk=inviter_id)
             invite = GroupInvitation.objects.get(group=group, inviter=inviter, invitee=request.user)
             invite.delete()
+        if action == 'create-group':
+            name = request.POST[u'name']
+            if name:
+                groups = Group.objects.filter(name=name)
+                if groups:
+                    # group does already exist
+                    form = GroupForm()
+                    group = groups[0]
+                    return render_to_response('userauth/groups_list.html', {'form': form, 'group': group}, context_instance=RequestContext(request))
+
+                group, created = Group.objects.get_or_create(name=name)
+                group.user_set.add(request.user)
+
+                template = get_template('userauth/mail-group-created.html')
+                context = Context({'user': request.user, 'group': group, 'host': settings.EMAIL_HTML_CONTENT_HOST})
+                content = template.render(context)
+                mail_admins('[Neue Gruppe] '+ group.name, 'Der User '+request.user.username+' hat eine neue Gruppe namens "'+group.name+'" erstellt.', html_message=content, fail_silently=True)
+                
+                return HttpResponseRedirect("/gruppe/"+str(group.id))
 
 
     groups = Group.objects.all()

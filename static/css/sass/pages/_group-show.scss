@@ -7,6 +7,52 @@
 		}
 	}
 
+	.multi-title {
+		&.full {
+			@include span-columns(8 of 10);
+			@include media ($tablet) {
+				@include span-columns(7 of 10);
+				@include omega();
+			}
+			float: left;
+		}
+		&.center {
+			width:100%;
+		}
+	}
+
+	.new-group-invite, .center .join-group {
+		text-align: center;
+		font-weight: bold;
+		padding: 12px 0 15px 0;	
+		width: 200px;
+		@include btn(#68a24f);
+		margin: 20px auto;
+
+		@include media($mobile) {
+			width: 100%;
+		}
+
+		a {
+			color: white;
+		}
+	}
+
+	.center {
+		.leave-group {
+			color: $error-red !important;
+			width: 100%;
+			text-align: center;
+			//font-size: 14px;
+			//padding: 10px 0;
+			//display: inline-block;
+
+			a {
+				color: $error-red !important;
+			}
+		}
+	}
+
 	.top-right {
 		.join-group {
 			margin: 5px 0;

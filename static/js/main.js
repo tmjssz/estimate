@@ -257,7 +257,9 @@ $( document ).ready(function() {
     closeModalOnClickOutside('.modal-window.feedback', '.modal-inner.feedback', 'label.modal-close.feedback');
     closeModalOnClickOutside('.modal-window.friend-invite', '.modal-inner.friend-invite', 'label.modal-close.friend-invite');
     closeModalOnClickOutside('.modal-window.question-feedback', '.modal-inner.question-feedback', 'label.modal-close.question-feedback');
-    
+    closeModalOnClickOutside('.modal-window.group', '.modal-inner.group', 'label.modal-close.group');
+    closeModalOnClickOutside('.modal-window.group-invite', '.modal-inner.group-invite', 'label.modal-close.group-invite');
+
 
     // Click Listener on question statistics checkboxes next to estimates
     $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
