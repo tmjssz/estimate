@@ -591,7 +591,9 @@ body {
       font-weight: 400; }
       @media screen and (max-width: 480px) {
         body .black_area h1 {
-          text-align: center; } }
+          text-align: center;
+          margin-bottom: 10px;
+          font-size: 28px; } }
     body .black_area h2 {
       color: #f0e3cf;
       margin: 10px 0 15px 0;
@@ -612,7 +614,10 @@ body {
       line-height: 0.85em; }
       @media screen and (max-width: 480px) {
         body .black_area h3 {
-          text-align: center; } }
+          text-align: center;
+          font-size: 20px;
+          margin-bottom: 20px;
+          margin-top: 0; } }
     body .black_area p {
       color: white;
       line-height: 1.2em;
@@ -704,9 +709,12 @@ body {
       display: block;
       margin-right: 33.33333%;
       width: 100%;
-      margin-top: 35px; }
+      margin-top: 5px; }
       body .black_area .features-list:last-child {
         margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        body .black_area .features-list {
+          margin-bottom: 20px; } }
       body .black_area .features-list .feature {
         float: left;
         display: block;
@@ -719,24 +727,23 @@ body {
           body .black_area .features-list .feature {
             float: left;
             display: block;
-            margin-right: 14.28571%;
-            width: 42.85714%;
-            margin-bottom: 15px; }
+            margin-right: 6.66667%;
+            width: 20%; }
             body .black_area .features-list .feature:last-child {
-              margin-right: 0; }
-            body .black_area .features-list .feature:nth-child(2n) {
-              margin-right: 0; }
-            body .black_area .features-list .feature:nth-child(2n+1) {
-              clear: left; } }
+              margin-right: 0; } }
         body .black_area .features-list .feature .icon {
           color: #8c8c8c !important; }
         body .black_area .features-list .feature .name {
           color: #999999 !important;
-          font-size: 16px;
+          font-size: 15px;
           display: block;
           width: 100%;
           line-height: 1.5em;
           letter-spacing: -1px; }
+          @media screen and (max-width: 480px) {
+            body .black_area .features-list .feature .name {
+              font-size: 12px;
+              letter-spacing: 0px; } }
     body .black_area .shadow-font {
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
@@ -1610,10 +1617,10 @@ header.navi-header {
     box-shadow: none;
     text-shadow: none;
     padding: 10px 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 22px;
     display: block; }
     #landing-stage .start-demo-btn:last-child {
       margin-right: 0; }
@@ -1628,6 +1635,10 @@ header.navi-header {
           margin-right: 0; } }
     #landing-stage .start-demo-btn:hover {
       background: #83b86c; }
+    @media screen and (max-width: 480px) {
+      #landing-stage .start-demo-btn {
+        font-size: 20px;
+        margin-bottom: 25px; } }
   #landing-stage p {
     float: left;
     display: block;
@@ -1636,9 +1647,35 @@ header.navi-header {
     #landing-stage p:last-child {
       margin-right: 0; }
   #landing-stage .features-list {
-    margin-top: 10px !important; }
-    #landing-stage .features-list .name {
-      font-size: 15px; }
+    margin-top: 0px !important;
+    margin-bottom: 10px; }
+    #landing-stage .features-list .feature-small {
+      float: left;
+      display: block;
+      margin-right: 4.34783%;
+      width: 21.73913%; }
+      #landing-stage .features-list .feature-small:last-child {
+        margin-right: 0; }
+      @media screen and (max-width: 480px) {
+        #landing-stage .features-list .feature-small {
+          float: left;
+          display: block;
+          margin-right: 6.66667%;
+          width: 20%;
+          margin-bottom: 15px; }
+          #landing-stage .features-list .feature-small:last-child {
+            margin-right: 0; } }
+      #landing-stage .features-list .feature-small .icon {
+        color: #8c8c8c !important; }
+      #landing-stage .features-list .feature-small .name {
+        color: #999999 !important;
+        font-size: 16px;
+        display: block;
+        width: 100%;
+        line-height: 1.5em;
+        letter-spacing: -1px; }
+      #landing-stage .features-list .feature-small .name {
+        font-size: 15px; }
 
 section.menu {
   padding: 20px 0; }

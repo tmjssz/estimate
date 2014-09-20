@@ -31,11 +31,16 @@
 		box-shadow: none;
 		text-shadow: none;
 		padding: 10px 0;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		text-align: center;
 		font-weight: 600;
-		font-size: 20px;
+		font-size: 22px;
 		display:block;
+
+		@include media($mobile) {
+			font-size: 20px;
+			margin-bottom: 25px;
+		}
 	}
 
 	p {
@@ -43,10 +48,35 @@
 	}
 
 	.features-list {
-		margin-top: 10px !important;
+		margin-top: 0px !important;
+		margin-bottom: 10px;
 
-		.name {
-			font-size: 15px;
+		.feature-small {
+			@include span-columns(1.5 of 6);
+
+			@include media($mobile) {
+				@include span-columns(1 of 4);
+				margin-bottom: 15px;
+			}
+
+			.icon {
+				color: lighten($dark-gray, 35) !important;
+			}
+
+			.name {
+				color: lighten($dark-gray, 40) !important;
+				font-size: 16px;
+				display: block;
+				width: 100%;
+				line-height: 1.5em;
+				letter-spacing: -1px;
+			}
+
+			.name {
+				font-size: 15px;
+			}
 		}
+
+		
 	}
 }
