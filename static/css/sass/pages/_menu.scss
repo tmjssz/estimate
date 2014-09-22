@@ -1,107 +1,129 @@
 // MAIN MENU 
 // - - - - - - - - - - - - - - - - - - - - - - - - 
-section.menu {
-	padding: 20px 0;
+.menu {
 
-	@include media($mobile) {
-		padding: 0px 10px;
-		text-align:center;
-	}
+	.menu-stage {
+		padding: 20px 0 0 0;
+		@include span-columns(10 of 10);
 
-	.row {
+		@include media($mobile) {
+			@include span-columns(4 of 4);
+			@include shift(0);
+			padding: 30px 10px 0 10px;
+			text-align:center;
+		}
+
 
 		.menu-btn {
-			@include span-columns(3 of 6);
-			@include media($mobile) {
-				@include span-columns(2 of 4);
-			}
-		}
-		
-		.challenge_btn {
-			//@include menu-btn($base-accent-color, 100px);
-			@include menu-btn(#988c7d, #b6ceef, 100px);
-		}
-		.random_btn {
-			//@include menu-btn(#dd480d, 100px);
-			@include menu-btn(#988c7d, #f5b9a1, 100px);
-		}
-		.choose_btn {
-			//@include menu-btn(#aabb2f, 100px);
-			@include menu-btn(#988c7d, #e4ebab, 100px);
-		}
-		.create_btn {
-			//@include menu-btn(#efb600, 100px);
-			@include menu-btn(#988c7d, #fae49f, 100px);
-		}
-	}
-
-	p.invites {
-		text-align: center;
-	}
-
-}
-
-aside.menu {
-	padding: 20px 0 0 20px;
-
-	@include media($tablet) {
-		padding-left: 0;
-	}
-
-	@include media($mobile) {
-		padding: 0;
-	}
-
-	.short-stats {
-		@include span-columns(1 of 1);
-		margin-bottom: 20px;
-
-
-		@include media($mobile) {
-			@include span-columns(3 of 4);
-			@include shift(0.5 of 4);
+			width: 300px;
+			border: 0;
+			box-shadow: none;
+			text-shadow: none;
+			margin: 0 auto 30px auto;
 			text-align: center;
-			border-top: 1px solid #E0E0E0;
-			border-bottom: 1px solid #E0E0E0;
-			padding-top: 20px;
-			padding-bottom: 20px;
-		}
+			font-weight: 500;
+			font-size: 20px;
+			letter-spacing: -1px;
+			padding: 0px !important;
+			display: table;
 
-		.score, .number {
-			@include span-columns(3 of 6);
-			@include number($dark-gray);
+			i {
+				border-right: 2px solid transparentize(white, 0.7);
+				font-size: 22px;
+				padding: 12px 14px 10px 15px !important;
+				display: table-cell;
+				width: 25px;
+			}
 
 			@include media($mobile) {
+				@include span-columns(4 of 4);
+				@include shift(0);
+				font-size: 18px;
+				margin-bottom: 20px;
+			}
+
+			span {
+				vertical-align: middle;
+				display: table-cell;
+				text-align: center;
+				padding: 10px 30px 10px 10px;
+				width: 100%;
+			}
+			
+			&.play-btn {
+				@include btn(#68a24f);
+			}
+			&.highscore-btn {
+				@include btn($base-accent-color);
+			}
+			&.statistics-btn {
+				@include btn(#7D4792);
+			}
+			&.send-question-btn {
+				@include btn(#de5c00);
+			}
+		}
+
+
+		.short-stats {
+			width: 300px;
+			margin: auto;
+
+			@include media($tablet) {
+				padding-left: 0;
+			}
+
+			@include media($mobile) {
+				@include span-columns(4 of 4);
+				padding: 10px 0 0 0;
+			}
+
+			.stat-elem {
 				@include span-columns(1 of 2);
-				margin-bottom: 15px;
+				@include number($dark-gray);
+				margin-bottom: 30px;
 			}
 		}
-	}
 
-	h4 {
-		text-align: center;
-	}
 
-	#statistics-menu, #highscores-menu {
-		text-align: center;
-		padding: 0 0 15px 0;
-		@include span-columns(1 of 1);
-		@include omega;
-
-		@include media($mobile) {
-			@include span-columns(2 of 4);
-			//text-align: left;
+		p.invites {
+			text-align: center;
+			margin: 0 0 25px 0;
+			line-height: 1em;
 		}
 
-		ul {
-			display: inline-block;
-			//text-align: left;
-			font-size: 16px;
-			@include media($mobile) {
-				font-size: 16px;
-				//text-align: center;
+
+		.game-mode {
+			font-size: 20px;
+			padding: 0 0 0 10px !important;
+			display: table;
+			width: 250px;
+			margin: 0 auto 10px auto;
+			color: $dark-gray;
+			border: 0;
+			@include transition (all 0.2s ease-in-out);
+
+			&:hover {
+				color: black;
+			}
+
+			i {
+				border-right: 2px solid transparentize(white, 0.7);
+				font-size: 28px;
+				padding: 12px 14px 10px 15px !important;
+				display: table-cell;
+				width: 25px;
+			}
+
+			span {
+				vertical-align: middle;
+				display: table-cell;
+				text-align: left;
+				width: 100%;
+				font-weight: 300;
 			}
 		}
+
 	}
 
 }

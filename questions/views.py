@@ -93,6 +93,74 @@ def menu_view(request):
             register_form = UserCreationFormCustom()
         return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
             context_instance=RequestContext(request))
+
+
+def menu_view_old(request):
+    """
+    Shows a menu
+    """
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+    logger.debug(guest_id)
+
+    if request.user.is_authenticated():
+        if request.user.is_active and request.user.is_superuser:
+            is_admin = True
+        else:
+            is_admin = False
+
+        challenges = Challenge.objects.filter(published=True)
+        if len(challenges) == 0:
+            challenges = None
+
+        estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
+        
+        score = 0
+        for e in estimates:
+            score += e.score
+
+        number_estimates = len(estimates)
+        
+        return render_to_response('questions/menu_old.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
+    else:
+        login_form = AuthenticationForm()
+        questions = Question.objects.filter(published=True)
+        question = random.choice(questions)
+
+        if request.method == 'POST':
+            register_form = UserCreationFormCustom(request.POST)
+            if register_form.is_valid():
+                username = request.POST[u'username']
+                pwd = request.POST[u'password1']
+
+                # check if user already answered questions as guest
+                user = None
+                if guest_id:
+                    users = User.objects.filter(id=guest_id)
+                    if users:
+                        user = users[0]
+
+                if user:
+                    user.username = username
+                    user.set_password(pwd)
+                    user.save()
+                    logger.debug(user)
+                    new_user = authenticate(username=username, password=pwd)
+                    login(request, new_user)
+                else:
+                    register_form.save()
+                    new_user = authenticate(username=username, password=pwd)
+                    login(request, new_user)
+
+                response = HttpResponseRedirect('willkommen/')
+                response.delete_cookie('estimate_guest_id')
+                return response
+        else:
+            register_form = UserCreationFormCustom()
+        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
+            context_instance=RequestContext(request))
+
+
         
 @login_required
 def questions_list_all(request):

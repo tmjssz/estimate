@@ -260,6 +260,7 @@ $( document ).ready(function() {
     closeModalOnClickOutside('.modal-window.group', '.modal-inner.group', 'label.modal-close.group');
     closeModalOnClickOutside('.modal-window.group-invite', '.modal-inner.group-invite', 'label.modal-close.group-invite');
     closeModalOnClickOutside('.modal-window.welcome', '.modal-inner.welcome', 'label.modal-close.welcome');
+    closeModalOnClickOutside('.modal-window.play', '.modal-inner.play', 'label.modal-close.play');
 
 
     // Click Listener on question statistics checkboxes next to estimates
