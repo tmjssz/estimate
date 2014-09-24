@@ -482,10 +482,16 @@ def question_view_start(request, slug):
                 username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
                 username = '_GAST[' + username + ']'
                 user_in_db = User.objects.filter(username=username)
-
             user = User(username=username)
             user.save()
-            user.username = 'Gast' + str(user.id)
+
+            username = 'Gast' + str(user.id)
+            user_in_db = User.objects.filter(username=username)
+            while user_in_db:
+                username = ''.join(random.choice(string.digits) for i in range(4))
+                username = 'Gast' + username
+                user_in_db = User.objects.filter(username=username)
+            user.username = username
             user.save()
 
         form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
