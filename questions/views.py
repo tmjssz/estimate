@@ -15,7 +15,6 @@ from django.conf import settings
 from django.core.mail import mail_admins
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-import datetime
 
 from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm, FeedbackQuestionForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
@@ -23,8 +22,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login
 from userauth.forms import UserCreationFormCustom
-import logging
-import random
+import logging, datetime, random, string
+
 
 logger = logging.getLogger('estimate.questions.views')
 
@@ -476,10 +475,18 @@ def question_view_start(request, slug):
 
         if not user:
             # new User has to be created
-            username = 'gast'
+            username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
+            username = 'GAST[' + username + ']'
+            user_in_db = User.objects.filter(username=username)
+            while user_in_db:
+                logger.debug('schleifendurchlauf')
+                username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
+                username = '_GAST[' + username + ']'
+                user_in_db = User.objects.filter(username=username)
+
             user = User(username=username)
             user.save()
-            user.username = username + '-' + str(user.id)
+            user.username = 'Gast ' + str(user.id)
             user.save()
 
         form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
