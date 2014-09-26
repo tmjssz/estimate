@@ -1,7 +1,13 @@
 from django.conf.urls import patterns, include, url
+from social.apps.django_app.default.models import Association, Nonce
 
 from django.contrib import admin
 admin.autodiscover()
+
+# Unregister unsued Models
+admin.site.unregister(Association)
+admin.site.unregister(Nonce)
+
 
 urlpatterns = patterns('',
     # Examples:
