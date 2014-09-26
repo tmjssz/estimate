@@ -51,15 +51,15 @@ class Question(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('questions_question_show', (), {'slug': self.slug})
+        return ('questions_question_show', (), {'question_slug': self.slug})
 
     @models.permalink
     def get_absolute_url_random(self):
-        return ('questions_question_random', (), {'slug': self.slug})
+        return ('questions_mode_question_show', (), {'question_slug': self.slug, 'mode': 'random'})
 
     @models.permalink
     def get_absolute_url_challenge(self, challenge):
-        return ('questions_challenge_question_show', (), {'question': self.slug, 'challenge': challenge})
+        return ('questions_mode_question_show', (), {'question_slug': self.slug, 'mode': challenge})
 
 
 

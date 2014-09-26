@@ -5,8 +5,8 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.http import HttpResponseForbidden, Http404, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.db.models import Min
 from django.utils.timezone import now
 from django.template.loader import get_template
@@ -30,11 +30,10 @@ logger = logging.getLogger('estimate.questions.views')
 
 def menu_view(request):
     """
-    Shows a menu
+    Shows the main menu if user is authenticated or the landing page if not.
     """
     # read cookie
     guest_id = request.COOKIES.get('estimate_guest_id')
-    logger.debug(guest_id)
 
     if request.user.is_authenticated():
         if request.user.is_active and request.user.is_superuser:
@@ -93,78 +92,11 @@ def menu_view(request):
         return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
             context_instance=RequestContext(request))
 
-
-def menu_view_old(request):
-    """
-    Shows a menu
-    """
-    # read cookie
-    guest_id = request.COOKIES.get('estimate_guest_id')
-    logger.debug(guest_id)
-
-    if request.user.is_authenticated():
-        if request.user.is_active and request.user.is_superuser:
-            is_admin = True
-        else:
-            is_admin = False
-
-        challenges = Challenge.objects.filter(published=True)
-        if len(challenges) == 0:
-            challenges = None
-
-        estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
-        
-        score = 0
-        for e in estimates:
-            score += e.score
-
-        number_estimates = len(estimates)
-        
-        return render_to_response('questions/menu_old.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
-    else:
-        login_form = AuthenticationForm()
-        questions = Question.objects.filter(published=True)
-        question = random.choice(questions)
-
-        if request.method == 'POST':
-            register_form = UserCreationFormCustom(request.POST)
-            if register_form.is_valid():
-                username = request.POST[u'username']
-                pwd = request.POST[u'password1']
-
-                # check if user already answered questions as guest
-                user = None
-                if guest_id:
-                    users = User.objects.filter(id=guest_id)
-                    if users:
-                        user = users[0]
-
-                if user:
-                    user.username = username
-                    user.set_password(pwd)
-                    user.save()
-                    logger.debug(user)
-                    new_user = authenticate(username=username, password=pwd)
-                    login(request, new_user)
-                else:
-                    register_form.save()
-                    new_user = authenticate(username=username, password=pwd)
-                    login(request, new_user)
-
-                response = HttpResponseRedirect('willkommen/')
-                response.delete_cookie('estimate_guest_id')
-                return response
-        else:
-            register_form = UserCreationFormCustom()
-        return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
-            context_instance=RequestContext(request))
-
-
         
 @login_required
 def questions_list_all(request):
     """
-    List all Questions
+    List all published Questions.
     """
     questions = Question.objects.filter(published=True)
     if not questions:
@@ -191,136 +123,295 @@ def questions_list_all(request):
     return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'time_out': time_out, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
 
-@login_required
-def question_view(request, slug):
+def question_view(request, question_slug, mode=None, challenge_slug=None):
     """
-    Show a question with estimate form or reached score
+    Show by slug specified question with estimate form if user has not made an estimate for it before.
+    Otherwise the estimate score page is shown.
+    Parameter 'mode' defines the game mode, in which the question is opened. 
+        None            = Choose Question
+        'random'        = Random Question
+        'start'         = Demo Mode for guests
+        'challenge'     = Challenge with second parameter challenge_slug as slug
     """
+    # check if current user is admin
+    is_admin = False
     if request.user.is_authenticated():
         if request.user.is_active and request.user.is_superuser:
             is_admin = True
-        else:
-            is_admin = False
 
-    question = get_object_or_404(Question, slug=slug, published=True)
-    estimates = Estimate.objects.filter(question=question, user=request.user)
+
+    # get question object
+    question = get_object_or_404(Question, slug=question_slug, published=True)
+
+    # requesting user
+    user = None
+
+    # requesting user's last estimate
+    estimate = None
+
+    # challenge, in which question was opened
+    challenge = None
+
+    # if true, next question for demo mode is shown on score page
+    next_start = False
+
+    # if true, next question for random mode is shown on score page
+    next_random = False
+
+    if mode == 'start':
+    # ---------------------------------------------------------------------------------------
+    # show question in demo game mode
     
-    # for this questions does already exist an estimate from the current user
-    if estimates and not is_admin:
-        estimate = estimates[0]
-        next_random = False
-        return render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'next_random': next_random})
-    
-    # current user hasn't already made an estimate for this question
-    if request.method == 'POST':
-        time_out = False
+        # read cookie
+        guest_id = request.COOKIES.get('estimate_guest_id')
+        if guest_id != 'None':
+            # get guest user
+            users = User.objects.filter(id=guest_id)
+            if users:
+                user = users[0]
+            # already made estimate? 
+            estimates = Estimate.objects.filter(question=question, user=user)
+            if estimates:
+                # for this questions does already exist an estimate from the current user
+                # show score for this question
+                estimate = estimates[0]
+                next_start = True
+                
+                # show score page
+                response = render(request, 'questions/question-score.html',
+                    {'question': question, 'estimate': estimate, 'next_start': next_start})
 
-        # get hidden post field
-        if request.POST.get("time_out", "") == "true":
-            time_out = True
+                # set cookie with guest id
+                set_cookie(response, 'estimate_guest_id', user.id, 1) 
+                return response
 
-        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
-        if form.is_valid():
-            if not is_admin:
+        # no estimate from this user for this question
+        if request.method == 'POST':
+            time_out = False
+
+            # get hidden post field
+            if request.POST.get("time_out", "") == "true":
+                time_out = True
+
+            if not user:
+                # new User has to be created
+                username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
+                username = 'GAST[' + username + ']'
+                user_in_db = User.objects.filter(username=username)
+                while user_in_db:
+                    username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
+                    username = '_GAST[' + username + ']'
+                    user_in_db = User.objects.filter(username=username)
+                user = User(username=username)
+                user.save()
+
+                username = 'Gast' + str(user.id)
+                user_in_db = User.objects.filter(username=username)
+                while user_in_db:
+                    username = ''.join(random.choice(string.digits) for i in range(4))
+                    username = 'Gast' + username
+                    user_in_db = User.objects.filter(username=username)
+                user.username = username
+                user.save()
+
+            form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
+            if form.is_valid():
                 form.save()
-                views = QuestionView.objects.filter(user=request.user, question=question)
+
+                views = QuestionView.objects.filter(user=user, question=question)
                 if views:
                     # delete saved view timestamps
                     views.delete()
 
-            return HttpResponseRedirect(question.get_absolute_url())
-    else:
-        time_max = 40
-        form = EstimateForm()
-        views = QuestionView.objects.filter(user=request.user, question=question)
-        if views:
-            # question was already viewed before
-            time = views[0].time
-            current_time = now()
-            timediff = current_time - time
-            seconds = int(timediff.total_seconds())
-            time_left = max(0, time_max - seconds)
+                response = HttpResponseRedirect("/start/"+question.slug)
 
-            if time_left == 0:
-                # no time left
-                too_late = Estimate(user=request.user, question=question, time_out=True)
-                too_late.save()
-                views.delete()
-                return HttpResponseRedirect(question.get_absolute_url())
+                # set cookie with guest id
+                set_cookie(response, 'estimate_guest_id', user.id, 1)
         else:
-            # question view for first time
-            view = QuestionView(user=request.user, question=question)
-            view.save()
-            time_left = time_max
-    return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
+            form = EstimateForm()
+            time_max = 40
+
+            views = None
+            if user:
+                views = QuestionView.objects.filter(user=user, question=question)
+
+            if views:
+                # question was already viewed before
+                time = views[0].time
+                current_time = now()
+                timediff = current_time - time
+                seconds = int(timediff.total_seconds())
+                time_left = max(0, time_max - seconds)
+
+                if time_left == 0:
+                    # no time left
+                    too_late = Estimate(user=user, question=question, time_out=True)
+                    too_late.save()
+                    views.delete()
+                    return HttpResponseRedirect("/start")
+            else:
+                # question view for first time
+                if user:
+                    view = QuestionView(user=user, question=question)
+                    view.save()
+                time_left = time_max
+
+            response = render(request, 'questions/question-show.html',
+                {'form': form, 'question': question, 'user': None, 'time_left': time_left})
+
+        if user:
+            # set cookie with guest id
+            set_cookie(response, 'estimate_guest_id', user.id, 1)
+
+        return response
+
+
+    else: 
+    # user is logged in
+        estimates = Estimate.objects.filter(question=question, user=request.user)
+        # for this questions does already exist an estimate from the current user
+        if estimates and not is_admin:
+            estimate = estimates[0]
+
+        if mode == None:
+        # ---------------------------------------------------------------------------------------
+        # show question without game mode
+            next_random = False
+            if estimate:
+                return question_score(request, question, estimate, next_random)
+            
+        elif mode == 'random':
+        # ---------------------------------------------------------------------------------------
+        # show question in random game mode
+            next_random = True
+            if estimate:
+                return question_score(request, question, estimate, next_random)
+
+        elif mode == 'challenge':
+        # ---------------------------------------------------------------------------------------
+        # show question in challenge mode with given string as challenge slug
+            challenge = get_object_or_404(Challenge, slug=challenge_slug, published=True)
+            questions = challenge.questions.filter(published=True)
+            if len(questions) == 0:
+                # give 404, if challenge has no published questions
+                raise Http404
+            if not question in questions:
+                # give 404, if question is not in challenge
+                raise Http404
+
+            next_random = False
+            if estimate:
+                return question_score(request, question, estimate, next_random, challenge)
+
+        
+        # current user hasn't already made an estimate for this question
+        if request.method == 'POST':
+            return post_estimate_data(request, question, next_random, challenge)
+
+        else:
+            time_max = 40
+            form = EstimateForm()
+            views = QuestionView.objects.filter(user=request.user, question=question)
+            if views:
+                # question was already viewed before
+                time = views[0].time
+                current_time = now()
+                timediff = current_time - time
+                seconds = int(timediff.total_seconds())
+                time_left = max(0, time_max - seconds)
+
+                if time_left == 0:
+                    # no time left
+                    too_late = Estimate(user=request.user, question=question, time_out=True)
+                    too_late.save()
+                    views.delete()
+
+                    if mode == 'challenge':
+                        return redirect('questions_question_show', question_slug=question.slug, mode=mode, challenge_slug=challenge)
+                    else:
+                        return redirect('questions_question_show', question_slug=question.slug, mode=mode)
+            else:
+                # question view for first time
+                view = QuestionView(user=request.user, question=question)
+                view.save()
+                time_left = time_max
+                return question_show(request, form, question, time_left, challenge)
+
 
 
 @login_required
-def question_view_random(request, slug):
+def question_score(request, question, estimate, next_random=False, challenge=None):
     """
-    Show a randomly chosen question with estimate form or reached score
+    Show the question score page for given question and estimate.
+    next_random : if true, a button for next random question is shown
+    challenge   : if given, a button for the next challenge question is shown      
     """
+    if challenge:
+        all_questions = challenge.questions.exclude(author=request.user).count()
+        answered_questions = Estimate.objects.number_answered_questions(request.user, challenge)
+        return render(request, 'questions/question-score-challenge.html',
+                {'question': question, 'estimate': estimate, 'challenge': challenge, 'all_questions': all_questions, 'answered_questions': answered_questions})
+    else:
+        return render(request, 'questions/question-score.html',
+                {'question': question, 'estimate': estimate, 'next_random': next_random})
+
+
+@login_required
+def question_show(request, form, question, time_left, challenge=None):
+    """
+    Show the given question with estimate form.
+    time_left : seconds for the left countdown time
+    challenge : if given, number of remaining challenge question is shown
+    """
+    if challenge:
+        all_questions = challenge.questions.exclude(author=request.user).count()
+        answered_questions = Estimate.objects.number_answered_questions(request.user, challenge)
+        current_question = answered_questions + 1
+        return render(request, 'questions/question-show.html',
+            {'form': form, 'question': question, 'user': request.user, 'challenge': challenge, 'all_questions': all_questions, 'current_question': current_question, 'time_left': time_left})
+    else:
+        return render(request, 'questions/question-show.html',
+            {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
+
+@login_required
+def post_estimate_data(request, question, next_random=False, challenge=None):
+    """
+    Post the request data of an estimate for a given question.
+    next_random : if true, redirect to question score page in random mode
+    challenge   : if given, redirect to question score page in challenge mode
+    """
+    # get hidden post field
+    time_out = False
+    if request.POST.get("time_out", "") == "true":
+        time_out = True
+
+    # check if current user is admin
+    is_admin = False
     if request.user.is_authenticated():
         if request.user.is_active and request.user.is_superuser:
             is_admin = True
-        else:
-            is_admin = False
 
-    question = get_object_or_404(Question, slug=slug, published=True)
-    estimates = Estimate.objects.filter(question=question, user=request.user)
-    
-    # for this questions does already exist an estimate from the current user
-    if estimates and not is_admin:
-        estimate = estimates[0]
-        next_random = True
-        return render(request, 'questions/question-score.html',
-            {'question': question, 'estimate': estimate, 'next_random': next_random})
-    
-    # current user hasn't already made an estimate for this question
-    if request.method == 'POST':
-        time_out = False
-
-        # get hidden post field
-        if request.POST.get("time_out", "") == "true":
-            time_out = True
-
-        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
-        if form.is_valid():
-            if not is_admin:
-                form.save()
-                views = QuestionView.objects.filter(user=request.user, question=question)
-                if views:
-                    # delete saved view timestamps
-                    views.delete()
-
-            return HttpResponseRedirect("/zufall/"+question.slug)
+    if challenge:
+        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST, challenge=challenge)
     else:
-        time_max = 40
-        form = EstimateForm()
-        views = QuestionView.objects.filter(user=request.user, question=question)
-        if views:
-            # question was already viewed before
-            time = views[0].time
-            current_time = now()
-            timediff = current_time - time
-            seconds = int(timediff.total_seconds())
-            time_left = max(0, time_max - seconds)
+        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST)
 
-            if time_left == 0:
-                # no time left
-                too_late = Estimate(user=request.user, question=question, time_out=True)
-                too_late.save()
+    if form.is_valid():
+        if not is_admin:
+            form.save()
+            views = QuestionView.objects.filter(user=request.user, question=question)
+            if views:
+                # delete saved view timestamps
                 views.delete()
-                return HttpResponseRedirect("/zufall")
-        else:
-            # question view for first time
-            view = QuestionView(user=request.user, question=question)
-            view.save()
-            time_left = time_max
-    return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
+
+        if challenge:
+            return redirect('questions_mode_question_show', question_slug=question.slug, mode='challenge', challenge_slug=challenge.slug)
+
+        if next_random:
+            return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
+
+        return HttpResponseRedirect(question.get_absolute_url())
+
 
 @login_required
 def question_random(request):
@@ -354,7 +445,7 @@ def question_random(request):
         both_questions = [question_stats, question]
         question = random.choice(both_questions)
 
-    return HttpResponseRedirect("/zufall/"+question.slug)
+    return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
 
 
 def question_start(request):
@@ -424,7 +515,8 @@ def question_start(request):
     else:
         # choose a random question
         question = random.choice(questions)
-        response = HttpResponseRedirect("/start/"+question.slug)
+        #response = HttpResponseRedirect("/start/"+question.slug)
+        response = redirect('questions_mode_question_show', question_slug=question.slug, mode='start')
 
     if not guest_id:
         # set cookie with guest id
@@ -432,118 +524,6 @@ def question_start(request):
 
     return response
 
-
-def question_view_start(request, slug):
-    """
-    Show a randomly chosen question with estimate form or reached score
-    """
-    question = get_object_or_404(Question, slug=slug, published=True)
-
-    user = None
-
-    # read cookie
-    guest_id = request.COOKIES.get('estimate_guest_id')
-
-    if guest_id != 'None':
-        # get guest user
-        users = User.objects.filter(id=guest_id)
-        if users:
-            user = users[0]
-
-        # already made estimate? 
-        estimates = Estimate.objects.filter(question=question, user=user)
-        if estimates:
-            # for this questions does already exist an estimate from the current user
-            # show score for this question
-            estimate = estimates[0]
-            next_start = True
-            response = render(request, 'questions/question-score.html',
-                {'question': question, 'estimate': estimate, 'next_start': next_start})
-
-            # set cookie with guest id
-            set_cookie(response, 'estimate_guest_id', user.id, 1) 
-            return response
-    
-
-    # no estimate from this user for this question
-    if request.method == 'POST':
-        time_out = False
-
-        # get hidden post field
-        if request.POST.get("time_out", "") == "true":
-            time_out = True
-
-        if not user:
-            # new User has to be created
-            username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
-            username = 'GAST[' + username + ']'
-            user_in_db = User.objects.filter(username=username)
-            while user_in_db:
-                username = ''.join(random.choice(string.lowercase + string.digits) for i in range(8))
-                username = '_GAST[' + username + ']'
-                user_in_db = User.objects.filter(username=username)
-            user = User(username=username)
-            user.save()
-
-            username = 'Gast' + str(user.id)
-            user_in_db = User.objects.filter(username=username)
-            while user_in_db:
-                username = ''.join(random.choice(string.digits) for i in range(4))
-                username = 'Gast' + username
-                user_in_db = User.objects.filter(username=username)
-            user.username = username
-            user.save()
-
-        form = EstimateForm(user=user, question=question, time_out=time_out, data=request.POST)
-        if form.is_valid():
-            form.save()
-
-            views = QuestionView.objects.filter(user=user, question=question)
-            if views:
-                # delete saved view timestamps
-                views.delete()
-
-            response = HttpResponseRedirect("/start/"+question.slug)
-
-            # set cookie with guest id
-            set_cookie(response, 'estimate_guest_id', user.id, 1)
-    else:
-        form = EstimateForm()
-        time_max = 40
-
-        views = None
-        if user:
-            views = QuestionView.objects.filter(user=user, question=question)
-
-        if views:
-            # question was already viewed before
-            time = views[0].time
-            current_time = now()
-            timediff = current_time - time
-            seconds = int(timediff.total_seconds())
-            time_left = max(0, time_max - seconds)
-
-            if time_left == 0:
-                # no time left
-                too_late = Estimate(user=user, question=question, time_out=True)
-                too_late.save()
-                views.delete()
-                return HttpResponseRedirect("/start")
-        else:
-            # question view for first time
-            if user:
-                view = QuestionView(user=user, question=question)
-                view.save()
-            time_left = time_max
-
-        response = render(request, 'questions/question-show.html',
-            {'form': form, 'question': question, 'user': None, 'time_left': time_left})
-
-    if user:
-        # set cookie with guest id
-        set_cookie(response, 'estimate_guest_id', user.id, 1)
-
-    return response
 
 
 
@@ -620,7 +600,8 @@ def challenge_view(request, slug):
         estimate = Estimate.objects.filter(question=q, user=request.user)
         if not estimate:
             # unanswered question found
-            return HttpResponseRedirect("/challenge/"+slug+"/"+q.slug)
+            return redirect('questions_mode_question_show', question_slug=q.slug, mode='challenge', challenge_slug=slug)
+            #return HttpResponseRedirect("/challenge/"+slug+"/"+q.slug)
 
         challenge_estimate = estimate.filter(challenge=challenge)
         if challenge_estimate:
@@ -638,93 +619,6 @@ def challenge_view(request, slug):
     # all questions already answered -> show result
     return render(request, 'questions/challenge-score.html',
         {'challenge': challenge, 'estimate_list': estimates, 'score': score, 'score_per_question': score_per_question, 'own_questions': own_questions})
-
-
-@login_required
-def challenge_question_view(request, challenge, question):
-    challenge = get_object_or_404(Challenge, slug=challenge, published=True)
-    question = get_object_or_404(Question, slug=question, published=True)
-
-    questions = challenge.questions.filter(published=True)
-
-    if len(questions) == 0:
-        # give 404, if challenge has no published questions
-        raise Http404
-
-    if not question in questions:
-        # give 404, if question is not in challenge
-        raise Http404
-
-    if request.user.is_authenticated():
-        if request.user.is_active and request.user.is_superuser:
-            is_admin = True
-        else:
-            is_admin = False
-
-    all_questions = challenge.questions.exclude(author=request.user).count()
-    answered_questions = Estimate.objects.number_answered_questions(request.user, challenge)
-    current_question = answered_questions + 1
-
-    estimates = Estimate.objects.filter(question=question, user=request.user)
-
-    # for this questions does already exist an estimate from the current user
-    if estimates and not is_admin:
-        # redirect to result page
-        estimate = estimates[0]
-        return render(request, 'questions/question-score-challenge.html',
-            {'question': question, 'estimate': estimate, 'challenge': challenge, 'all_questions': all_questions, 'answered_questions': answered_questions})
-
-    if request.method == 'POST':
-        time_out = False
-
-        # get hidden post field
-        if request.POST.get("time_out", "") == "true":
-            time_out = True
-
-        form = EstimateForm(user=request.user, question=question, time_out=time_out, data=request.POST, challenge=challenge)
-        if form.is_valid():
-            if not is_admin:
-                form.save()
-                views = QuestionView.objects.filter(user=request.user, question=question)
-                if views:
-                    # delete saved view timestamps
-                    views.delete()
-
-                for q in questions:
-                    estimates = Estimate.objects.filter(question=q, user=request.user)
-                    return HttpResponseRedirect(question.get_absolute_url_challenge(challenge.slug))
-
-                    if len(estimates) == 0 and q != question and q.author != request.user:
-                        # redirect to next unsanswered question
-                        return HttpResponseRedirect("/challenge/"+challenge.slug+"/"+q.slug)
-                # all questions answered -> redirect to result page
-                return HttpResponseRedirect("/challenge/"+challenge.slug)
-    else:
-        time_max = 40
-        form = EstimateForm()
-        views = QuestionView.objects.filter(user=request.user, question=question)
-        if views:
-            # question was already viewed before
-            time = views[0].time
-            current_time = now()
-            timediff = current_time - time
-            seconds = int(timediff.total_seconds())
-            time_left = max(0, time_max - seconds)
-
-            if time_left == 0:
-                # no time left
-                too_late = Estimate(user=request.user, question=question, time_out=True, challenge=challenge)
-                too_late.save()
-                views.delete()
-                # all questions answered -> redirect to result page
-                return HttpResponseRedirect("/challenge/"+challenge.slug)
-        else:
-            # question view for first time
-            view = QuestionView(user=request.user, question=question)
-            view.save()
-            time_left = time_max
-    return render(request, 'questions/question-show.html',
-        {'form': form, 'question': question, 'user': request.user, 'challenge': challenge, 'all_questions': all_questions, 'current_question': current_question, 'time_left': time_left})
 
 
 @login_required
