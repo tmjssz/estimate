@@ -37,7 +37,7 @@
 
 		<h1>Feedback</h1>
 
-		<form enctype="multipart/form-data" action="{% url 'feedback' %}" method="POST" accept-charset="utf-8">
+		<form enctype="multipart/form-data" action="{% url 'questions_feedback' %}" method="POST" accept-charset="utf-8">
 			{% csrf_token %}
 		    
 		    {% for field in form.hidden_fields %}

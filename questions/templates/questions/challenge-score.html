@@ -8,7 +8,7 @@
     <h2>{{ challenge.title }}</h2>
 
     <div class="challenge-highscore">
-        <a href="{% url 'questions_challenge_highscore' challenge.slug %}"><i class="fa fa-trophy"></i> Highscore</a>
+        <a href="{% url 'questions_highscore_challenge' challenge.slug %}"><i class="fa fa-trophy"></i> Highscore</a>
     </div>
 
     {% if estimate_list %}
@@ -67,7 +67,7 @@
 
     {% elif own_questions %}
 
-        <p>Dies ist deine eigene Challenge, da alle Fragen von dir eingereicht wurden. Schau dir doch die Statistiken zu den einzelnen Fragen oder die <a href="{% url 'questions_challenge_highscore' challenge.slug %}">Highscore</a> zu dieser Challenge an.</p>
+        <p>Dies ist deine eigene Challenge, da alle Fragen von dir eingereicht wurden. Schau dir doch die Statistiken zu den einzelnen Fragen oder die <a href="{% url 'questions_highscore_challenge' challenge.slug %}">Highscore</a> zu dieser Challenge an.</p>
 
         <p>
             <table>

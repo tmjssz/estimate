@@ -126,7 +126,7 @@
 			      <div class="modal-content" id="feedback-question-content">
 			      
 				      <h3>Feedback: {{ question.title }}</h3>
-						<form method="post" action="{% url 'feedback' %}">{% csrf_token %}
+						<form method="post" action="{% url 'questions_feedback' %}">{% csrf_token %}
 							<p>
 								<input type="hidden" id="question_id" name="questionid" value="{{ question.id }}" placeholder="Frage">
 							</p>

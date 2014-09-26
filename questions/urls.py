@@ -16,17 +16,17 @@ urlpatterns = patterns('questions.views',
 
     # statistics
     url(r'^statistik/$', 'statistics_crowd', name='questions_statistics_crowd'),
-    url(r'^statistik/(?P<slug>[-\w]+)/$', 'question_statistics', name='questions_statistics_question'),
+    url(r'^statistik/(?P<slug>[-\w]+)/$', 'statistics_question', name='questions_statistics_question'),
     url(r'^benutzer/(?P<user_id>[-\w]+)/$', 'statistics_user', name='questions_user'),
 
     # highscores
-    url(r'^highscore/$', 'question_highscore', name='questions_highscore'),
-    url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'challenge_highscore', name='questions_challenge_highscore'),
+    url(r'^highscore/$', 'highscore_all', name='questions_highscore'),
+    url(r'^highscore/challenge/(?P<slug>[-\w]+)/$', 'highscore_challenge', name='questions_highscore_challenge'),
 
     # other
     url(r'^frage-einreichen/$', 'question_create_view', name='questions_question_create'),
     url(r'^konto/$', 'account_settings', name='questions_account'),
-    url(r'^feedback/$', 'feedback', name='feedback'),
+    url(r'^feedback/$', 'feedback', name='questions_feedback'),
 
     #url(r'^start/(?P<slug>[-\w]+)/$', 'question_view_start', name='questions_question_start'),
     #url(r'^challenge/(?P<challenge>[-\w]+)/(?P<question>[-\w]+)/$', 'challenge_question_view', name='questions_challenge_question_show'),

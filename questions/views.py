@@ -28,6 +28,10 @@ import logging, datetime, random, string
 logger = logging.getLogger('estimate.questions.views')
 
 
+
+# ==================================================================================================
+# MAIN MENU AND LANDING PAGE
+# ==================================================================================================
 def menu_view(request):
     """
     Shows the main menu if user is authenticated or the landing page if not.
@@ -92,10 +96,20 @@ def menu_view(request):
         return render_to_response('questions/landing-page.html', {'form': login_form, 'register_form': register_form, 'question': question},
             context_instance=RequestContext(request))
 
+
+
         
+# ==================================================================================================
+# GAME MODES
+#   - questions_list_all    = CHOOSE QUESTIONS
+#   - question_random       = RANDOM QUESTIONS
+#   - challenges_list_all   = CHALLENGE LIST
+#   - challenge_view        = PLAY CHALLENGE
+# ==================================================================================================
 @login_required
 def questions_list_all(request):
     """
+    GAME MODE: CHOOSE QUESTIONS
     List all published Questions.
     """
     questions = Question.objects.filter(published=True)
@@ -123,6 +137,208 @@ def questions_list_all(request):
     return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'time_out': time_out, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
 
+@login_required
+def question_random(request):
+    """
+    Show a random question, which were not answered before.
+    """
+    questions = Question.objects.filter(published=True).exclude(author=request.user)
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+
+    # filter out questions, which were already answered
+    estimates = Estimate.objects.filter(user=request.user)
+    for e in estimates:
+        questions = questions.exclude(pk=e.question.pk)
+    
+    if questions.count() == 0:
+        # there are no unanswered questions left
+        title = u'Alle Fragen beantwortet'
+        message = u'Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal weitere Fragen.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+    
+    question = random.choice(questions)
+
+    # get another questions for statistics, so that those questions are preferred
+    questions_stats = questions.filter(stats=True)
+    if questions_stats.count() > 0:
+        question_stats = random.choice(questions_stats)
+        # make a list of both selected questions and choose randomly one of them
+        both_questions = [question_stats, question]
+        question = random.choice(both_questions)
+
+    return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
+
+
+@login_required
+def challenges_list_all(request):
+    """
+    Show list of all challenges.
+    """
+    challenges = Challenge.objects.filter(published=True)
+
+    if len(challenges) == 0:
+        title = u'Keine Challenge verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+
+    completed_challenges = Challenge.objects.completed_challenges(request.user)
+    if completed_challenges:
+        score_list = []
+        for c in completed_challenges:
+            score_list.append(Score.objects.challenge_score(request.user, c))
+        completed_challenges = zip(completed_challenges, score_list)
+
+    incompleted_challenges = Challenge.objects.incompleted_challenges(request.user)
+    if incompleted_challenges:
+        left_questions_list = []
+        status_list = []
+        for c in incompleted_challenges:
+            chall_questions = c.questions.exclude(author=request.user)
+            answered_questions = Estimate.objects.number_answered_questions(request.user, c)
+            left_questions = chall_questions.count() - answered_questions
+            left_questions_list.append(left_questions)
+            status = 100*answered_questions / chall_questions.count()
+            status_list.append(status)
+        incompleted_challenges = zip(incompleted_challenges, left_questions_list, status_list)
+
+    own_challenges = Challenge.objects.own_challenges(request.user)
+
+    open_questions = len(Question.objects.filter(published=True).exclude(author=request.user)) - len(Estimate.objects.filter(user=request.user))
+    if open_questions <= 0:
+        open_questions = None
+
+    return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges, 'own_challenges': own_challenges, 'open_questions': open_questions})
+
+
+@login_required
+def challenge_view(request, slug):
+    """
+    Show a given challenge. 
+    As long as there are unanswered questions inside the challenge, a challenge questions is shown.
+    """
+    challenge = get_object_or_404(Challenge, slug=slug, published=True)
+    questions = challenge.questions.filter(published=True).exclude(author=request.user)
+    own_questions = challenge.questions.filter(author=request.user)
+
+    if len(questions) == 0 and len(own_questions) == 0:
+        # give 404, if challenge has no published questions
+        raise Http404
+
+    # check for each question, if there is already an estimate
+    estimates = []
+    score = 0
+    for q in questions:
+        estimate = Estimate.objects.filter(question=q, user=request.user)
+        if not estimate:
+            # unanswered question found
+            return redirect('questions_mode_question_show', question_slug=q.slug, mode='challenge', challenge_slug=slug)
+            #return HttpResponseRedirect("/challenge/"+slug+"/"+q.slug)
+
+        challenge_estimate = estimate.filter(challenge=challenge)
+        if challenge_estimate:
+            estimates.append(challenge_estimate[0])
+            score += challenge_estimate[0].score
+        else:
+            estimates.append(estimate[0])
+            score += estimate[0].score
+
+    if questions.count() > 0:
+        score_per_question = score / questions.count()
+    else: 
+        score_per_question = 0
+
+    # all questions already answered -> show result
+    return render(request, 'questions/challenge-score.html',
+        {'challenge': challenge, 'estimate_list': estimates, 'score': score, 'score_per_question': score_per_question, 'own_questions': own_questions})
+
+
+
+def question_start(request):
+    """
+    Show selected questions without login necessary.
+    """
+    questions = Question.objects.filter(published=True, stats=True)
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
+        return render(request, 'questions/message.html', {'title': title, 'message': message})
+
+    user = User()
+    # read cookie
+    guest_id = request.COOKIES.get('estimate_guest_id')
+
+    if guest_id != 'None':
+        # get guest user
+        users = User.objects.filter(id=guest_id)
+        if users:
+            user = users[0]
+
+    # new user registration
+    if request.method == 'POST':
+        register_form = UserCreationFormCustom(request.POST)
+        if register_form.is_valid():
+            username = request.POST[u'username']
+            pwd = request.POST[u'password1']
+
+            if user:
+                user.username = username
+                user.set_password(pwd)
+                user.save()
+                logger.debug(user)
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
+            else:
+                register_form.save()
+                new_user = authenticate(username=username, password=pwd)
+                login(request, new_user)
+
+            response = HttpResponseRedirect('willkommen/')
+            response.delete_cookie('estimate_guest_id')
+            return response
+
+    # filter out questions, which were already answered
+    estimates = Estimate.objects.filter(user=user)
+    for e in estimates:
+        questions = questions.exclude(pk=e.question.pk)
+    
+    if questions.count() == 0:
+        # there are no unanswered questions left
+        register_form = UserCreationFormCustom()
+
+        # calculate the users score
+        estimates = Estimate.objects.filter(user=user).exclude(estimate=None).order_by('percentage_error')
+        score = 0
+        for e in estimates:
+            score += e.score
+
+        # users avg score
+        avg_score = 0
+        if len(estimates) > 0:
+            avg_score = score / len(estimates)
+
+        response = render(request, 'questions/question-start-done.html', {'register_form': register_form, 'score': score, 'avg_score': avg_score})
+    else:
+        # choose a random question
+        question = random.choice(questions)
+        #response = HttpResponseRedirect("/start/"+question.slug)
+        response = redirect('questions_mode_question_show', question_slug=question.slug, mode='start')
+
+    if not guest_id:
+        # set cookie with guest id
+        set_cookie(response, 'estimate_guest_id', user.id, 1)
+
+    return response
+
+
+
+
+
+# ==================================================================================================
+# QUESTION VIEW
+# ==================================================================================================
 def question_view(request, question_slug, mode=None, challenge_slug=None):
     """
     Show by slug specified question with estimate form if user has not made an estimate for it before.
@@ -133,13 +349,6 @@ def question_view(request, question_slug, mode=None, challenge_slug=None):
         'start'         = Demo Mode for guests
         'challenge'     = Challenge with second parameter challenge_slug as slug
     """
-    # check if current user is admin
-    is_admin = False
-    if request.user.is_authenticated():
-        if request.user.is_active and request.user.is_superuser:
-            is_admin = True
-
-
     # get question object
     question = get_object_or_404(Question, slug=question_slug, published=True)
 
@@ -149,18 +358,11 @@ def question_view(request, question_slug, mode=None, challenge_slug=None):
     # requesting user's last estimate
     estimate = None
 
-    # challenge, in which question was opened
-    challenge = None
-
     # if true, next question for demo mode is shown on score page
     next_start = False
 
-    # if true, next question for random mode is shown on score page
-    next_random = False
-
     if mode == 'start':
-    # ---------------------------------------------------------------------------------------
-    # show question in demo game mode
+        # show question in demo game mode
     
         # read cookie
         guest_id = request.COOKIES.get('estimate_guest_id')
@@ -267,76 +469,100 @@ def question_view(request, question_slug, mode=None, challenge_slug=None):
 
 
     else: 
-    # user is logged in
-        estimates = Estimate.objects.filter(question=question, user=request.user)
-        # for this questions does already exist an estimate from the current user
-        if estimates and not is_admin:
-            estimate = estimates[0]
-
-        if mode == None:
-        # ---------------------------------------------------------------------------------------
-        # show question without game mode
-            next_random = False
-            if estimate:
-                return question_score(request, question, estimate, next_random)
-            
-        elif mode == 'random':
-        # ---------------------------------------------------------------------------------------
-        # show question in random game mode
-            next_random = True
-            if estimate:
-                return question_score(request, question, estimate, next_random)
-
-        elif mode == 'challenge':
-        # ---------------------------------------------------------------------------------------
-        # show question in challenge mode with given string as challenge slug
+    # ---------------------------------------------------------------------------------------
+    # show question with game mode
+        challenge = None
+        if mode == 'challenge':
             challenge = get_object_or_404(Challenge, slug=challenge_slug, published=True)
-            questions = challenge.questions.filter(published=True)
-            if len(questions) == 0:
-                # give 404, if challenge has no published questions
-                raise Http404
-            if not question in questions:
-                # give 404, if question is not in challenge
-                raise Http404
 
-            next_random = False
-            if estimate:
-                return question_score(request, question, estimate, next_random, challenge)
+        return question_view_authentificated(request, question, mode, challenge)
 
+
+@login_required
+def question_view_authentificated(request, question, mode, challenge=None):
+    """
+    Shows a given question object in given game mode.
+    """
+    # check if current user is admin
+    is_admin = False
+    if request.user.is_authenticated():
+        if request.user.is_active and request.user.is_superuser:
+            is_admin = True
+
+    # if true, next question for random mode is shown on score page
+    next_random = False
+
+    estimate = None
+    estimates = Estimate.objects.filter(question=question, user=request.user)
+    # for this questions does already exist an estimate from the current user
+    if estimates and not is_admin:
+        estimate = estimates[0]
+
+    if mode == None:
+    # ---------------------------------------------------------------------------------------
+    # show question without game mode
+        next_random = False
+        if estimate:
+            return question_score(request, question, estimate, next_random)
         
-        # current user hasn't already made an estimate for this question
-        if request.method == 'POST':
-            return post_estimate_data(request, question, next_random, challenge)
+    elif mode == 'random':
+    # ---------------------------------------------------------------------------------------
+    # show question in random game mode
+        next_random = True
+        if estimate:
+            return question_score(request, question, estimate, next_random)
 
+    elif mode == 'challenge':
+    # ---------------------------------------------------------------------------------------
+    # show question in challenge mode with given string as challenge slug
+        if not challenge:
+            raise Http404
+
+        questions = challenge.questions.filter(published=True)
+        if len(questions) == 0:
+            # give 404, if challenge has no published questions
+            raise Http404
+        if not question in questions:
+            # give 404, if question is not in challenge
+            raise Http404
+
+        next_random = False
+        if estimate:
+            return question_score(request, question, estimate, next_random, challenge)
+
+    
+    # current user hasn't already made an estimate for this question
+    if request.method == 'POST':
+        return post_estimate_data(request, question, next_random, challenge)
+
+    else:
+        time_max = 40
+        form = EstimateForm()
+        views = QuestionView.objects.filter(user=request.user, question=question)
+        if views:
+            # question was already viewed before
+            time = views[0].time
+            current_time = now()
+            timediff = current_time - time
+            seconds = int(timediff.total_seconds())
+            time_left = max(0, time_max - seconds)
+
+            if time_left == 0:
+                # no time left
+                too_late = Estimate(user=request.user, question=question, time_out=True)
+                too_late.save()
+                views.delete()
+
+                if mode == 'challenge':
+                    return redirect('questions_question_show', question_slug=question.slug, mode=mode, challenge_slug=challenge)
+                else:
+                    return redirect('questions_question_show', question_slug=question.slug, mode=mode)
         else:
-            time_max = 40
-            form = EstimateForm()
-            views = QuestionView.objects.filter(user=request.user, question=question)
-            if views:
-                # question was already viewed before
-                time = views[0].time
-                current_time = now()
-                timediff = current_time - time
-                seconds = int(timediff.total_seconds())
-                time_left = max(0, time_max - seconds)
-
-                if time_left == 0:
-                    # no time left
-                    too_late = Estimate(user=request.user, question=question, time_out=True)
-                    too_late.save()
-                    views.delete()
-
-                    if mode == 'challenge':
-                        return redirect('questions_question_show', question_slug=question.slug, mode=mode, challenge_slug=challenge)
-                    else:
-                        return redirect('questions_question_show', question_slug=question.slug, mode=mode)
-            else:
-                # question view for first time
-                view = QuestionView(user=request.user, question=question)
-                view.save()
-                time_left = time_max
-                return question_show(request, form, question, time_left, challenge)
-
+            # question view for first time
+            view = QuestionView(user=request.user, question=question)
+            view.save()
+            time_left = time_max
+            return question_show(request, form, question, time_left, challenge)
 
 
 @login_required
@@ -413,214 +639,15 @@ def post_estimate_data(request, question, next_random=False, challenge=None):
         return HttpResponseRedirect(question.get_absolute_url())
 
 
-@login_required
-def question_random(request):
-    """
-    Show a random question, which were not answered before
-    """
-    questions = Question.objects.filter(published=True).exclude(author=request.user)
-    if not questions:
-        title = u'Keine Frage verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
-
-    # filter out questions, which were already answered
-    estimates = Estimate.objects.filter(user=request.user)
-    for e in estimates:
-        questions = questions.exclude(pk=e.question.pk)
-    
-    if questions.count() == 0:
-        # there are no unanswered questions left
-        title = u'Alle Fragen beantwortet'
-        message = u'Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal weitere Fragen.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
-    
-    question = random.choice(questions)
-
-    # get another questions for statistics, so that those questions are preferred
-    questions_stats = questions.filter(stats=True)
-    if questions_stats.count() > 0:
-        question_stats = random.choice(questions_stats)
-        # make a list of both selected questions and choose randomly one of them
-        both_questions = [question_stats, question]
-        question = random.choice(both_questions)
-
-    return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
-
-
-def question_start(request):
-    """
-    Show selected questions without login necessary.
-    """
-    questions = Question.objects.filter(published=True, stats=True)
-    if not questions:
-        title = u'Keine Frage verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
-
-    user = User()
-    # read cookie
-    guest_id = request.COOKIES.get('estimate_guest_id')
-
-    if guest_id != 'None':
-        # get guest user
-        users = User.objects.filter(id=guest_id)
-        if users:
-            user = users[0]
-
-    # new user registration
-    if request.method == 'POST':
-        register_form = UserCreationFormCustom(request.POST)
-        if register_form.is_valid():
-            username = request.POST[u'username']
-            pwd = request.POST[u'password1']
-
-            if user:
-                user.username = username
-                user.set_password(pwd)
-                user.save()
-                logger.debug(user)
-                new_user = authenticate(username=username, password=pwd)
-                login(request, new_user)
-            else:
-                register_form.save()
-                new_user = authenticate(username=username, password=pwd)
-                login(request, new_user)
-
-            response = HttpResponseRedirect('willkommen/')
-            response.delete_cookie('estimate_guest_id')
-            return response
-
-    # filter out questions, which were already answered
-    estimates = Estimate.objects.filter(user=user)
-    for e in estimates:
-        questions = questions.exclude(pk=e.question.pk)
-    
-    if questions.count() == 0:
-        # there are no unanswered questions left
-        register_form = UserCreationFormCustom()
-
-        # calculate the users score
-        estimates = Estimate.objects.filter(user=user).exclude(estimate=None).order_by('percentage_error')
-        score = 0
-        for e in estimates:
-            score += e.score
-
-        # users avg score
-        avg_score = 0
-        if len(estimates) > 0:
-            avg_score = score / len(estimates)
-
-        response = render(request, 'questions/question-start-done.html', {'register_form': register_form, 'score': score, 'avg_score': avg_score})
-    else:
-        # choose a random question
-        question = random.choice(questions)
-        #response = HttpResponseRedirect("/start/"+question.slug)
-        response = redirect('questions_mode_question_show', question_slug=question.slug, mode='start')
-
-    if not guest_id:
-        # set cookie with guest id
-        set_cookie(response, 'estimate_guest_id', user.id, 1)
-
-    return response
 
 
 
-
-@login_required
-def question_create_view(request):
-    """
-    Show from for sending in a question
-    """
-    if request.method == 'POST':
-        form = QuestionForm(request.POST, request.FILES, user=request.user)
-        if form.is_valid():
-            form.save()
-            question_title = form.cleaned_data['title']
-            question = get_object_or_404(Question, title=question_title, author=request.user)
-            return render(request, 'questions/question-create.html',
-                {'form': None, 'question': question})
-    else:
-        form = QuestionForm()
-    return render(request, 'questions/question-create.html',
-        {'form': form})
-
-@login_required
-def challenges_list_all(request):
-    challenges = Challenge.objects.filter(published=True)
-
-    if len(challenges) == 0:
-        title = u'Keine Challenge verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
-
-    completed_challenges = Challenge.objects.completed_challenges(request.user)
-    if completed_challenges:
-        score_list = []
-        for c in completed_challenges:
-            score_list.append(Score.objects.challenge_score(request.user, c))
-        completed_challenges = zip(completed_challenges, score_list)
-
-    incompleted_challenges = Challenge.objects.incompleted_challenges(request.user)
-    if incompleted_challenges:
-        left_questions_list = []
-        status_list = []
-        for c in incompleted_challenges:
-            chall_questions = c.questions.exclude(author=request.user)
-            answered_questions = Estimate.objects.number_answered_questions(request.user, c)
-            left_questions = chall_questions.count() - answered_questions
-            left_questions_list.append(left_questions)
-            status = 100*answered_questions / chall_questions.count()
-            status_list.append(status)
-        incompleted_challenges = zip(incompleted_challenges, left_questions_list, status_list)
-
-    own_challenges = Challenge.objects.own_challenges(request.user)
-
-    open_questions = len(Question.objects.filter(published=True).exclude(author=request.user)) - len(Estimate.objects.filter(user=request.user))
-    if open_questions <= 0:
-        open_questions = None
-
-    return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges, 'own_challenges': own_challenges, 'open_questions': open_questions})
-
-
-@login_required
-def challenge_view(request, slug):
-    challenge = get_object_or_404(Challenge, slug=slug, published=True)
-    questions = challenge.questions.filter(published=True).exclude(author=request.user)
-    own_questions = challenge.questions.filter(author=request.user)
-
-    if len(questions) == 0 and len(own_questions) == 0:
-        # give 404, if challenge has no published questions
-        raise Http404
-
-    # check for each question, if there is already an estimate
-    estimates = []
-    score = 0
-    for q in questions:
-        estimate = Estimate.objects.filter(question=q, user=request.user)
-        if not estimate:
-            # unanswered question found
-            return redirect('questions_mode_question_show', question_slug=q.slug, mode='challenge', challenge_slug=slug)
-            #return HttpResponseRedirect("/challenge/"+slug+"/"+q.slug)
-
-        challenge_estimate = estimate.filter(challenge=challenge)
-        if challenge_estimate:
-            estimates.append(challenge_estimate[0])
-            score += challenge_estimate[0].score
-        else:
-            estimates.append(estimate[0])
-            score += estimate[0].score
-
-    if questions.count() > 0:
-        score_per_question = score / questions.count()
-    else: 
-        score_per_question = 0
-
-    # all questions already answered -> show result
-    return render(request, 'questions/challenge-score.html',
-        {'challenge': challenge, 'estimate_list': estimates, 'score': score, 'score_per_question': score_per_question, 'own_questions': own_questions})
-
-
+# ==================================================================================================
+# STATISTICS
+#   - statistics_crowd    = CROWD STATISTICS
+#   - statistics_question = QUESTIONS STATISTICS
+#   - statistics_user     = USER STATISTICS
+# ==================================================================================================
 @login_required
 def statistics_crowd(request):
     """
@@ -660,7 +687,7 @@ def statistics_crowd(request):
     return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'best_avg_estimate': best_avg_estimate, 'estimate_list': estimate_list})
 
 @login_required
-def question_statistics(request, slug):
+def statistics_question(request, slug):
     """
     Show statistics for given question
     """
@@ -733,20 +760,16 @@ def statistics_user(request, user_id):
         return render(request, 'questions/statistics-user.html', {'user': request.user, 'show_user': user, 'score': score, 'estimate_list': estimates, 'estimates_time_out': estimates_time_out, 'score_per_question': score_per_question, 'error_per_question': error_per_question, 'own_questions': own_questions})
 
 
+
+
+
+# ==================================================================================================
+# HIGHSCORES
+#   - highscore_all       = HIGHSCORE ALL
+#   - highscore_challenge = CHALLENGE HIGHSCORE
+# ==================================================================================================
 @login_required
-def account_settings(request):
-    if request.method == "POST":
-        user_form = UserProfileForm(data=request.POST, instance=request.user)
-        if user_form.is_valid():
-            user_form.save()
-    pw_form = PasswordChangeForm(user=request.user)
-    user_form = UserProfileForm(instance=request.user)
-    return render(request, 'questions/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
-
-
-
-@login_required
-def question_highscore(request):
+def highscore_all(request):
     """
     Show a highscore
     """
@@ -771,7 +794,7 @@ def question_highscore(request):
 
 
 @login_required
-def challenge_highscore(request, slug):
+def highscore_challenge(request, slug):
     """
     Show highscore for a given challenge
     """
@@ -789,6 +812,52 @@ def challenge_highscore(request, slug):
     return render(request, 'questions/challenge-highscore.html', {'user': request.user, 'challenge': challenge, 'score_list': scores, 'own_questions': own_questions, 'own_challenge': own_challenge})
 
 
+
+
+
+# ==================================================================================================
+# QUESTION CREATE VIEW
+# ==================================================================================================
+@login_required
+def question_create_view(request):
+    """
+    Show from for sending in a question
+    """
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            form.save()
+            question_title = form.cleaned_data['title']
+            question = get_object_or_404(Question, title=question_title, author=request.user)
+            return render(request, 'questions/question-create.html',
+                {'form': None, 'question': question})
+    else:
+        form = QuestionForm()
+    return render(request, 'questions/question-create.html',
+        {'form': form})
+
+
+
+
+# ==================================================================================================
+# ACCOUNT SETTINGS
+# ==================================================================================================
+@login_required
+def account_settings(request):
+    if request.method == "POST":
+        user_form = UserProfileForm(data=request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+    pw_form = PasswordChangeForm(user=request.user)
+    user_form = UserProfileForm(instance=request.user)
+    return render(request, 'questions/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
+
+
+
+
+# ==================================================================================================
+# FEEDBACK
+# ==================================================================================================
 def feedback(request):
     """ Send Feedback Mail. """
     if request.method == 'POST':
@@ -812,6 +881,7 @@ def feedback(request):
         form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})
     
     return render_to_response('questions/feedback.html', {'form': form}, context_instance=RequestContext(request))
+
 
 
 def set_cookie(response, key, value, days_expire = 7):
