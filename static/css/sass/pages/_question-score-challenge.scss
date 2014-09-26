@@ -139,5 +139,10 @@
 		@include media($tablet) {
 			@include span-columns(8 of 8);
 		}
+
+		small.img-zoom {
+			display: block;
+			text-align: center;
+		}
 	}
 }

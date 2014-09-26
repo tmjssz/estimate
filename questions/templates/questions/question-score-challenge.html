@@ -139,7 +139,8 @@
 		{% endif %}
 
 		{% if question.image %}
-			<p><a href="/{{ question.image }}" data-lightbox="{{ question.slug }}" data-title="{{ question.title }}"><img src="/{{ question.image }}" /></a></p>
+			<p><a href="/{{ question.image }}" data-lightbox="{{ question.slug }}" data-title="{{ question.title }}"><img src="/{{ question.image }}" />
+			<small class="img-zoom"><i class="fa fa-search-plus"></i> Bild vergrößern durch Klick.</small></a></p>
 		{% endif %}
 
 		{% if question.source %}
