@@ -1275,6 +1275,7 @@ header.navi-header {
   margin-right: 2.5641%;
   width: 28.20513%;
   margin-right: 0;
+  float: right !important;
   text-align: right;
   font-weight: bold;
   padding: 12px 0 15px 0; }
@@ -2101,6 +2102,7 @@ header.navi-header {
   display: inline-block;
   width: 100%; }
 #question-score-challenge .top-right {
+  float: right !important;
   float: left;
   display: block;
   margin-right: 2.5641%;
@@ -2317,6 +2319,7 @@ header.navi-header {
   display: inline-block;
   width: 100%; }
 #question-score .top-right {
+  float: right !important;
   float: left;
   display: block;
   margin-right: 2.5641%;

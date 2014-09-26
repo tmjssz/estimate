@@ -86,6 +86,8 @@
 	}
 
 	.top-right {
+		float: right !important;
+		
 		@include span-columns(2 of 10);
 		@include omega;
 

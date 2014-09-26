@@ -16,6 +16,7 @@
 	.challenge-highscore {
 		@include span-columns(3 of 10);
 		@include omega;
+		float: right !important;
 		text-align: right;
 		font-weight: bold;
 		padding: 12px 0 15px 0;	
