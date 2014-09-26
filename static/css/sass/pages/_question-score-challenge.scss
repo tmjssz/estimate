@@ -93,10 +93,16 @@
 			@include span-columns(3 of 10);
 		}
 
-		.next-btn {
+		.top-right-btn {
 			text-align:center;
-			@include btn($base-accent-color);
-			
+
+			&.stats-btn {
+				@include btn(#7D4792);
+			}
+			&.next-btn {
+				@include btn(#68A24F);
+			}
+
 			float: right;
 
 			i {

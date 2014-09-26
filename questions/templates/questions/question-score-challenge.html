@@ -8,19 +8,23 @@
 	<h2>{{ challenge.title }} {{ answered_questions }} / {{ all_questions }}</h2>
 
 	<div class="top-right">
-		<a class="next-btn" href="{% url 'questions_challenge_show' challenge.slug %}">
-			{% if answered_questions == all_questions %}
+		
+		{% if answered_questions == all_questions %}
+			<a class="stats-btn top-right-btn" href="{% url 'questions_challenge_show' challenge.slug %}">
 				<i class="fa fa-list"></i>
 				<div class="label">
 					<span>Überblick</span>
 				</div>
-			{% else %}
+			</a>
+		{% else %}
+			<a class="next-btn top-right-btn" href="{% url 'questions_challenge_show' challenge.slug %}">
 				<div class="label">
 					<span>Weiter</span>
 				</div>
-			<i class="fa fa-arrow-circle-right"></i> 
-			{% endif %}
-		</a>
+				<i class="fa fa-arrow-circle-right"></i> 
+			</a>
+		{% endif %}
+		
 	</div>
 
 	<section>
