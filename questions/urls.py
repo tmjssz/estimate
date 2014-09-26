@@ -28,9 +28,6 @@ urlpatterns = patterns('questions.views',
     url(r'^konto/$', 'account_settings', name='questions_account'),
     url(r'^feedback/$', 'feedback', name='questions_feedback'),
 
-    #url(r'^start/(?P<slug>[-\w]+)/$', 'question_view_start', name='questions_question_start'),
-    #url(r'^challenge/(?P<challenge>[-\w]+)/(?P<question>[-\w]+)/$', 'challenge_question_view', name='questions_challenge_question_show'),
-
     # show question (has to be last)
     url(r'^frage/(?P<question_slug>[-\w]+)/$', 'question_view', name='questions_question_show'),
     url(r'^(?P<mode>[-\w]+)/(?P<question_slug>[-\w]+)/$', 'question_view', name='questions_mode_question_show'),
