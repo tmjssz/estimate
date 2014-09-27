@@ -68,17 +68,6 @@
 #modal-welcome {
 	text-align: center;
 
-	.go {
-		text-align:center;
-		font-size: 20px;
-		letter-spacing: -1px;
-		@include btn(#68a24f);
-		color: white;
-		font-weight: 400;
-		padding: 8px 0;
-		line-height: 1em;
-	}
-
 	.greeting {
 		line-height: 1em;
 		text-transform: none;

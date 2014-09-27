@@ -102,7 +102,7 @@ def register_done(request):
 
     number_estimates = len(estimates)
     
-    return render_to_response('userauth/register_done.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
+    return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates, 'welcome': True}, context_instance=RequestContext(request))
 
 
 @login_required

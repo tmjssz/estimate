@@ -36,7 +36,7 @@
             <form class="pw-change" action="{% url 'password_change' %}" method="post" accept-charset="utf-8">
                 {{ pw_form.as_p }}
                 {% csrf_token %}
-                <input type="submit" value="Ändern"/>
+                <input type="submit" value="Passwort ändern"/>
             </form>
         </div>
 

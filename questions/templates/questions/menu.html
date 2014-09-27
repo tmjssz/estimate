@@ -4,6 +4,17 @@
 
 {% block content %}
 
+{% if welcome %}
+	{% include "userauth/modal-welcome.html" with modal_id="modal-welcome" modal_class="welcome" checked="checked" %}
+{% endif %}
+
+{% if message %}
+	{% include "questions/modal-message.html" with modal_id="modal-message" modal_class="message" checked="checked" %}
+{% endif %}
+
+
+{% block message %}{% endblock %}
+
 <div class="menu">
 
 	<div class="menu-stage">

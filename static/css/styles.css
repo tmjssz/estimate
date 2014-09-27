@@ -325,6 +325,25 @@ body {
     @media screen and (max-width: 480px) {
       body #main p {
         line-height: 1.3em; } }
+    body #main input[type="submit"] {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #477dca;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      padding: 8px 0;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 100%;
+      line-height: 1em; }
+      body #main input[type="submit"]:hover {
+        background: #6f99d5; }
     body #main section {
       padding-bottom: 15px;
       float: left;
@@ -850,6 +869,23 @@ body {
       color: #333333; }
       body .modal .modal-inner p.centered-text {
         text-align: center; }
+    body .modal .modal-inner .modal-ok-btn {
+      text-align: center;
+      font-size: 20px;
+      letter-spacing: -1px;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      background: #68a24f;
+      border-radius: 0.1875em;
+      color: white;
+      padding: .4em .6em;
+      color: white;
+      font-weight: 400;
+      padding: 8px 0;
+      line-height: 1em; }
+      body .modal .modal-inner .modal-ok-btn:hover {
+        background: #83b86c; }
     body .modal .modal-inner a.cta {
       color: white;
       display: inline-block;
@@ -1276,9 +1312,7 @@ footer {
   width: 28.20513%;
   margin-right: 0;
   float: right !important;
-  text-align: right;
-  font-weight: bold;
-  padding: 12px 0 15px 0; }
+  text-align: right; }
   #challenge-score .challenge-highscore:last-child {
     margin-right: 0; }
   @media screen and (max-width: 768px) {
@@ -2120,6 +2154,7 @@ footer {
         margin-right: 0; } }
   #question-score-challenge .top-right .top-right-btn {
     text-align: center;
+    padding: 6px 6px 3px 6px !important;
     float: right; }
     #question-score-challenge .top-right .top-right-btn.stats-btn {
       -webkit-transition: all 0.2s ease-in-out;
@@ -2145,8 +2180,7 @@ footer {
       display: inline-block;
       font-size: 1.7em; }
     #question-score-challenge .top-right .top-right-btn .label {
-      display: inline-block;
-      font-weight: bold; }
+      display: inline-block; }
       #question-score-challenge .top-right .top-right-btn .label span {
         font-size: 14px;
         display: block;
@@ -2352,8 +2386,7 @@ footer {
       display: inline-block;
       font-size: 1.7em; }
     #question-score .top-right .next-random-btn .label {
-      display: inline-block;
-      font-weight: bold; }
+      display: inline-block; }
       #question-score .top-right .next-random-btn .label span {
         font-size: 14px;
         display: block;
@@ -2524,7 +2557,8 @@ footer {
       display: block;
       margin-right: 2.85714%;
       width: 31.42857%;
-      padding: 0.5em 0.5em; }
+      padding: 10px;
+      margin-top: 2px; }
       #question-show section form input[type=submit]:last-child {
         margin-right: 0; }
       @media screen and (max-width: 480px) {
@@ -2683,23 +2717,6 @@ footer {
 
 #modal-welcome {
   text-align: center; }
-  #modal-welcome .go {
-    text-align: center;
-    font-size: 20px;
-    letter-spacing: -1px;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    background: #68a24f;
-    border-radius: 0.1875em;
-    color: white;
-    padding: .4em .6em;
-    color: white;
-    font-weight: 400;
-    padding: 8px 0;
-    line-height: 1em; }
-    #modal-welcome .go:hover {
-      background: #83b86c; }
   #modal-welcome .greeting {
     line-height: 1em;
     text-transform: none;

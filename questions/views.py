@@ -40,24 +40,13 @@ def menu_view(request):
     guest_id = request.COOKIES.get('estimate_guest_id')
 
     if request.user.is_authenticated():
-        if request.user.is_active and request.user.is_superuser:
-            is_admin = True
-        else:
-            is_admin = False
-
-        challenges = Challenge.objects.filter(published=True)
-        if len(challenges) == 0:
-            challenges = None
-
         estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
-        
+        number_estimates = len(estimates)
         score = 0
         for e in estimates:
             score += e.score
-
-        number_estimates = len(estimates)
         
-        return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
+        return render_to_response('questions/menu.html', {'user': request.user, 'score': score, 'number_estimates': number_estimates}, context_instance=RequestContext(request))
     else:
         login_form = AuthenticationForm()
         questions = Question.objects.filter(published=True)
@@ -115,8 +104,8 @@ def questions_list_all(request):
     questions = Question.objects.filter(published=True)
     if not questions:
         title = u'Keine Frage verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
+        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.</p>'
+        return show_message(request, title, message)
 
     # filter out own questions
     questions = questions.exclude(author=request.user)
@@ -145,8 +134,8 @@ def question_random(request):
     questions = Question.objects.filter(published=True).exclude(author=request.user)
     if not questions:
         title = u'Keine Frage verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
+        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.</p>'
+        return show_message(request, title, message)
 
     # filter out questions, which were already answered
     estimates = Estimate.objects.filter(user=request.user)
@@ -156,8 +145,8 @@ def question_random(request):
     if questions.count() == 0:
         # there are no unanswered questions left
         title = u'Alle Fragen beantwortet'
-        message = u'Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann überlege dir doch mal weitere Fragen.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
+        message = u'<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann <a href="/frage-einreichen/">überlege</a> dir doch mal weitere Fragen.</p>'
+        return show_message(request, title, message)
     
     question = random.choice(questions)
 
@@ -181,8 +170,8 @@ def challenges_list_all(request):
 
     if len(challenges) == 0:
         title = u'Keine Challenge verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
+        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan keine Challenges zur Verfügung.</p>'
+        return show_message(request, title, message)
 
     completed_challenges = Challenge.objects.completed_challenges(request.user)
     if completed_challenges:
@@ -263,8 +252,8 @@ def question_start(request):
     questions = Question.objects.filter(published=True, stats=True)
     if not questions:
         title = u'Keine Frage verfügbar'
-        message = u'Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.'
-        return render(request, 'questions/message.html', {'title': title, 'message': message})
+        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.</p>'
+        return show_message(request, title, message)
 
     user = User()
     # read cookie
@@ -875,13 +864,31 @@ def feedback(request):
 
         if form.is_valid():
             form.save()
-            return render_to_response('questions/message.html', {'title': 'Feedback gesendet', 'message': '<i class="fa feedback-sent-icon fa-5x fa-check-circle"></i> <p class="centered-text">Vielen Dank für dein Feedback!</p>'}, context_instance=RequestContext(request))
+            title = 'Feedback gesendet'
+            message = '<i class="fa feedback-sent-icon fa-5x fa-check-circle"></i> <p class="centered-text">Vielen Dank für dein Feedback!</p>'
+            return render_to_response('questions/message.html', {'title': title, 'message': message}, context_instance=RequestContext(request))
 
     else:
         form = FeedbackForm(initial={'name': request.user.username, 'email': request.user.email, 'userid': request.user.id})
     
     return render_to_response('questions/feedback.html', {'form': form}, context_instance=RequestContext(request))
 
+
+
+
+# ==================================================================================================
+# MESSAGE
+# ==================================================================================================
+def show_message(request, message_title, message):
+    if request.user.is_authenticated():
+        estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
+        number_estimates = len(estimates)
+        score = 0
+        for e in estimates:
+            score += e.score
+        return render(request, 'questions/menu.html', {'message_title': message_title, 'message': message, 'user': request.user, 'score': score, 'number_estimates': number_estimates})
+    else:
+        return redirect('questions_menu')
 
 
 def set_cookie(response, key, value, days_expire = 7):

@@ -117,6 +117,19 @@ body {
 			}
 		}
 
+		input[type="submit"] {
+			@include btn($base-accent-color);
+			border: 0;
+			box-shadow: none;
+			text-shadow: none;
+			padding: 8px 0;
+			font-weight: 400;
+			margin-top: 0;
+			margin-bottom: 0;
+			width:100%;
+			line-height: 1em;
+		}
+
 		section {
 			padding-bottom: 15px;
 			@include span-columns(6 of 10);
@@ -668,6 +681,17 @@ body {
 			  &.centered-text {
 			  	text-align: center;
 			  }
+			}
+
+			.modal-ok-btn {
+				text-align:center;
+				font-size: 20px;
+				letter-spacing: -1px;
+				@include btn(#68a24f);
+				color: white;
+				font-weight: 400;
+				padding: 8px 0;
+				line-height: 1em;
 			}
 
 			a.cta {

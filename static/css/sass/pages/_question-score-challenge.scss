@@ -97,6 +97,7 @@
 
 		.top-right-btn {
 			text-align:center;
+			padding: 6px 6px 3px 6px !important;
 
 			&.stats-btn {
 				@include btn(#7D4792);
@@ -114,7 +115,6 @@
 
 			.label {
 				display: inline-block;
-				font-weight: bold;
 				span {
 					font-size: 14px;
 					display:block;

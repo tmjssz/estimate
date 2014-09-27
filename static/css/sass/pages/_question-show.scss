@@ -59,7 +59,8 @@
 
 			input[type=submit] {
 				@include span-columns(3 of 9);
-				padding: 0.5em 0.5em;
+				padding: 10px;
+				margin-top: 2px;
 
 				@include media($mobile) {
 					@include span-columns(4 of 4);

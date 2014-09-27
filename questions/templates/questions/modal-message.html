@@ -1,0 +1,9 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}{% endblock %}
+{% block modal_title %}{{ message_title }}{% endblock %}
+
+{% block modal_content %}
+	{{ message|safe }}
+	<label class="modal-ok-btn" for="modal-message-state">Ok</label>
+{% endblock %}
