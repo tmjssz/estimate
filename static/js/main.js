@@ -321,8 +321,14 @@ $( document ).ready(function() {
         });
     }
 
-    closeModalOnClickOutside($('.modal'));
+    closeModalOnClickOutside($('#modal-login'));
     closeModalOnClickOutside($('#modal-invite-friend'));
     closeModalOnClickOutside($('#modal-feedback'));
+    closeModalOnClickOutside($('#modal-question-feedback'));
+    closeModalOnClickOutside($('#modal-play'));
+    closeModalOnClickOutside($('#modal-group-create'));
+    closeModalOnClickOutside($('#modal-group-invite'));
+    closeModalOnClickOutside($('#modal-welcome'));
+    closeModalOnClickOutside($('#modal-message'));
 
 });
