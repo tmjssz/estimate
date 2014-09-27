@@ -80,11 +80,7 @@ class QuestionForm(ModelForm):
 
         return super(QuestionForm, self).save(commit)
 
-class UserProfileForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'first_name', 'last_name', )
-
+        
 class FeedbackForm(Form):
     name = CharField(required=True, label='Name', widget=TextInput(attrs={'placeholder': 'Name'}))
     userid = CharField(required=False, label='User ID', widget=HiddenInput())

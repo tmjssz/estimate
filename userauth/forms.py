@@ -34,6 +34,12 @@ class GroupForm(ModelForm):
         return super(GroupForm, self).save(commit)
 
 
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', )
+
+
 class UserCreationFormCustom(UserCreationForm):
 
     def __init__(self, *args, **kwargs):

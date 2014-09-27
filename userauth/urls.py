@@ -21,6 +21,7 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('userauth.views',
+    url(r'^konto/$', 'account_settings', name='questions_account'),
     url(r'^gruppe/$', 'group_list', name='group_list'),
     url(r'^gruppe/(?P<id>[-\w]+)/$$', 'group_view', name='group_show'),
     url(r'^freund-einladen/$', 'invite_friend', name='invite_friend'), 

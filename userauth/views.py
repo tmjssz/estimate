@@ -1,30 +1,55 @@
+#!/usr/bin/env python
+# coding: utf8
+
+"""
+####################################################################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+#
+#  USERAUTH VIEW - CONTENTS
+#  ========================
+#
+#  1. User Registration
+#  2. Account Settings
+#  3. Groups
+#  4. Tell A Friend
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+####################################################################################################
+"""
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, render
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import mail_admins
 from django.template import Context
 from django.template.loader import get_template
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from userauth.models import GroupInvitation
+from userauth.forms import UserCreationFormCustom, FriendInviteForm
 from questions.models import Score, Estimate, Challenge
-from userauth.forms import GroupForm
+from userauth.forms import GroupForm, UserProfileForm
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.validators import validate_email
 from django.forms import ValidationError
 import logging
 
-from userauth.forms import UserCreationFormCustom, FriendInviteForm
-
-
 logger = logging.getLogger('estimate.userauth.views')
 
 
+
+""" 
+==================================================================================================
+ # 1
+ USER REGISTRATION
+ =================
+================================================================================================== 
+"""
 @receiver(post_save, sender=User)
 def ensure_profile_exists(sender, **kwargs):
     """ Sends a mail to the admins, when a new User object is saved to the DB. """
@@ -105,6 +130,37 @@ def register_done(request):
     return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates, 'welcome': True}, context_instance=RequestContext(request))
 
 
+
+
+
+""" 
+==================================================================================================
+ # 2
+ ACCOUNT SETTINGS
+ ================
+================================================================================================== 
+"""
+@login_required
+def account_settings(request):
+    if request.method == "POST":
+        user_form = UserProfileForm(data=request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+    pw_form = PasswordChangeForm(user=request.user)
+    user_form = UserProfileForm(instance=request.user)
+    return render(request, 'userauth/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
+
+
+
+
+
+""" 
+==================================================================================================
+ # 3
+ GROUPS
+ ======
+================================================================================================== 
+"""
 @login_required
 def group_list(request):
     if request.method == 'POST':
@@ -212,6 +268,16 @@ def group_view(request, id):
     return render_to_response('userauth/group_show.html', {'group': group, 'invitable_users': invitable_users, 'gotten_invites': gotten_invites, 'scores': scores, 'is_member': is_member, 'scores_per_question': scores_per_question, 'best_estimates': best_estimates, 'best_percentage_error': scores_best_percentage_error}, context_instance=RequestContext(request))    
 
 
+
+
+
+""" 
+==================================================================================================
+ # 4
+ TELL A FRIEND
+ =============
+================================================================================================== 
+"""
 def invite_friend(request):
     form = FriendInviteForm(initial={'username': request.user.username})
 

@@ -25,7 +25,6 @@ urlpatterns = patterns('questions.views',
 
     # other
     url(r'^frage-einreichen/$', 'question_create_view', name='questions_question_create'),
-    url(r'^konto/$', 'account_settings', name='questions_account'),
     url(r'^feedback/$', 'feedback', name='questions_feedback'),
 
     # show question (has to be last)

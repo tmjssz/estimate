@@ -1,12 +1,29 @@
 #!/usr/bin/env python
 # coding: utf8
 
-#from django.shortcuts import render
-from django.shortcuts import render_to_response, get_object_or_404
+"""
+####################################################################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 
+#  QUESTIONS VIEW - CONTENTS
+#  =========================
+#
+#  1. Main Menu and Landing Page
+#  2. Game Modes
+#  3. Question View
+#  4. Statistics
+#  5. Highscores
+#  6. Create new Question
+#  7. Feedback
+#  8. Message
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+####################################################################################################
+"""
+from django.shortcuts import render_to_response, get_object_or_404, render, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, Http404, HttpResponseRedirect
-from django.shortcuts import render, redirect
 from django.db.models import Min
 from django.utils.timezone import now
 from django.template.loader import get_template
@@ -15,23 +32,25 @@ from django.conf import settings
 from django.core.mail import mail_admins
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-
-from questions.forms import EstimateForm, QuestionForm, UserProfileForm, FeedbackForm, FeedbackQuestionForm
+from questions.forms import EstimateForm, QuestionForm, FeedbackForm, FeedbackQuestionForm
 from questions.models import Question, Estimate, Score, Challenge, QuestionView
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from userauth.forms import UserCreationFormCustom
 import logging, datetime, random, string
-
 
 logger = logging.getLogger('estimate.questions.views')
 
 
 
-# ==================================================================================================
-# MAIN MENU AND LANDING PAGE
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 1
+ MAIN MENU AND LANDING PAGE
+ ==========================
+================================================================================================== 
+"""
 def menu_view(request):
     """
     Shows the main menu if user is authenticated or the landing page if not.
@@ -88,13 +107,17 @@ def menu_view(request):
 
 
         
-# ==================================================================================================
-# GAME MODES
-#   - questions_list_all    = CHOOSE QUESTIONS
-#   - question_random       = RANDOM QUESTIONS
-#   - challenges_list_all   = CHALLENGE LIST
-#   - challenge_view        = PLAY CHALLENGE
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 2 
+ GAME MODES
+ ==========
+    questions_list_all    = CHOOSE QUESTIONS
+    question_random       = RANDOM QUESTIONS
+    challenges_list_all   = CHALLENGE LIST
+    challenge_view        = PLAY CHALLENGE
+================================================================================================== 
+"""
 @login_required
 def questions_list_all(request):
     """
@@ -324,10 +347,13 @@ def question_start(request):
 
 
 
-
-# ==================================================================================================
-# QUESTION VIEW
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 3 
+ QUESTION VIEW
+ =============
+================================================================================================== 
+"""
 def question_view(request, question_slug, mode=None, challenge_slug=None):
     """
     Show by slug specified question with estimate form if user has not made an estimate for it before.
@@ -631,12 +657,16 @@ def post_estimate_data(request, question, next_random=False, challenge=None):
 
 
 
-# ==================================================================================================
-# STATISTICS
-#   - statistics_crowd    = CROWD STATISTICS
-#   - statistics_question = QUESTIONS STATISTICS
-#   - statistics_user     = USER STATISTICS
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 4 
+ STATISTICS
+ ==========
+    statistics_crowd    = CROWD STATISTICS
+    statistics_question = QUESTIONS STATISTICS
+    statistics_user     = USER STATISTICS
+================================================================================================== 
+"""
 @login_required
 def statistics_crowd(request):
     """
@@ -752,11 +782,15 @@ def statistics_user(request, user_id):
 
 
 
-# ==================================================================================================
-# HIGHSCORES
-#   - highscore_all       = HIGHSCORE ALL
-#   - highscore_challenge = CHALLENGE HIGHSCORE
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 5 
+ HIGHSCORES
+ ==========
+   - highscore_all       = HIGHSCORE ALL
+   - highscore_challenge = CHALLENGE HIGHSCORE
+================================================================================================== 
+"""
 @login_required
 def highscore_all(request):
     """
@@ -804,9 +838,13 @@ def highscore_challenge(request, slug):
 
 
 
-# ==================================================================================================
-# QUESTION CREATE VIEW
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 6 
+ QUESTION CREATE VIEW
+ ====================
+================================================================================================== 
+"""
 @login_required
 def question_create_view(request):
     """
@@ -828,25 +866,13 @@ def question_create_view(request):
 
 
 
-# ==================================================================================================
-# ACCOUNT SETTINGS
-# ==================================================================================================
-@login_required
-def account_settings(request):
-    if request.method == "POST":
-        user_form = UserProfileForm(data=request.POST, instance=request.user)
-        if user_form.is_valid():
-            user_form.save()
-    pw_form = PasswordChangeForm(user=request.user)
-    user_form = UserProfileForm(instance=request.user)
-    return render(request, 'userauth/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
-
-
-
-
-# ==================================================================================================
-# FEEDBACK
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 7
+ FEEDBACK
+ ========
+================================================================================================== 
+"""
 def feedback(request):
     """ Send Feedback Mail. """
     if request.method == 'POST':
@@ -876,9 +902,13 @@ def feedback(request):
 
 
 
-# ==================================================================================================
-# MESSAGE
-# ==================================================================================================
+""" 
+==================================================================================================
+ # 8
+ MESSAGE
+ =======
+================================================================================================== 
+"""
 def show_message(request, message_title, message):
     if request.user.is_authenticated():
         estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
