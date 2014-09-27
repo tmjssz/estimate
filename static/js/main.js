@@ -1,38 +1,88 @@
+/* //////////////////////////////////////////////////////////////////////////////////////////////
+CONTENTS
+========
+ 1. LANDING PAGES
+ 2. NAVIGATION
+ 3. SHOW QUESTION
+ 4. QUESTION SCORE
+ 5. HIGHSCORES
+ 6. STATISTICS
+ 7. ACCOUNT SETTINGS
+ 8. AJAX FORMS: FEEDBACK & FRIEND INVITE
+ 9. MODAL OVERLAYS
+////////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+
 $( document ).ready(function() {
 
-    /*var time = getCookie('time');
-    if (time == '') {
-        time = 40;
-    }
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1);
-            if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
-        }
-        return "";
-    }
+    // ========================================================================================
+    // 1. LANDING PAGES
+    // ========================================================================================
+    
 
-    var setCookie = function(name, value, days) {
-        var expires;
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toGMTString();
+    // Set focus on first input of Modal Overlay when page is loaded
+    // ........................................................................................
+
+    function setModalFocusOnChecked(checkbox, input) {
+        if ( checkbox.is(':checked') ) {
+            input.focus();
         }
         else {
-            expires = "";
+            // else the register form input is focused
+            $('#estimate_form input#id_estimate').focus();
+            $('#register-form input#id_username').focus();
         }
-        document.cookie = name + "=" + value + expires + "; path=/";
-    }*/
+    }
 
-    //time = 40;
+    function focusInputOnModalOpen(modal) {
+        $(modal).each(function(){
+            var checkbox = $(this).find('input.modal-state');
+            var input = $(this).find('.modal-inner form').find('input[type="text"], input[type="email"], textarea').first();
+            checkbox.change(function() {
+                setModalFocusOnChecked(checkbox, input);
+            });
+            setModalFocusOnChecked(checkbox, input);
+        });
+    }
+
+    focusInputOnModalOpen('.modal');
+
+
+
+
+    // ========================================================================================
+    // 2. NAVIGATION
+    // ========================================================================================
+
+
+    // Click handler for mobile navigation
+    // ........................................................................................
+
+    var navigation = $('.navigation-wrapper nav ul');
+    var naviToggle = $('#naviToggle');
+    $(naviToggle).click(function(e) {
+        e.preventDefault();
+        navigation.slideToggle(function(){
+            if(navigation.is(':hidden')) {
+                navigation.removeAttr('style');
+            }
+        });
+    });
     
     
-    // COUNTDOWN FOR QUESTIONS -----------------------------------------------
+
+
+
+    // ========================================================================================
+    // 3. SHOW QUESTION
+    // ========================================================================================
+
+
+    // Question Countdown 
+    // ........................................................................................
+
     var countdown = $("#countdown");
 
     if (countdown.length > 0) {
@@ -54,7 +104,10 @@ $( document ).ready(function() {
         });
     }
 
-    // Format the input content, that all 3 digits are separated
+
+    // Format estimate input content, that all 3 digits are separated
+    // ........................................................................................
+
     $('#id_estimate').focus();
     $('#id_estimate').keyup(function() {
         var num = $(this).val().replace(/(\s)/g, '');
@@ -74,9 +127,6 @@ $( document ).ready(function() {
         }
 
         $('#id_estimate').val(value);
-
-        // reset cookie
-        setCookie('time', 40, 0);
     });
 
     function isNumber(n) {
@@ -85,6 +135,8 @@ $( document ).ready(function() {
 
 
     // Check if estimate is given, when submit button is clicked
+    // ........................................................................................
+
     $('#question-show form input[type=submit]').click(function(e) {
         if ($('#id_estimate').val() == "") {
             e.preventDefault();
@@ -94,46 +146,35 @@ $( document ).ready(function() {
         }
     });
 
+
+
+
+
+    // ========================================================================================
+    // 4. QUESTION SCORE
+    // ========================================================================================
+
+
     // Click handler for 'Show resolution' Button
+    // ........................................................................................
+
 	$('#show_btn').click(function() {
 		$(this).hide();
         $('.timed_out').fadeIn();
 	});
 
 
-	// Click handler for mobile navigation
-    var navigation = $('.navigation-wrapper nav ul');
-    var naviToggle = $('#naviToggle');
-    $(naviToggle).click(function(e) {
-    	e.preventDefault();
-    	navigation.slideToggle(function(){
-    		if(navigation.is(':hidden')) {
-    			navigation.removeAttr('style');
-    		}
-    	});
-    });
 
-    // Click handler for Register/Login Accordion on Landing Page
-    var accItem = $('#register-login .accordion li');
-    $(accItem).click(function(e) {
-        e.preventDefault();
-        if ( $(this).hasClass('not-selected') ) {
-            var rel = $(this).attr('rel');
-            $(accItem).removeClass('selected').addClass('not-selected');
-            $(this).removeClass('not-selected').addClass('selected');
 
-            $('#register-login .form').hide();
-            $('#'+rel).fadeIn();
-        }
-    });
 
-    // Click handler for 'Password change' Button
-    $('span.pw-change').click(function() {
-        $(this).hide();
-        $('div.pw-change').fadeIn();
-    });
+    // ========================================================================================
+    // 5. HIGHSCORES
+    // ========================================================================================
+
 
     // Click handler for Highscore change Button
+    // ........................................................................................
+
     $('.highscore-change').click(function() {
         if (!$(this).hasClass('selected')) {
             $('.highscore-change.selected').toggleClass('selected');
@@ -141,11 +182,55 @@ $( document ).ready(function() {
             var rel = $(this).attr('rel');
             $('.score-list table').hide();
             $('.score-list table.'+rel).fadeIn();
-            //window.history.pushState("", rel, "#"+rel);
         }
     });
 
-    // SPINNER OPTIONS
+
+
+
+
+    // ========================================================================================
+    // 6. STATISTICS
+    // ========================================================================================
+
+
+    // Click Listener on question statistics checkboxes next to estimates (only for admin)
+    // ........................................................................................
+
+    $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
+        var id = $(this).val();
+        $(this).parent().submit();
+    });
+
+
+
+
+
+    // ========================================================================================
+    // 7. ACCOUNT SETTINGS
+    // ========================================================================================
+
+
+    // Click handler for 'Password change' Button
+    // ........................................................................................
+
+    $('span.pw-change').click(function() {
+        $(this).hide();
+        $('div.pw-change').fadeIn();
+    });
+
+
+
+
+
+    // ========================================================================================
+    // 8. AJAX FORMS: FEEDBACK & FRIEND INVITE
+    // ========================================================================================
+
+
+    // Spinner Options
+    // ........................................................................................
+
     var opts = {
       lines: 13, // The number of lines to draw
       length: 7, // The length of each line
@@ -166,107 +251,83 @@ $( document ).ready(function() {
     };
     
 
-    // Click handler for Feedback Form Submit Buttons
-    $('#feedback-content input[type="submit"]').click(function(e) {
-        var content_id = 'feedback-content';
-        var answer_id = 'feedback-answer';
-        e.preventDefault();
+    // Function to set Click handler for Modal Form Submit Buttons
+    // ........................................................................................
 
-        var target = document.getElementById(content_id);
-        var spinner = new Spinner(opts).spin(target);
+    function setModalSubmitHandler(modal_elem, url) {
+        var submit_elem = modal_elem.find('.modal-content input[type="submit"]').first();
+        
+        submit_elem.click(function(e) {
+            e.preventDefault();
+            var form_elem = modal_elem.find('.modal-inner .modal-content form').first();
+            var answer_elem = modal_elem.find('.modal-inner .modal-answer').first();
+            var content_elem = modal_elem.find('.modal-inner .modal-content').first();
+            var spinner = new Spinner(opts).spin();
 
-        $.ajax({
-            url : "/feedback/",
-            type: "POST",
-            data: $('#' + content_id + ' form').serialize(),
-            success: function( response ){
-                $('#' + answer_id).html( $(response).find('#main >') );
-                $('#' + content_id).hide();
-                spinner.stop();
-            }
+            content_elem[0].appendChild(spinner.el);
+            ajaxFormPost(url, form_elem, answer_elem, content_elem, spinner);
+
+            content_elem.find('form input, form textarea').attr('disabled', 'disabled');
         });
+    }
 
-        $('#' + content_id + ' form input, #' + content_id + ' form textarea').attr('disabled', 'disabled');
-    });
-
-    // Click handler for Question-Feedback Form Submit Buttons
-    $('#feedback-question-content input[type="submit"]').click(function(e) {
-        var content_id = 'feedback-question-content';
-        var answer_id = 'feedback-question-answer';
-        e.preventDefault();
-
-        var target = document.getElementById(content_id);
-        var spinner = new Spinner(opts).spin(target);
-
+    function ajaxFormPost(url, form_elem, answer_elem, content_elem, spinner) {
         $.ajax({
-            url : "/feedback/",
+            url : url,
             type: "POST",
-            data: $('#' + content_id + ' form').serialize(),
+            data: form_elem.serialize(),
             success: function( response ){
-                $('#' + answer_id).html( $(response).find('#main >') );
-                $('#' + content_id).hide();
+                answer_elem.html( $(response).find('#main >') );
+                content_elem.hide();
                 spinner.stop();
-            }
-        });
-
-        $('#' + content_id + ' form input, #' + content_id + ' form textarea').attr('disabled', 'disabled');
-    });
-
-    // Click handler for Friend Invitation Form Submit Buttons
-    $('#invite-friend-content input[type="submit"]').click(function(e) {
-        var content_id = 'invite-friend-content';
-        var answer_id = 'invite-friend-answer';
-        e.preventDefault();
-
-        var target = document.getElementById(content_id);
-        var spinner = new Spinner(opts).spin(target);
-
-        $.ajax({
-            url : "/freund-einladen/",
-            type: "POST",
-            data: $('#' + content_id + ' form').serialize(),
-            success: function( response ){
-                $('#' + answer_id).html( $(response).find('#main >') );
-                $('#' + content_id).hide();
-                spinner.stop();
-                $('#' + content_id + ' form input, #' + content_id + ' form textarea').removeAttr('disabled');
-                $('#' + content_id + ' form #id_mail, #' + content_id + ' form #id_message').val('');
+                content_elem.find('form input, form textarea').removeAttr('disabled');
+                content_elem.find('form input[type="text"], form input[type="email"], form textarea').val('');
                 
-                $('#' + answer_id + ' .close-modal-btn').click(function() {
-                    $('#' + answer_id).html('');
-                    $('#' + content_id).fadeIn();
+                answer_elem.find('.close-modal-btn').click(function() {
+                    answer_elem.html('');
+                    content_elem.fadeIn();
                 });
             }
         });
+    }
 
-        $('#' + content_id + ' form input, #' + content_id + ' form textarea').attr('disabled', 'disabled');
-    });
-    
+
+    setModalSubmitHandler($('#modal-feedback'), "/feedback/");
+    setModalSubmitHandler($('#modal-invite-friend'), "/freund-einladen/");
+    setModalSubmitHandler($('#modal-question-feedback'), "/feedback/");   
+
+
+
+
+
+    // ========================================================================================
+    // 9. MODAL OVERLAYS
+    // ========================================================================================
+
 
     // Function to set click handlers for clicks outside a modal window to close it
-    function closeModalOnClickOutside(modalWindow, modalInner, closeLabel) {
-        $(modalWindow).click(function() {
-            $(closeLabel).click();
+    // ........................................................................................
+
+    function closeModalOnClickOutside(modal_elem) {
+        var modalWindow = modal_elem.find('.modal-window').first();
+        var modalInner = modal_elem.find('.modal-inner').first();
+        var closeLabel = modal_elem.find('.modal-label').first();
+
+        modalWindow.click(function() {
+            closeLabel.click();
         });
-        $(modalInner).click(function(event){
+        modalInner.click(function(event){
             event.stopPropagation();
         });
     }
 
-    closeModalOnClickOutside('.modal-window.login', '.modal-inner.login', 'label.login-btn');
-    closeModalOnClickOutside('.modal-window.feedback', '.modal-inner.feedback', 'label.modal-close.feedback');
-    closeModalOnClickOutside('.modal-window.friend-invite', '.modal-inner.friend-invite', 'label.modal-close.friend-invite');
-    closeModalOnClickOutside('.modal-window.question-feedback', '.modal-inner.question-feedback', 'label.modal-close.question-feedback');
-    closeModalOnClickOutside('.modal-window.group', '.modal-inner.group', 'label.modal-close.group');
-    closeModalOnClickOutside('.modal-window.group-invite', '.modal-inner.group-invite', 'label.modal-close.group-invite');
-    closeModalOnClickOutside('.modal-window.welcome', '.modal-inner.welcome', 'label.modal-close.welcome');
-    closeModalOnClickOutside('.modal-window.play', '.modal-inner.play', 'label.modal-close.play');
-
-
-    // Click Listener on question statistics checkboxes next to estimates
-    $("form.activate-stats, form.deactivate-stats").on("change", "input:checkbox", function(){
-        var id = $(this).val();
-        $(this).parent().submit();
-    });
+    closeModalOnClickOutside($('#modal-login'));
+    closeModalOnClickOutside($('#modal-feedback'));
+    closeModalOnClickOutside($('#modal-invite-friend'));
+    closeModalOnClickOutside($('#modal-question-feedback'));
+    closeModalOnClickOutside($('#modal-group-create'));
+    closeModalOnClickOutside($('#modal-group-invite'));
+    closeModalOnClickOutside($('#modal-welcome'));
+    closeModalOnClickOutside($('#modal-play'));    
 
 });

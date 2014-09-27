@@ -482,53 +482,6 @@ body {
           width: 28.20513%; }
           body #main .top-right:last-child {
             margin-right: 0; } }
-  body footer {
-    background: #333333;
-    color: rgba(255, 255, 255, 0.5);
-    padding: 15px 0;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 10px; }
-    body footer:after {
-      content: "";
-      display: table;
-      clear: both; }
-    @media screen and (max-width: 768px) {
-      body footer {
-        padding: 15px; } }
-    body footer a {
-      -webkit-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      color: rgba(255, 255, 255, 0.5);
-      display: inline-block;
-      text-decoration: underline;
-      float: right;
-      padding-left: 5px;
-      font-size: 13px;
-      margin-left: 10px; }
-      body footer a:hover {
-        color: white;
-        text-decoration: none; }
-    body footer .modal {
-      display: inline-block;
-      float: right; }
-      body footer .modal label {
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        color: rgba(255, 255, 255, 0.5);
-        display: inline-block;
-        text-decoration: underline;
-        float: right;
-        padding-left: 5px;
-        font-size: 13px;
-        font-weight: normal;
-        margin-left: 10px; }
-        body footer .modal label:hover {
-          color: white;
-          text-decoration: none; }
   body .rating i {
     color: rgba(0, 0, 0, 0.2); }
     body .rating i:hover {
@@ -1043,7 +996,7 @@ header.landing {
             display: none; } }
       header.landing #header-wrapper .login-navi .modal {
         display: inline-block; }
-      header.landing #header-wrapper .login-navi .login-btn {
+      header.landing #header-wrapper .login-navi #modal-login .modal-label {
         line-height: 1em !important;
         margin-top: 7.5px;
         margin-bottom: 7.5px;
@@ -1055,7 +1008,7 @@ header.landing {
         color: white;
         padding: .4em .6em;
         font-weight: 400; }
-        header.landing #header-wrapper .login-navi .login-btn:hover {
+        header.landing #header-wrapper .login-navi #modal-login .modal-label:hover {
           background: #6f99d5; }
 
 header.navi-header {
@@ -1228,6 +1181,53 @@ header.navi-header {
         padding: 1px 3px;
         font-size: 0.6em;
         vertical-align: 0.8em; }
+
+footer {
+  background: #333333;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 15px 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 10px; }
+  footer:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (max-width: 768px) {
+    footer {
+      padding: 15px; } }
+  footer a {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    color: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    text-decoration: underline;
+    float: right;
+    padding-left: 5px;
+    font-size: 13px;
+    margin-left: 10px; }
+    footer a:hover {
+      color: white;
+      text-decoration: none; }
+  footer .modal {
+    display: inline-block;
+    float: right; }
+    footer .modal label {
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      color: rgba(255, 255, 255, 0.5);
+      display: inline-block;
+      float: right;
+      padding-left: 5px;
+      font-size: 13px;
+      font-weight: normal;
+      margin-left: 20px; }
+      footer .modal label:hover {
+        color: white;
+        text-decoration: none; }
 
 #account-settings div.join-date, #account-settings div.last-login, #account-settings div.pw-change {
   padding-bottom: 15px; }
@@ -1414,7 +1414,7 @@ header.navi-header {
         #challenge-list-all aside #played-challenges ul li a span.detail:hover, #challenge-list-all aside #own-challenges ul li a span.detail:hover {
           color: #333333; }
 
-#groups-list .new-group {
+#groups-list #modal-group-create .modal-label {
   text-align: center;
   font-weight: bold;
   padding: 12px 0 15px 0;
@@ -1427,10 +1427,10 @@ header.navi-header {
   color: white;
   padding: .4em .6em;
   margin: auto; }
-  #groups-list .new-group:hover {
+  #groups-list #modal-group-create .modal-label:hover {
     background: #83b86c; }
   @media screen and (max-width: 480px) {
-    #groups-list .new-group {
+    #groups-list #modal-group-create .modal-label {
       width: 100%; } }
 #groups-list .accept {
   float: right; }
@@ -1471,7 +1471,7 @@ header.navi-header {
         margin-right: 0; } }
 #group-show .multi-title.center {
   width: 100%; }
-#group-show .new-group-invite, #group-show .center .join-group {
+#group-show #modal-group-invite .modal-label, #group-show .center .join-group {
   text-align: center;
   font-weight: bold;
   padding: 12px 0 15px 0;
@@ -1484,12 +1484,12 @@ header.navi-header {
   color: white;
   padding: .4em .6em;
   margin: 20px auto; }
-  #group-show .new-group-invite:hover, #group-show .center .join-group:hover {
+  #group-show #modal-group-invite .modal-label:hover, #group-show .center .join-group:hover {
     background: #83b86c; }
   @media screen and (max-width: 480px) {
-    #group-show .new-group-invite, #group-show .center .join-group {
+    #group-show #modal-group-invite .modal-label, #group-show .center .join-group {
       width: 100%; } }
-  #group-show .new-group-invite a, #group-show .center .join-group a {
+  #group-show #modal-group-invite .modal-label a, #group-show .center .join-group a {
     color: white; }
 #group-show .center .leave-group {
   color: #a60000 !important;
@@ -1687,7 +1687,7 @@ header.navi-header {
       text-align: center; }
       .menu .menu-stage:last-child {
         margin-right: 0; } }
-  .menu .menu-stage .menu-btn {
+  .menu .menu-stage .menu-btn, .menu .menu-stage #modal-play .modal-label {
     width: 300px;
     border: 0;
     box-shadow: none;
@@ -1699,14 +1699,14 @@ header.navi-header {
     letter-spacing: -1px;
     padding: 0px !important;
     display: table; }
-    .menu .menu-stage .menu-btn i {
+    .menu .menu-stage .menu-btn i, .menu .menu-stage #modal-play .modal-label i {
       border-right: 2px solid rgba(255, 255, 255, 0.3);
       font-size: 22px;
       padding: 12px 14px 10px 15px !important;
       display: table-cell;
       width: 25px; }
     @media screen and (max-width: 480px) {
-      .menu .menu-stage .menu-btn {
+      .menu .menu-stage .menu-btn, .menu .menu-stage #modal-play .modal-label {
         float: left;
         display: block;
         margin-right: 6.66667%;
@@ -1714,15 +1714,15 @@ header.navi-header {
         margin-left: 0%;
         font-size: 18px;
         margin-bottom: 20px; }
-        .menu .menu-stage .menu-btn:last-child {
+        .menu .menu-stage .menu-btn:last-child, .menu .menu-stage #modal-play .modal-label:last-child {
           margin-right: 0; } }
-    .menu .menu-stage .menu-btn span {
+    .menu .menu-stage .menu-btn span, .menu .menu-stage #modal-play .modal-label span {
       vertical-align: middle;
       display: table-cell;
       text-align: center;
       padding: 10px 30px 10px 10px;
       width: 100%; }
-    .menu .menu-stage .menu-btn.play-btn {
+    .menu .menu-stage .menu-btn.modal-label, .menu .menu-stage #modal-play .modal-label.modal-label {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
@@ -1730,9 +1730,9 @@ header.navi-header {
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em; }
-      .menu .menu-stage .menu-btn.play-btn:hover {
+      .menu .menu-stage .menu-btn.modal-label:hover, .menu .menu-stage #modal-play .modal-label.modal-label:hover {
         background: #83b86c; }
-    .menu .menu-stage .menu-btn.highscore-btn {
+    .menu .menu-stage .menu-btn.highscore-btn, .menu .menu-stage #modal-play .modal-label.highscore-btn {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
@@ -1740,9 +1740,9 @@ header.navi-header {
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em; }
-      .menu .menu-stage .menu-btn.highscore-btn:hover {
+      .menu .menu-stage .menu-btn.highscore-btn:hover, .menu .menu-stage #modal-play .modal-label.highscore-btn:hover {
         background: #6f99d5; }
-    .menu .menu-stage .menu-btn.statistics-btn {
+    .menu .menu-stage .menu-btn.statistics-btn, .menu .menu-stage #modal-play .modal-label.statistics-btn {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
@@ -1750,9 +1750,9 @@ header.navi-header {
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em; }
-      .menu .menu-stage .menu-btn.statistics-btn:hover {
+      .menu .menu-stage .menu-btn.statistics-btn:hover, .menu .menu-stage #modal-play .modal-label.statistics-btn:hover {
         background: #985cb0; }
-    .menu .menu-stage .menu-btn.send-question-btn {
+    .menu .menu-stage .menu-btn.send-question-btn, .menu .menu-stage #modal-play .modal-label.send-question-btn {
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
@@ -1760,7 +1760,7 @@ header.navi-header {
       border-radius: 0.1875em;
       color: white;
       padding: .4em .6em; }
-      .menu .menu-stage .menu-btn.send-question-btn:hover {
+      .menu .menu-stage .menu-btn.send-question-btn:hover, .menu .menu-stage #modal-play .modal-label.send-question-btn:hover {
         background: #ff7412; }
   .menu .menu-stage .short-stats {
     width: 300px;
@@ -2178,7 +2178,7 @@ header.navi-header {
     width: 42.85714%; }
     #question-score-challenge .stats-feedback .question-stats-btn:last-child {
       margin-right: 0; }
-  #question-score-challenge .stats-feedback .question-feedback-btn {
+  #question-score-challenge .stats-feedback .modal-label {
     float: left;
     display: block;
     margin-right: 14.28571%;
@@ -2189,9 +2189,9 @@ header.navi-header {
     -moz-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
     font-weight: 400; }
-    #question-score-challenge .stats-feedback .question-feedback-btn:last-child {
+    #question-score-challenge .stats-feedback .modal-label:last-child {
       margin-right: 0; }
-    #question-score-challenge .stats-feedback .question-feedback-btn:hover {
+    #question-score-challenge .stats-feedback .modal-label:hover {
       color: #2c5999; }
 @media screen and (max-width: 768px) {
   #question-score-challenge section {
@@ -2344,6 +2344,7 @@ header.navi-header {
     border-radius: 0.1875em;
     color: white;
     padding: .4em .6em;
+    padding: 8px 8px 5px 8px;
     float: right; }
     #question-score .top-right .next-random-btn:hover {
       background: #83b86c; }
@@ -2383,7 +2384,7 @@ header.navi-header {
     width: 42.85714%; }
     #question-score .stats-feedback .question-stats-btn:last-child {
       margin-right: 0; }
-  #question-score .stats-feedback .question-feedback-btn {
+  #question-score .stats-feedback .modal-label {
     float: left;
     display: block;
     margin-right: 14.28571%;
@@ -2394,9 +2395,9 @@ header.navi-header {
     -moz-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
     font-weight: 400; }
-    #question-score .stats-feedback .question-feedback-btn:last-child {
+    #question-score .stats-feedback .modal-label:last-child {
       margin-right: 0; }
-    #question-score .stats-feedback .question-feedback-btn:hover {
+    #question-score .stats-feedback .modal-label:hover {
       color: #2c5999; }
 @media screen and (max-width: 768px) {
   #question-score section {
@@ -2680,9 +2681,9 @@ header.navi-header {
   #register-form .errorlist + p > input {
     border: 1px solid #D46A6A !important; }
 
-.register_done {
+#modal-welcome {
   text-align: center; }
-  .register_done .go {
+  #modal-welcome .go {
     text-align: center;
     font-size: 20px;
     letter-spacing: -1px;
@@ -2697,9 +2698,9 @@ header.navi-header {
     font-weight: 400;
     padding: 8px 0;
     line-height: 1em; }
-    .register_done .go:hover {
+    #modal-welcome .go:hover {
       background: #83b86c; }
-  .register_done .greeting {
+  #modal-welcome .greeting {
     line-height: 1em;
     text-transform: none;
     display: block;
@@ -2707,7 +2708,7 @@ header.navi-header {
     margin-bottom: 15px;
     font-size: 20px;
     letter-spacing: -1px; }
-  .register_done p {
+  #modal-welcome p {
     text-align: center !important;
     margin-bottom: 20px; }
 

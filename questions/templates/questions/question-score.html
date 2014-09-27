@@ -111,49 +111,7 @@
 				Statistik zur Frage
 			</a>
 
-			<div class="modal">
-			  <label class="question-feedback-btn" for="modal-question-feedback">
-			  	<i class="fa fa-comment"></i> 
-			    Feedback zur Frage
-			  </label>
-			  <input class="modal-state" id="modal-question-feedback" type="checkbox" />
-			  <div class="modal-window question-feedback">
-			    <div class="modal-inner question-feedback">
-			      <label class="modal-close question-feedback" for="modal-question-feedback"></label>
-
-			      <div class="modal-answer" id="feedback-question-answer"></div>
-
-			      <div class="modal-content" id="feedback-question-content">
-			      
-				      <h3>Feedback: {{ question.title }}</h3>
-						<form method="post" action="{% url 'questions_feedback' %}">{% csrf_token %}
-							<p>
-								<input type="hidden" id="question_id" name="questionid" value="{{ question.id }}" placeholder="Frage">
-							</p>
-
-							{% if user.is_authenticated %}
-					        	<input name="userid" type="hidden" value="{{ user.id }}">
-								<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
-							{% else %}
-								<p>
-									<input name="userid" type="hidden">
-									<input id="id_name" name="name" placeholder="Name" type="text">
-								</p>
-							{% endif %}
-
-							<p>
-								<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
-							</p>
-							<p>
-								<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
-							</p>
-							<input type="submit" value="Feedback senden ">
-						</form>
-					</div>
-
-			    </div>
-			  </div>
-			</div>
+			{% include "questions/modal-question-feedback.html" with modal_id="modal-question-feedback" modal_class="question-feedback" %}
 
 		</div>
 

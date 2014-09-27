@@ -98,6 +98,7 @@
 		.next-random-btn {
 			text-align:center;
 			@include btn(#68a24f);
+			padding: 8px 8px 5px 8px;
 			
 			float: right;
 
@@ -134,7 +135,7 @@
 			@include span-columns(1 of 2);
 		}
 
-		.question-feedback-btn {
+		.modal-label {
 			@include span-columns(1 of 2);
 			@include omega();
 			color: #477dca;

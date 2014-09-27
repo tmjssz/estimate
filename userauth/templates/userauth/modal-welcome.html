@@ -1,0 +1,11 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}{% endblock %}
+{% block modal_title %}Willkommen{% endblock %}
+
+{% block modal_content %}
+<div class="greeting">Hi {{ user.username }}, du hast jetzt deinen eigenen Account.</div>
+<p>Im Menu unter dem Punkt <a href="{% url 'questions_account' %}"> <i class="fa fa-user"></i> Konto</a> kannst du deinen Benutzernamen und dein Passwort ändern. Viel Spaß beim Schätzen!</p>
+
+<label class="register_done go" for="modal-welcome-state">Los geht's! <i class="fa fa-arrow-circle-right"></i></label>
+{% endblock %}

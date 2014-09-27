@@ -1,0 +1,30 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}<i class="fa fa-sign-in"></i> Login{% endblock %}
+{% block modal_title %}Login{% endblock %}
+
+{% block modal_content %}
+	<form action="{% url 'userauth_login' %}" method="post" accept-charset="utf-8">
+	    <p>
+	    	<input id="id_username" maxlength="254" name="username" type="text" placeholder="Benutzername" autofocus>
+	    </p>
+	    <p>
+	    	<input id="id_password" name="password" type="password" placeholder="Passwort">
+	    </p>
+	    <p id="login-submit">
+	    	<input type="hidden" name="next" value="{{ next }}" />
+	    	<input type="submit" value="Anmelden"/>
+	    </p>
+	    <p class="centered-text">
+	    	Noch kein Account? <a href="{% url 'userauth_register' %}">Registrieren</a>
+	    </p>
+	    <strong class="line-thru">oder</strong>
+
+	    <a class="social-login google" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><i class="fa fa-google-plus"></i> <span>Mit Google anmelden</span></a>
+	    {% csrf_token %}
+
+	    <div class="smaller">
+	    	Wenn du dich mit Google anmeldest und noch keinen Account besitzt, registrierst du dich und solltest dich auch in Zukunft mit Google anmelden.
+	    </div>
+	</form>
+{% endblock %}

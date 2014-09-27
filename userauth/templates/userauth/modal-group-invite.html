@@ -1,0 +1,22 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}<i class="fa fa-plus-square"></i> User einladen{% endblock %}
+{% block modal_title %}User einladen{% endblock %}
+
+{% block modal_content %}
+<form enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
+	{% if invitable_users %}
+	<select name="invitee" id="select-invitee" required size="5">
+		{% for u in invitable_users %}
+			{% if not u.is_superuser %}
+				<option>{{ u }}</option>
+			{% endif %}
+		{% endfor %}
+	</select>
+	{% endif %}
+	
+	<input type="hidden" name="action" value="invite">
+	{% csrf_token %}
+	<input type="submit" value="Einladen"/>
+</form>
+{% endblock %}

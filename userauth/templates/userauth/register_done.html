@@ -4,26 +4,7 @@
 
 {% block content %}
 
-<div class="modal register_done">
-  <input class="modal-state" id="modal-welcome" type="checkbox" checked/>
-  <div class="modal-window welcome">
-    <div class="modal-inner welcome">
-      <label class="modal-close welcome" for="modal-welcome"></label>
-
-      <div class="modal-answer" id="welcome-answer"></div>
-      
-      <div class="modal-content" id="welcome-content">
-
-	      <h1>Willkommen</h1>
-	      <div class="greeting">Hi {{ user.username }}, du hast jetzt deinen eigenen Account.</div>
-		  <p>Im Menu unter dem Punkt <a href="{% url 'questions_account' %}"> <i class="fa fa-user"></i> Konto</a> kannst du deinen Benutzernamen und dein Passwort ändern. Viel Spaß beim Schätzen!</p>
-
-		  <label class="register_done go" for="modal-welcome">Los geht's! <i class="fa fa-arrow-circle-right"></i></label>
-	  </div>
-
-    </div>
-  </div>
-</div>
+{% include "userauth/modal-welcome.html" with modal_id="modal-welcome" modal_class="welcome" checked="checked" %}
 
 <div class="menu">
 
@@ -40,44 +21,7 @@
 		{% endif %}
 
 
-		<div class="modal">
-
-			<label for="modal-play" class="play-btn menu-btn">
-				<i class="fa fa-arrow-circle-right"></i> <span>Spielen</span>
-			</label>
-			<input class="modal-state" id="modal-play" type="checkbox"/>
-			<div class="modal-window play">
-				<div class="modal-inner play">
-
-		    		<label class="modal-close play" for="modal-play"></label>
-
-		    		<div class="modal-answer" id="play-answer"></div>
-		      
-		    		<div class="modal-content" id="play-content">
-
-					<h1>Spiel starten</h1>
-
-
-					<a href="{% url 'questions_random' %}" class="game-mode">
-						<i class="fa fa-random"></i>
-						<span>Zufällige Fragen</span>
-					</a>
-
-					<a href="{% url 'questions_challenge_all' %}" class="game-mode">
-						<i class="fa fa-flag"></i>
-						<span>Challenge</span>
-					</a>
-
-					<a href="{% url 'questions_question_all' %}" class="game-mode">
-						<i class="fa fa-list"></i>
-						<span>Frage wählen</span>
-					</a>
-
-				</div>
-		    </div>
-		  </div>
-		</div>
-
+		{% include "questions/modal-play.html" with modal_id="modal-play" modal_class="play" %}
 
 		<a class="highscore-btn menu-btn" href="{% url 'questions_highscore' %}">
 			<i class="fa fa-trophy"></i> <span>Highscore</span>

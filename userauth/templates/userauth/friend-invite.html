@@ -22,10 +22,6 @@
 		<h1>Freund einladen</h1>
 	    <form enctype="multipart/form-data" action="{% url 'invite_friend' %}" method="post" accept-charset="utf-8">
 			{% csrf_token %}
-		    
-		    {% for field in form.hidden_fields %}
-		        {{ field }}
-		    {% endfor %}
 
 		    {% for field in form.visible_fields %}
 		        <p>
@@ -33,6 +29,11 @@
 		        	{{ field }}
 		        </p>
 		    {% endfor %}
+
+		    {% for field in form.hidden_fields %}
+		        {{ field }}
+		    {% endfor %}
+		    
 			<input type="submit" value="Einladung senden"/>
 		</form>
 

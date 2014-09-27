@@ -1,0 +1,21 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}<i class="fa fa-arrow-circle-right"></i> <span>Spielen</span>{% endblock %}
+{% block modal_title %}Spiel starten{% endblock %}
+
+{% block modal_content %}
+<a href="{% url 'questions_random' %}" class="game-mode">
+	<i class="fa fa-random"></i>
+	<span>Zufällige Fragen</span>
+</a>
+
+<a href="{% url 'questions_challenge_all' %}" class="game-mode">
+	<i class="fa fa-flag"></i>
+	<span>Challenge</span>
+</a>
+
+<a href="{% url 'questions_question_all' %}" class="game-mode">
+	<i class="fa fa-list"></i>
+	<span>Frage wählen</span>
+</a>
+{% endblock %}

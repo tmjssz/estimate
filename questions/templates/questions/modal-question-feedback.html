@@ -1,0 +1,30 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}<i class="fa fa-comment"></i> Feedback zur Frage{% endblock %}
+{% block modal_title %}Feedback: {{ question.title }}{% endblock %}
+
+{% block modal_content %}
+<form method="post" action="{% url 'questions_feedback' %}">{% csrf_token %}
+	<p>
+		<input type="hidden" id="question_id" name="questionid" value="{{ question.id }}" placeholder="Frage">
+	</p>
+
+	{% if user.is_authenticated %}
+    	<input name="userid" type="hidden" value="{{ user.id }}">
+		<input id="id_name" name="name" placeholder="Name" type="hidden" value="{{ user.username }}">
+	{% else %}
+		<p>
+			<input name="userid" type="hidden">
+			<input id="id_name" name="name" placeholder="Name" type="text">
+		</p>
+	{% endif %}
+
+	<p>
+		<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
+	</p>
+	<p>
+		<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
+	</p>
+	<input type="submit" value="Feedback senden ">
+</form>
+{% endblock %}

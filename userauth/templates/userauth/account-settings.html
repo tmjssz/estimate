@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Konto{% endblock %}
+
+{% block content %}
+<div id="account-settings">
+
+    <h2>Konto-Einstellungen</h2>
+
+    <section>
+
+        <form class="user-change" action="{% url 'questions_account' %}" method="post" accept-charset="utf-8">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Speichern"/>
+        </form>
+
+    </section>
+
+    <aside>
+
+        <div class="join-date">
+            <h4>Mitglied seit</h4>
+            {{ user.date_joined }}
+        </div>
+
+        <div class="last-login">
+            <h4>Zuletzt gesehen</h4>
+            {{ user.last_login }}
+        </div>
+
+        <span class="pw-change">Passwort ändern</span>
+        <div class="pw-change">
+            <h4>Passwort ändern</h4>
+
+            <form class="pw-change" action="{% url 'password_change' %}" method="post" accept-charset="utf-8">
+                {{ pw_form.as_p }}
+                {% csrf_token %}
+                <input type="submit" value="Ändern"/>
+            </form>
+        </div>
+
+    </aside>
+
+<!-- / #account-settings -->
+</div>
+{% endblock %}

@@ -39,10 +39,6 @@
 
 		<form enctype="multipart/form-data" action="{% url 'questions_feedback' %}" method="POST" accept-charset="utf-8">
 			{% csrf_token %}
-		    
-		    {% for field in form.hidden_fields %}
-		        {{ field }}
-		    {% endfor %}
 
 		    {{ form.non_field_errors }}
 
@@ -51,6 +47,10 @@
 		        	{{ field.errors }}
 		        	{{ field }}
 		        </p>
+		    {% endfor %}
+
+		    {% for field in form.hidden_fields %}
+		        {{ field }}
 		    {% endfor %}
 
 		    <input type="submit" value="Feedback senden">

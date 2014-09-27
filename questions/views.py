@@ -850,7 +850,7 @@ def account_settings(request):
             user_form.save()
     pw_form = PasswordChangeForm(user=request.user)
     user_form = UserProfileForm(instance=request.user)
-    return render(request, 'questions/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
+    return render(request, 'userauth/account-settings.html', {'pw_form': pw_form, 'user_form': user_form, 'user': request.user})
 
 
 

@@ -1,0 +1,22 @@
+<div class="modal" id="{{ modal_id }}">
+  <label class="modal-label" for="{{ modal_id }}-state">
+    {% block modal_label %}{% endblock %}
+  </label>
+  <input class="modal-state" id="{{ modal_id }}-state" type="checkbox" {{ checked }}/>
+  <div class="modal-window {{ modal_class }}">
+    <div class="modal-inner {{ modal_class }}">
+      <label class="modal-close {{ modal_class }}" for="{{ modal_id }}-state"></label>
+
+      <div class="modal-answer"></div>
+      
+      <div class="modal-content">
+
+	      <h1>{% block modal_title %}{% endblock %}</h1>
+
+			{% block modal_content %}{% endblock %}
+
+		</div>
+
+    </div>
+  </div>
+</div>

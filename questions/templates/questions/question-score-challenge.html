@@ -112,32 +112,7 @@
 				Statistik zur Frage
 			</a>
 
-			<div class="modal">
-			  <label class="question-feedback-btn" for="modal-question-feedback">
-			  	<i class="fa fa-comment"></i> 
-			    Feedback zur Frage
-			  </label>
-			  <input class="modal-state" id="modal-question-feedback" type="checkbox" />
-			  <div class="modal-window">
-			    <div class="modal-inner">
-			      <label class="modal-close" for="modal-question-feedback"></label>
-			      
-			      <h3>Feedback: {{ question.title }}</h3>
-					<form method="post" action="{% url 'questions_feedback' %}">{% csrf_token %}
-						<p>
-							<input type="hidden" id="name_id" name="name" value="{{ question.title }}" placeholder="Fragen">
-						</p>
-						<p>
-							<input required type="email" id="mail_id" name="email" placeholder="E-Mail" value="{{ user.email }}">
-						</p>
-						<p>
-							<textarea required name="message" id="message_id" rows="10" cols="50" placeholder="Nachricht"></textarea>
-						</p>
-						<input type="submit" value="Feedback senden ">
-					</form>
-			    </div>
-			  </div>
-			</div>
+			{% include "questions/modal-question-feedback.html" with modal_id="modal-question-feedback" modal_class="question-feedback" %}
 
 		</div>
 

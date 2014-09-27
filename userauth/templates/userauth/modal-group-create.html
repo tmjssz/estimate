@@ -1,0 +1,25 @@
+{% extends "modal.html" %}
+
+{% block modal_label %}<i class="fa fa-plus"></i> Neue Gruppe{% endblock %}
+{% block modal_title %}Neue Gruppe{% endblock %}
+
+{% block modal_content %}
+<p>
+	Eine neue Gruppe zu erstellen ist ganz einfach. Wähle den Namen deiner Gruppe und lade anschließend deine Freunde dazu ein.
+</p>
+<form enctype="multipart/form-data" action="{% url 'group_list' %}" method="post" accept-charset="utf-8">
+	<input type="hidden" name="action" value="create-group">
+	{% if group %}
+		<p>
+			<ul class="errorlist"><li>Dieser Gruppenname ist bereits vergeben (<a href="{% url 'group_show' group.id %}">{{ group }}</a>), bitte wähle einen anderen Namen.</li></ul>
+	    	<input id="id_name" maxlength="80" name="name" type="text" placeholder="Gruppenname" value="{{ group }}">
+	    </p>
+	{% else %}
+	    <p>
+	    	<input id="id_name" maxlength="80" name="name" type="text" placeholder="Gruppenname">
+	    </p>
+	{% endif %}
+    {% csrf_token %}
+    <input type="submit" value="Gruppe erstellen"/>
+</form>
+{% endblock %}

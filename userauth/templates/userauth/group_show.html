@@ -63,34 +63,9 @@
 				<p>In deiner Gruppe befinden sich außer dir noch keine weiteren Mitglieder. Lade jetzt deine Freunde zur Gruppe ein.</p>
 
 				{% if invitable_users %}
-					<div class="modal">
-					  <label for="modal-group-invite" class="new-group-invite">
-					    <i class="fa fa-plus-square"></i> User einladen
-					  </label>
-					  <input class="modal-state" id="modal-group-invite" type="checkbox" />
-					  <div class="modal-window group-invite">
-					    <div class="modal-inner group-invite">
-					      <label class="modal-close group-invite" for="modal-group-invite"></label>
-					      <h1>User einladen</h1>
-					      
-					      <form enctype="multipart/form-data" action="{% url 'group_show' group.id %}" method="post" accept-charset="utf-8">
-							{% if invitable_users %}
-							<select name="invitee" id="select-invitee" required size="5">
-								{% for u in invitable_users %}
-									{% if not u.is_superuser %}
-										<option>{{ u }}</option>
-									{% endif %}
-								{% endfor %}
-							</select>
-							{% endif %}
-							
-							<input type="hidden" name="action" value="invite">
-							{% csrf_token %}
-							<input type="submit" value="Einladen"/>
-						</form>
-					    </div>
-					  </div>
-					</div>
+
+					{% include "userauth/modal-group-invite.html" with modal_id="modal-group-invite" modal_class="group-invite" %}
+
 				{% endif %}
 
 				<div class="leave-group">

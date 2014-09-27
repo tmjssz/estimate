@@ -14,7 +14,7 @@
 		}
 
 
-		.menu-btn {
+		.menu-btn, #modal-play .modal-label {
 			width: 300px;
 			border: 0;
 			box-shadow: none;
@@ -50,7 +50,7 @@
 				width: 100%;
 			}
 			
-			&.play-btn {
+			&.modal-label {
 				@include btn(#68a24f);
 			}
 			&.highscore-btn {
