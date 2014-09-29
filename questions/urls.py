@@ -8,11 +8,11 @@ urlpatterns = patterns('questions.views',
     url(r'^$', 'menu_view', name='questions_menu'),
 
     # game modes
-    url(r'^zufall/$', 'question_random', name='questions_random'),
+    url(r'^zufall/$', 'game_mode_random', name='questions_random'),
     url(r'^frage/$', 'questions_list_all', name='questions_question_all'),
-    url(r'^start/$', 'question_start', name='questions_start'),
+    url(r'^start/$', 'game_mode_start', name='questions_start'),
     url(r'^challenge/$', 'challenges_list_all', name='questions_challenge_all'),
-    url(r'^challenge/(?P<slug>[-\w]+)/$', 'challenge_view', name='questions_challenge_show'),
+    url(r'^challenge/(?P<slug>[-\w]+)/$', 'game_mode_challenge', name='questions_challenge_show'),
 
     # statistics
     url(r'^statistik/$', 'statistics_crowd', name='questions_statistics_crowd'),

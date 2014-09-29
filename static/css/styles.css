@@ -2458,6 +2458,44 @@ footer {
   display: block;
   text-align: center; }
 
+#question-show #progressTimer {
+  position: relative; }
+  @media screen and (max-width: 480px) {
+    #question-show #progressTimer {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%; } }
+  #question-show #progressTimer .progress {
+    height: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
+    @media screen and (max-width: 480px) {
+      #question-show #progressTimer .progress {
+        background-color: #333333;
+        margin-bottom: 0;
+        height: 5px; } }
+    #question-show #progressTimer .progress .progress-bar {
+      float: left;
+      width: 0;
+      height: 100%;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+      background-color: #477dca;
+      -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+      -webkit-transition: width .6s ease;
+      transition: width .6s ease; }
+      @media screen and (max-width: 480px) {
+        #question-show #progressTimer .progress .progress-bar {
+          background-color: #f0e3cf; } }
+      #question-show #progressTimer .progress .progress-bar.progress-bar-danger, #question-show #progressTimer .progress .progress-bar.progress-bar-success {
+        background-color: #de5c00; }
 #question-show section {
   float: left;
   display: block;

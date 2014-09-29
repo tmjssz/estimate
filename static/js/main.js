@@ -80,7 +80,7 @@ $( document ).ready(function() {
     // ========================================================================================
 
 
-    // Question Countdown 
+    // Question Countdown Timer & animated Progress Bar
     // ........................................................................................
 
     var countdown = $("#countdown");
@@ -102,6 +102,8 @@ $( document ).ready(function() {
                 $("form#estimate_form").submit();
             }
         });
+
+        $('#progressTimer').progressTimer({ timeLimit: time });
     }
 
 

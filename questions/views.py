@@ -112,17 +112,20 @@ def menu_view(request):
  # 2 
  GAME MODES
  ==========
-    questions_list_all    = CHOOSE QUESTIONS
-    question_random       = RANDOM QUESTIONS
-    challenges_list_all   = CHALLENGE LIST
-    challenge_view        = PLAY CHALLENGE
+    questions_list_all      = CHOOSE QUESTIONS
+    challenges_list_all     = CHALLENGE LIST
+    game_mode_challenge     = PLAY CHALLENGE
+    game_mode_random        = RANDOM QUESTIONS
+    game_mode_start         = DEMO MODE
 ================================================================================================== 
 """
 @login_required
 def questions_list_all(request):
     """
     GAME MODE: CHOOSE QUESTIONS
-    List all published Questions.
+    List all published Questions. 
+    Open questions, own questions (with author = current user), answered questions
+    and questions with time out are separated.
     """
     questions = Question.objects.filter(published=True)
     if not questions:
@@ -148,40 +151,6 @@ def questions_list_all(request):
 
     return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'time_out': time_out, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
-
-@login_required
-def question_random(request):
-    """
-    Show a random question, which were not answered before.
-    """
-    questions = Question.objects.filter(published=True).exclude(author=request.user)
-    if not questions:
-        title = u'Keine Frage verfügbar'
-        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.</p>'
-        return show_message(request, title, message)
-
-    # filter out questions, which were already answered
-    estimates = Estimate.objects.filter(user=request.user)
-    for e in estimates:
-        questions = questions.exclude(pk=e.question.pk)
-    
-    if questions.count() == 0:
-        # there are no unanswered questions left
-        title = u'Alle Fragen beantwortet'
-        message = u'<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann <a href="/frage-einreichen/">überlege</a> dir doch mal weitere Fragen.</p>'
-        return show_message(request, title, message)
-    
-    question = random.choice(questions)
-
-    # get another questions for statistics, so that those questions are preferred
-    questions_stats = questions.filter(stats=True)
-    if questions_stats.count() > 0:
-        question_stats = random.choice(questions_stats)
-        # make a list of both selected questions and choose randomly one of them
-        both_questions = [question_stats, question]
-        question = random.choice(both_questions)
-
-    return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
 
 
 @login_required
@@ -226,7 +195,7 @@ def challenges_list_all(request):
 
 
 @login_required
-def challenge_view(request, slug):
+def game_mode_challenge(request, slug):
     """
     Show a given challenge. 
     As long as there are unanswered questions inside the challenge, a challenge questions is shown.
@@ -267,8 +236,43 @@ def challenge_view(request, slug):
         {'challenge': challenge, 'estimate_list': estimates, 'score': score, 'score_per_question': score_per_question, 'own_questions': own_questions})
 
 
+@login_required
+def game_mode_random(request):
+    """
+    Show a random question, which were not answered before.
+    """
+    questions = Question.objects.filter(published=True).exclude(author=request.user)
+    if not questions:
+        title = u'Keine Frage verfügbar'
+        message = u'<p>Sorry ' + request.user.username + u', es stehen momentan leider keine Fragen zur Verfügung.</p>'
+        return show_message(request, title, message)
 
-def question_start(request):
+    # filter out questions, which were already answered
+    estimates = Estimate.objects.filter(user=request.user)
+    for e in estimates:
+        questions = questions.exclude(pk=e.question.pk)
+    
+    if questions.count() == 0:
+        # there are no unanswered questions left
+        title = u'Alle Fragen beantwortet'
+        message = u'<p>Glückwunsch, du hast alle Fragen beantwortet. Momentan stehen leider keine weiteren Fragen zur Verfügung. Willst du das ändern? Dann <a href="/frage-einreichen/">überlege</a> dir doch mal weitere Fragen.</p>'
+        return show_message(request, title, message)
+    
+    question = random.choice(questions)
+
+    # get another questions for statistics, so that those questions are preferred
+    questions_stats = questions.filter(stats=True)
+    if questions_stats.count() > 0:
+        question_stats = random.choice(questions_stats)
+        # make a list of both selected questions and choose randomly one of them
+        both_questions = [question_stats, question]
+        question = random.choice(both_questions)
+
+    return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
+
+
+
+def game_mode_start(request):
     """
     Show selected questions without login necessary.
     """
@@ -569,9 +573,14 @@ def question_view_authentificated(request, question, mode, challenge=None):
                 views.delete()
 
                 if mode == 'challenge':
-                    return redirect('questions_question_show', question_slug=question.slug, mode=mode, challenge_slug=challenge)
+                    return redirect('questions_mode_question_show', question_slug=question.slug, mode=mode, challenge_slug=challenge)
+                elif mode == None:
+                    return redirect('questions_question_show', question_slug=question.slug)
                 else:
-                    return redirect('questions_question_show', question_slug=question.slug, mode=mode)
+                    return redirect('questions_mode_question_show', question_slug=question.slug, mode=mode)
+
+            return question_show(request, form, question, time_left, challenge)
+
         else:
             # question view for first time
             view = QuestionView(user=request.user, question=question)
@@ -583,7 +592,7 @@ def question_view_authentificated(request, question, mode, challenge=None):
 @login_required
 def question_score(request, question, estimate, next_random=False, challenge=None):
     """
-    Show the question score page for given question and estimate.
+    Show the question score page for given question with given estimate.
     next_random : if true, a button for next random question is shown
     challenge   : if given, a button for the next challenge question is shown      
     """
@@ -600,9 +609,9 @@ def question_score(request, question, estimate, next_random=False, challenge=Non
 @login_required
 def question_show(request, form, question, time_left, challenge=None):
     """
-    Show the given question with estimate form.
+    Show the given question with given estimate form.
     time_left : seconds for the left countdown time
-    challenge : if given, number of remaining challenge question is shown
+    challenge : if given, number of already answered challenge questions is shown
     """
     if challenge:
         all_questions = challenge.questions.exclude(author=request.user).count()
@@ -670,7 +679,9 @@ def post_estimate_data(request, question, next_random=False, challenge=None):
 @login_required
 def statistics_crowd(request):
     """
-    Show overall crowd statistics  
+    Show overall crowd statistics.
+    Calculates the crowd-estimate for each question. (If current user=admin, only for questions qith stats=True)
+    Average percentage error of all crowd estimates and best average estimate of single user are calculated as well.
     """
     admin = False
     if request.user.is_active and request.user.is_superuser:
