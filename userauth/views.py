@@ -64,7 +64,6 @@ def ensure_profile_exists(sender, **kwargs):
 def register(request, template_name='userauth/register.html', next_page_name=None):
     # read cookie
     guest_id = request.COOKIES.get('estimate_guest_id')
-    logger.debug(guest_id)
     
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -75,9 +74,10 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
             # check if user already answered questions as guest
             user = None
             if guest_id:
-                users = User.objects.filter(id=guest_id)
-                if users:
-                    user = users[0]
+                if not guest_id == 'None':
+                    users = User.objects.filter(id=guest_id)
+                    if users:
+                        user = users[0]
 
             if user:
                 user.username = username
