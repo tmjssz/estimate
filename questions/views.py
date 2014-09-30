@@ -356,8 +356,8 @@ def game_mode_start(request):
         response = render(request, 'questions/question-start-done.html', {'register_form': register_form, 'score': score, 'avg_score': avg_score})
     else:
         # choose a random question
-        question = random.choice(questions)
-        #response = HttpResponseRedirect("/start/"+question.slug)
+        #question = random.choice(questions)
+        question = questions[0]
         response = redirect('questions_mode_question_show', question_slug=question.slug, mode='start')
 
     if not guest_id:
