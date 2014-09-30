@@ -3,17 +3,17 @@
 
 """
 ####################################################################################################
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#
-#  USERAUTH VIEW - CONTENTS
-#  ========================
-#
-#  1. User Registration
-#  2. Account Settings
-#  3. Groups
-#  4. Tell A Friend
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+ # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+ #                                                                                                 #
+ #  USERAUTH VIEW - CONTENTS                                                                       #
+ #  ========================                                                                       #
+ #                                                                                                 #
+ #  1. User Registration                                                                           #
+ #  2. Account Settings                                                                            #
+ #  3. Groups                                                                                      #
+ #  4. Tell A Friend                                                                               #
+ #                                                                                                 #
+ # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 ####################################################################################################
 """
 from django.contrib.auth.forms import UserCreationForm
@@ -45,22 +45,21 @@ logger = logging.getLogger('estimate.userauth.views')
 
 """ 
 ==================================================================================================
- # 1
- USER REGISTRATION
- =================
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 1 USER REGISTRATION
+ ---------------------
+
+    register                    // user register function
+    register_done               // show menu page after successful user registration
+    ensure_profile_exists       // send mail to admin on user registration
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
-@receiver(post_save, sender=User)
-def ensure_profile_exists(sender, **kwargs):
-    """ Sends a mail to the admins, when a new User object is saved to the DB. """
-    if kwargs.get('created', False):
-            template = get_template('userauth/mail-user-registered.html')
-            new_user = kwargs.get('instance')
-            context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
-            content = template.render(context)
-            mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
 
-
+# User Registration
+# ................................................................................................
 def register(request, template_name='userauth/register.html', next_page_name=None):
     # read cookie
     guest_id = request.COOKIES.get('estimate_guest_id')
@@ -105,6 +104,8 @@ def register(request, template_name='userauth/register.html', next_page_name=Non
         context_instance=RequestContext(request))
 
 
+# View the menu page after successful User registration
+# ................................................................................................
 @login_required
 def register_done(request):
     """
@@ -130,16 +131,35 @@ def register_done(request):
     return render_to_response('questions/menu.html', {'user': request.user, 'is_admin': is_admin, 'challenges': challenges, 'score': score, 'number_estimates': number_estimates, 'welcome': True}, context_instance=RequestContext(request))
 
 
+# Send a Mail to admin for every User registration
+# ................................................................................................
+@receiver(post_save, sender=User)
+def ensure_profile_exists(sender, **kwargs):
+    """ Sends a mail to the admins, when a new User object is saved to the DB. """
+    if kwargs.get('created', False):
+            template = get_template('userauth/mail-user-registered.html')
+            new_user = kwargs.get('instance')
+            context = Context({'user': new_user, 'host': settings.EMAIL_HTML_CONTENT_HOST})
+            content = template.render(context)
+            mail_admins('[Neuer User] '+ new_user.username, 'Es hat sich ein neuer User namens '+new_user.username+' registriert.', html_message=content, fail_silently=True)
+
+
 
 
 
 """ 
 ==================================================================================================
- # 2
- ACCOUNT SETTINGS
- ================
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 2 ACCOUNT SETTINGS
+ --------------------
+
+    account_settings    // show the current user's account settings
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
 @login_required
 def account_settings(request):
     if request.method == "POST":
@@ -156,11 +176,20 @@ def account_settings(request):
 
 """ 
 ==================================================================================================
- # 3
- GROUPS
- ======
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 3 GROUPS
+ ----------
+
+    group_list      // list all groups
+    group_view      // show a single group
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# List all Groups
+# ................................................................................................
 @login_required
 def group_list(request):
     if request.method == 'POST':
@@ -204,6 +233,8 @@ def group_list(request):
     return render_to_response('userauth/groups_list.html', {'groups': groups_list}, context_instance=RequestContext(request))    
 
 
+# Show a single Group
+# ................................................................................................
 @login_required
 def group_view(request, id):
     group = get_object_or_404(Group, id=id)
@@ -273,11 +304,17 @@ def group_view(request, id):
 
 """ 
 ==================================================================================================
- # 4
- TELL A FRIEND
- =============
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 4 TELL A FRIEND
+ -----------------
+
+    invite_friend       // send mail to friend
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
 def invite_friend(request):
     form = FriendInviteForm(initial={'username': request.user.username})
 
@@ -286,11 +323,6 @@ def invite_friend(request):
         message = request.POST[u'message']
         username = request.POST[u'username']
 
-        """try:
-            validate_email(email)
-        except ValidationError:
-            return render_to_response('userauth/friend-invite.html', {'error': True, 'email': email, 'message': message, 'name': name}, context_instance=RequestContext(request))
-        """
         form = FriendInviteForm(request.POST)
         if form.is_valid():
             form.save()

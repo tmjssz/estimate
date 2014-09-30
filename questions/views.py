@@ -3,21 +3,21 @@
 
 """
 ####################################################################################################
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# 
-#  QUESTIONS VIEW - CONTENTS
-#  =========================
-#
-#  1. Main Menu and Landing Page
-#  2. Game Modes
-#  3. Question View
-#  4. Statistics
-#  5. Highscores
-#  6. Create new Question
-#  7. Feedback
-#  8. Message
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+ # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+ #                                                                                                 #
+ #  QUESTIONS VIEW - CONTENTS                                                                      #
+ #  =========================                                                                      #
+ #                                                                                                 #
+ #  1. Main Menu and Landing Page                                                                  #
+ #  2. Game Modes                                                                                  #
+ #  3. Question View                                                                               #
+ #  4. Statistics                                                                                  #
+ #  5. highscores                                                                                  #
+ #  6. Create new Question                                                                         #
+ #  7. Feedback                                                                                    #
+ #  8. Message                                                                                     #
+ #                                                                                                 #
+ # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 ####################################################################################################
 """
 from django.shortcuts import render_to_response, get_object_or_404, render, redirect
@@ -46,9 +46,14 @@ logger = logging.getLogger('estimate.questions.views')
 
 """ 
 ==================================================================================================
- # 1
- MAIN MENU AND LANDING PAGE
- ==========================
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 1 MAIN MENU AND LANDING PAGE
+ ------------------------------
+
+    menu_view       // show menu if logged in, or landing page otherwise
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
 def menu_view(request):
@@ -109,16 +114,23 @@ def menu_view(request):
         
 """ 
 ==================================================================================================
- # 2 
- GAME MODES
- ==========
-    questions_list_all      = CHOOSE QUESTIONS
-    challenges_list_all     = CHALLENGE LIST
-    game_mode_challenge     = PLAY CHALLENGE
-    game_mode_random        = RANDOM QUESTIONS
-    game_mode_start         = DEMO MODE
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 2 GAME MODES
+ --------------
+
+    questions_list_all      // list all questions 
+    challenges_list_all     // list all challenges
+    game_mode_challenge     // start challenge game mode
+    game_mode_random        // start random questions game mode
+    game_mode_start         // start demo questions game mode
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# List all Questions
+# ................................................................................................
 @login_required
 def questions_list_all(request):
     """
@@ -152,7 +164,8 @@ def questions_list_all(request):
     return render_to_response('questions/questions-list-all.html', {'question_list': questions, 'ready_list': ready_questions, 'time_out': time_out, 'own_questions': own_questions, 'user': request.user}, context_instance=RequestContext(request))
 
 
-
+# List all Challenges
+# ................................................................................................
 @login_required
 def challenges_list_all(request):
     """
@@ -194,6 +207,8 @@ def challenges_list_all(request):
     return render(request, 'questions/challenges-list-all.html', {'incompleted_challenges': incompleted_challenges, 'completed_challenges': completed_challenges, 'own_challenges': own_challenges, 'open_questions': open_questions})
 
 
+# Start the Challenge game mode
+# ................................................................................................
 @login_required
 def game_mode_challenge(request, slug):
     """
@@ -236,6 +251,8 @@ def game_mode_challenge(request, slug):
         {'challenge': challenge, 'estimate_list': estimates, 'score': score, 'score_per_question': score_per_question, 'own_questions': own_questions})
 
 
+# Start the Random Questions game mode
+# ................................................................................................
 @login_required
 def game_mode_random(request):
     """
@@ -271,7 +288,8 @@ def game_mode_random(request):
     return redirect('questions_mode_question_show', question_slug=question.slug, mode='random')
 
 
-
+# Start the Demo Questions game mode
+# ................................................................................................
 def game_mode_start(request):
     """
     Show selected questions without login necessary.
@@ -353,11 +371,23 @@ def game_mode_start(request):
 
 """ 
 ==================================================================================================
- # 3 
- QUESTION VIEW
- =============
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 3 QUESTION VIEW
+ -----------------
+
+    question_view                   // main question view function
+    question_view_authentificated   // show question in game mode
+    question_score                  // show question score
+    question_show                   // show question
+    post_estimate_data              // post estimate form data
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# Main Question View Function
+# ................................................................................................
 def question_view(request, question_slug, mode=None, challenge_slug=None):
     """
     Show by slug specified question with estimate form if user has not made an estimate for it before.
@@ -497,6 +527,8 @@ def question_view(request, question_slug, mode=None, challenge_slug=None):
         return question_view_authentificated(request, question, mode, challenge)
 
 
+# Show Question in Game Mode
+# ................................................................................................
 @login_required
 def question_view_authentificated(request, question, mode, challenge=None):
     """
@@ -589,6 +621,8 @@ def question_view_authentificated(request, question, mode, challenge=None):
             return question_show(request, form, question, time_left, challenge)
 
 
+# Show Question Score
+# ................................................................................................
 @login_required
 def question_score(request, question, estimate, next_random=False, challenge=None):
     """
@@ -606,6 +640,8 @@ def question_score(request, question, estimate, next_random=False, challenge=Non
                 {'question': question, 'estimate': estimate, 'next_random': next_random})
 
 
+# Show Question
+# ................................................................................................
 @login_required
 def question_show(request, form, question, time_left, challenge=None):
     """
@@ -623,6 +659,9 @@ def question_show(request, form, question, time_left, challenge=None):
         return render(request, 'questions/question-show.html',
             {'form': form, 'question': question, 'user': request.user, 'time_left': time_left})
 
+
+# Post Estimate Form data
+# ................................................................................................
 @login_required
 def post_estimate_data(request, question, next_random=False, challenge=None):
     """
@@ -668,14 +707,21 @@ def post_estimate_data(request, question, next_random=False, challenge=None):
 
 """ 
 ==================================================================================================
- # 4 
- STATISTICS
- ==========
-    statistics_crowd    = CROWD STATISTICS
-    statistics_question = QUESTIONS STATISTICS
-    statistics_user     = USER STATISTICS
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 4 STATISTICS
+ --------------
+
+    statistics_crowd        // crowd statistics
+    statistics_question     // question statistics
+    statistics_user         // user statistics
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# Show the Crowd Statistics
+# ................................................................................................
 @login_required
 def statistics_crowd(request):
     """
@@ -716,6 +762,9 @@ def statistics_crowd(request):
     estimate_list = zip(avg_estimates, best_estimates, count_estimates, show_estimate)
     return render(request, 'questions/statistics-all.html', {'user': request.user, 'avg_percentage_error': avg_percentage_error, 'best_avg_estimate': best_avg_estimate, 'estimate_list': estimate_list})
 
+
+# Show the Question Statistics
+# ................................................................................................
 @login_required
 def statistics_question(request, slug):
     """
@@ -752,6 +801,9 @@ def statistics_question(request, slug):
 
     return render(request, 'questions/statistics-question.html', {'question': question, 'user':request.user, 'admin': admin, 'own_estimate': own_estimate, 'estimate_list': estimates, 'avg_estimate': avg_estimate})
 
+
+# Show the User Statistics
+# ................................................................................................
 @login_required
 def statistics_user(request, user_id):
     """
@@ -795,13 +847,20 @@ def statistics_user(request, user_id):
 
 """ 
 ==================================================================================================
- # 5 
- HIGHSCORES
- ==========
-   - highscore_all       = HIGHSCORE ALL
-   - highscore_challenge = CHALLENGE HIGHSCORE
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 5 HIGHSCORES
+ --------------
+
+    highscore_all           // highscore top 100
+    highscore_challenge     // highscore challenge
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# Show the Top 100 Highscore
+# ................................................................................................
 @login_required
 def highscore_all(request):
     """
@@ -827,6 +886,8 @@ def highscore_all(request):
     return render(request, 'questions/highscore.html', {'user': request.user, 'score_list': scores, 'per_question': scores_per_question, 'best_estimates': best_estimates, 'best_percentage_error': scores_best_percentage_error})
 
 
+# Show the Challenge Highscore
+# ................................................................................................
 @login_required
 def highscore_challenge(request, slug):
     """
@@ -851,11 +912,17 @@ def highscore_challenge(request, slug):
 
 """ 
 ==================================================================================================
- # 6 
- QUESTION CREATE VIEW
- ====================
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 6 QUESTION CREATE VIEW
+ ------------------------
+
+    question_create_view        // form for questions creation
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
 @login_required
 def question_create_view(request):
     """
@@ -879,11 +946,17 @@ def question_create_view(request):
 
 """ 
 ==================================================================================================
- # 7
- FEEDBACK
- ========
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 7 FEEDBACK
+ ------------
+
+    feedback        // send feedback mail
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
 def feedback(request):
     """ Send Feedback Mail. """
     if request.method == 'POST':
@@ -915,11 +988,20 @@ def feedback(request):
 
 """ 
 ==================================================================================================
- # 8
- MESSAGE
- =======
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+ # 8 MESSAGE
+ -----------
+
+    show_message        // show message in modal overlay
+    set_cookie          // set value in cookie
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 ================================================================================================== 
 """
+
+# Show a Message in a Modal Overlay in front of Menu Page
+# ................................................................................................
 def show_message(request, message_title, message):
     if request.user.is_authenticated():
         estimates = Estimate.objects.filter(user=request.user).exclude(estimate=None).order_by('percentage_error')
@@ -932,6 +1014,8 @@ def show_message(request, message_title, message):
         return redirect('questions_menu')
 
 
+# Set value in a Cookie
+# ................................................................................................
 def set_cookie(response, key, value, days_expire = 7):
     if days_expire is None:
         max_age = 365 * 24 * 60 * 60  #one year
